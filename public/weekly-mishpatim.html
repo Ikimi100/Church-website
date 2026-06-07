@@ -1,0 +1,1043 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weekly Study | Mishpatim — Messianic Movement</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --color-bg: #050505;
+            --color-bg-elevated: #0a0a0a;
+            --color-surface: #111111;
+            --color-gold: #d4af37;
+            --color-gold-light: #f4d03f;
+            --color-gold-muted: rgba(212, 175, 55, 0.15);
+            --color-purple: #6b46c1;
+            --color-purple-rich: #7c3aed;
+            --color-soft-blue: #3b82f6;
+            --color-text: #ffffff;
+            --color-text-secondary: #b0b0c0;
+            --color-text-muted: #71717a;
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background-color: var(--color-bg);
+            color: var(--color-text);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 400;
+            letter-spacing: -0.02em;
+        }
+
+        /* Film Grain Overlay */
+        .grain-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            pointer-events: none;
+            opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+
+        /* Navigation */
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            text-decoration: none;
+            color: var(--color-text);
+        }
+
+        .logo-mark {
+            width: 48px;
+            height: 48px;
+            border: 1px solid var(--color-gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            box-shadow: 0 0 20px rgba(212,175,55,0.1);
+            background: linear-gradient(135deg, rgba(212,175,55,0.12), rgba(124,58,237,0.12));
+        }
+
+        .logo-mark img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            font-weight: 400;
+            line-height: 1;
+        }
+
+        .logo-subtitle {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--color-text-secondary);
+            margin-top: 0.15rem;
+        }
+
+        .logo-mark::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, var(--color-gold), var(--color-purple-rich));
+            transform: scale(0);
+            transition: transform 0.6s var(--ease-out-expo);
+            border-radius: 50%;
+        }
+
+        .logo:hover .logo-mark::before {
+            transform: scale(1);
+        }
+
+        .logo:hover .logo-mark {
+            color: var(--color-bg);
+            box-shadow: 0 0 30px rgba(212,175,55,0.3);
+        }
+
+        .study-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 1.5rem 4%;
+            background: rgba(5, 5, 5, 0.85);
+            backdrop-filter: blur(20px) saturate(180%);
+            border-bottom: 1px solid var(--glass-border);
+            transition: all 0.6s var(--ease-out-expo);
+        }
+
+        .nav-inner {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-back {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            color: var(--color-text-secondary);
+            text-decoration: none;
+            font-size: 0.875rem;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            transition: all 0.3s ease;
+        }
+
+        .nav-back:hover {
+            color: var(--color-gold);
+            transform: translateX(-5px);
+        }
+
+        .nav-back i {
+            font-size: 1.25rem;
+        }
+
+        .nav-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.25rem;
+            color: var(--color-gold);
+            letter-spacing: 0.1em;
+        }
+
+        /* Hero Section - Cinematic */
+        .study-hero {
+            position: relative;
+            min-height: 85vh;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            overflow: hidden;
+            padding: 0 4%;
+            padding-bottom: 6rem;
+        }
+
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            z-index: -2;
+        }
+
+        .hero-bg::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, rgba(5,5,5,0.3) 0%, rgba(5,5,5,0.7) 50%, var(--color-bg) 100%);
+            z-index: 2;
+        }
+
+        .hero-bg::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 30% 50%, rgba(212, 175, 55, 0.15) 0%, transparent 60%),
+                        radial-gradient(circle at 70% 80%, rgba(107, 33, 168, 0.1) 0%, transparent 50%);
+            z-index: 3;
+        }
+
+        .hero-image {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.5;
+            filter: brightness(0.4) contrast(1.2) saturate(0.8);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            max-width: 1200px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .hero-meta {
+            display: inline-flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeUp 1s var(--ease-out-expo) 0.3s forwards;
+        }
+
+        .meta-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.6rem 1.2rem;
+            background: rgba(212, 175, 55, 0.1);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 100px;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--color-gold);
+            font-weight: 600;
+        }
+
+        .meta-divider {
+            width: 40px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--color-gold), transparent);
+        }
+
+        .meta-date {
+            font-size: 0.875rem;
+            color: var(--color-text-secondary);
+            letter-spacing: 0.1em;
+        }
+
+        .hero-hebrew {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(4rem, 12vw, 10rem);
+            color: transparent;
+            -webkit-text-stroke: 1px rgba(212, 175, 55, 0.4);
+            line-height: 1;
+            margin-bottom: 1rem;
+            opacity: 0;
+            transform: translateY(40px);
+            animation: fadeUp 1.2s var(--ease-out-expo) 0.5s forwards;
+            letter-spacing: 0.05em;
+        }
+
+        .hero-title {
+            font-size: clamp(3rem, 8vw, 6rem);
+            line-height: 1;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #fff 0%, var(--color-gold-light) 50%, var(--color-gold) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            opacity: 0;
+            transform: translateY(40px);
+            animation: fadeUp 1.2s var(--ease-out-expo) 0.7s forwards;
+            filter: drop-shadow(0 0 40px rgba(212,175,55,0.2));
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.125rem, 2vw, 1.5rem);
+            color: var(--color-text-secondary);
+            max-width: 700px;
+            margin: 0 auto 3rem;
+            font-weight: 300;
+            line-height: 1.7;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeUp 1s var(--ease-out-expo) 0.9s forwards;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--color-text-muted);
+            font-size: 0.75rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            opacity: 0;
+            animation: fadeUp 1s var(--ease-out-expo) 1.5s forwards;
+        }
+
+        .scroll-line {
+            width: 1px;
+            height: 60px;
+            background: linear-gradient(to bottom, var(--color-gold), transparent);
+            animation: scrollPulse 2s infinite;
+        }
+
+        @keyframes scrollPulse {
+            0%, 100% { opacity: 1; transform: scaleY(1); }
+            50% { opacity: 0.5; transform: scaleY(0.5); }
+        }
+
+        @keyframes fadeUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Readings Bar - Floating */
+        .readings-bar {
+            position: relative;
+            z-index: 100;
+            max-width: 1100px;
+            margin: -60px auto 0;
+            padding: 0 4%;
+        }
+
+        .readings-inner {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            background: rgba(10, 10, 15, 0.95);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 24px;
+            padding: 2.5rem;
+            backdrop-filter: blur(20px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 40px rgba(212,175,55,0.05);
+        }
+
+        .reading-card {
+            position: relative;
+            padding: 2rem;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            transition: all 0.6s var(--ease-out-expo);
+            overflow: hidden;
+        }
+
+        .reading-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--color-gold), var(--color-purple-rich), var(--color-soft-blue));
+            transform: scaleX(0);
+            transition: transform 0.6s var(--ease-out-expo);
+        }
+
+        .reading-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(212, 175, 55, 0.3);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3), 0 0 30px rgba(212,175,55,0.1);
+        }
+
+        .reading-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .reading-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            transition: all 0.4s ease;
+        }
+
+        .reading-card:nth-child(1) .reading-icon {
+            background: rgba(212, 175, 55, 0.1);
+            color: var(--color-gold);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .reading-card:nth-child(2) .reading-icon {
+            background: rgba(124, 58, 237, 0.1);
+            color: var(--color-purple-rich);
+            border: 1px solid rgba(124, 58, 237, 0.2);
+        }
+
+        .reading-card:nth-child(3) .reading-icon {
+            background: rgba(59, 130, 246, 0.1);
+            color: var(--color-soft-blue);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+        }
+
+        .reading-card:hover .reading-icon {
+            transform: scale(1.1) rotate(-5deg);
+        }
+
+        .reading-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--color-text-muted);
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .reading-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            color: var(--color-text);
+            line-height: 1.3;
+        }
+
+        .reading-ref {
+            margin-top: 0.75rem;
+            font-size: 0.875rem;
+            color: var(--color-text-secondary);
+        }
+
+        /* Main Content */
+        .study-content {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 6rem 4%;
+        }
+
+        .content-section {
+            margin-bottom: 5rem;
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s var(--ease-out-expo);
+        }
+
+        .content-section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .section-number {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 5rem;
+            font-weight: 300;
+            color: rgba(212, 175, 55, 0.15);
+            line-height: 1;
+            flex-shrink: 0;
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 4vw, 3rem);
+            color: var(--color-gold);
+            line-height: 1.1;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -0.5rem;
+            left: 0;
+            width: 60px;
+            height: 2px;
+            background: linear-gradient(90deg, var(--color-gold), transparent);
+        }
+
+        .section-body {
+            padding-left: 6.5rem;
+        }
+
+        .section-body p {
+            font-size: 1.125rem;
+            line-height: 1.9;
+            color: var(--color-text-secondary);
+            margin-bottom: 1.5rem;
+        }
+
+        .section-body strong {
+            color: var(--color-gold);
+            font-weight: 600;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(212,175,55,0.08), rgba(124,58,237,0.06));
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 20px;
+            padding: 2.5rem;
+            margin: 2.5rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .highlight-box::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(212,175,55,0.1) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .highlight-box h3 {
+            font-size: 1.75rem;
+            color: var(--color-gold);
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .highlight-box p {
+            position: relative;
+        }
+
+        .scripture-quote {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            font-style: italic;
+            color: var(--color-text);
+            line-height: 1.6;
+            padding: 2rem;
+            border-left: 3px solid var(--color-gold);
+            background: rgba(212, 175, 55, 0.05);
+            margin: 2rem 0;
+            border-radius: 0 16px 16px 0;
+        }
+
+        .scripture-quote cite {
+            display: block;
+            margin-top: 1rem;
+            font-size: 0.875rem;
+            font-style: normal;
+            color: var(--color-gold);
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        /* Action Steps */
+        .action-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .action-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.4s ease;
+        }
+
+        .action-card:hover {
+            border-color: rgba(212, 175, 55, 0.3);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .action-card h4 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--color-gold);
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .action-card p {
+            font-size: 0.95rem;
+            color: var(--color-text-secondary);
+            line-height: 1.7;
+            margin: 0;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            max-width: 1100px;
+            margin: 0 auto 6rem;
+            padding: 0 4%;
+        }
+
+        .cta-inner {
+            background: linear-gradient(135deg, rgba(212,175,55,0.1), rgba(107,33,168,0.1));
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 24px;
+            padding: 4rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-inner::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 50% 0%, rgba(212,175,55,0.1) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .cta-title {
+            font-size: clamp(2rem, 4vw, 3rem);
+            color: var(--color-text);
+            margin-bottom: 1rem;
+            position: relative;
+        }
+
+        .cta-text {
+            color: var(--color-text-secondary);
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            font-size: 1.125rem;
+            line-height: 1.7;
+            position: relative;
+        }
+
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.25rem 3rem;
+            background: linear-gradient(135deg, var(--color-gold), var(--color-purple-rich));
+            color: var(--color-bg);
+            text-decoration: none;
+            border-radius: 100px;
+            font-weight: 700;
+            font-size: 1rem;
+            letter-spacing: 0.05em;
+            transition: all 0.4s var(--ease-out-expo);
+            position: relative;
+            border: none;
+            cursor: pointer;
+            font-family: 'Space Grotesk', sans-serif;
+            box-shadow: 0 10px 30px rgba(212,175,55,0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(212,175,55,0.4);
+        }
+
+        .cta-button i {
+            transition: transform 0.3s ease;
+        }
+
+        .cta-button:hover i {
+            transform: translateX(5px);
+        }
+
+        /* Footer */
+        .study-footer {
+            border-top: 1px solid var(--glass-border);
+            padding: 3rem 4%;
+            text-align: center;
+            color: var(--color-text-muted);
+            font-size: 0.875rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .readings-inner {
+                grid-template-columns: 1fr;
+            }
+            
+            .section-body {
+                padding-left: 0;
+            }
+            
+            .section-number {
+                display: none;
+            }
+            
+            .action-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .study-hero {
+                min-height: 70vh;
+                padding-bottom: 4rem;
+            }
+            
+            .hero-hebrew {
+                font-size: 3rem;
+            }
+            
+            .readings-inner {
+                padding: 1.5rem;
+                margin-top: -40px;
+            }
+            
+            .reading-card {
+                padding: 1.5rem;
+            }
+            
+            .cta-inner {
+                padding: 2.5rem 1.5rem;
+            }
+        }
+
+        /* Selection */
+        ::selection {
+            background: rgba(212, 175, 55, 0.3);
+            color: #fff;
+        }
+    
+    /* LOGO IMAGE FALLBACK */
+    
+    /* HOMEPAGE HEADER LOGO MATCH */
+    nav .logo .logo-mark,
+    .study-nav .logo .logo-mark,
+    .watch-header .logo .logo-mark {
+        width: 48px;
+        height: 48px;
+        flex: 0 0 48px;
+        border: 1px solid var(--color-gold);
+        border-radius: 50%;
+        background: transparent;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        position: relative;
+        box-shadow: 0 0 20px rgba(212,175,55,0.1);
+    }
+
+    nav .logo .logo-mark img,
+    .study-nav .logo .logo-mark img,
+    .watch-header .logo .logo-mark img,
+    nav .logo .logo-mark-img,
+    .study-nav .logo .logo-mark-img,
+    .watch-header .logo .logo-mark-img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        display: block;
+        position: relative;
+        z-index: 1;
+    }
+
+    nav .logo .logo-title,
+    .study-nav .logo .logo-title,
+    .watch-header .logo .logo-title {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 1.5rem;
+        font-weight: 400;
+        line-height: 1;
+        letter-spacing: 0;
+    }
+
+    nav .logo .logo-subtitle,
+    .study-nav .logo .logo-subtitle,
+    .watch-header .logo .logo-subtitle {
+        font-size: 0.65rem;
+        text-transform: uppercase;
+        letter-spacing: 0.3em;
+        color: var(--color-text-muted);
+        margin-top: 0.25rem;
+    }
+
+    .loader-ring,
+    .loader-ring--soft,
+    .loader-dots,
+    .loader-bar,
+    .loader-progress {
+        display: none !important;
+    }
+</style>
+</head>
+<body>
+
+    <div class="grain-overlay"></div>
+
+    <!-- Navigation -->
+    <nav id="navbar" class="study-nav scrolled" style="background: rgba(5,5,5,0.85); backdrop-filter: blur(20px);">
+        <div class="nav-inner">
+        <a href="index.html" class="logo">
+            <div class="logo-mark"><img src="images/logowtb.png" alt="Messianic Movement logo" class="logo-mark-img"></div>
+            <div class="logo-text">
+                <span class="logo-title">Messianic Movement</span>
+                <span class="logo-subtitle">Regenerational Ministry</span>
+            </div>
+        </a>
+
+            <a href="index.html#torah" class="nav-back">
+                <i class="fas fa-arrow-left"></i>
+                <span>Back to Torah Portions</span>
+            </a>
+            <div class="nav-title">Weekly Study</div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="study-hero">
+        <div class="hero-bg">
+            <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&q=80" alt="Mishpatim - Covenant stones, justice scales, and the mountain" class="hero-image">
+        </div>
+        
+        <div class="hero-content">
+            <div class="hero-meta">
+                <span class="meta-badge">
+                    <i class="fas fa-scroll"></i>
+                    Parashah
+                </span>
+                <div class="meta-divider"></div>
+                <span class="meta-date">Week 18 • February 14, 2026</span>
+            </div>
+            
+            <div class="hero-hebrew">משפטים</div>
+            <h1 class="hero-title">Mishpatim</h1>
+            <p class="hero-subtitle">Laws — Justice for the Vulnerable, and the Blood of the Covenant</p>
+        </div>
+
+        <div class="scroll-indicator">
+            <span>Explore</span>
+            <div class="scroll-line"></div>
+        </div>
+    </section>
+
+    <!-- Readings Bar -->
+    <div class="readings-bar">
+        <div class="readings-inner">
+            <div class="reading-card">
+                <div class="reading-icon">
+                    <i class="fas fa-book"></i>
+                </div>
+                <div class="reading-label">Torah</div>
+                <div class="reading-text">Exodus</div>
+                <div class="reading-ref">21:1 – 24:18</div>
+            </div>
+            
+            <div class="reading-card">
+                <div class="reading-icon">
+                    <i class="fas fa-fire"></i>
+                </div>
+                <div class="reading-label">Haftarah</div>
+                <div class="reading-text">Jeremiah</div>
+                <div class="reading-ref">34:8-22; 33:25-26</div>
+            </div>
+            
+            <div class="reading-card">
+                <div class="reading-icon">
+                    <i class="fas fa-cross"></i>
+                </div>
+                <div class="reading-label">Gospel</div>
+                <div class="reading-text">Matthew</div>
+                <div class="reading-ref">26:1-30</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="study-content">
+        
+        <!-- Messianic Insights -->
+        <section class="content-section">
+            <div class="section-header">
+                <span class="section-number">01</span>
+                <h2 class="section-title">Messianic Insights</h2>
+            </div>
+            <div class="section-body">
+                <p><strong>משפטים — Mishpatim: "Laws" or "Ordinances."</strong> After the Ten Commandments comes the Torah of details — how to treat a Hebrew servant, what to do when an ox gores, how to handle a deposit, what justice looks like for the widow and the orphan. The Torah is not merely spiritual poetry; it is a comprehensive constitution for a holy society. <strong>God cares about contracts, cattle, and compassion.</strong></p>
+                
+                <div class="scripture-quote">
+                    "If you buy a Hebrew servant, he is to serve you for six years. But in the seventh year, he shall go free, without paying anything."
+                    <cite>Exodus 21:2</cite>
+                </div>
+
+                <p><strong>The Hebrew servant is a shadow of Jubilee and Messiah's liberation.</strong> Every seven years, the slave goes free. Every fiftieth year — the Yovel — the land returns, the debts cancel, the captives are released. This is the heartbeat of Torah justice: <strong>redemption is built into the calendar.</strong> Yeshua stood in the synagogue at Nazareth and declared: "The Spirit of the Lord is on me… to proclaim freedom for the prisoners and release for the oppressed." He was announcing the eternal Jubilee — the Year of the Lord's favor that never ends. The servant goes free not because he earned it, but because the year of release has come.</p>
+                
+                <p><strong>"Eye for eye, tooth for tooth" is not vengeance; it is judicial limit.</strong> In the ancient world, a slight could spark a blood feud that wiped out entire families. The lex talionis — law of retaliation — placed a ceiling on punishment. The penalty must fit the crime, no more, no less. But Yeshua revealed the fulfillment: <strong>He took the blow so we would not have to retaliate.</strong> "Turn the other cheek" is possible because Messiah absorbed the ultimate injustice at the cross. The eye-for-eye system was a fence for a fallen world; the cross is the gate for a redeemed one.</p>
+            </div>
+        </section>
+
+        <!-- Gospel Insights -->
+        <section class="content-section">
+            <div class="section-header">
+                <span class="section-number">02</span>
+                <h2 class="section-title">Gospel Insights</h2>
+            </div>
+            <div class="section-body">
+                <p><strong>Do Not Oppress the Foreigner.</strong> The Torah commands Israel: "Do not oppress a foreigner; you yourselves know how it feels to be foreigners, because you were foreigners in Egypt." This command appears more than any other in the Torah — thirty-six times. <strong>Memory produces mercy.</strong> Israel was not to build walls of exclusion; they were to build tables of inclusion. The foreigner — the <em>ger</em> — was to be fed, clothed, and defended under the same covenant. This is the Gospel: we who were foreigners to the commonwealth of Israel have been brought near by the blood of Messiah. The Torah's care for the outsider is a preview of the Great Commission.</p>
+                
+                <p><strong>The Blood of the Covenant.</strong> Moses took the blood of the sacrifices, threw half on the altar and half on the people, and declared: "This is the blood of the covenant that the Lord has made with you." This is the exact phrase Yeshua used at the Last Supper: <strong>"This is My blood of the covenant, which is poured out for many for the forgiveness of sins."</strong> The covenant at Sinai was sealed with the blood of bulls; the new covenant is sealed with the blood of the Lamb. The first covenant made Israel a nation; the new covenant makes the nations Israel. The blood speaks better things than the blood of Abel — it speaks mercy, not vengeance.</p>
+
+                <div class="highlight-box">
+                    <h3>Practical Application</h3>
+                    <p>Where is your "eye for eye" impulse active this week? A slight from a colleague? A betrayal by a friend? An injustice you cannot forget? The Torah limited retaliation; the Gospel eliminates it. This week, identify one person you are holding in debt. Release them. Not because they deserve it, but because the blood of the new covenant has released you. Write their name down. Cross it out. Declare: "The blood speaks a better word over us both." Then serve someone vulnerable — a widow, an orphan, a foreigner, a prisoner. The Torah is not theory; it is action. Justice is not a sermon; it is a sandwich, a visit, a defense.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Thematic Focus -->
+        <section class="content-section">
+            <div class="section-header">
+                <span class="section-number">03</span>
+                <h2 class="section-title">Thematic Focus</h2>
+            </div>
+            <div class="section-body">
+                <h3 style="font-size: 1.75rem; color: var(--color-gold); margin-bottom: 1.5rem;">"The Blood of the Covenant" — From Sinai to the Upper Room</h3>
+                
+                <p>Moses went up into the cloud on Mount Sinai and stayed forty days and forty nights. The glory of the Lord rested on the mountain like a consuming fire. The people saw it and trembled. Moses entered the darkness where God was. <strong>This is the pattern of covenant: glory, blood, and consecration.</strong> The mountain was fenced. The people were washed. The elders ate and drank in God's presence. The covenant was not a cold contract; it was a fiery wedding sealed in blood.</p>
+
+                <p>But the blood of bulls could not perfect the conscience. The covenant needed a better mediator, a better sacrifice, a better priest. <strong>Yeshua is all three.</strong> He is the Mediator of a new covenant. He is the Lamb whose blood speaks better things. He is the High Priest who enters the true tabernacle made without hands. Where Moses sprinkled blood on the people, Yeshua pours His blood into the cup and says, "Drink from it, all of you." Where Moses went up the mountain to receive the law, Yeshua went up the mountain to fulfill it. Where the elders of Israel saw God from afar, we see Him face to face in Messiah.</p>
+
+                <p>As disciples, we live under the blood of this better covenant. The laws of Mishpatim are not abolished; they are written on our hearts by the Spirit. We do not need a list to tell us to care for the foreigner — we have the love of Messiah compelling us. We do not need a limit on retaliation — we have the cross absorbing our vengeance. <strong>The Torah is the shadow; Messiah is the substance. The mountain was the classroom; the cross is the graduation.</strong></p>
+
+                <div class="action-grid">
+                    <div class="action-card">
+                        <h4><i class="fas fa-gavel" style="color: var(--color-gold);"></i> Study One Law</h4>
+                        <p>Choose one ordinance from Exodus 21-23 this week. Ask the Spirit: "How does Yeshua fulfill this?" Let the shadow lead you to the substance.</p>
+                    </div>
+                    
+                    <div class="action-card">
+                        <h4><i class="fas fa-hand-holding-heart" style="color: var(--color-purple-rich);"></i> Serve the Vulnerable</h4>
+                        <p>Identify one widow, orphan, foreigner, or poor person you can serve this week. Do not just pray — provide. The Torah demands action, not sentiment.</p>
+                    </div>
+                    
+                    <div class="action-card">
+                        <h4><i class="fas fa-wine-glass" style="color: var(--color-soft-blue);"></i> Remember the Blood</h4>
+                        <p>Take communion this week with fresh eyes. As you drink, hear Moses: "This is the blood of the covenant." Hear Yeshua: "This is My blood." The same covenant, sealed by the same God.</p>
+                    </div>
+                    
+                    <div class="action-card">
+                        <h4><i class="fas fa-dove" style="color: var(--color-gold);"></i> Release the Debt</h4>
+                        <p>Who owes you an eye? A tooth? An apology? A reputation? Write their name. Declare release. The seventh year has come. The Jubilee trumpet is sounding in Messiah.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="cta-inner">
+            <h2 class="cta-title">Continue the Journey</h2>
+            <p class="cta-text">Join our global community of disciples exploring the depths of God's Word. Share your insights, ask questions, and grow together in Messiah.</p>
+            <a href="#" class="cta-button">
+                <i class="fas fa-comments"></i>
+                Join the Community Discussion
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="study-footer">
+        <p> Messianic Movement. All rights reserved.</p>
+        <p style="margin-top: 0.5rem; font-size: 0.75rem;">Torah Portions • Mishpatim • Week 18 of 54</p>
+    </footer>
+
+    <script>
+        // Intersection Observer for scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.content-section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Reading cards hover effect
+        document.querySelectorAll('.reading-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-8px)';
+            });
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+            });
+        });
+    </script>
+
+<script>
+window.addEventListener('load', () => {
+    const loader = document.getElementById('loader');
+    if (loader) {
+        setTimeout(() => loader.classList.add('hidden'), 2200);
+    }
+});
+</script>
+</body>
+</html>
+
+
+

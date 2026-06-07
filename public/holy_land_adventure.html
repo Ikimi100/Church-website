@@ -1,0 +1,1014 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Holy Land Adventure | WHGRM Spiritual Resources</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        :root {
+            --color-gold: #d4af37;
+            --color-gold-light: #f0d878;
+            --color-gold-dark: #b8941d;
+            --color-purple-rich: #8b5cf6;
+            --color-soft-blue: #93c5fd;
+            --color-text: #f5f5f5;
+            --color-text-secondary: #a1a1aa;
+            --color-text-muted: #71717a;
+            --color-bg: #050505;
+            --color-bg-elevated: #0a0a0f;
+            --glass-bg: rgba(255,255,255,0.03);
+            --glass-border: rgba(255,255,255,0.06);
+            --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background: var(--color-bg);
+            color: var(--color-text);
+            overflow-x: hidden;
+        }
+        .grain-overlay {
+            position: fixed; inset: 0; pointer-events: none; z-index: 9999;
+            opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+        }
+        .vignette {
+            position: fixed; inset: 0; pointer-events: none; z-index: 9998;
+            background: radial-gradient(circle at 50% 50%, transparent 40%, rgba(0,0,0,0.6) 100%);
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+            padding: 1.25rem 4%;
+            transition: all 0.4s ease;
+        }
+        nav.scrolled {
+            background: rgba(5,5,5,0.85);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--glass-border);
+        }
+        .nav-container {
+            max-width: 1400px; margin: 0 auto;
+            display: flex; align-items: center; justify-content: space-between;
+        }
+        .logo { display: flex; align-items: center; gap: 0.875rem; text-decoration: none; }
+        .logo-mark {
+    overflow: hidden;
+            width: 44px; height: 44px; border-radius: 12px;
+            background: linear-gradient(135deg, rgba(212,175,55,0.2), rgba(139,92,246,0.2));
+            border: 1px solid rgba(212,175,55,0.3);
+            display: flex; align-items: center; justify-content: center;
+            color: var(--color-gold); font-size: 1.25rem;}
+        .logo-text { display: flex; flex-direction: column; }
+        .logo-title { font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; color: var(--color-text); font-weight: 600; letter-spacing: 0.02em; }
+        .logo-subtitle { font-size: 0.7rem; color: var(--color-text-muted); text-transform: uppercase; letter-spacing: 0.15em; }
+        .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+        .nav-links a {
+            text-decoration: none; color: var(--color-text-secondary);
+            font-size: 0.875rem; font-weight: 500; letter-spacing: 0.02em;
+            transition: color 0.3s ease; position: relative;
+        }
+        .nav-links a:hover, .nav-links a.active { color: var(--color-gold); }
+        .nav-links a::after {
+            content: ''; position: absolute; bottom: -6px; left: 0; width: 0; height: 2px;
+            background: linear-gradient(90deg, var(--color-gold), var(--color-purple-rich));
+            transition: width 0.3s ease;
+        }
+        .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+
+        /* Hero */
+        .hla-hero {
+            min-height: 100vh; display: flex; align-items: center; justify-content: center;
+            position: relative; padding: 140px 4% 6rem; overflow: hidden;
+        }
+        .hla-hero::before {
+            content: ''; position: absolute; inset: 0;
+            background:
+                radial-gradient(circle at 20% 50%, rgba(212,175,55,0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(139,92,246,0.06) 0%, transparent 50%),
+                radial-gradient(circle at 50% 100%, rgba(212,175,55,0.05) 0%, transparent 40%);
+            z-index: 0;
+        }
+        .hla-hero-bg {
+            position: absolute; inset: 0; z-index: 0; opacity: 0.15;
+            background: url('https://images.unsplash.com/photo-1538669716095-09471c8c6c7a?q=80&w=2070&auto=format&fit=crop') center/cover no-repeat;
+            filter: saturate(0.4) brightness(0.4);
+        }
+        .hla-hero-content { max-width: 1000px; text-align: center; position: relative; z-index: 2; }
+        .hero-eyebrow {
+            display: inline-flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;
+        }
+        .eyebrow-line { width: 40px; height: 1px; background: linear-gradient(90deg, transparent, var(--color-gold)); }
+        .eyebrow-text {
+            font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.2em; color: var(--color-gold);
+            font-weight: 600;
+        }
+        .hla-hero h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(3rem, 8vw, 6.5rem); line-height: 1; margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #fff 0%, var(--color-gold-light) 50%, var(--color-gold) 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+        .hla-hero p {
+            font-size: 1.25rem; color: var(--color-text-secondary); max-width: 700px;
+            margin: 0 auto 2.5rem; font-weight: 300; line-height: 1.7;
+        }
+        .hero-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+        .btn {
+            display: inline-flex; align-items: center; gap: 0.75rem; padding: 1rem 2.5rem;
+            border-radius: 100px; font-family: 'Space Grotesk', sans-serif; font-weight: 600;
+            font-size: 0.95rem; text-decoration: none; transition: all 0.4s var(--ease-out-expo); cursor: pointer; border: none;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, var(--color-gold), var(--color-gold-dark));
+            color: var(--color-bg); box-shadow: 0 4px 25px rgba(212,175,55,0.3);
+        }
+        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 8px 35px rgba(212,175,55,0.5); }
+        .btn-secondary {
+            background: transparent; border: 1px solid var(--glass-border);
+            color: var(--color-text); backdrop-filter: blur(10px);
+        }
+        .btn-secondary:hover { border-color: var(--color-gold); color: var(--color-gold); background: rgba(212,175,55,0.05); }
+        .btn-icon { font-size: 0.875rem; }
+
+        .hla-stats {
+            display: flex; justify-content: center; gap: 4rem; margin-top: 4rem; flex-wrap: wrap;
+        }
+        .hla-stat { text-align: center; position: relative; }
+        .hla-stat:not(:last-child)::after {
+            content: ''; position: absolute; right: -2rem; top: 20%; height: 60%;
+            width: 1px; background: linear-gradient(180deg, transparent, var(--color-gold), transparent);
+            opacity: 0.3;
+        }
+        .hla-stat-number {
+            font-family: 'Cormorant Garamond', serif; font-size: 3.5rem; color: var(--color-gold);
+            line-height: 1; text-shadow: 0 0 30px rgba(212,175,55,0.3);
+        }
+        .hla-stat-label {
+            font-size: 0.8rem; color: var(--color-text-muted); text-transform: uppercase;
+            letter-spacing: 0.15em; margin-top: 0.75rem;
+        }
+
+        /* Section Headers */
+        section { padding: 6rem 4%; position: relative; }
+        .section-header { text-align: center; max-width: 800px; margin: 0 auto 4rem; }
+        .section-eyebrow {
+            display: inline-flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem;
+            font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.2em; color: var(--color-gold); font-weight: 600;
+        }
+        .section-eyebrow::before, .section-eyebrow::after {
+            content: ''; width: 30px; height: 1px; background: linear-gradient(90deg, var(--color-gold), transparent);
+        }
+        .section-eyebrow::after { background: linear-gradient(90deg, transparent, var(--color-gold)); }
+        .section-title {
+            font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 5vw, 3.5rem);
+            margin-bottom: 1rem; color: var(--color-text); line-height: 1.1;
+        }
+        .section-subtitle {
+            font-size: 1.1rem; color: var(--color-text-secondary); font-weight: 300; line-height: 1.7;
+        }
+
+        /* Testimonials Strip */
+        .testimonials-strip {
+            background: linear-gradient(135deg, rgba(10,10,15,0.98), rgba(5,5,5,0.99));
+            border-top: 1px solid rgba(212,175,55,0.1); border-bottom: 1px solid rgba(212,175,55,0.1);
+            padding: 3rem 4%;
+        }
+        .testimonials-grid {
+            max-width: 1400px; margin: 0 auto;
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem;
+        }
+        .testimonial-card {
+            background: var(--glass-bg); border: 1px solid var(--glass-border);
+            border-radius: 20px; padding: 2rem; backdrop-filter: blur(10px);
+            transition: all 0.4s ease;
+        }
+        .testimonial-card:hover { border-color: rgba(212,175,55,0.2); transform: translateY(-5px); }
+        .testimonial-stars { color: var(--color-gold); font-size: 0.875rem; margin-bottom: 1rem; letter-spacing: 0.1em; }
+        .testimonial-text {
+            font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; font-style: italic;
+            color: var(--color-text-secondary); line-height: 1.7; margin-bottom: 1.5rem;
+        }
+        .testimonial-author { display: flex; align-items: center; gap: 1rem; }
+        .testimonial-avatar {
+            width: 44px; height: 44px; border-radius: 50%;
+            background: linear-gradient(135deg, rgba(212,175,55,0.2), rgba(139,92,246,0.2));
+            border: 1px solid rgba(212,175,55,0.3); display: flex; align-items: center; justify-content: center;
+            color: var(--color-gold); font-size: 1rem;
+        }
+        .testimonial-name { font-weight: 600; font-size: 0.9rem; color: var(--color-text); }
+        .testimonial-trip { font-size: 0.8rem; color: var(--color-text-muted); }
+
+        /* Tour Packages */
+        .tours-section { background: var(--color-bg-elevated); }
+        .tours-filters {
+            display: flex; justify-content: center; gap: 1rem; margin-bottom: 3rem; flex-wrap: wrap;
+        }
+        .filter-btn {
+            padding: 0.875rem 2rem; background: rgba(255,255,255,0.03); border: 1px solid var(--glass-border);
+            border-radius: 100px; color: var(--color-text-secondary); font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.875rem; font-weight: 600; cursor: pointer; transition: all 0.4s ease;
+        }
+        .filter-btn.active, .filter-btn:hover {
+            background: linear-gradient(135deg, rgba(212,175,55,0.15), rgba(107,33,168,0.15));
+            border-color: rgba(212,175,55,0.4); color: var(--color-gold);
+            box-shadow: 0 0 30px rgba(212,175,55,0.1);
+        }
+        .tours-grid {
+            max-width: 1400px; margin: 0 auto;
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(360px, 1fr)); gap: 2rem;
+        }
+        .tour-card {
+            background: rgba(17,17,17,0.6); border: 1px solid var(--glass-border);
+            border-radius: 24px; overflow: hidden; transition: all 0.6s var(--ease-out-expo);
+            cursor: pointer; position: relative; backdrop-filter: blur(10px);
+        }
+        .tour-card::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+            background: linear-gradient(90deg, var(--color-gold), var(--color-purple-rich), var(--color-soft-blue));
+            transform: scaleX(0); transition: transform 0.6s var(--ease-out-expo);
+        }
+        .tour-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            border-color: rgba(212,175,55,0.2);
+            box-shadow: 0 30px 60px -20px rgba(0,0,0,0.5), 0 0 40px rgba(212,175,55,0.1);
+        }
+        .tour-card:hover::before { transform: scaleX(1); }
+        .tour-image { position: relative; aspect-ratio: 16/10; overflow: hidden; }
+        .tour-image img { width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s var(--ease-out-expo); filter: brightness(0.7); }
+        .tour-card:hover .tour-image img { transform: scale(1.1); }
+        .tour-badge {
+            position: absolute; top: 1rem; left: 1rem;
+            padding: 0.5rem 1rem; background: rgba(0,0,0,0.7); backdrop-filter: blur(10px);
+            border: 1px solid rgba(212,175,55,0.3); border-radius: 100px;
+            color: var(--color-gold); font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;
+        }
+        .tour-body { padding: 2rem; }
+        .tour-meta {
+            display: flex; gap: 1rem; margin-bottom: 1rem; flex-wrap: wrap;
+        }
+        .tour-meta span {
+            display: inline-flex; align-items: center; gap: 0.4rem;
+            font-size: 0.8rem; color: var(--color-text-muted);
+        }
+        .tour-meta span i { color: var(--color-gold); font-size: 0.75rem; }
+        .tour-title {
+            font-family: 'Cormorant Garamond', serif; font-size: 1.75rem;
+            margin-bottom: 0.75rem; color: var(--color-text); transition: color 0.3s ease;
+        }
+        .tour-card:hover .tour-title { color: var(--color-gold); }
+        .tour-desc {
+            font-size: 0.9rem; color: var(--color-text-secondary); line-height: 1.7;
+            margin-bottom: 1.5rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--glass-border);
+        }
+        .tour-footer { display: flex; justify-content: space-between; align-items: center; }
+        .tour-price {
+            font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; color: var(--color-gold);
+        }
+        .tour-price span { font-size: 0.8rem; color: var(--color-text-muted); font-family: 'Space Grotesk', sans-serif; }
+        .tour-cta {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            padding: 0.75rem 1.5rem; background: rgba(212,175,55,0.1);
+            border: 1px solid rgba(212,175,55,0.2); border-radius: 100px;
+            color: var(--color-gold); font-size: 0.875rem; font-weight: 600;
+            text-decoration: none; transition: all 0.3s ease;
+        }
+        .tour-cta:hover {
+            background: linear-gradient(135deg, var(--color-gold), var(--color-purple-rich));
+            color: var(--color-bg); border-color: transparent; transform: scale(1.05);
+        }
+
+        /* Sacred Sites */
+        .sites-grid {
+            max-width: 1400px; margin: 0 auto;
+            display: grid; grid-template-columns: repeat(2, 1fr); gap: 2.5rem;
+        }
+        .site-card {
+            display: grid; grid-template-columns: 1fr 1.2fr; gap: 0;
+            background: var(--glass-bg); border: 1px solid var(--glass-border);
+            border-radius: 24px; overflow: hidden; backdrop-filter: blur(10px);
+            transition: all 0.5s var(--ease-out-expo);
+        }
+        .site-card:nth-child(even) { grid-template-columns: 1.2fr 1fr; direction: rtl; }
+        .site-card:nth-child(even) > * { direction: ltr; }
+        .site-card:hover { border-color: rgba(212,175,55,0.2); box-shadow: 0 25px 50px rgba(0,0,0,0.4); transform: translateY(-5px); }
+        .site-image { position: relative; overflow: hidden; min-height: 280px; }
+        .site-image img { width: 100%; height: 100%; object-fit: cover; transition: transform 1s var(--ease-out-expo); filter: brightness(0.65); }
+        .site-card:hover .site-image img { transform: scale(1.08); }
+        .site-image::after {
+            content: ''; position: absolute; inset: 0;
+            background: linear-gradient(90deg, transparent 40%, rgba(5,5,5,0.8) 100%);
+        }
+        .site-card:nth-child(even) .site-image::after {
+            background: linear-gradient(270deg, transparent 40%, rgba(5,5,5,0.8) 100%);
+        }
+        .site-content { padding: 2.5rem; display: flex; flex-direction: column; justify-content: center; }
+        .site-scripture {
+            font-family: 'Cormorant Garamond', serif; font-size: 1rem; font-style: italic;
+            color: var(--color-gold); margin-bottom: 0.75rem;
+        }
+        .site-name {
+            font-family: 'Cormorant Garamond', serif; font-size: 2rem;
+            margin-bottom: 1rem; color: var(--color-text);
+        }
+        .site-desc { font-size: 0.95rem; color: var(--color-text-secondary); line-height: 1.8; margin-bottom: 1.5rem; }
+        .site-highlights { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+        .site-highlights span {
+            padding: 0.4rem 1rem; background: rgba(212,175,55,0.08);
+            border: 1px solid rgba(212,175,55,0.15); border-radius: 100px;
+            font-size: 0.75rem; color: var(--color-gold); text-transform: uppercase; letter-spacing: 0.05em;
+        }
+
+        /* Experience Section */
+        .experience-section {
+            background: linear-gradient(135deg, rgba(10,10,15,0.95), rgba(5,5,5,0.98));
+            border-top: 1px solid rgba(212,175,55,0.1); border-bottom: 1px solid rgba(212,175,55,0.1);
+            position: relative; overflow: hidden;
+        }
+        .experience-section::before {
+            content: ''; position: absolute; inset: 0;
+            background: radial-gradient(circle at 50% 0%, rgba(212,175,55,0.05), transparent 60%);
+        }
+        .experience-grid {
+            max-width: 1200px; margin: 0 auto;
+            display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; position: relative; z-index: 1;
+        }
+        .experience-card {
+            background: var(--glass-bg); border: 1px solid var(--glass-border);
+            border-radius: 20px; padding: 2.5rem 2rem; text-align: center;
+            transition: all 0.4s ease; backdrop-filter: blur(10px);
+        }
+        .experience-card:hover {
+            transform: translateY(-8px); border-color: rgba(212,175,55,0.2);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+        .experience-icon {
+            width: 72px; height: 72px; margin: 0 auto 1.5rem;
+            background: linear-gradient(135deg, rgba(212,175,55,0.1), rgba(107,33,168,0.1));
+            border: 1px solid rgba(212,175,55,0.2); border-radius: 20px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.75rem; color: var(--color-gold);
+        }
+        .experience-card h4 { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; margin-bottom: 0.75rem; }
+        .experience-card p { color: var(--color-text-secondary); font-size: 0.9rem; line-height: 1.7; }
+
+        /* FAQ */
+        .faq-container { max-width: 800px; margin: 0 auto; }
+        .faq-item {
+            background: var(--glass-bg); border: 1px solid var(--glass-border);
+            border-radius: 16px; overflow: hidden; transition: all 0.3s ease; margin-bottom: 1rem;
+        }
+        .faq-item:hover { border-color: rgba(212,175,55,0.15); }
+        .faq-question {
+            padding: 1.5rem 2rem; display: flex; justify-content: space-between; align-items: center;
+            cursor: pointer; font-weight: 600; font-size: 1rem;
+        }
+        .faq-question i { transition: transform 0.3s ease; color: var(--color-gold); }
+        .faq-item.open .faq-question i { transform: rotate(180deg); }
+        .faq-answer {
+            padding: 0 2rem; max-height: 0; overflow: hidden; transition: all 0.4s ease;
+            color: var(--color-text-secondary); line-height: 1.7; font-size: 0.95rem;
+        }
+        .faq-item.open .faq-answer { padding: 0 2rem 1.5rem; max-height: 400px; }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, rgba(212,175,55,0.05), rgba(107,33,168,0.05));
+            text-align: center;
+        }
+        .cta-section .section-header { margin-bottom: 2rem; }
+        .cta-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(180deg, var(--color-bg-elevated), #000);
+            border-top: 1px solid var(--glass-border); padding: 5rem 4% 2rem;
+        }
+        .footer-grid {
+            max-width: 1400px; margin: 0 auto;
+            display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 4rem;
+        }
+        .footer-brand p { color: var(--color-text-secondary); font-size: 0.95rem; line-height: 1.7; margin: 1.5rem 0; max-width: 300px; }
+        .social-links { display: flex; gap: 1rem; }
+        .social-links a {
+            width: 40px; height: 40px; border-radius: 10px;
+            background: var(--glass-bg); border: 1px solid var(--glass-border);
+            display: flex; align-items: center; justify-content: center;
+            color: var(--color-text-secondary); text-decoration: none; transition: all 0.3s ease;
+        }
+        .social-links a:hover { border-color: var(--color-gold); color: var(--color-gold); background: rgba(212,175,55,0.1); }
+        .footer-links h4 { font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; margin-bottom: 1.5rem; color: var(--color-text); }
+        .footer-links ul { list-style: none; }
+        .footer-links li { margin-bottom: 0.875rem; }
+        .footer-links a {
+            color: var(--color-text-secondary); text-decoration: none; font-size: 0.9rem;
+            transition: color 0.3s ease; display: inline-flex; align-items: center; gap: 0.5rem;
+        }
+        .footer-links a:hover { color: var(--color-gold); }
+        .footer-bottom {
+            max-width: 1400px; margin: 4rem auto 0; padding-top: 2rem;
+            border-top: 1px solid var(--glass-border);
+            display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;
+        }
+        .footer-bottom p { font-size: 0.85rem; color: var(--color-text-muted); }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .sites-grid { grid-template-columns: 1fr; }
+            .site-card, .site-card:nth-child(even) { grid-template-columns: 1fr; direction: ltr; }
+            .site-card:nth-child(even) > * { direction: ltr; }
+            .site-image { min-height: 200px; }
+            .site-image::after, .site-card:nth-child(even) .site-image::after {
+                background: linear-gradient(180deg, transparent 40%, rgba(5,5,5,0.9) 100%);
+            }
+            .experience-grid { grid-template-columns: repeat(2, 1fr); }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+            .hla-stat:not(:last-child)::after { display: none; }
+        }
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .testimonials-grid { grid-template-columns: 1fr; }
+            .tours-grid { grid-template-columns: 1fr; }
+            .experience-grid { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr; }
+            .hla-stats { gap: 2rem; }
+            .hla-hero { min-height: auto; padding-top: 100px; }
+        }
+    
+    /* LOGO IMAGE FALLBACK */
+    
+    /* HOMEPAGE HEADER LOGO MATCH */
+    nav .logo .logo-mark,
+    .study-nav .logo .logo-mark,
+    .watch-header .logo .logo-mark {
+        width: 48px;
+        height: 48px;
+        flex: 0 0 48px;
+        border: 1px solid var(--color-gold);
+        border-radius: 50%;
+        background: transparent;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        position: relative;
+        box-shadow: 0 0 20px rgba(212,175,55,0.1);
+    }
+
+    nav .logo .logo-mark img,
+    .study-nav .logo .logo-mark img,
+    .watch-header .logo .logo-mark img,
+    nav .logo .logo-mark-img,
+    .study-nav .logo .logo-mark-img,
+    .watch-header .logo .logo-mark-img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        display: block;
+        position: relative;
+        z-index: 1;
+    }
+
+    nav .logo .logo-title,
+    .study-nav .logo .logo-title,
+    .watch-header .logo .logo-title {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 1.5rem;
+        font-weight: 400;
+        line-height: 1;
+        letter-spacing: 0;
+    }
+
+    nav .logo .logo-subtitle,
+    .study-nav .logo .logo-subtitle,
+    .watch-header .logo .logo-subtitle {
+        font-size: 0.65rem;
+        text-transform: uppercase;
+        letter-spacing: 0.3em;
+        color: var(--color-text-muted);
+        margin-top: 0.25rem;
+    }
+
+    .loader-ring,
+    .loader-ring--soft,
+    .loader-dots,
+    .loader-bar,
+    .loader-progress {
+        display: none !important;
+    }
+</style>
+</head>
+<body>
+    <div class="grain-overlay"></div>
+    <div class="vignette"></div>
+
+    <!-- Navigation -->
+    <nav id="navbar" class="scrolled" style="background: rgba(5,5,5,0.85); backdrop-filter: blur(20px);">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <div class="logo-mark"><img src="images/logowtb.png" alt="Messianic Movement logo" class="logo-mark-img"></div>
+                <div class="logo-text">
+                    <span class="logo-title">Messianic Movement</span>
+                    <span class="logo-subtitle">Regenerational Ministry</span>
+                </div>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="index.html#ministries" class="nav-link">Ministries</a></li>
+                <li><a href="divine_episodes.html" class="nav-link">Divine Episodes</a></li>
+                <li><a href="holy_land_adventure.html" class="nav-link active" style="color: var(--color-gold);">Resources</a></li>
+                <li><a href="index.html#live" class="nav-link">Live</a></li>
+                <li><a href="index.html#give" class="nav-link">Give</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hla-hero">
+        <div class="hla-hero-bg"></div>
+        <div class="hla-hero-content">
+            <div class="hero-eyebrow" style="justify-content: center;">
+                <div class="eyebrow-line"></div>
+                <span class="eyebrow-text">Spiritual Resources</span>
+                <div class="eyebrow-line" style="transform: rotate(180deg);"></div>
+            </div>
+            <h1>Holy Land Adventure</h1>
+            <p>Walk where Yeshua walked. Experience the living Scriptures across Israel, Jordan, and Egypt with anointed guides, worship-filled itineraries, and life-changing encounters.</p>
+            <div class="hero-actions">
+                <a href="#tours" class="btn btn-primary">
+                    <i class="fas fa-map-marked-alt btn-icon"></i>
+                    Explore Tours
+                </a>
+                <a href="#sites" class="btn btn-secondary">
+                    Sacred Sites
+                    <i class="fas fa-arrow-right btn-icon"></i>
+                </a>
+            </div>
+            <div class="hla-stats">
+                <div class="hla-stat">
+                    <div class="hla-stat-number">12</div>
+                    <div class="hla-stat-label">Itineraries</div>
+                </div>
+                <div class="hla-stat">
+                    <div class="hla-stat-number">9-21</div>
+                    <div class="hla-stat-label">Days Each</div>
+                </div>
+                <div class="hla-stat">
+                    <div class="hla-stat-number">500+</div>
+                    <div class="hla-stat-label">Pilgrims</div>
+                </div>
+                <div class="hla-stat">
+                    <div class="hla-stat-number">24/7</div>
+                    <div class="hla-stat-label">Prayer Cover</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Strip -->
+    <section class="testimonials-strip">
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <div class="testimonial-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                <div class="testimonial-text">"We rate this pilgrimage a 12 out of 10. Over the top. Super guides, super itineraries, and supernatural encounters at every site. The baptism in the Jordan was the highlight of my life."</div>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar"><i class="fas fa-user"></i></div>
+                    <div>
+                        <div class="testimonial-name">Greg & Sarah J.</div>
+                        <div class="testimonial-trip">Jordan & Israel Tour, Feb 2025</div>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <div class="testimonial-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                <div class="testimonial-text">"The whole tour was awesome—more magnificent than I could have expected. Our guide was informative and gracious. The Lord really blessed the whole trip. We are already planning our return."</div>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar"><i class="fas fa-user"></i></div>
+                    <div>
+                        <div class="testimonial-name">Steve T.</div>
+                        <div class="testimonial-trip">Best of Israel Tour, Nov 2024</div>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <div class="testimonial-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                <div class="testimonial-text">"The perfect balance of spiritual reverence, deep history, and prophetic insight. I am so grateful for the experience. Communion at the Garden Tomb changed my perspective forever."</div>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar"><i class="fas fa-user"></i></div>
+                    <div>
+                        <div class="testimonial-name">Rebecca M.</div>
+                        <div class="testimonial-trip">Israel In-Depth, May 2024</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tour Packages -->
+    <section class="tours-section" id="tours">
+        <div class="section-header">
+            <span class="section-eyebrow">Pilgrimage Collection</span>
+            <h2 class="section-title">Choose Your Journey</h2>
+            <p class="section-subtitle">Spirit-led itineraries from 9 to 21 days. Each tour includes worship nights, Torah teaching on location, and prayer ministry at every sacred site.</p>
+        </div>
+        <div class="tours-filters">
+            <button class="filter-btn active" onclick="filterTours('all', this)">All Journeys</button>
+            <button class="filter-btn" onclick="filterTours('israel', this)">Israel Only</button>
+            <button class="filter-btn" onclick="filterTours('jordan', this)">Jordan & Israel</button>
+            <button class="filter-btn" onclick="filterTours('exodus', this)">Exodus Route</button>
+            <button class="filter-btn" onclick="filterTours('premium', this)">Premium Class</button>
+        </div>
+        <div class="tours-grid" id="toursGrid">
+            <!-- Tour 1 -->
+            <div class="tour-card" data-category="israel">
+                <div class="tour-image">
+                    <img src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?q=80&w=2070&auto=format&fit=crop" alt="Best of Israel">
+                    <div class="tour-badge"><i class="fas fa-fire"></i> Most Popular</div>
+                </div>
+                <div class="tour-body">
+                    <div class="tour-meta">
+                        <span><i class="fas fa-calendar"></i> Year-Round</span>
+                        <span><i class="fas fa-clock"></i> 10 Days</span>
+                        <span><i class="fas fa-hotel"></i> 4-Star</span>
+                    </div>
+                    <h3 class="tour-title">Best of Israel</h3>
+                    <p class="tour-desc">The essential pilgrimage covering Jerusalem, Galilee, and the Dead Sea. Includes Sea of Galilee worship cruise, Jordan River baptism, and Garden Tomb communion.</p>
+                    <div class="tour-footer">
+                        <div class="tour-price">$2,890 <span>/ person</span></div>
+                        <a href="#" class="tour-cta">View Itinerary <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tour 2 -->
+            <div class="tour-card" data-category="israel premium">
+                <div class="tour-image">
+                    <img src="https://images.unsplash.com/photo-1524230572899-a33b7455664c?q=80&w=1974&auto=format&fit=crop" alt="Israel Superior">
+                    <div class="tour-badge"><i class="fas fa-gem"></i> Premium</div>
+                </div>
+                <div class="tour-body">
+                    <div class="tour-meta">
+                        <span><i class="fas fa-calendar"></i> Apr – Oct</span>
+                        <span><i class="fas fa-clock"></i> 12 Days</span>
+                        <span><i class="fas fa-hotel"></i> 5-Star</span>
+                    </div>
+                    <h3 class="tour-title">Israel Superior First Class</h3>
+                    <p class="tour-desc">An elevated experience with luxury accommodations, private worship sessions, extended time at each site, and exclusive teaching from Pst. John James on location.</p>
+                    <div class="tour-footer">
+                        <div class="tour-price">$4,450 <span>/ person</span></div>
+                        <a href="#" class="tour-cta">View Itinerary <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tour 3 -->
+            <div class="tour-card" data-category="jordan">
+                <div class="tour-image">
+                    <img src="https://images.unsplash.com/photo-1579606038836-e81852828d77?q=80&w=2070&auto=format&fit=crop" alt="Jordan and Israel">
+                    <div class="tour-badge"><i class="fas fa-mountain"></i> Adventure</div>
+                </div>
+                <div class="tour-body">
+                    <div class="tour-meta">
+                        <span><i class="fas fa-calendar"></i> Year-Round</span>
+                        <span><i class="fas fa-clock"></i> 13 Days</span>
+                        <span><i class="fas fa-hotel"></i> 4-Star</span>
+                    </div>
+                    <h3 class="tour-title">Jordan & Israel Explorer</h3>
+                    <p class="tour-desc">Walk through Petra, float in the Dead Sea, stand on Mount Nebo where Moses viewed the Promised Land, then cross into Israel for the full biblical experience.</p>
+                    <div class="tour-footer">
+                        <div class="tour-price">$3,650 <span>/ person</span></div>
+                        <a href="#" class="tour-cta">View Itinerary <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tour 4 -->
+            <div class="tour-card" data-category="exodus">
+                <div class="tour-image">
+                    <img src="https://images.unsplash.com/photo-1539650116455-251d9a063595?q=80&w=2070&auto=format&fit=crop" alt="Exodus Tour">
+                    <div class="tour-badge"><i class="fas fa-scroll"></i> Exodus Route</div>
+                </div>
+                <div class="tour-body">
+                    <div class="tour-meta">
+                        <span><i class="fas fa-calendar"></i> Year-Round</span>
+                        <span><i class="fas fa-clock"></i> 16 Days</span>
+                        <span><i class="fas fa-hotel"></i> Mixed</span>
+                    </div>
+                    <h3 class="tour-title">Exodus: Egypt, Jordan & Israel</h3>
+                    <p class="tour-desc">Trace the footsteps of deliverance from the pyramids of Giza to the Red Sea, through Petra, and into the Promised Land. A prophetic journey of liberation.</p>
+                    <div class="tour-footer">
+                        <div class="tour-price">$4,120 <span>/ person</span></div>
+                        <a href="#" class="tour-cta">View Itinerary <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tour 5 -->
+            <div class="tour-card" data-category="israel">
+                <div class="tour-image">
+                    <img src="https://images.unsplash.com/photo-1516483638261-f4dbaf036963?q=80&w=2066&auto=format&fit=crop" alt="Israel in Detail">
+                    <div class="tour-badge"><i class="fas fa-search"></i> In-Depth</div>
+                </div>
+                <div class="tour-body">
+                    <div class="tour-meta">
+                        <span><i class="fas fa-calendar"></i> Jan – Oct</span>
+                        <span><i class="fas fa-clock"></i> 14 Days</span>
+                        <span><i class="fas fa-hotel"></i> 4-Star</span>
+                    </div>
+                    <h3 class="tour-title">Israel In-Depth</h3>
+                    <p class="tour-desc">For those who want to dig deeper. Extended time in Samaria and Judea, archaeological insights, Hebrew word studies on location, and extended Old City prayer walks.</p>
+                    <div class="tour-footer">
+                        <div class="tour-price">$3,290 <span>/ person</span></div>
+                        <a href="#" class="tour-cta">View Itinerary <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tour 6 -->
+            <div class="tour-card" data-category="jordan premium">
+                <div class="tour-image">
+                    <img src="https://images.unsplash.com/photo-1501232060322-aa87215ab531?q=80&w=2070&auto=format&fit=crop" alt="Premium Exodus">
+                    <div class="tour-badge"><i class="fas fa-crown"></i> Luxury</div>
+                </div>
+                <div class="tour-body">
+                    <div class="tour-meta">
+                        <span><i class="fas fa-calendar"></i> Apr – Oct</span>
+                        <span><i class="fas fa-clock"></i> 17 Days</span>
+                        <span><i class="fas fa-hotel"></i> 5-Star</span>
+                    </div>
+                    <h3 class="tour-title">Exodus Superior with Nile Cruise</h3>
+                    <p class="tour-desc">The ultimate pilgrimage. Egypt, Jordan, and Israel in premium class with a 4-night Nile cruise, Wadi Rum jeep safari, and private worship atop Mount Zion.</p>
+                    <div class="tour-footer">
+                        <div class="tour-price">$5,890 <span>/ person</span></div>
+                        <a href="#" class="tour-cta">View Itinerary <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sacred Sites -->
+    <section id="sites">
+        <div class="section-header">
+            <span class="section-eyebrow">The Land of Promise</span>
+            <h2 class="section-title">Sacred Sites</h2>
+            <p class="section-subtitle">Explore the locations where the Bible comes alive. Each site is visited with prayer, teaching, and prophetic impartation.</p>
+        </div>
+        <div class="sites-grid">
+            <div class="site-card">
+                <div class="site-image">
+                    <img src="https://images.unsplash.com/photo-1538669716095-09471c8c6c7a?q=80&w=2070&auto=format&fit=crop" alt="Jerusalem">
+                </div>
+                <div class="site-content">
+                    <div class="site-scripture">"Pray for the peace of Jerusalem" — Psalm 122:6</div>
+                    <h3 class="site-name">Jerusalem</h3>
+                    <p class="site-desc">Walk the Passion Week path from the Mount of Olives through Gethsemane, the Via Dolorosa, and the Garden Tomb. Experience the convergence of Abraham, David, Solomon, and Messiah in the eternal city.</p>
+                    <div class="site-highlights">
+                        <span>Western Wall</span>
+                        <span>Garden Tomb</span>
+                        <span>Mount of Olives</span>
+                        <span>Upper Room</span>
+                    </div>
+                </div>
+            </div>
+            <div class="site-card">
+                <div class="site-image">
+                    <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=80&w=2070&auto=format&fit=crop" alt="Sea of Galilee">
+                </div>
+                <div class="site-content">
+                    <div class="site-scripture">"Follow Me, and I will make you fishers of men" — Matthew 4:19</div>
+                    <h3 class="site-name">Sea of Galilee</h3>
+                    <p class="site-desc">Nowhere does the Bible come alive more than along these shores. Worship cruise at sunrise, visit Capernaum, Magdala, and Nazareth. Imagine the disciples casting nets as you reflect on the call of Messiah.</p>
+                    <div class="site-highlights">
+                        <span>Sunrise Cruise</span>
+                        <span>Capernaum</span>
+                        <span>Mount Arbel</span>
+                        <span>Baptism Site</span>
+                    </div>
+                </div>
+            </div>
+            <div class="site-card">
+                <div class="site-image">
+                    <img src="https://images.unsplash.com/photo-1542401886-65d6c61db217?q=80&w=2070&auto=format&fit=crop" alt="Dead Sea">
+                </div>
+                <div class="site-content">
+                    <div class="site-scripture">"The Salt Sea" — Genesis 14:3</div>
+                    <h3 class="site-name">The Dead Sea</h3>
+                    <p class="site-desc">The lowest point on earth and one of the most otherworldly landscapes in Scripture. Float in mineral-rich waters, visit Qumran where the Dead Sea Scrolls were discovered, and reflect on judgment and grace.</p>
+                    <div class="site-highlights">
+                        <span>Float Experience</span>
+                        <span>Qumran Caves</span>
+                        <span>Ein Gedi</span>
+                        <span>Masada</span>
+                    </div>
+                </div>
+            </div>
+            <div class="site-card">
+                <div class="site-image">
+                    <img src="https://images.unsplash.com/photo-1579606038836-e81852828d77?q=80&w=2070&auto=format&fit=crop" alt="Petra">
+                </div>
+                <div class="site-content">
+                    <div class="site-scriptence">"Who will lead me to Edom?" — Psalm 60:9</div>
+                    <h3 class="site-name">Petra & Wadi Rum</h3>
+                    <p class="site-desc">Walk through the rose-red Siq into the ancient Nabatean city. Stand where Moses struck the rock, then journey into Wadi Rum's desert grandeur—where the silence teaches what words cannot.</p>
+                    <div class="site-highlights">
+                        <span>The Treasury</span>
+                        <span>Wadi Rum Jeep</span>
+                        <span>Bedouin Camp</span>
+                        <span>Mount Nebo</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience -->
+    <section class="experience-section">
+        <div class="section-header">
+            <span class="section-eyebrow">The WHGRM Difference</span>
+            <h2 class="section-title">A Pilgrimage Like No Other</h2>
+            <p class="section-subtitle">We do not merely tour. We encounter. Every journey is covered in prayer, led by anointed teachers, and designed for spiritual transformation.</p>
+        </div>
+        <div class="experience-grid">
+            <div class="experience-card">
+                <div class="experience-icon"><i class="fas fa-pray"></i></div>
+                <h4>Worship on Location</h4>
+                <p>Live worship at the Sea of Galilee, sunrise prayer at the Mount of Olives, and communion at the Garden Tomb.</p>
+            </div>
+            <div class="experience-card">
+                <div class="experience-icon"><i class="fas fa-book-open"></i></div>
+                <h4>Torah Teaching</h4>
+                <p>Pst. John James and anointed teachers unpack Scripture at the very locations where events unfolded.</p>
+            </div>
+            <div class="experience-card">
+                <div class="experience-icon"><i class="fas fa-hand-holding-heart"></i></div>
+                <h4>Prayer Ministry</h4>
+                <p>Personal prayer and prophetic impartation at every major site. Return home spiritually renewed and activated.</p>
+            </div>
+            <div class="experience-card">
+                <div class="experience-icon"><i class="fas fa-shield-halved"></i></div>
+                <h4>24/7 Prayer Cover</h4>
+                <p>Our intercession team covers every pilgrim from booking to return. Travel under a canopy of continuous prayer.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section>
+        <div class="section-header">
+            <span class="section-eyebrow">Questions</span>
+            <h2 class="section-title">Frequently Asked</h2>
+        </div>
+        <div class="faq-container">
+            <div class="faq-item open">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <span>What is the best season for a Holy Land pilgrimage?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">Spring (March–May) and Fall (September–November) offer the most pleasant weather and vibrant landscapes. However, we operate year-round. Winter pilgrimages offer quieter sites and a unique atmosphere, while summer tours include more indoor teaching and evening activities.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <span>Is it safe to travel to Israel and Jordan?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">As a ministry, we take a biblical perspective on peace in the region. We do not believe lasting peace will come until the Prince of Peace returns. Our expert drivers and guides carefully avoid any areas of concern and treat you as our honored guest. We have safely led 500+ pilgrims without incident.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <span>Can I be baptized in the Jordan River?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">Yes. Yardenit baptism site is included in most itineraries. We provide white garments, changing facilities, and a meaningful ceremony led by your tour pastor. It is one of the most powerful moments of the entire pilgrimage for many travelers.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <span>What is the physical requirement for these tours?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">Our tours require walking approximately 3–4 miles per day on average, often across uneven terrain and hills. Comfortable, supportive footwear is essential. At each site, our guides offer options for those with physical limitations. If you have concerns, contact us for a private consultation.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <span>Do you offer private group tours for churches?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">Absolutely. If your church or ministry group has 10 or more people, we can customize an itinerary to fit your specific needs, teaching focus, and schedule. Private tours include dedicated worship sessions and tailored teaching from your own leadership.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <span>What should I pack and wear?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">Dress modestly with shoulders and knees covered at religious sites. Men should bring a head covering for the Western Wall (we provide one if needed). Bring comfortable walking shoes, a hat, sunscreen, and a reusable water bottle. A detailed packing list is sent upon registration.</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section">
+        <div class="section-header">
+            <span class="section-eyebrow">Your Journey Awaits</span>
+            <h2 class="section-title">Step Into the Scriptures</h2>
+            <p class="section-subtitle">Join hundreds of believers who have had their faith forever transformed by walking the land of the Bible. The stones cry out—will you come and hear?</p>
+        </div>
+        <div class="cta-buttons">
+            <a href="#tours" class="btn btn-primary">
+                <i class="fas fa-calendar-check btn-icon"></i>
+                Reserve Your Seat
+            </a>
+            <a href="index.html#give" class="btn btn-secondary">
+                <i class="fas fa-heart btn-icon"></i>
+                Sponsor a Pilgrim
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <a href="index.html" class="logo">
+                    <div class="logo-mark"><img src="images/logowtb.png" alt="Messianic Movement logo" class="logo-mark-img"></div>
+                    <div class="logo-text">
+                        <span class="logo-title">Messianic Movement</span>
+                        <span class="logo-subtitle">Regenerational Ministry</span>
+                    </div>
+                </a>
+                <p>Raising a generation of Spirit-filled believers who will transform nations through the power of the Holy Ghost.</p>
+                <div class="social-links">
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="index.html#ministries">Ministries</a></li>
+                    <li><a href="divine_episodes.html">Divine Episodes</a></li>
+                    <li><a href="holy_land_adventure.html">Holy Land Adventure</a></li>
+                    <li><a href="index.html#live">Live Service</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Resources</h4>
+                <ul>
+                    <li><a href="watch.html">Sermon Archive</a></li>
+                    <li><a href="divine_episodes.html">Divine Episodes</a></li>
+                    <li><a href="prayer_request.html">Prayer Request</a></li>
+                    <li><a href="ministry_school.html">Ministry School</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Contact</h4>
+                <ul>
+                    <li><i class="fas fa-map-marker-alt" style="color: var(--color-gold); margin-right: 0.5rem;"></i> 123 Faith Avenue, Glory City</li>
+                    <li><i class="fas fa-phone" style="color: var(--color-gold); margin-right: 0.5rem;"></i> +1 (555) 123-4567</li>
+                    <li><i class="fas fa-envelope" style="color: var(--color-gold); margin-right: 0.5rem;"></i> info@whgrministry.org</li>
+                    <li><i class="fas fa-clock" style="color: var(--color-gold); margin-right: 0.5rem;"></i> Sun: 9AM & 11AM EST</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Messianic Movement. All rights reserved.</p>
+            <p>Designed with <i class="fas fa-heart" style="color: var(--color-gold);"></i> by the Spirit</p>
+        </div>
+    </footer>
+
+    <script>
+        function filterTours(cat, btn) {
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            document.querySelectorAll('.tour-card').forEach(card => {
+                const categories = card.dataset.category.split(' ');
+                if (cat === 'all' || categories.includes(cat)) {
+                    card.style.display = 'block';
+                    setTimeout(() => card.style.opacity = '1', 10);
+                } else {
+                    card.style.opacity = '0';
+                    setTimeout(() => card.style.display = 'none', 300);
+                }
+            });
+        }
+        function toggleFaq(el) {
+            el.parentElement.classList.toggle('open');
+        }
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 50) nav.classList.add('scrolled');
+            else nav.classList.remove('scrolled');
+        });
+    </script>
+</body>
+</html>

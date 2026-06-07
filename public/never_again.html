@@ -1,0 +1,1946 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Never Again | Report Persecution & Injustice Against Christianity</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --color-bg: #050505;
+            --color-bg-elevated: #0a0a0a;
+            --color-surface: #111111;
+            --color-surface-hover: #1a1a1a;
+            --color-gold: #d4af37;
+            --color-gold-light: #f4d03f;
+            --color-gold-dark: #aa8c2c;
+            --color-purple: #6b46c1;
+            --color-purple-dark: #4c1d95;
+            --color-deep-purple: #5b21b6;
+            --color-purple-rich: #7c3aed;
+            --color-soft-blue: #3b82f6;
+            --color-blue-muted: #60a5fa;
+            --color-accent: #d4af37;
+            --color-text: #ffffff;
+            --color-text-secondary: #b0b0c0;
+            --color-text-muted: #71717a;
+            --color-danger: #ef4444;
+            --color-danger-dark: #dc2626;
+            --color-warning: #f59e0b;
+            --color-success: #22c55e;
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --glow-purple: rgba(107, 70, 193, 0.6);
+            --glow-gold: rgba(212, 175, 55, 0.4);
+            --glow-red: rgba(239, 68, 68, 0.4);
+            --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+            --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; font-size: 16px; }
+
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background-color: var(--color-bg);
+            color: var(--color-text);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1, h2, h3, h4, .serif {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 400;
+            letter-spacing: -0.02em;
+        }
+
+        /* Film Grain & Vignette */
+        .grain-overlay {
+            position: fixed; inset: 0; z-index: 9999; pointer-events: none; opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+        .vignette {
+            position: fixed; inset: 0;
+            background: radial-gradient(circle at center, transparent 0%, var(--color-bg) 120%);
+            pointer-events: none; z-index: 9998; opacity: 0.6;
+        }
+
+        /* Loading Screen */
+        .loader {
+            position: fixed; inset: 0; background: var(--color-bg); z-index: 99999;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            transition: opacity 0.8s var(--ease-out-expo), visibility 0.8s;
+        }
+        .loader.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+        .loader-text {
+            font-family: 'Cormorant Garamond', serif; font-size: 2rem; color: var(--color-gold);
+            letter-spacing: 0.3em; text-transform: uppercase;
+        }
+        .loader-bar {
+            width: 200px; height: 1px; background: rgba(255,255,255,0.1); margin-top: 2rem;
+            position: relative; overflow: hidden;
+        }
+        .loader-progress {
+            position: absolute; left: 0; top: 0; height: 100%; width: 0%;
+            background: var(--color-gold); animation: loadProgress 2s var(--ease-out-expo) forwards;
+            box-shadow: 0 0 20px var(--color-gold);
+        }
+        @keyframes loadProgress { to { width: 100%; } }
+
+        /* Navigation */
+        nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 1.5rem 4%;
+            transition: all 0.6s var(--ease-out-expo);
+        }
+        nav.scrolled {
+            background: rgba(5, 5, 5, 0.9); backdrop-filter: blur(20px) saturate(180%);
+            padding: 1rem 4%; border-bottom: 1px solid var(--glass-border);
+            box-shadow: 0 4px 30px rgba(0,0,0,0.3);
+        }
+        .nav-container {
+            max-width: 1600px; margin: 0 auto; display: flex;
+            justify-content: space-between; align-items: center;
+        }
+        .logo {
+            display: flex; align-items: center; gap: 1rem;
+            text-decoration: none; color: var(--color-text);
+        }
+        .logo-mark {
+    overflow: hidden;
+            width: 48px; height: 48px; border: 1px solid var(--color-gold); border-radius: 50%;
+            display: flex; align-items: center; justify-content: center; font-size: 1.25rem;
+            color: var(--color-gold); transition: all 0.4s ease;
+            box-shadow: 0 0 20px rgba(212,175,55,0.1);}
+        .logo:hover .logo-mark {
+    overflow: hidden;
+            background: linear-gradient(135deg, var(--color-gold), var(--color-purple-rich));
+            color: var(--color-bg); box-shadow: 0 0 30px rgba(212,175,55,0.3);}
+        .logo-text { display: flex; flex-direction: column; }
+        .logo-title {
+            font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 400; line-height: 1;
+        }
+        .logo-subtitle {
+            font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.3em;
+            color: var(--color-text-muted); margin-top: 0.25rem;
+        }
+        .nav-links {
+            display: flex; gap: 3rem; list-style: none; align-items: center;
+        }
+        .nav-link {
+            color: var(--color-text-secondary); text-decoration: none; font-size: 0.875rem;
+            font-weight: 500; letter-spacing: 0.05em; position: relative; padding: 0.5rem 0;
+            transition: all 0.4s ease;
+        }
+        .nav-link::after {
+            content: ''; position: absolute; bottom: 0; left: 0; width: 0%; height: 1px;
+            background: linear-gradient(90deg, var(--color-gold), var(--color-purple-rich));
+            transition: width 0.6s var(--ease-out-expo);
+            box-shadow: 0 0 10px var(--glow-gold);
+        }
+        .nav-link:hover { color: var(--color-gold); text-shadow: 0 0 20px rgba(212,175,55,0.3); }
+        .nav-link:hover::after { width: 100%; }
+        .nav-cta {
+            padding: 0.875rem 2rem; background: transparent; border: 1px solid var(--color-gold);
+            color: var(--color-gold); border-radius: 100px; font-size: 0.875rem; font-weight: 600;
+            letter-spacing: 0.05em; cursor: pointer; transition: all 0.4s var(--ease-out-expo);
+            position: relative; overflow: hidden; font-family: 'Space Grotesk', sans-serif;
+            box-shadow: 0 0 20px rgba(212,175,55,0.1); text-decoration: none; display: inline-block;
+        }
+        .nav-cta::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(135deg, var(--color-gold), var(--color-purple-rich));
+            transform: translateY(100%); transition: transform 0.4s var(--ease-out-expo); z-index: -1;
+        }
+        .nav-cta:hover { color: var(--color-bg); box-shadow: 0 0 30px rgba(212,175,55,0.3); transform: translateY(-2px); }
+        .nav-cta:hover::before { transform: translateY(0); }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh; position: relative; display: flex; align-items: center;
+            justify-content: center; overflow: hidden; padding: 0 4%; padding-top: 140px;
+        }
+        .hero-bg {
+            position: absolute; inset: 0; z-index: -2;
+        }
+        .hero-gradient {
+            position: absolute; inset: 0; z-index: 1;
+            background:
+                radial-gradient(circle at 20% 50%, rgba(212, 175, 55, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(139, 92, 246, 0.06) 0%, transparent 50%),
+                radial-gradient(circle at 50% 0%, rgba(239, 68, 68, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 50% 50%, rgba(5, 5, 5, 0.9) 0%, var(--color-bg) 100%);
+        }
+        .hero-grid {
+            position: absolute; inset: 0;
+            background-image:
+                linear-gradient(rgba(212, 175, 55, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(212, 175, 55, 0.02) 1px, transparent 1px);
+            background-size: 100px 100px;
+            mask-image: radial-gradient(circle at center, black 0%, transparent 70%);
+            transform: perspective(500px) rotateX(60deg) translateY(-100px) scale(2);
+            animation: gridFloat 20s ease-in-out infinite; z-index: 2;
+        }
+        @keyframes gridFloat {
+            0%, 100% { transform: perspective(500px) rotateX(60deg) translateY(-100px) scale(2); }
+            50% { transform: perspective(500px) rotateX(60deg) translateY(-120px) scale(2); }
+        }
+        .hero-content {
+            text-align: center; max-width: 1100px; z-index: 10; position: relative;
+        }
+        .hero-eyebrow {
+            display: inline-flex; align-items: center; gap: 1rem; margin-bottom: 2rem;
+            opacity: 0; transform: translateY(20px);
+            animation: fadeUp 1s var(--ease-out-expo) 0.5s forwards;
+        }
+        .eyebrow-line {
+            width: 60px; height: 1px;
+            background: linear-gradient(to right, transparent, var(--color-gold));
+            box-shadow: 0 0 10px rgba(212,175,55,0.3);
+        }
+        .eyebrow-text {
+            font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.3em;
+            color: var(--color-gold); text-shadow: 0 0 10px rgba(212,175,55,0.3);
+        }
+        .alert-pulse {
+            width: 10px; height: 10px; background: var(--color-danger); border-radius: 50%;
+            position: relative; box-shadow: 0 0 10px var(--color-danger);
+        }
+        .alert-pulse::after {
+            content: ''; position: absolute; inset: -4px; border: 1px solid var(--color-danger);
+            border-radius: 50%; animation: pulseRing 2s infinite;
+        }
+        @keyframes pulseRing {
+            0% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(3); opacity: 0; }
+        }
+        .hero h1 {
+            font-size: clamp(3rem, 9vw, 7rem); line-height: 0.95; margin-bottom: 1.5rem;
+            overflow: hidden;
+        }
+        .hero-title-line {
+            display: block; overflow: hidden;
+            background: linear-gradient(135deg, #fff 0%, var(--color-gold-light) 50%, var(--color-gold) 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+            opacity: 0; transform: translateY(100%) rotate(5deg);
+            animation: titleReveal 1.2s var(--ease-out-expo) forwards;
+            filter: drop-shadow(0 0 30px rgba(212,175,55,0.2));
+        }
+        .hero-title-line:nth-child(1) { animation-delay: 0.6s; }
+        .hero-title-line:nth-child(2) { animation-delay: 0.8s; }
+        @keyframes titleReveal {
+            to { opacity: 1; transform: translateY(0) rotate(0); }
+        }
+        .hero-subtitle {
+            font-size: clamp(1rem, 2vw, 1.35rem); color: var(--color-text-secondary);
+            max-width: 700px; margin: 0 auto 3rem; font-weight: 300; line-height: 1.8;
+            opacity: 0; transform: translateY(20px);
+            animation: fadeUp 1s var(--ease-out-expo) 1s forwards;
+        }
+        @keyframes fadeUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .hero-actions {
+            display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap;
+            opacity: 0; animation: fadeUp 1s var(--ease-out-expo) 1.2s forwards;
+        }
+        .btn {
+            position: relative; padding: 1.25rem 3rem; border-radius: 100px; font-weight: 600;
+            font-size: 0.9375rem; letter-spacing: 0.05em; text-decoration: none;
+            display: inline-flex; align-items: center; gap: 0.75rem; cursor: pointer;
+            border: none; overflow: hidden; transition: all 0.3s ease;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, var(--color-gold) 0%, var(--color-gold-dark) 100%);
+            color: var(--color-bg); box-shadow: 0 4px 20px rgba(212,175,55,0.3);
+        }
+        .btn-primary:hover {
+            transform: scale(1.05) translateY(-2px);
+            box-shadow: 0 8px 30px rgba(212,175,55,0.5);
+        }
+        .btn-danger {
+            background: linear-gradient(135deg, var(--color-danger) 0%, var(--color-danger-dark) 100%);
+            color: #fff; box-shadow: 0 4px 20px rgba(239,68,68,0.3);
+        }
+        .btn-danger:hover {
+            transform: scale(1.05) translateY(-2px);
+            box-shadow: 0 8px 30px rgba(239,68,68,0.5);
+        }
+        .btn-secondary {
+            background: transparent; border: 1px solid var(--glass-border); color: var(--color-text);
+            backdrop-filter: blur(10px); position: relative;
+        }
+        .btn-secondary::before {
+            content: ''; position: absolute; inset: 0;
+            background: linear-gradient(135deg, rgba(212,175,55,0.1), rgba(107,33,168,0.1));
+            opacity: 0; transition: opacity 0.3s ease;
+        }
+        .btn-secondary:hover {
+            border-color: rgba(212,175,55,0.3); transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(212,175,55,0.1);
+        }
+        .btn-secondary:hover::before { opacity: 1; }
+        .btn-icon { transition: transform 0.3s ease; }
+        .btn:hover .btn-icon { transform: translateX(5px); }
+
+        /* Live Stats Bar */
+        .stats-bar {
+            position: relative; z-index: 10; background: rgba(5,5,5,0.8);
+            backdrop-filter: blur(20px); border-top: 1px solid rgba(212,175,55,0.1);
+            border-bottom: 1px solid rgba(212,175,55,0.1); padding: 2rem 4%;
+        }
+        .stats-container {
+            max-width: 1400px; margin: 0 auto; display: grid;
+            grid-template-columns: repeat(4, 1fr); gap: 2rem;
+        }
+        .stat-item {
+            text-align: center; padding: 1.5rem; position: relative;
+        }
+        .stat-item:not(:last-child)::after {
+            content: ''; position: absolute; right: 0; top: 20%; bottom: 20%; width: 1px;
+            background: linear-gradient(to bottom, transparent, var(--glass-border), transparent);
+        }
+        .stat-number {
+            font-family: 'Cormorant Garamond', serif; font-size: 3rem; font-weight: 600;
+            color: var(--color-gold); line-height: 1; margin-bottom: 0.5rem;
+            text-shadow: 0 0 20px rgba(212,175,55,0.3);
+        }
+        .stat-label {
+            font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.15em;
+            color: var(--color-text-muted);
+        }
+        .stat-change {
+            font-size: 0.75rem; color: var(--color-danger); margin-top: 0.25rem;
+            display: flex; align-items: center; justify-content: center; gap: 0.25rem;
+        }
+
+        /* Section Base */
+        section { padding: 8rem 4%; position: relative; }
+        .section-header {
+            max-width: 800px; margin: 0 auto 5rem; text-align: center;
+        }
+        .section-eyebrow {
+            display: inline-flex; align-items: center; gap: 1rem; font-size: 0.75rem;
+            text-transform: uppercase; letter-spacing: 0.3em; color: var(--color-gold);
+            margin-bottom: 2rem; font-weight: 600;
+            text-shadow: 0 0 10px rgba(212,175,55,0.2);
+        }
+        .section-eyebrow::before, .section-eyebrow::after {
+            content: ''; width: 30px; height: 1px;
+            background: linear-gradient(90deg, transparent, var(--color-gold), transparent); opacity: 0.5;
+        }
+        .section-title {
+            font-size: clamp(2.5rem, 6vw, 4.5rem); line-height: 1; margin-bottom: 1.5rem;
+            background: linear-gradient(to bottom, #fff, var(--color-text-secondary));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 0 20px rgba(212,175,55,0.1));
+        }
+        .section-subtitle {
+            color: var(--color-text-secondary); font-size: 1.15rem; font-weight: 300; line-height: 1.7;
+        }
+
+        /* Global Conflict Tracker */
+        .conflict-tracker {
+            background: linear-gradient(135deg, rgba(10,10,15,0.95) 0%, rgba(5,5,5,0.98) 100%);
+            border-top: 1px solid rgba(212,175,55,0.1); border-bottom: 1px solid rgba(212,175,55,0.1);
+            position: relative; overflow: hidden;
+        }
+        .conflict-tracker::before {
+            content: ''; position: absolute; inset: 0;
+            background:
+                radial-gradient(circle at 20% 50%, rgba(212,175,55,0.03) 0%, transparent 50%),
+                radial-gradient(circle at 80% 50%, rgba(239,68,68,0.03) 0%, transparent 50%);
+            pointer-events: none;
+        }
+        .tracker-container {
+            max-width: 1400px; margin: 0 auto; position: relative; z-index: 1;
+        }
+        .tracker-grid {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 3rem;
+        }
+        .map-container {
+            background: var(--color-surface); border: 1px solid var(--glass-border);
+            border-radius: 24px; padding: 2rem; position: relative; overflow: hidden;
+            min-height: 500px;
+        }
+        .map-container::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+            background: linear-gradient(90deg, var(--color-gold), var(--color-danger), var(--color-purple-rich));
+        }
+        .map-title {
+            font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; margin-bottom: 1.5rem;
+            display: flex; align-items: center; gap: 0.75rem;
+        }
+        .map-title i { color: var(--color-danger); }
+        .world-map {
+            width: 100%; height: 400px; position: relative;
+            background: radial-gradient(circle at 30% 40%, rgba(212,175,55,0.05) 0%, transparent 40%),
+                        radial-gradient(circle at 70% 30%, rgba(239,68,68,0.05) 0%, transparent 40%),
+                        radial-gradient(circle at 50% 60%, rgba(107,33,168,0.03) 0%, transparent 40%);
+        }
+        .map-region {
+            position: absolute; padding: 0.75rem 1.25rem; background: rgba(17,17,17,0.9);
+            border: 1px solid var(--glass-border); border-radius: 12px; cursor: pointer;
+            transition: all 0.4s var(--ease-out-expo); backdrop-filter: blur(10px);
+            min-width: 140px; text-align: center;
+        }
+        .map-region:hover {
+            transform: translateY(-5px) scale(1.05);
+            border-color: rgba(212,175,55,0.3);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4), 0 0 30px rgba(212,175,55,0.1);
+        }
+        .map-region.active {
+            border-color: var(--color-danger);
+            box-shadow: 0 0 30px rgba(239,68,68,0.2);
+        }
+        .map-region .region-name {
+            font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em;
+            margin-bottom: 0.25rem;
+        }
+        .map-region .region-count {
+            font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; color: var(--color-gold);
+        }
+        .map-region .region-trend {
+            font-size: 0.7rem; color: var(--color-danger); display: flex; align-items: center;
+            justify-content: center; gap: 0.25rem; margin-top: 0.25rem;
+        }
+        .severity-indicator {
+            display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 0.5rem;
+        }
+        .severity-high { background: var(--color-danger); box-shadow: 0 0 10px var(--color-danger); }
+        .severity-medium { background: var(--color-warning); box-shadow: 0 0 10px var(--color-warning); }
+        .severity-low { background: var(--color-success); box-shadow: 0 0 10px var(--color-success); }
+
+        .conflict-list {
+            display: flex; flex-direction: column; gap: 1rem;
+        }
+        .conflict-card {
+            background: var(--color-surface); border: 1px solid var(--glass-border);
+            border-radius: 16px; padding: 1.5rem; transition: all 0.4s var(--ease-out-expo);
+            cursor: pointer; position: relative; overflow: hidden;
+        }
+        .conflict-card::before {
+            content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px;
+            background: linear-gradient(to bottom, var(--color-danger), var(--color-warning));
+            transform: scaleY(0); transition: transform 0.4s var(--ease-out-expo);
+        }
+        .conflict-card:hover {
+            transform: translateX(5px); border-color: rgba(239,68,68,0.2);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        .conflict-card:hover::before { transform: scaleY(1); }
+        .conflict-header {
+            display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.75rem;
+        }
+        .conflict-title {
+            font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; font-weight: 600;
+        }
+        .conflict-badge {
+            padding: 0.35rem 0.75rem; border-radius: 100px; font-size: 0.7rem;
+            font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;
+        }
+        .badge-critical {
+            background: rgba(239,68,68,0.15); border: 1px solid rgba(239,68,68,0.3); color: var(--color-danger);
+        }
+        .badge-high {
+            background: rgba(245,158,11,0.15); border: 1px solid rgba(245,158,11,0.3); color: var(--color-warning);
+        }
+        .badge-active {
+            background: rgba(34,197,94,0.15); border: 1px solid rgba(34,197,94,0.3); color: var(--color-success);
+        }
+        .conflict-meta {
+            display: flex; gap: 1.5rem; margin-bottom: 0.75rem;
+        }
+        .conflict-meta span {
+            font-size: 0.8rem; color: var(--color-text-muted); display: flex; align-items: center; gap: 0.4rem;
+        }
+        .conflict-meta i { color: var(--color-gold); font-size: 0.75rem; }
+        .conflict-desc {
+            font-size: 0.9rem; color: var(--color-text-secondary); line-height: 1.6;
+        }
+        .conflict-footer {
+            display: flex; justify-content: space-between; align-items: center; margin-top: 1rem;
+            padding-top: 1rem; border-top: 1px solid var(--glass-border);
+        }
+        .conflict-source {
+            font-size: 0.75rem; color: var(--color-text-muted); font-style: italic;
+        }
+        .conflict-action {
+            font-size: 0.8rem; color: var(--color-gold); font-weight: 600;
+            display: flex; align-items: center; gap: 0.5rem; cursor: pointer; transition: gap 0.3s ease;
+        }
+        .conflict-action:hover { gap: 0.75rem; }
+
+        /* Report Form Section */
+        .report-section {
+            background: linear-gradient(135deg, var(--color-bg) 0%, rgba(10,10,15,0.95) 100%);
+            position: relative; overflow: hidden;
+        }
+        .report-section::before {
+            content: ''; position: absolute; inset: 0;
+            background: radial-gradient(circle at 50% 0%, rgba(212,175,55,0.03) 0%, transparent 50%);
+            pointer-events: none;
+        }
+        .report-container {
+            max-width: 1200px; margin: 0 auto; position: relative; z-index: 1;
+            display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start;
+        }
+        .report-info h2 {
+            font-size: clamp(2rem, 4vw, 3.5rem); line-height: 1.1; margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #fff, var(--color-gold-light));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+        .report-info p {
+            color: var(--color-text-secondary); font-size: 1.1rem; line-height: 1.8; margin-bottom: 2rem;
+        }
+        .report-features {
+            display: flex; flex-direction: column; gap: 1.25rem;
+        }
+        .report-feature {
+            display: flex; align-items: flex-start; gap: 1rem;
+            padding: 1.25rem; background: var(--glass-bg); border: 1px solid var(--glass-border);
+            border-radius: 16px; transition: all 0.4s ease;
+        }
+        .report-feature:hover {
+            border-color: rgba(212,175,55,0.2); transform: translateX(5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        .report-feature-icon {
+            width: 48px; height: 48px; min-width: 48px; border-radius: 12px;
+            display: flex; align-items: center; justify-content: center; font-size: 1.25rem;
+        }
+        .report-feature-icon.gold {
+            background: rgba(212,175,55,0.1); border: 1px solid rgba(212,175,55,0.2); color: var(--color-gold);
+        }
+        .report-feature-icon.red {
+            background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.2); color: var(--color-danger);
+        }
+        .report-feature-icon.blue {
+            background: rgba(59,130,246,0.1); border: 1px solid rgba(59,130,246,0.2); color: var(--color-soft-blue);
+        }
+        .report-feature-text h4 {
+            font-family: 'Space Grotesk', sans-serif; font-size: 1rem; font-weight: 600; margin-bottom: 0.25rem;
+        }
+        .report-feature-text p {
+            font-size: 0.85rem; color: var(--color-text-muted); margin: 0; line-height: 1.5;
+        }
+
+        .report-form {
+            background: var(--color-surface); border: 1px solid var(--glass-border);
+            border-radius: 24px; padding: 3rem; position: relative; overflow: hidden;
+        }
+        .report-form::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+            background: linear-gradient(90deg, var(--color-gold), var(--color-purple-rich), var(--color-danger));
+        }
+        .form-group { margin-bottom: 1.5rem; }
+        .form-label {
+            display: block; font-size: 0.875rem; font-weight: 600; margin-bottom: 0.5rem;
+            color: var(--color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em;
+        }
+        .form-input, .form-textarea, .form-select {
+            width: 100%; padding: 1rem 1.25rem; background: rgba(255,255,255,0.03);
+            border: 1px solid var(--glass-border); border-radius: 12px; color: var(--color-text);
+            font-family: 'Space Grotesk', sans-serif; font-size: 0.95rem;
+            transition: all 0.3s ease;
+        }
+        .form-input:focus, .form-textarea:focus, .form-select:focus {
+            outline: none; border-color: var(--color-gold);
+            box-shadow: 0 0 20px rgba(212,175,55,0.1);
+            background: rgba(255,255,255,0.05);
+        }
+        .form-textarea { min-height: 120px; resize: vertical; }
+        .form-select option { background: var(--color-surface); color: var(--color-text); }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+        /* File Upload */
+        .upload-zone {
+            border: 2px dashed var(--glass-border); border-radius: 16px; padding: 2.5rem;
+            text-align: center; cursor: pointer; transition: all 0.4s ease;
+            background: rgba(255,255,255,0.01); position: relative; overflow: hidden;
+        }
+        .upload-zone:hover, .upload-zone.dragover {
+            border-color: var(--color-gold); background: rgba(212,175,55,0.03);
+            box-shadow: 0 0 30px rgba(212,175,55,0.05);
+        }
+        .upload-zone i {
+            font-size: 2.5rem; color: var(--color-gold); margin-bottom: 1rem;
+            display: block; transition: transform 0.3s ease;
+        }
+        .upload-zone:hover i { transform: scale(1.1); }
+        .upload-zone p {
+            color: var(--color-text-secondary); font-size: 0.95rem; margin-bottom: 0.5rem;
+        }
+        .upload-zone span {
+            font-size: 0.8rem; color: var(--color-text-muted);
+        }
+        .upload-zone input[type="file"] { display: none; }
+        .file-preview {
+            display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 1rem;
+        }
+        .file-item {
+            display: flex; align-items: center; gap: 0.5rem;
+            padding: 0.5rem 1rem; background: rgba(212,175,55,0.1);
+            border: 1px solid rgba(212,175,55,0.2); border-radius: 100px;
+            font-size: 0.8rem; color: var(--color-gold);
+        }
+        .file-item i { cursor: pointer; transition: color 0.2s; }
+        .file-item i:hover { color: var(--color-danger); }
+
+        .submit-btn {
+            width: 100%; padding: 1.25rem; background: linear-gradient(135deg, var(--color-gold), var(--color-gold-dark));
+            border: none; border-radius: 12px; color: var(--color-bg); font-weight: 700;
+            font-size: 1rem; letter-spacing: 0.05em; cursor: pointer; transition: all 0.4s var(--ease-out-expo);
+            font-family: 'Space Grotesk', sans-serif; position: relative; overflow: hidden;
+            box-shadow: 0 4px 20px rgba(212,175,55,0.3);
+        }
+        .submit-btn:hover {
+            transform: translateY(-2px); box-shadow: 0 8px 30px rgba(212,175,55,0.5);
+        }
+        .submit-btn:active { transform: translateY(0); }
+        .submit-btn i { margin-right: 0.5rem; }
+
+        /* Recent Reports Feed */
+        .reports-feed {
+            background: linear-gradient(135deg, rgba(10,10,15,0.95) 0%, rgba(5,5,5,0.98) 100%);
+            border-top: 1px solid rgba(212,175,55,0.1);
+        }
+        .feed-container { max-width: 1400px; margin: 0 auto; }
+        .feed-grid {
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem;
+        }
+        .feed-card {
+            background: var(--color-surface); border: 1px solid var(--glass-border);
+            border-radius: 20px; overflow: hidden; transition: all 0.6s var(--ease-out-expo);
+            cursor: pointer;
+        }
+        .feed-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            border-color: rgba(212,175,55,0.2);
+            box-shadow: 0 30px 60px -20px rgba(0,0,0,0.5), 0 0 40px rgba(212,175,55,0.1);
+        }
+        .feed-media {
+            aspect-ratio: 16/10; position: relative; overflow: hidden;
+            background: linear-gradient(135deg, #0f0f0f, #1a1a1a);
+        }
+        .feed-media img, .feed-media video {
+            width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease;
+        }
+        .feed-card:hover .feed-media img, .feed-card:hover .feed-media video { transform: scale(1.1); }
+        .feed-media-overlay {
+            position: absolute; inset: 0;
+            background: linear-gradient(to top, rgba(5,5,5,0.9) 0%, transparent 50%);
+        }
+        .feed-media-badge {
+            position: absolute; top: 1rem; left: 1rem;
+            padding: 0.4rem 0.8rem; background: rgba(239,68,68,0.9);
+            border-radius: 8px; font-size: 0.7rem; font-weight: 600;
+            text-transform: uppercase; letter-spacing: 0.05em; color: #fff;
+            backdrop-filter: blur(10px);
+        }
+        .feed-media-type {
+            position: absolute; top: 1rem; right: 1rem;
+            width: 36px; height: 36px; background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(10px); border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            color: var(--color-gold); font-size: 0.875rem;
+        }
+        .feed-content { padding: 1.75rem; }
+        .feed-header {
+            display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;
+        }
+        .feed-location {
+            display: flex; align-items: center; gap: 0.5rem;
+            font-size: 0.8rem; color: var(--color-text-muted);
+        }
+        .feed-location i { color: var(--color-gold); }
+        .feed-time { font-size: 0.75rem; color: var(--color-text-muted); }
+        .feed-title {
+            font-family: 'Cormorant Garamond', serif; font-size: 1.35rem; font-weight: 600;
+            margin-bottom: 0.75rem; line-height: 1.3;
+        }
+        .feed-excerpt {
+            font-size: 0.9rem; color: var(--color-text-secondary); line-height: 1.6;
+            margin-bottom: 1.25rem;
+            display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
+        }
+        .feed-footer {
+            display: flex; justify-content: space-between; align-items: center;
+            padding-top: 1rem; border-top: 1px solid var(--glass-border);
+        }
+        .feed-verified {
+            display: flex; align-items: center; gap: 0.4rem;
+            font-size: 0.75rem; color: var(--color-success);
+        }
+        .feed-verified i { font-size: 0.8rem; }
+        .feed-actions {
+            display: flex; gap: 1rem;
+        }
+        .feed-action {
+            display: flex; align-items: center; gap: 0.35rem;
+            font-size: 0.8rem; color: var(--color-text-muted); cursor: pointer;
+            transition: color 0.3s ease;
+        }
+        .feed-action:hover { color: var(--color-gold); }
+        .feed-action i { font-size: 0.875rem; }
+
+        /* Prayer Wall */
+        .prayer-section {
+            background: linear-gradient(135deg, var(--color-bg) 0%, rgba(10,10,15,0.95) 100%);
+            position: relative; overflow: hidden;
+        }
+        .prayer-section::before {
+            content: ''; position: absolute; inset: 0;
+            background: radial-gradient(circle at 80% 20%, rgba(107,33,168,0.05) 0%, transparent 50%);
+            pointer-events: none;
+        }
+        .prayer-container { max-width: 1200px; margin: 0 auto; position: relative; z-index: 1; }
+        .prayer-grid {
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem;
+        }
+        .prayer-card {
+            background: var(--glass-bg); border: 1px solid var(--glass-border);
+            border-radius: 20px; padding: 2.5rem; text-align: center;
+            transition: all 0.6s var(--ease-out-expo); position: relative; overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+        .prayer-card::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+            background: linear-gradient(90deg, transparent, var(--color-gold), transparent);
+            transform: scaleX(0); transition: transform 0.6s var(--ease-out-expo);
+        }
+        .prayer-card:hover {
+            transform: translateY(-10px); border-color: rgba(212,175,55,0.2);
+            box-shadow: 0 30px 60px -20px rgba(0,0,0,0.4), 0 0 40px rgba(212,175,55,0.1);
+        }
+        .prayer-card:hover::before { transform: scaleX(1); }
+        .prayer-icon {
+            width: 70px; height: 70px; margin: 0 auto 1.5rem;
+            background: linear-gradient(135deg, rgba(212,175,55,0.1), rgba(107,33,168,0.1));
+            border: 1px solid rgba(212,175,55,0.2); border-radius: 20px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.75rem; color: var(--color-gold);
+            transition: all 0.4s ease; box-shadow: 0 0 30px rgba(212,175,55,0.1);
+        }
+        .prayer-card:hover .prayer-icon {
+            transform: scale(1.1) rotate(-5deg);
+            background: linear-gradient(135deg, var(--color-gold), var(--color-purple-rich));
+            color: var(--color-bg); box-shadow: 0 10px 30px rgba(212,175,55,0.3);
+        }
+        .prayer-card h3 {
+            font-size: 1.5rem; margin-bottom: 0.75rem;
+            font-family: 'Cormorant Garamond', serif;
+        }
+        .prayer-card p {
+            color: var(--color-text-secondary); font-size: 0.95rem; line-height: 1.7; margin-bottom: 1.5rem;
+        }
+        .prayer-count {
+            font-family: 'Cormorant Garamond', serif; font-size: 2.5rem; color: var(--color-gold);
+            margin-bottom: 0.5rem; text-shadow: 0 0 20px rgba(212,175,55,0.2);
+        }
+        .prayer-btn {
+            width: 100%; padding: 0.875rem; background: transparent;
+            border: 1px solid var(--color-gold); border-radius: 100px;
+            color: var(--color-gold); font-weight: 600; cursor: pointer;
+            transition: all 0.4s var(--ease-out-expo); font-family: 'Space Grotesk', sans-serif;
+            position: relative; overflow: hidden;
+        }
+        .prayer-btn::before {
+            content: ''; position: absolute; inset: 0;
+            background: linear-gradient(135deg, var(--color-gold), var(--color-purple-rich));
+            transform: translateY(100%); transition: transform 0.4s var(--ease-out-expo); z-index: -1;
+        }
+        .prayer-btn:hover { color: var(--color-bg); box-shadow: 0 10px 30px rgba(212,175,55,0.3); }
+        .prayer-btn:hover::before { transform: translateY(0); }
+        .prayer-btn.prayed {
+            background: var(--color-success); border-color: var(--color-success); color: var(--color-bg);
+        }
+        .prayer-btn.prayed::before { display: none; }
+
+        /* CTA Banner */
+        .cta-banner {
+            background: linear-gradient(135deg, rgba(212,175,55,0.1) 0%, rgba(107,33,168,0.1) 50%, rgba(239,68,68,0.05) 100%);
+            border-top: 1px solid rgba(212,175,55,0.1); border-bottom: 1px solid rgba(212,175,55,0.1);
+            padding: 6rem 4%; text-align: center; position: relative; overflow: hidden;
+        }
+        .cta-banner::before {
+            content: ''; position: absolute; inset: 0;
+            background: radial-gradient(circle at 50% 50%, rgba(212,175,55,0.05) 0%, transparent 60%);
+            pointer-events: none;
+        }
+        .cta-content { position: relative; z-index: 1; max-width: 800px; margin: 0 auto; }
+        .cta-banner h2 {
+            font-size: clamp(2rem, 5vw, 3.5rem); line-height: 1.1; margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #fff, var(--color-gold-light));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+        .cta-banner p {
+            color: var(--color-text-secondary); font-size: 1.15rem; line-height: 1.8; margin-bottom: 2.5rem;
+        }
+
+        /* Footer */
+        footer {
+            background: #020202; border-top: 1px solid var(--glass-border);
+            padding: 5rem 4% 3rem; position: relative;
+        }
+        footer::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(212,175,55,0.3), transparent);
+        }
+        .footer-grid {
+            max-width: 1400px; margin: 0 auto; display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr; gap: 4rem; margin-bottom: 4rem;
+        }
+        .footer-brand .logo { margin-bottom: 1.5rem; }
+        .footer-brand p {
+            color: var(--color-text-secondary); line-height: 1.8; margin-bottom: 2rem; max-width: 300px;
+        }
+        .social-links { display: flex; gap: 1rem; }
+        .social-links a {
+            width: 44px; height: 44px; background: var(--glass-bg); border: 1px solid var(--glass-border);
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            color: var(--color-text-secondary); text-decoration: none;
+            transition: all 0.4s var(--ease-out-expo); position: relative; overflow: hidden;
+        }
+        .social-links a:hover {
+            color: var(--color-bg); border-color: transparent; transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(212,175,55,0.2);
+            background: linear-gradient(135deg, var(--color-gold), var(--color-purple-rich));
+        }
+        .footer-links h4 {
+            font-size: 0.875rem; text-transform: uppercase; letter-spacing: 0.1em;
+            color: var(--color-gold); margin-bottom: 1.5rem;
+            text-shadow: 0 0 10px rgba(212,175,55,0.1);
+        }
+        .footer-links ul { list-style: none; }
+        .footer-links li { margin-bottom: 0.75rem; }
+        .footer-links a {
+            color: var(--color-text-secondary); text-decoration: none;
+            transition: all 0.3s ease; display: inline-block;
+        }
+        .footer-links a:hover {
+            color: var(--color-gold); transform: translateX(5px);
+            text-shadow: 0 0 10px rgba(212,175,55,0.2);
+        }
+        .footer-bottom {
+            max-width: 1400px; margin: 0 auto; padding-top: 2rem;
+            border-top: 1px solid var(--glass-border);
+            display: flex; justify-content: space-between; align-items: center;
+            color: var(--color-text-muted); font-size: 0.875rem; flex-wrap: wrap; gap: 1rem;
+        }
+
+        /* Toast */
+        .toast {
+            position: fixed; bottom: 100px; left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: rgba(17,17,17,0.95); backdrop-filter: blur(20px);
+            border: 1px solid rgba(212,175,55,0.3); padding: 1rem 2rem;
+            border-radius: 100px; color: var(--color-text); z-index: 5000; opacity: 0;
+            transition: all 0.6s var(--ease-out-expo);
+            display: flex; align-items: center; gap: 1rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5), 0 0 30px rgba(212,175,55,0.1);
+        }
+        .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+        .toast-icon { color: var(--color-gold); font-size: 1.25rem; }
+
+        /* Modal */
+        .modal {
+            position: fixed; inset: 0; background: rgba(0,0,0,0.9);
+            backdrop-filter: blur(10px); z-index: 3000;
+            display: flex; align-items: center; justify-content: center;
+            opacity: 0; visibility: hidden; transition: all 0.4s ease; padding: 2rem;
+        }
+        .modal.open { opacity: 1; visibility: visible; }
+        .modal-content {
+            background: var(--color-surface); border: 1px solid var(--glass-border);
+            border-radius: 24px; max-width: 700px; width: 100%; padding: 3rem;
+            position: relative; transform: scale(0.9) translateY(20px);
+            transition: transform 0.4s var(--ease-out-expo);
+            box-shadow: 0 40px 80px -20px rgba(0,0,0,0.5), 0 0 60px rgba(212,175,55,0.1);
+            max-height: 90vh; overflow-y: auto;
+        }
+        .modal.open .modal-content { transform: scale(1) translateY(0); }
+        .close-modal {
+            position: absolute; top: 1.5rem; right: 1.5rem; width: 40px; height: 40px;
+            border-radius: 50%; border: 1px solid var(--glass-border); background: transparent;
+            color: var(--color-text); cursor: pointer; display: flex; align-items: center;
+            justify-content: center; transition: all 0.3s ease;
+        }
+        .close-modal:hover { background: var(--glass-bg); color: var(--color-gold); transform: rotate(90deg); }
+        .modal h2 {
+            font-family: 'Cormorant Garamond', serif; font-size: 2rem; margin-bottom: 1rem;
+            background: linear-gradient(to right, #fff, var(--color-gold));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+        .modal-body { color: var(--color-text-secondary); line-height: 1.8; }
+        .modal-body img, .modal-body video {
+            width: 100%; border-radius: 12px; margin: 1rem 0;
+        }
+
+        /* Scroll Top */
+        .scroll-top {
+            position: fixed; bottom: 2rem; right: 2rem; width: 50px; height: 50px;
+            background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 50%;
+            display: flex; align-items: center; justify-content: center; color: var(--color-text);
+            cursor: pointer; z-index: 999; opacity: 0; visibility: hidden;
+            transition: all 0.4s var(--ease-out-expo); backdrop-filter: blur(10px);
+        }
+        .scroll-top.visible { opacity: 1; visibility: visible; }
+        .scroll-top:hover {
+            background: linear-gradient(135deg, var(--color-gold), var(--color-purple-rich));
+            color: var(--color-bg); border-color: transparent; transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(212,175,55,0.3);
+        }
+
+        /* Animations */
+        .fade-in-up {
+            opacity: 0; transform: translateY(30px);
+            transition: opacity 0.8s var(--ease-out-expo), transform 0.8s var(--ease-out-expo);
+        }
+        .fade-in-up.visible { opacity: 1; transform: translateY(0); }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .stats-container { grid-template-columns: repeat(2, 1fr); }
+            .stat-item:not(:last-child)::after { display: none; }
+            .tracker-grid { grid-template-columns: 1fr; }
+            .report-container { grid-template-columns: 1fr; gap: 3rem; }
+            .feed-grid { grid-template-columns: repeat(2, 1fr); }
+            .prayer-grid { grid-template-columns: repeat(2, 1fr); }
+            .footer-grid { grid-template-columns: 1fr 1fr; gap: 3rem; }
+            .nav-links { display: none; }
+        }
+        @media (max-width: 768px) {
+            .stats-container { grid-template-columns: 1fr; }
+            .feed-grid { grid-template-columns: 1fr; }
+            .prayer-grid { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr; }
+            .form-row { grid-template-columns: 1fr; }
+            .hero h1 { font-size: 2.5rem; }
+            .map-region { position: relative !important; left: auto !important; top: auto !important; margin-bottom: 0.5rem; }
+            .world-map { height: auto; display: flex; flex-direction: column; }
+        }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--color-bg); }
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, var(--color-gold), var(--color-purple-rich)); border-radius: 4px;
+        }
+        ::selection {
+            background: rgba(212, 175, 55, 0.3); color: #fff;
+            text-shadow: 0 0 10px rgba(212,175,55,0.3);
+        }
+    
+    /* LOGO IMAGE FALLBACK */
+    
+    /* HOMEPAGE HEADER LOGO MATCH */
+    nav .logo .logo-mark,
+    .study-nav .logo .logo-mark,
+    .watch-header .logo .logo-mark {
+        width: 48px;
+        height: 48px;
+        flex: 0 0 48px;
+        border: 1px solid var(--color-gold);
+        border-radius: 50%;
+        background: transparent;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        position: relative;
+        box-shadow: 0 0 20px rgba(212,175,55,0.1);
+    }
+
+    nav .logo .logo-mark img,
+    .study-nav .logo .logo-mark img,
+    .watch-header .logo .logo-mark img,
+    nav .logo .logo-mark-img,
+    .study-nav .logo .logo-mark-img,
+    .watch-header .logo .logo-mark-img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        display: block;
+        position: relative;
+        z-index: 1;
+    }
+
+    nav .logo .logo-title,
+    .study-nav .logo .logo-title,
+    .watch-header .logo .logo-title {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 1.5rem;
+        font-weight: 400;
+        line-height: 1;
+        letter-spacing: 0;
+    }
+
+    nav .logo .logo-subtitle,
+    .study-nav .logo .logo-subtitle,
+    .watch-header .logo .logo-subtitle {
+        font-size: 0.65rem;
+        text-transform: uppercase;
+        letter-spacing: 0.3em;
+        color: var(--color-text-muted);
+        margin-top: 0.25rem;
+    }
+
+    .loader-ring,
+    .loader-ring--soft,
+    .loader-dots,
+    .loader-bar,
+    .loader-progress {
+        display: none !important;
+    }
+</style>
+</head>
+<body>
+    <!-- Film Grain & Vignette -->
+    <div class="grain-overlay"></div>
+    <div class="vignette"></div>
+
+    <!-- Navigation -->
+    <nav id="navbar" class="scrolled" style="background: rgba(5,5,5,0.85); backdrop-filter: blur(20px);">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <div class="logo-mark"><img src="images/logowtb.png" alt="Messianic Movement logo" class="logo-mark-img"></div>
+                <div class="logo-text">
+                    <span class="logo-title">Messianic Movement</span>
+                    <span class="logo-subtitle">Regenerational Ministry</span>
+                </div>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="#conflicts" class="nav-link">Conflict Tracker</a></li>
+                <li><a href="#report" class="nav-link">Report Incident</a></li>
+                <li><a href="#feed" class="nav-link">Recent Reports</a></li>
+                <li><a href="#pray" class="nav-link">Prayer Wall</a></li>
+                <li style="margin-left: 1rem;">
+                    <a href="#report" class="nav-cta"><i class="fas fa-exclamation-triangle"></i> Report Now</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-bg">
+            <div class="hero-gradient"></div>
+            <div class="hero-grid"></div>
+        </div>
+        <div class="hero-content">
+            <div class="hero-eyebrow">
+                <div class="eyebrow-line"></div>
+                <div class="alert-pulse"></div>
+                <span class="eyebrow-text">Global Alert System Active</span>
+                <div class="eyebrow-line" style="transform: rotate(180deg);"></div>
+            </div>
+            <h1>
+                <span class="hero-title-line">Never Again</span>
+                <span class="hero-title-line">Shall We Be Silent</span>
+            </h1>
+            <p class="hero-subtitle">
+                A global command center for monitoring, documenting, and responding to persecution against Christians worldwide. 
+                Report incidents in real-time, upload evidence, and join a global prayer force standing against injustice.
+            </p>
+            <div class="hero-actions">
+                <a href="#report" class="btn btn-danger">
+                    <i class="fas fa-exclamation-triangle btn-icon"></i>
+                    Report an Incident
+                </a>
+                <a href="#conflicts" class="btn btn-secondary">
+                    <i class="fas fa-globe btn-icon"></i>
+                    View Conflict Tracker
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Live Stats Bar -->
+    <div class="stats-bar">
+        <div class="stats-container">
+            <div class="stat-item">
+                <div class="stat-number" data-count="2847">0</div>
+                <div class="stat-label">Reports This Year</div>
+                <div class="stat-change"><i class="fas fa-arrow-up"></i> 12% from last year</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" data-count="156">0</div>
+                <div class="stat-label">Countries Affected</div>
+                <div class="stat-change"><i class="fas fa-arrow-up"></i> 8 new this month</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" data-count="4231">0</div>
+                <div class="stat-label">Prayer Warriors</div>
+                <div class="stat-change"><i class="fas fa-arrow-up"></i> 234 joined today</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" data-count="89">0</div>
+                <div class="stat-label">Active Alerts</div>
+                <div class="stat-change"><i class="fas fa-circle" style="font-size:0.5rem; color:var(--color-danger);"></i> Live monitoring</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Global Conflict Tracker -->
+    <section class="conflict-tracker" id="conflicts">
+        <div class="section-header">
+            <span class="section-eyebrow">Global Intelligence</span>
+            <h2 class="section-title">Conflict Tracker</h2>
+            <p class="section-subtitle">Real-time monitoring of persecution incidents against Christians worldwide. Data sourced from verified reports, field partners, and open-source intelligence.</p>
+        </div>
+        <div class="tracker-container">
+            <div class="tracker-grid">
+                <div class="map-container">
+                    <div class="map-title"><i class="fas fa-globe-americas"></i> Global Threat Map</div>
+                    <div class="world-map" id="worldMap">
+                        <div class="map-region" style="left: 15%; top: 25%;" data-region="middle-east">
+                            <div class="region-name"><span class="severity-indicator severity-high"></span>Middle East</div>
+                            <div class="region-count">847</div>
+                            <div class="region-trend"><i class="fas fa-arrow-up"></i> Critical</div>
+                        </div>
+                        <div class="map-region" style="left: 55%; top: 20%;" data-region="africa">
+                            <div class="region-name"><span class="severity-indicator severity-high"></span>Africa</div>
+                            <div class="region-count">1,203</div>
+                            <div class="region-trend"><i class="fas fa-arrow-up"></i> Rising</div>
+                        </div>
+                        <div class="map-region" style="left: 70%; top: 35%;" data-region="asia">
+                            <div class="region-name"><span class="severity-indicator severity-high"></span>Asia Pacific</div>
+                            <div class="region-count">956</div>
+                            <div class="region-trend"><i class="fas fa-arrow-up"></i> Severe</div>
+                        </div>
+                        <div class="map-region" style="left: 25%; top: 55%;" data-region="latin-america">
+                            <div class="region-name"><span class="severity-indicator severity-medium"></span>Latin America</div>
+                            <div class="region-count">312</div>
+                            <div class="region-trend"><i class="fas fa-minus"></i> Stable</div>
+                        </div>
+                        <div class="map-region" style="left: 45%; top: 15%;" data-region="europe">
+                            <div class="region-name"><span class="severity-indicator severity-medium"></span>Europe</div>
+                            <div class="region-count">278</div>
+                            <div class="region-trend"><i class="fas fa-arrow-up"></i> Increasing</div>
+                        </div>
+                        <div class="map-region" style="left: 78%; top: 70%;" data-region="oceania">
+                            <div class="region-name"><span class="severity-indicator severity-low"></span>Oceania</div>
+                            <div class="region-count">89</div>
+                            <div class="region-trend"><i class="fas fa-minus"></i> Low</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="conflict-list" id="conflictList">
+                    <div class="conflict-card" onclick="openConflictModal(0)">
+                        <div class="conflict-header">
+                            <div class="conflict-title">Church Bombing in Nigeria</div>
+                            <span class="conflict-badge badge-critical">Critical</span>
+                        </div>
+                        <div class="conflict-meta">
+                            <span><i class="fas fa-map-marker-alt"></i> Borno State, Nigeria</span>
+                            <span><i class="fas fa-clock"></i> 2 hours ago</span>
+                        </div>
+                        <div class="conflict-desc">Armed militants attacked a church during Sunday service. Multiple casualties reported. Local authorities responding.</div>
+                        <div class="conflict-footer">
+                            <span class="conflict-source">Source: Field Partner Network</span>
+                            <span class="conflict-action">View Details <i class="fas fa-arrow-right"></i></span>
+                        </div>
+                    </div>
+                    <div class="conflict-card" onclick="openConflictModal(1)">
+                        <div class="conflict-header">
+                            <div class="conflict-title">Pastor Arrested in China</div>
+                            <span class="conflict-badge badge-high">High Priority</span>
+                        </div>
+                        <div class="conflict-meta">
+                            <span><i class="fas fa-map-marker-alt"></i> Henan Province, China</span>
+                            <span><i class="fas fa-clock"></i> 5 hours ago</span>
+                        </div>
+                        <div class="conflict-desc">Underground church pastor detained during early morning raid. Congregation members also taken for questioning.</div>
+                        <div class="conflict-footer">
+                            <span class="conflict-source">Source: ChinaAid</span>
+                            <span class="conflict-action">View Details <i class="fas fa-arrow-right"></i></span>
+                        </div>
+                    </div>
+                    <div class="conflict-card" onclick="openConflictModal(2)">
+                        <div class="conflict-header">
+                            <div class="conflict-title">Church Burned in India</div>
+                            <span class="conflict-badge badge-critical">Critical</span>
+                        </div>
+                        <div class="conflict-meta">
+                            <span><i class="fas fa-map-marker-alt"></i> Odisha, India</span>
+                            <span><i class="fas fa-clock"></i> 8 hours ago</span>
+                        </div>
+                        <div class="conflict-desc">Hindu nationalist mob set fire to church building. Congregation displaced. Police slow to respond to pleas for help.</div>
+                        <div class="conflict-footer">
+                            <span class="conflict-source">Source: Open Doors</span>
+                            <span class="conflict-action">View Details <i class="fas fa-arrow-right"></i></span>
+                        </div>
+                    </div>
+                    <div class="conflict-card" onclick="openConflictModal(3)">
+                        <div class="conflict-header">
+                            <div class="conflict-title">Christian Village Attacked</div>
+                            <span class="conflict-badge badge-high">High Priority</span>
+                        </div>
+                        <div class="conflict-meta">
+                            <span><i class="fas fa-map-marker-alt"></i> Plateau State, Nigeria</span>
+                            <span><i class="fas fa-clock"></i> 12 hours ago</span>
+                        </div>
+                        <div class="conflict-desc">Fulani herdsmen attacked Christian farming community. Homes destroyed, families displaced. Urgent humanitarian need.</div>
+                        <div class="conflict-footer">
+                            <span class="conflict-source">Source: ICC</span>
+                            <span class="conflict-action">View Details <i class="fas fa-arrow-right"></i></span>
+                        </div>
+                    </div>
+                    <div class="conflict-card" onclick="openConflictModal(4)">
+                        <div class="conflict-header">
+                            <div class="conflict-title">Bible Distribution Banned</div>
+                            <span class="conflict-badge badge-active">Active Monitoring</span>
+                        </div>
+                        <div class="conflict-meta">
+                            <span><i class="fas fa-map-marker-alt"></i> Multiple Regions</span>
+                            <span><i class="fas fa-clock"></i> 1 day ago</span>
+                        </div>
+                        <div class="conflict-desc">New regulations in several countries severely restrict Bible importation and distribution. Digital surveillance increased.</div>
+                        <div class="conflict-footer">
+                            <span class="conflict-source">Source: Bible League</span>
+                            <span class="conflict-action">View Details <i class="fas fa-arrow-right"></i></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Report Form Section -->
+    <section class="report-section" id="report">
+        <div class="section-header">
+            <span class="section-eyebrow">Speak Up</span>
+            <h2 class="section-title">Report an Incident</h2>
+            <p class="section-subtitle">Your voice matters. Document persecution, upload evidence, and help us build a global record of injustice against Christians. All reports are verified before publication.</p>
+        </div>
+        <div class="report-container">
+            <div class="report-info">
+                <h2>Be the Voice for the Voiceless</h2>
+                <p>Every report you submit helps us track patterns, alert the global community, and advocate for those suffering in silence. Your courage in speaking up can save lives.</p>
+                <div class="report-features">
+                    <div class="report-feature">
+                        <div class="report-feature-icon gold"><i class="fas fa-shield-alt"></i></div>
+                        <div class="report-feature-text">
+                            <h4>Anonymous Reporting</h4>
+                            <p>Your identity is protected. We use encrypted channels and never share personal data with third parties.</p>
+                        </div>
+                    </div>
+                    <div class="report-feature">
+                        <div class="report-feature-icon red"><i class="fas fa-bolt"></i></div>
+                        <div class="report-feature-text">
+                            <h4>Real-Time Alerts</h4>
+                            <p>Critical reports trigger immediate notifications to our global prayer network and advocacy partners.</p>
+                        </div>
+                    </div>
+                    <div class="report-feature">
+                        <div class="report-feature-icon blue"><i class="fas fa-file-alt"></i></div>
+                        <div class="report-feature-text">
+                            <h4>Evidence Archive</h4>
+                            <p>Upload photos, videos, and documents. We maintain a secure archive for legal and advocacy purposes.</p>
+                        </div>
+                    </div>
+                    <div class="report-feature">
+                        <div class="report-feature-icon gold"><i class="fas fa-hands-helping"></i></div>
+                        <div class="report-feature-text">
+                            <h4>Direct Support</h4>
+                            <p>Our team follows up on every report to connect victims with legal aid, shelter, and pastoral care.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="report-form">
+                <form id="incidentForm" onsubmit="submitReport(event)">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Incident Type</label>
+                            <select class="form-select" id="incidentType" required>
+                                <option value="">Select type...</option>
+                                <option value="physical-violence">Physical Violence</option>
+                                <option value="arrest-detention">Arrest / Detention</option>
+                                <option value="property-damage">Property Damage</option>
+                                <option value="discrimination">Discrimination</option>
+                                <option value="forced-conversion">Forced Conversion</option>
+                                <option value="murder">Murder / Killing</option>
+                                <option value="kidnapping">Kidnapping</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Severity</label>
+                            <select class="form-select" id="severity" required>
+                                <option value="">Select severity...</option>
+                                <option value="critical">Critical - Life Threatening</option>
+                                <option value="high">High - Physical Harm</option>
+                                <option value="medium">Medium - Threats / Intimidation</option>
+                                <option value="low">Low - Discrimination</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Country</label>
+                            <input type="text" class="form-input" id="country" placeholder="e.g., Nigeria" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">City / Region</label>
+                            <input type="text" class="form-input" id="city" placeholder="e.g., Borno State">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Date of Incident</label>
+                        <input type="date" class="form-input" id="incidentDate" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Description</label>
+                        <textarea class="form-textarea" id="description" placeholder="Describe what happened in detail..." required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Upload Evidence</label>
+                        <div class="upload-zone" id="uploadZone" onclick="document.getElementById('fileInput').click()">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            <p>Drag & drop photos or videos here</p>
+                            <span>or click to browse (Max 50MB)</span>
+                            <input type="file" id="fileInput" multiple accept="image/*,video/*" onchange="handleFiles(this.files)">
+                        </div>
+                        <div class="file-preview" id="filePreview"></div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Your Email (Optional)</label>
+                        <input type="email" class="form-input" id="email" placeholder="For follow-up only">
+                    </div>
+                    <button type="submit" class="submit-btn">
+                        <i class="fas fa-paper-plane"></i> Submit Report Securely
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Recent Reports Feed -->
+    <section class="reports-feed" id="feed">
+        <div class="section-header">
+            <span class="section-eyebrow">Verified Reports</span>
+            <h2 class="section-title">Recent Incidents</h2>
+            <p class="section-subtitle">Latest verified reports from our global monitoring network. Click any card to view full details and evidence.</p>
+        </div>
+        <div class="feed-container">
+            <div class="feed-grid">
+                <div class="feed-card" onclick="openFeedModal(0)">
+                    <div class="feed-media">
+                        <img src="https://images.unsplash.com/photo-1544027993-37dbfe43562a?w=800&q=80" alt="Church damage">
+                        <div class="feed-media-overlay"></div>
+                        <span class="feed-media-badge">Verified</span>
+                        <div class="feed-media-type"><i class="fas fa-image"></i></div>
+                    </div>
+                    <div class="feed-content">
+                        <div class="feed-header">
+                            <span class="feed-location"><i class="fas fa-map-marker-alt"></i> Kaduna, Nigeria</span>
+                            <span class="feed-time">3 hours ago</span>
+                        </div>
+                        <h3 class="feed-title">Church Attacked During Evening Service</h3>
+                        <p class="feed-excerpt">Gunmen opened fire on worshippers during evening prayers. Multiple injuries reported. Community in shock.</p>
+                        <div class="feed-footer">
+                            <span class="feed-verified"><i class="fas fa-check-circle"></i> Verified by Field Team</span>
+                            <div class="feed-actions">
+                                <span class="feed-action"><i class="fas fa-praying-hands"></i> 1.2k</span>
+                                <span class="feed-action"><i class="fas fa-share-alt"></i> Share</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="feed-card" onclick="openFeedModal(1)">
+                    <div class="feed-media">
+                        <img src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=800&q=80" alt="Protest">
+                        <div class="feed-media-overlay"></div>
+                        <span class="feed-media-badge">Verified</span>
+                        <div class="feed-media-type"><i class="fas fa-video"></i></div>
+                    </div>
+                    <div class="feed-content">
+                        <div class="feed-header">
+                            <span class="feed-location"><i class="fas fa-map-marker-alt"></i> Lahore, Pakistan</span>
+                            <span class="feed-time">6 hours ago</span>
+                        </div>
+                        <h3 class="feed-title">Christian Family Evicted from Home</h3>
+                        <p class="feed-excerpt">Landlord forcibly removed family after discovering their faith. Children left without shelter in monsoon season.</p>
+                        <div class="feed-footer">
+                            <span class="feed-verified"><i class="fas fa-check-circle"></i> Verified by Local Partner</span>
+                            <div class="feed-actions">
+                                <span class="feed-action"><i class="fas fa-praying-hands"></i> 856</span>
+                                <span class="feed-action"><i class="fas fa-share-alt"></i> Share</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="feed-card" onclick="openFeedModal(2)">
+                    <div class="feed-media">
+                        <img src="https://images.unsplash.com/photo-1529070538774-1843cb3265df?w=800&q=80" alt="Hands praying">
+                        <div class="feed-media-overlay"></div>
+                        <span class="feed-media-badge">Verified</span>
+                        <div class="feed-media-type"><i class="fas fa-image"></i></div>
+                    </div>
+                    <div class="feed-content">
+                        <div class="feed-header">
+                            <span class="feed-location"><i class="fas fa-map-marker-alt"></i> Mosul, Iraq</span>
+                            <span class="feed-time">12 hours ago</span>
+                        </div>
+                        <h3 class="feed-title">Christian Business Owner Threatened</h3>
+                        <p class="feed-excerpt">Extremist group issued death threats to shop owner for displaying cross. Police refuse to file report.</p>
+                        <div class="feed-footer">
+                            <span class="feed-verified"><i class="fas fa-check-circle"></i> Verified by ICC</span>
+                            <div class="feed-actions">
+                                <span class="feed-action"><i class="fas fa-praying-hands"></i> 2.1k</span>
+                                <span class="feed-action"><i class="fas fa-share-alt"></i> Share</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="feed-card" onclick="openFeedModal(3)">
+                    <div class="feed-media">
+                        <img src="https://images.unsplash.com/photo-1519834785169-98be25ec3f84?w=800&q=80" alt="Church interior">
+                        <div class="feed-media-overlay"></div>
+                        <span class="feed-media-badge">Verified</span>
+                        <div class="feed-media-type"><i class="fas fa-image"></i></div>
+                    </div>
+                    <div class="feed-content">
+                        <div class="feed-header">
+                            <span class="feed-location"><i class="fas fa-map-marker-alt"></i> Colombo, Sri Lanka</span>
+                            <span class="feed-time">1 day ago</span>
+                        </div>
+                        <h3 class="feed-title">Easter Bombing Anniversary Memorial Vandalized</h3>
+                        <p class="feed-excerpt">Memorial for 2019 Easter bombing victims desecrated. Community demands government protection.</p>
+                        <div class="feed-footer">
+                            <span class="feed-verified"><i class="fas fa-check-circle"></i> Verified by NCEASL</span>
+                            <div class="feed-actions">
+                                <span class="feed-action"><i class="fas fa-praying-hands"></i> 3.4k</span>
+                                <span class="feed-action"><i class="fas fa-share-alt"></i> Share</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="feed-card" onclick="openFeedModal(4)">
+                    <div class="feed-media">
+                        <img src="https://images.unsplash.com/photo-1569516449771-41c89ee14ca0?w=800&q=80" alt="Prison bars">
+                        <div class="feed-media-overlay"></div>
+                        <span class="feed-media-badge">Verified</span>
+                        <div class="feed-media-type"><i class="fas fa-video"></i></div>
+                    </div>
+                    <div class="feed-content">
+                        <div class="feed-header">
+                            <span class="feed-location"><i class="fas fa-map-marker-alt"></i> Tehran, Iran</span>
+                            <span class="feed-time">2 days ago</span>
+                        </div>
+                        <h3 class="feed-title">Underground Church Leader Sentenced to 10 Years</h3>
+                        <p class="feed-excerpt">Pastor convicted of "acting against national security" for leading house church. Family denied visitation rights.</p>
+                        <div class="feed-footer">
+                            <span class="feed-verified"><i class="fas fa-check-circle"></i> Verified by CSW</span>
+                            <div class="feed-actions">
+                                <span class="feed-action"><i class="fas fa-praying-hands"></i> 5.7k</span>
+                                <span class="feed-action"><i class="fas fa-share-alt"></i> Share</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="feed-card" onclick="openFeedModal(5)">
+                    <div class="feed-media">
+                        <img src="https://images.unsplash.com/photo-1499209974431-9dddcece7f88?w=800&q=80" alt="Refugees">
+                        <div class="feed-media-overlay"></div>
+                        <span class="feed-media-badge">Verified</span>
+                        <div class="feed-media-type"><i class="fas fa-image"></i></div>
+                    </div>
+                    <div class="feed-content">
+                        <div class="feed-header">
+                            <span class="feed-location"><i class="fas fa-map-marker-alt"></i> Kachin, Myanmar</span>
+                            <span class="feed-time">3 days ago</span>
+                        </div>
+                        <h3 class="feed-title">Christian Refugees Denied Aid</h3>
+                        <p class="feed-excerpt">Internally displaced Christians blocked from receiving UN food supplies by local militia. Starvation risk.</p>
+                        <div class="feed-footer">
+                            <span class="feed-verified"><i class="fas fa-check-circle"></i> Verified by Partners</span>
+                            <div class="feed-actions">
+                                <span class="feed-action"><i class="fas fa-praying-hands"></i> 1.8k</span>
+                                <span class="feed-action"><i class="fas fa-share-alt"></i> Share</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Prayer Wall -->
+    <section class="prayer-section" id="pray">
+        <div class="section-header">
+            <span class="section-eyebrow">Intercession</span>
+            <h2 class="section-title">Global Prayer Wall</h2>
+            <p class="section-subtitle">Join thousands of prayer warriors covering the persecuted church. Your prayers make a difference in the spiritual realm.</p>
+        </div>
+        <div class="prayer-container">
+            <div class="prayer-grid">
+                <div class="prayer-card">
+                    <div class="prayer-icon"><i class="fas fa-cross"></i></div>
+                    <h3>Pray for Nigeria</h3>
+                    <p>Violence against Christians in the Middle Belt continues to escalate. Pray for protection, healing, and justice for affected communities.</p>
+                    <div class="prayer-count" id="prayCount1">12,847</div>
+                    <div style="font-size:0.8rem; color:var(--color-text-muted); margin-bottom:1rem;">prayers offered</div>
+                    <button class="prayer-btn" id="prayBtn1" onclick="prayFor(1)">
+                        <i class="fas fa-praying-hands"></i> I Will Pray
+                    </button>
+                </div>
+                <div class="prayer-card">
+                    <div class="prayer-icon"><i class="fas fa-dove"></i></div>
+                    <h3>Pray for China</h3>
+                    <p>Underground churches face increased surveillance and raids. Pray for wisdom for leaders and courage for believers to stand firm.</p>
+                    <div class="prayer-count" id="prayCount2">9,234</div>
+                    <div style="font-size:0.8rem; color:var(--color-text-muted); margin-bottom:1rem;">prayers offered</div>
+                    <button class="prayer-btn" id="prayBtn2" onclick="prayFor(2)">
+                        <i class="fas fa-praying-hands"></i> I Will Pray
+                    </button>
+                </div>
+                <div class="prayer-card">
+                    <div class="prayer-icon"><i class="fas fa-heart"></i></div>
+                    <h3>Pray for India</h3>
+                    <p>Anti-conversion laws are being weaponized against Christians. Pray for legal protection and for the Gospel to spread despite opposition.</p>
+                    <div class="prayer-count" id="prayCount3">15,102</div>
+                    <div style="font-size:0.8rem; color:var(--color-text-muted); margin-bottom:1rem;">prayers offered</div>
+                    <button class="prayer-btn" id="prayBtn3" onclick="prayFor(3)">
+                        <i class="fas fa-praying-hands"></i> I Will Pray
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Banner -->
+    <section class="cta-banner">
+        <div class="cta-content">
+            <h2>Stand With the Persecuted Church</h2>
+            <p>Every report matters. Every prayer counts. Every voice amplifies the cry of those who cannot speak for themselves. Join our global mission to ensure that persecution against Christians is never ignored, never forgotten, and never again tolerated.</p>
+            <a href="#report" class="btn btn-danger" style="margin-right: 1rem;">
+                <i class="fas fa-exclamation-triangle btn-icon"></i> Report Now
+            </a>
+            <a href="index.html" class="btn btn-secondary">
+                <i class="fas fa-home btn-icon"></i> Back to Home
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <a href="index.html" class="logo">
+                    <div class="logo-icon"><img src="images/logowtb.png" alt="Messianic Movement logo" class="logo-mark-img"></div>
+                    <div class="logo-text">
+                        <span class="logo-title">Messianic Movement</span>
+                        <span class="logo-subtitle">Regenerational Ministry</span>
+                    </div>
+                </a>
+                <p>Raising a generation of Spirit-filled believers who will transform nations through the power of the Holy Ghost. Standing with the persecuted church worldwide.</p>
+                <div class="social-links">
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="#conflicts">Conflict Tracker</a></li>
+                    <li><a href="#report">Report Incident</a></li>
+                    <li><a href="#feed">Recent Reports</a></li>
+                    <li><a href="#pray">Prayer Wall</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Resources</h4>
+                <ul>
+                    <li><a href="#">World Watch List</a></li>
+                    <li><a href="#">Legal Aid Network</a></li>
+                    <li><a href="#">Emergency Shelter</a></li>
+                    <li><a href="#">Advocacy Guide</a></li>
+                    <li><a href="#">Partner Organizations</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Contact</h4>
+                <ul>
+                    <li><i class="fas fa-map-marker-alt"></i> 123 Faith Avenue, Glory City</li>
+                    <li><i class="fas fa-phone"></i> +1 (555) 123-4567</li>
+                    <li><i class="fas fa-envelope"></i> neveragain@whgrministry.org</li>
+                    <li><i class="fas fa-clock"></i> 24/7 Crisis Hotline</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Messianic Movement. All rights reserved.</p>
+            <p>Never Again Initiative - Standing with the Persecuted Church</p>
+        </div>
+    </footer>
+
+    <!-- Modal -->
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModal()">
+                <i class="fas fa-times"></i>
+            </button>
+            <h2 id="modalTitle">Title</h2>
+            <div class="modal-body" id="modalBody">Content goes here...</div>
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div class="toast" id="toast">
+        <i class="fas fa-check-circle toast-icon"></i>
+        <span id="toastMessage">Action completed</span>
+    </div>
+
+    <!-- Scroll Top -->
+    <button class="scroll-top" id="scrollTop" onclick="scrollToTop()" aria-label="Scroll to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script>
+        // ==================== LOADING SCREEN ====================
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('loader')?.classList.add('hidden');
+                initCounters();
+                initScrollAnimations();
+            }, 2000);
+        });
+
+        // ==================== NAVIGATION SCROLL ====================
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // ==================== ANIMATED COUNTERS ====================
+        function initCounters() {
+            const counters = document.querySelectorAll('.stat-number');
+            counters.forEach(counter => {
+                const target = parseInt(counter.getAttribute('data-count'));
+                const duration = 2000;
+                const step = target / (duration / 16);
+                let current = 0;
+                const updateCounter = () => {
+                    current += step;
+                    if (current < target) {
+                        counter.textContent = Math.floor(current).toLocaleString();
+                        requestAnimationFrame(updateCounter);
+                    } else {
+                        counter.textContent = target.toLocaleString();
+                    }
+                };
+                updateCounter();
+            });
+        }
+
+        // ==================== SCROLL ANIMATIONS ====================
+        function initScrollAnimations() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.fade-in-up').forEach(el => observer.observe(el));
+        }
+
+        // ==================== FILE UPLOAD ====================
+        let uploadedFiles = [];
+        function handleFiles(files) {
+            const preview = document.getElementById('filePreview');
+            Array.from(files).forEach(file => {
+                uploadedFiles.push(file);
+                const item = document.createElement('div');
+                item.className = 'file-item';
+                item.innerHTML = `
+                    <i class="fas fa-${file.type.startsWith('video') ? 'video' : 'image'}"></i>
+                    <span>${file.name}</span>
+                    <i class="fas fa-times" onclick="removeFile(this, '${file.name}')"></i>
+                `;
+                preview.appendChild(item);
+            });
+        }
+        function removeFile(el, name) {
+            uploadedFiles = uploadedFiles.filter(f => f.name !== name);
+            el.parentElement.remove();
+        }
+
+        // Drag and drop
+        const uploadZone = document.getElementById('uploadZone');
+        uploadZone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadZone.classList.add('dragover');
+        });
+        uploadZone.addEventListener('dragleave', () => {
+            uploadZone.classList.remove('dragover');
+        });
+        uploadZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadZone.classList.remove('dragover');
+            handleFiles(e.dataTransfer.files);
+        });
+
+        // ==================== FORM SUBMISSION ====================
+        function submitReport(e) {
+            e.preventDefault();
+            const formData = {
+                type: document.getElementById('incidentType').value,
+                severity: document.getElementById('severity').value,
+                country: document.getElementById('country').value,
+                city: document.getElementById('city').value,
+                date: document.getElementById('incidentDate').value,
+                description: document.getElementById('description').value,
+                email: document.getElementById('email').value,
+                files: uploadedFiles.length
+            };
+
+            // Simulate submission
+            showToast('Report submitted successfully! Our team will verify within 24 hours.');
+            document.getElementById('incidentForm').reset();
+            document.getElementById('filePreview').innerHTML = '';
+            uploadedFiles = [];
+        }
+
+        // ==================== PRAYER WALL ====================
+        const prayerCounts = { 1: 12847, 2: 9234, 3: 15102 };
+        function prayFor(id) {
+            const btn = document.getElementById('prayBtn' + id);
+            const count = document.getElementById('prayCount' + id);
+
+            if (btn.classList.contains('prayed')) {
+                showToast('You are already praying for this region. Thank you!');
+                return;
+            }
+
+            prayerCounts[id]++;
+            count.textContent = prayerCounts[id].toLocaleString();
+            btn.classList.add('prayed');
+            btn.innerHTML = '<i class="fas fa-check"></i> Praying';
+            showToast('Thank you for joining the prayer force!');
+        }
+
+        // ==================== MODAL ====================
+        const conflictData = [
+            {
+                title: 'Church Bombing in Nigeria',
+                body: `
+                    <p><strong>Location:</strong> Borno State, Nigeria</p>
+                    <p><strong>Date:</strong> May 10, 2026</p>
+                    <p><strong>Severity:</strong> <span style="color:var(--color-danger)">Critical</span></p>
+                    <hr style="border-color: var(--glass-border); margin: 1rem 0;">
+                    <p>Armed militants attacked St. Mary's Catholic Church during Sunday morning service. Eyewitnesses report gunmen entered the church and opened fire on congregants.</p>
+                    <p><strong>Casualties:</strong> 23 killed, 47 injured</p>
+                    <p><strong>Status:</strong> Nigerian military responding. International condemnation growing.</p>
+                    <p><strong>How to Help:</strong> Contact our emergency response team or donate to the Nigeria Relief Fund.</p>
+                `
+            },
+            {
+                title: 'Pastor Arrested in China',
+                body: `
+                    <p><strong>Location:</strong> Henan Province, China</p>
+                    <p><strong>Date:</strong> May 10, 2026</p>
+                    <p><strong>Severity:</strong> <span style="color:var(--color-warning)">High Priority</span></p>
+                    <hr style="border-color: var(--glass-border); margin: 1rem 0;">
+                    <p>Pastor Li Wen was arrested during an early morning raid on his home church. Authorities confiscated Bibles and church materials. Congregation members were also taken for questioning.</p>
+                    <p><strong>Status:</strong> Pastor held at unknown location. Family seeking legal representation.</p>
+                    <p><strong>How to Help:</strong> Sign the petition for his release. Pray for his safety and courage.</p>
+                `
+            },
+            {
+                title: 'Church Burned in India',
+                body: `
+                    <p><strong>Location:</strong> Odisha, India</p>
+                    <p><strong>Date:</strong> May 10, 2026</p>
+                    <p><strong>Severity:</strong> <span style="color:var(--color-danger)">Critical</span></p>
+                    <hr style="border-color: var(--glass-border); margin: 1rem 0;">
+                    <p>A mob of approximately 200 Hindu nationalists attacked and set fire to the Believers Church in Odisha. The church building was completely destroyed.</p>
+                    <p><strong>Damages:</strong> Church building destroyed, pastor's home looted</p>
+                    <p><strong>Status:</strong> Congregation displaced. Local police have not filed FIR despite repeated requests.</p>
+                `
+            },
+            {
+                title: 'Christian Village Attacked',
+                body: `
+                    <p><strong>Location:</strong> Plateau State, Nigeria</p>
+                    <p><strong>Date:</strong> May 9, 2026</p>
+                    <p><strong>Severity:</strong> <span style="color:var(--color-warning)">High Priority</span></p>
+                    <hr style="border-color: var(--glass-border); margin: 1rem 0;">
+                    <p>Fulani herdsmen attacked the Christian farming village of Kuru. Homes were burned and crops destroyed. Residents fled to neighboring communities.</p>
+                    <p><strong>Casualties:</strong> 12 killed, 200+ displaced</p>
+                    <p><strong>Status:</strong> Humanitarian crisis developing. Urgent need for food, shelter, and medical aid.</p>
+                `
+            },
+            {
+                title: 'Bible Distribution Banned',
+                body: `
+                    <p><strong>Location:</strong> Multiple Regions</p>
+                    <p><strong>Date:</strong> May 9, 2026</p>
+                    <p><strong>Severity:</strong> <span style="color:var(--color-success)">Active Monitoring</span></p>
+                    <hr style="border-color: var(--glass-border); margin: 1rem 0;">
+                    <p>New regulations in several Central Asian countries now classify Bible distribution as "extremist activity." Digital Bible apps are being blocked by government firewalls.</p>
+                    <p><strong>Affected Countries:</strong> 5 confirmed, 3 under review</p>
+                    <p><strong>Status:</strong> Advocacy teams engaging with international bodies. Underground distribution networks activated.</p>
+                `
+            }
+        ];
+
+        const feedData = [
+            {
+                title: 'Church Attacked During Evening Service',
+                body: `
+                    <p><strong>Location:</strong> Kaduna, Nigeria</p>
+                    <p><strong>Date:</strong> May 10, 2026</p>
+                    <img src="https://images.unsplash.com/photo-1544027993-37dbfe43562a?w=800&q=80" alt="Church damage">
+                    <p>Gunmen opened fire on worshippers during evening prayers at the Redeemed Christian Church of God in Kaduna. Multiple injuries reported including women and children.</p>
+                    <p>The attackers arrived on motorcycles and fled before security forces could respond. Community leaders are calling for increased protection for places of worship.</p>
+                    <p><strong>Verified by:</strong> Field Partner Network - Nigeria</p>
+                `
+            },
+            {
+                title: 'Christian Family Evicted from Home',
+                body: `
+                    <p><strong>Location:</strong> Lahore, Pakistan</p>
+                    <p><strong>Date:</strong> May 10, 2026</p>
+                    <img src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=800&q=80" alt="Protest">
+                    <p>A Christian family of six was forcibly evicted from their rental home after the landlord discovered their faith. The eviction occurred during monsoon season, leaving the children without shelter.</p>
+                    <p>Local Christian community has provided temporary accommodation. Legal aid team is working to challenge the eviction under Pakistan's tenancy laws.</p>
+                    <p><strong>Verified by:</strong> Local Partner - Lahore</p>
+                `
+            },
+            {
+                title: 'Christian Business Owner Threatened',
+                body: `
+                    <p><strong>Location:</strong> Mosul, Iraq</p>
+                    <p><strong>Date:</strong> May 9, 2026</p>
+                    <img src="https://images.unsplash.com/photo-1529070538774-1843cb3265df?w=800&q=80" alt="Hands praying">
+                    <p>An extremist group issued death threats to a Christian shop owner for displaying a small cross in his store window. The threats were delivered via anonymous messages and graffiti.</p>
+                    <p>Local police have refused to file a report, claiming the threats are "not credible." The shop owner has been forced to close his business temporarily.</p>
+                    <p><strong>Verified by:</strong> International Christian Concern</p>
+                `
+            },
+            {
+                title: 'Easter Bombing Anniversary Memorial Vandalized',
+                body: `
+                    <p><strong>Location:</strong> Colombo, Sri Lanka</p>
+                    <p><strong>Date:</strong> May 8, 2026</p>
+                    <img src="https://images.unsplash.com/photo-1519834785169-98be25ec3f84?w=800&q=80" alt="Church interior">
+                    <p>The memorial for victims of the 2019 Easter bombings was vandalized overnight. The memorial, located outside St. Anthony's Shrine, had flowers and photos destroyed.</p>
+                    <p>The National Christian Evangelical Alliance of Sri Lanka (NCEASL) has condemned the act and called for government protection of Christian sites.</p>
+                    <p><strong>Verified by:</strong> NCEASL</p>
+                `
+            },
+            {
+                title: 'Underground Church Leader Sentenced',
+                body: `
+                    <p><strong>Location:</strong> Tehran, Iran</p>
+                    <p><strong>Date:</strong> May 7, 2026</p>
+                    <img src="https://images.unsplash.com/photo-1569516449771-41c89ee14ca0?w=800&q=80" alt="Prison bars">
+                    <p>Pastor Yousef Nadarkhani was sentenced to 10 years in prison for "acting against national security" by leading a house church. His family has been denied visitation rights.</p>
+                    <p>Christian Solidarity Worldwide (CSW) is calling for international pressure on Iranian authorities to overturn the sentence and release the pastor.</p>
+                    <p><strong>Verified by:</strong> Christian Solidarity Worldwide</p>
+                `
+            },
+            {
+                title: 'Christian Refugees Denied Aid',
+                body: `
+                    <p><strong>Location:</strong> Kachin, Myanmar</p>
+                    <p><strong>Date:</strong> May 6, 2026</p>
+                    <img src="https://images.unsplash.com/photo-1499209974431-9dddcece7f88?w=800&q=80" alt="Refugees">
+                    <p>Internally displaced Christians in Kachin State are being blocked from receiving UN food supplies by a local militia. The militia claims Christians are "not entitled" to aid.</p>
+                    <p>Over 500 families are at risk of starvation. Humanitarian organizations are negotiating access but facing significant obstacles.</p>
+                    <p><strong>Verified by:</strong> Partners Relief & Development</p>
+                `
+            }
+        ];
+
+        function openConflictModal(index) {
+            const data = conflictData[index];
+            document.getElementById('modalTitle').textContent = data.title;
+            document.getElementById('modalBody').innerHTML = data.body;
+            document.getElementById('modal').classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function openFeedModal(index) {
+            const data = feedData[index];
+            document.getElementById('modalTitle').textContent = data.title;
+            document.getElementById('modalBody').innerHTML = data.body;
+            document.getElementById('modal').classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            document.getElementById('modal').classList.remove('open');
+            document.body.style.overflow = '';
+        }
+
+        document.getElementById('modal').addEventListener('click', (e) => {
+            if (e.target === document.getElementById('modal')) closeModal();
+        });
+
+        // ==================== TOAST ====================
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toastMessage').textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 4000);
+        }
+
+        // ==================== SCROLL TOP ====================
+        const scrollTop = document.getElementById('scrollTop');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 500) {
+                scrollTop.classList.add('visible');
+            } else {
+                scrollTop.classList.remove('visible');
+            }
+        });
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // ==================== MAP REGION INTERACTION ====================
+        document.querySelectorAll('.map-region').forEach(region => {
+            region.addEventListener('click', () => {
+                document.querySelectorAll('.map-region').forEach(r => r.classList.remove('active'));
+                region.classList.add('active');
+                showToast(`Loading ${region.querySelector('.region-name').textContent.trim()} data...`);
+            });
+        });
+
+        // ==================== FEED ACTIONS ====================
+        document.querySelectorAll('.feed-action').forEach(action => {
+            action.addEventListener('click', (e) => {
+                e.stopPropagation();
+                if (action.innerHTML.includes('share')) {
+                    showToast('Link copied to clipboard!');
+                }
+            });
+        });
+
+        console.log("✅ Never Again page loaded successfully");
+    </script>
+</body>
+</html>
+

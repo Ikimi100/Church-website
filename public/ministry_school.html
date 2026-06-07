@@ -1,0 +1,1630 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ministry School | Messianic Movement</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        /* ==================== MINISTRY SCHOOL SPECIFIC STYLES ==================== */
+
+        /* Page Hero */
+        .school-hero {
+            min-height: 85vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            padding: 0 4%;
+            padding-top: 140px;
+            background: linear-gradient(135deg, rgba(10,10,15,0.95) 0%, rgba(5,5,5,0.98) 100%);
+        }
+
+        .school-hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(212, 175, 55, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(139, 92, 246, 0.06) 0%, transparent 50%),
+                radial-gradient(circle at 50% 0%, rgba(59, 130, 246, 0.04) 0%, transparent 50%);
+            z-index: 1;
+        }
+
+        .school-hero-bg {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+            opacity: 0.3;
+        }
+
+        .school-hero-bg img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.5) contrast(1.2) saturate(0.8);
+        }
+
+        .school-hero-grid {
+            position: absolute;
+            inset: 0;
+            background-image: 
+                linear-gradient(rgba(212, 175, 55, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(212, 175, 55, 0.02) 1px, transparent 1px);
+            background-size: 80px 80px;
+            mask-image: radial-gradient(circle at center, black 0%, transparent 70%);
+            transform: perspective(500px) rotateX(60deg) translateY(-100px) scale(2);
+            z-index: 2;
+        }
+
+        .school-hero-content {
+            text-align: center;
+            max-width: 900px;
+            z-index: 10;
+            position: relative;
+        }
+
+        .school-hero .hero-eyebrow {
+            margin-bottom: 1.5rem;
+        }
+
+        .school-hero h1 {
+            font-size: clamp(3rem, 8vw, 6rem);
+            line-height: 1;
+            margin-bottom: 1.5rem;
+        }
+
+        .school-hero h1 span {
+            display: block;
+            background: linear-gradient(135deg, #fff 0%, var(--color-gold-light) 50%, var(--color-gold) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .school-hero-subtitle {
+            font-size: clamp(1.125rem, 2vw, 1.35rem);
+            color: var(--color-text-secondary);
+            max-width: 650px;
+            margin: 0 auto 2.5rem;
+            font-weight: 300;
+            line-height: 1.8;
+        }
+
+        .school-stats {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-top: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            text-align: center;
+            position: relative;
+        }
+
+        .stat-item::after {
+            content: '';
+            position: absolute;
+            right: -1.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 1px;
+            height: 40px;
+            background: linear-gradient(to bottom, transparent, var(--color-gold), transparent);
+            opacity: 0.3;
+        }
+
+        .stat-item:last-child::after {
+            display: none;
+        }
+
+        .stat-number {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3rem;
+            font-weight: 600;
+            color: var(--color-gold);
+            line-height: 1;
+            text-shadow: 0 0 20px rgba(212,175,55,0.2);
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--color-text-muted);
+            margin-top: 0.5rem;
+        }
+
+        /* Vision Section */
+        .vision-section {
+            background: var(--color-bg-elevated);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .vision-section::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 30% 50%, rgba(212,175,55,0.03) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .vision-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .vision-image {
+            position: relative;
+            border-radius: 24px;
+            overflow: hidden;
+            border: 1px solid var(--glass-border);
+        }
+
+        .vision-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 1.2s var(--ease-out-expo);
+        }
+
+        .vision-image:hover img {
+            transform: scale(1.05);
+        }
+
+        .vision-image::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(212,175,55,0.1) 0%, rgba(107,33,168,0.1) 100%);
+            pointer-events: none;
+        }
+
+        .vision-content h2 {
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            margin-bottom: 1.5rem;
+            background: linear-gradient(to bottom, #fff, var(--color-text-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .vision-content p {
+            color: var(--color-text-secondary);
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .vision-list {
+            list-style: none;
+            margin-top: 2rem;
+        }
+
+        .vision-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1.25rem;
+            color: var(--color-text-secondary);
+            font-size: 1rem;
+        }
+
+        .vision-list li i {
+            width: 32px;
+            height: 32px;
+            background: rgba(212,175,55,0.1);
+            border: 1px solid rgba(212,175,55,0.2);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-gold);
+            font-size: 0.875rem;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        /* Programs Section */
+        .programs-section {
+            position: relative;
+        }
+
+        .programs-section::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 80% 20%, rgba(107,33,168,0.05) 0%, transparent 40%);
+            pointer-events: none;
+        }
+
+        .programs-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .program-card {
+            background: rgba(17,17,17,0.6);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 3rem 2rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.6s var(--ease-out-expo);
+            backdrop-filter: blur(10px);
+            text-align: center;
+        }
+
+        .program-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--color-gold), var(--color-purple-rich), var(--color-soft-blue));
+            transform: scaleX(0);
+            transition: transform 0.6s var(--ease-out-expo);
+        }
+
+        .program-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            border-color: rgba(212,175,55,0.2);
+            box-shadow: 0 30px 60px -20px rgba(0,0,0,0.5), 0 0 40px rgba(212,175,55,0.1);
+        }
+
+        .program-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .program-badge {
+            display: inline-block;
+            padding: 0.5rem 1.25rem;
+            background: rgba(212,175,55,0.1);
+            border: 1px solid rgba(212,175,55,0.2);
+            border-radius: 100px;
+            font-size: 0.75rem;
+            color: var(--color-gold);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 1.5rem;
+        }
+
+        .program-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1.5rem;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), rgba(107, 33, 168, 0.1));
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: var(--color-gold);
+            transition: all 0.4s ease;
+            box-shadow: 0 0 30px rgba(212,175,55,0.1);
+        }
+
+        .program-card:hover .program-icon {
+            transform: scale(1.1) rotate(-5deg);
+            background: linear-gradient(135deg, var(--color-gold), var(--color-purple-rich));
+            color: var(--color-bg);
+            box-shadow: 0 10px 30px rgba(212,175,55,0.3);
+        }
+
+        .program-card h3 {
+            font-size: 1.75rem;
+            margin-bottom: 1rem;
+            font-family: 'Cormorant Garamond', serif;
+        }
+
+        .program-card p {
+            color: var(--color-text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .program-duration {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid var(--glass-border);
+            border-radius: 100px;
+            font-size: 0.875rem;
+            color: var(--color-text-muted);
+            margin-bottom: 1.5rem;
+        }
+
+        .program-duration i {
+            color: var(--color-gold);
+        }
+
+        .program-features {
+            list-style: none;
+            text-align: left;
+            margin-bottom: 2rem;
+        }
+
+        .program-features li {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.5rem 0;
+            color: var(--color-text-secondary);
+            font-size: 0.9rem;
+            border-bottom: 1px solid rgba(255,255,255,0.03);
+        }
+
+        .program-features li i {
+            color: var(--color-gold);
+            font-size: 0.75rem;
+        }
+
+        .program-btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: transparent;
+            border: 1px solid var(--color-gold);
+            border-radius: 100px;
+            color: var(--color-gold);
+            font-weight: 600;
+            font-size: 0.875rem;
+            text-decoration: none;
+            letter-spacing: 0.05em;
+            transition: all 0.4s var(--ease-out-expo);
+            position: relative;
+            overflow: hidden;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .program-btn::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, var(--color-gold), var(--color-purple-rich));
+            transform: translateY(100%);
+            transition: transform 0.4s var(--ease-out-expo);
+            z-index: -1;
+        }
+
+        .program-btn:hover {
+            color: var(--color-bg);
+            box-shadow: 0 10px 30px rgba(212,175,55,0.3);
+            transform: translateY(-2px);
+        }
+
+        .program-btn:hover::before {
+            transform: translateY(0);
+        }
+
+        /* Curriculum Section */
+        .curriculum-section {
+            background: var(--color-bg-elevated);
+            position: relative;
+        }
+
+        .curriculum-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+
+        .curriculum-card {
+            background: rgba(17,17,17,0.6);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.4s var(--ease-out-expo);
+            backdrop-filter: blur(10px);
+            cursor: pointer;
+        }
+
+        .curriculum-card:hover {
+            border-color: rgba(212,175,55,0.2);
+            transform: translateX(10px);
+            box-shadow: 0 20px 40px -20px rgba(0,0,0,0.4), 0 0 30px rgba(212,175,55,0.05);
+        }
+
+        .curriculum-card:hover h4 {
+            color: var(--color-gold);
+        }
+
+        .curriculum-number {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: var(--color-gold);
+            opacity: 0.3;
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+
+        .curriculum-card h4 {
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+            transition: color 0.3s ease;
+        }
+
+        .curriculum-card p {
+            color: var(--color-text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        /* Faculty Section */
+        .faculty-section {
+            position: relative;
+        }
+
+        .faculty-section::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 20% 50%, rgba(212,175,55,0.03) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .faculty-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+        }
+
+        .faculty-card {
+            background: rgba(17,17,17,0.6);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            overflow: hidden;
+            transition: all 0.6s var(--ease-out-expo);
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .faculty-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(212,175,55,0.2);
+            box-shadow: 0 30px 60px -20px rgba(0,0,0,0.5), 0 0 40px rgba(212,175,55,0.1);
+        }
+
+        .faculty-image {
+            aspect-ratio: 1;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, #0f0f0f, #1a1a1a);
+        }
+
+        .faculty-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s var(--ease-out-expo);
+        }
+
+        .faculty-card:hover .faculty-image img {
+            transform: scale(1.1);
+        }
+
+        .faculty-image::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(5,5,5,0.8) 0%, transparent 50%);
+        }
+
+        .faculty-info {
+            padding: 1.5rem;
+            margin-top: -2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .faculty-info h4 {
+            font-size: 1.25rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .faculty-role {
+            font-size: 0.875rem;
+            color: var(--color-gold);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.75rem;
+        }
+
+        .faculty-bio {
+            font-size: 0.875rem;
+            color: var(--color-text-secondary);
+            line-height: 1.6;
+        }
+
+        /* Tuition Section */
+        .tuition-section {
+            background: linear-gradient(135deg, rgba(10,10,15,0.95) 0%, rgba(5,5,5,0.98) 100%);
+            position: relative;
+            overflow: hidden;
+            border-top: 1px solid rgba(212,175,55,0.1);
+            border-bottom: 1px solid rgba(212,175,55,0.1);
+        }
+
+        .tuition-section::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(212,175,55,0.05) 0%, transparent 50%),
+                radial-gradient(circle at 80% 50%, rgba(107,33,168,0.05) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .tuition-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .tuition-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 3rem 2rem;
+            text-align: center;
+            transition: all 0.6s var(--ease-out-expo);
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tuition-card.featured {
+            border-color: rgba(212,175,55,0.3);
+            box-shadow: 0 0 40px rgba(212,175,55,0.1);
+            transform: scale(1.05);
+        }
+
+        .tuition-card.featured::before {
+            content: 'Most Popular';
+            position: absolute;
+            top: 1rem;
+            right: -2.5rem;
+            padding: 0.5rem 3rem;
+            background: linear-gradient(135deg, var(--color-gold), var(--color-purple-rich));
+            color: var(--color-bg);
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            transform: rotate(45deg);
+        }
+
+        .tuition-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(212,175,55,0.2);
+            box-shadow: 0 30px 60px -20px rgba(0,0,0,0.4), 0 0 40px rgba(212,175,55,0.1);
+        }
+
+        .tuition-card.featured:hover {
+            transform: scale(1.05) translateY(-10px);
+        }
+
+        .tuition-icon {
+            width: 70px;
+            height: 70px;
+            margin: 0 auto 1.5rem;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), rgba(107, 33, 168, 0.1));
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.75rem;
+            color: var(--color-gold);
+            box-shadow: 0 0 20px rgba(212,175,55,0.1);
+        }
+
+        .tuition-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            font-family: 'Cormorant Garamond', serif;
+        }
+
+        .tuition-price {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3rem;
+            color: var(--color-gold);
+            margin: 1rem 0;
+            text-shadow: 0 0 20px rgba(212,175,55,0.2);
+        }
+
+        .tuition-price span {
+            font-size: 1rem;
+            color: var(--color-text-muted);
+        }
+
+        .tuition-card p {
+            color: var(--color-text-secondary);
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .tuition-features {
+            list-style: none;
+            text-align: left;
+            margin-bottom: 2rem;
+        }
+
+        .tuition-features li {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 0;
+            color: var(--color-text-secondary);
+            font-size: 0.9rem;
+            border-bottom: 1px solid rgba(255,255,255,0.03);
+        }
+
+        .tuition-features li i {
+            color: var(--color-gold);
+            font-size: 0.875rem;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, #0f0f1a 0%, #1a103c 50%, #0f172a 100%);
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 50% 50%, rgba(212,175,55,0.08) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .cta-container {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-container h2 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            margin-bottom: 1.5rem;
+            background: linear-gradient(to bottom, #fff, var(--color-gold-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .cta-container p {
+            color: var(--color-text-secondary);
+            font-size: 1.25rem;
+            line-height: 1.7;
+            margin-bottom: 2.5rem;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            background: var(--color-bg-elevated);
+        }
+
+        .faq-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: rgba(17,17,17,0.6);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .faq-item:hover {
+            border-color: rgba(212,175,55,0.15);
+        }
+
+        .faq-question {
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .faq-question h4 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: var(--color-text);
+        }
+
+        .faq-question i {
+            color: var(--color-gold);
+            transition: transform 0.4s var(--ease-out-expo);
+            font-size: 1rem;
+        }
+
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s var(--ease-out-expo), padding 0.5s var(--ease-out-expo);
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 300px;
+            padding: 0 2rem 1.5rem;
+        }
+
+        .faq-answer p {
+            color: var(--color-text-secondary);
+            line-height: 1.7;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .vision-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .programs-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .curriculum-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .faculty-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .tuition-grid {
+                grid-template-columns: 1fr;
+                max-width: 500px;
+            }
+
+            .tuition-card.featured {
+                transform: scale(1);
+            }
+
+            .tuition-card.featured:hover {
+                transform: scale(1) translateY(-10px);
+            }
+
+            .school-stats {
+                gap: 2rem;
+            }
+
+            .stat-item::after {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .programs-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .faculty-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .school-hero {
+                padding-top: 100px;
+                min-height: 70vh;
+            }
+
+            .stat-number {
+                font-size: 2.5rem;
+            }
+        }
+    
+    /* LOGO IMAGE FALLBACK */
+    
+    /* HOMEPAGE HEADER LOGO MATCH */
+    nav .logo .logo-mark,
+    .study-nav .logo .logo-mark,
+    .watch-header .logo .logo-mark {
+        width: 48px;
+        height: 48px;
+        flex: 0 0 48px;
+        border: 1px solid var(--color-gold);
+        border-radius: 50%;
+        background: transparent;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        position: relative;
+        box-shadow: 0 0 20px rgba(212,175,55,0.1);
+    }
+
+    nav .logo .logo-mark img,
+    .study-nav .logo .logo-mark img,
+    .watch-header .logo .logo-mark img,
+    nav .logo .logo-mark-img,
+    .study-nav .logo .logo-mark-img,
+    .watch-header .logo .logo-mark-img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        display: block;
+        position: relative;
+        z-index: 1;
+    }
+
+    nav .logo .logo-title,
+    .study-nav .logo .logo-title,
+    .watch-header .logo .logo-title {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 1.5rem;
+        font-weight: 400;
+        line-height: 1;
+        letter-spacing: 0;
+    }
+
+    nav .logo .logo-subtitle,
+    .study-nav .logo .logo-subtitle,
+    .watch-header .logo .logo-subtitle {
+        font-size: 0.65rem;
+        text-transform: uppercase;
+        letter-spacing: 0.3em;
+        color: var(--color-text-muted);
+        margin-top: 0.25rem;
+    }
+
+    .loader-ring,
+    .loader-ring--soft,
+    .loader-dots,
+    .loader-bar,
+    .loader-progress {
+        display: none !important;
+    }
+</style>
+</head>
+<body>
+    <!-- Film Grain Overlay -->
+    <div class="grain-overlay"></div>
+    <div class="vignette"></div>
+
+    <!-- Custom Cursor -->
+    <div class="cursor" id="cursor"></div>
+    <div class="cursor-dot" id="cursorDot"></div>
+
+    <!-- Navigation -->
+    <nav id="navbar" class="scrolled" style="background: rgba(5,5,5,0.85); backdrop-filter: blur(20px);">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <div class="logo-mark"><img src="images/logowtb.png" alt="Messianic Movement logo" class="logo-mark-img"></div>
+                <div class="logo-text">
+                    <span class="logo-title">Messianic Movement</span>
+                    <span class="logo-subtitle">Regenerational Ministry</span>
+                </div>
+            </a>
+
+            <ul class="nav-links">
+                <li><a href="index.html#home" class="nav-link">Home</a></li>
+                <li><a href="index.html#ministries" class="nav-link">Ministries</a></li>
+                <li><a href="index.html#calendar" class="nav-link">Calendar</a></li>
+                <li><a href="index.html#resources" class="nav-link">Resources</a></li>
+                <li><a href="index.html#store" class="nav-link">Store</a></li>
+                <li><a href="index.html#live" class="nav-link">Live</a></li>
+                <li style="margin-left: 1rem;">
+                    <button class="nav-cta" onclick="toggleCart()">
+                        Cart (<span id="cartCount">0</span>)
+                    </button>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- School Hero -->
+    <section class="school-hero">
+        <div class="school-hero-bg">
+            <img src="images/bible-school.jpg" alt="Ministry School worship atmosphere">
+        </div>
+        <div class="school-hero-grid"></div>
+
+        <div class="school-hero-content">
+            <div class="hero-eyebrow">
+                <div class="eyebrow-line"></div>
+                <span class="eyebrow-text">Spiritual Training</span>
+                <div class="eyebrow-line" style="transform: rotate(180deg);"></div>
+            </div>
+
+            <h1>
+                <span>Ministry School</span>
+                <span style="font-size: 0.6em; opacity: 0.9;">of the Spirit</span>
+            </h1>
+
+            <p class="school-hero-subtitle">
+                Equipping divine messengers with the knowledge of God's Word and the power of the Holy Ghost. 
+                A transformative journey from calling to commissioning.
+            </p>
+
+            <div class="hero-actions">
+                <a href="#programs" class="btn btn-primary">
+                    <i class="fas fa-book-open btn-icon"></i>
+                    Explore Programs
+                </a>
+                <a href="#apply" class="btn btn-secondary">
+                    Apply Now
+                    <i class="fas fa-arrow-right btn-icon"></i>
+                </a>
+            </div>
+
+            <div class="school-stats">
+                <div class="stat-item">
+                    <div class="stat-number" data-count="500">0</div>
+                    <div class="stat-label">Graduates</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" data-count="12">0</div>
+                    <div class="stat-label">Courses</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" data-count="25">0</div>
+                    <div class="stat-label">Nations Reached</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" data-count="98">0</div>
+                    <div class="stat-label">% Satisfaction</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Vision Section -->
+    <section class="vision-section" id="about">
+        <div class="vision-grid">
+            <div class="vision-image">
+                <img src="images/faith-dimension.jpg" alt="Students studying the Word">
+            </div>
+            <div class="vision-content">
+                <span class="section-eyebrow">Our Mandate</span>
+                <h2>Raising Spirit-Filled Leaders for Global Impact</h2>
+                <p>
+                    The Ministry School of the Spirit is a divine training ground where believers are transformed 
+                    into vessels of honor, equipped with the uncompromised Word and the demonstration of the 
+                    Holy Ghost's power.
+                </p>
+                <p>
+                    Founded on the revelation of regeneration and the messianic mandate, our school exists to 
+                    prepare men and women who will stand as divine messengers in this generation—carrying the 
+                    fire of revival to every nation.
+                </p>
+                <ul class="vision-list">
+                    <li>
+                        <i class="fas fa-check"></i>
+                        <span>Comprehensive biblical theology rooted in Messianic understanding</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-check"></i>
+                        <span>Hands-on ministry training with spiritual formation</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-check"></i>
+                        <span>Global mission exposure and cross-cultural engagement</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-check"></i>
+                        <span>Leadership development for church planting and revival</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Programs Section -->
+    <section class="programs-section" id="programs">
+        <div class="section-header">
+            <span class="section-eyebrow">Academic Programs</span>
+            <h2 class="section-title">Paths of Preparation</h2>
+            <p class="section-subtitle">Three distinct levels of training designed to take you from foundation to full ministry deployment.</p>
+        </div>
+
+        <div class="programs-grid">
+            <div class="program-card">
+                <div class="program-badge">Foundation</div>
+                <div class="program-icon">
+                    <i class="fas fa-seedling"></i>
+                </div>
+                <h3>Certificate in Ministry</h3>
+                <div class="program-duration">
+                    <i class="fas fa-clock"></i>
+                    <span>1 Year Program</span>
+                </div>
+                <p>Establishing the foundations of faith, biblical literacy, and spiritual disciplines for every believer.</p>
+                <ul class="program-features">
+                    <li><i class="fas fa-check"></i> Bible Survey & Hermeneutics</li>
+                    <li><i class="fas fa-check"></i> Doctrine of the Trinity</li>
+                    <li><i class="fas fa-check"></i> Spiritual Formation</li>
+                    <li><i class="fas fa-check"></i> Evangelism & Discipleship</li>
+                    <li><i class="fas fa-check"></i> Prayer & Intercession</li>
+                </ul>
+                <a href="#apply" class="program-btn">Enroll Now</a>
+            </div>
+
+            <div class="program-card">
+                <div class="program-badge">Intermediate</div>
+                <div class="program-icon">
+                    <i class="fas fa-fire"></i>
+                </div>
+                <h3>Diploma in Theology</h3>
+                <div class="program-duration">
+                    <i class="fas fa-clock"></i>
+                    <span>2 Year Program</span>
+                </div>
+                <p>Deepening theological understanding and developing practical ministry skills for effective service.</p>
+                <ul class="program-features">
+                    <li><i class="fas fa-check"></i> Systematic Theology</li>
+                    <li><i class="fas fa-check"></i> Christology & Soteriology</li>
+                    <li><i class="fas fa-check"></i> Church History & Reformation</li>
+                    <li><i class="fas fa-check"></i> Pastoral Leadership</li>
+                    <li><i class="fas fa-check"></i> Homiletics & Teaching</li>
+                </ul>
+                <a href="#apply" class="program-btn">Enroll Now</a>
+            </div>
+
+            <div class="program-card">
+                <div class="program-badge">Advanced</div>
+                <div class="program-icon">
+                    <i class="fas fa-crown"></i>
+                </div>
+                <h3>Advanced Diploma</h3>
+                <div class="program-duration">
+                    <i class="fas fa-clock"></i>
+                    <span>3 Year Program</span>
+                </div>
+                <p>Advanced training for apostolic and prophetic leadership, church planting, and global mission strategy.</p>
+                <ul class="program-features">
+                    <li><i class="fas fa-check"></i> Advanced Hermeneutics</li>
+                    <li><i class="fas fa-check"></i> Apostolic Ministry</li>
+                    <li><i class="fas fa-check"></i> Church Growth Methodologies</li>
+                    <li><i class="fas fa-check"></i> Christian Apologetics</li>
+                    <li><i class="fas fa-check"></i> Theology of Culture & Ethics</li>
+                </ul>
+                <a href="#apply" class="program-btn">Enroll Now</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Curriculum Section -->
+    <section class="curriculum-section" id="curriculum">
+        <div class="section-header">
+            <span class="section-eyebrow">Course Catalog</span>
+            <h2 class="section-title">Core Curriculum</h2>
+            <p class="section-subtitle">A comprehensive selection of courses designed to equip you in every dimension of ministry.</p>
+        </div>
+
+        <div class="curriculum-grid">
+            <div class="curriculum-card">
+                <div class="curriculum-number">01</div>
+                <h4>Introduction to the Scriptures</h4>
+                <p>A foundational overview of the Bible's structure, themes, and the progressive revelation of God's redemptive plan from Genesis to Revelation.</p>
+            </div>
+            <div class="curriculum-card">
+                <div class="curriculum-number">02</div>
+                <h4>Biblical Hermeneutics</h4>
+                <p>The art and science of biblical interpretation—learning to rightly divide the Word of truth through historical, grammatical, and contextual analysis.</p>
+            </div>
+            <div class="curriculum-card">
+                <div class="curriculum-number">03</div>
+                <h4>Doctrine of the Trinity</h4>
+                <p>Exploring the nature of God as Father, Son, and Holy Spirit—understanding the Godhead and its implications for worship and ministry.</p>
+            </div>
+            <div class="curriculum-card">
+                <div class="curriculum-number">04</div>
+                <h4>Christology & Soteriology</h4>
+                <p>The person and work of Jesus Christ, and the doctrine of salvation—regeneration, justification, sanctification, and glorification.</p>
+            </div>
+            <div class="curriculum-card">
+                <div class="curriculum-number">05</div>
+                <h4>Pneumatology & the Holy Ghost</h4>
+                <p>The doctrine of the Holy Spirit—His person, work, gifts, and the believer's relationship with the Spirit of power and regeneration.</p>
+            </div>
+            <div class="curriculum-card">
+                <div class="curriculum-number">06</div>
+                <h4>Church History & Reformation</h4>
+                <p>Tracing the history of the Church from Pentecost to the present, with special focus on the Reformation and revivals that shaped our faith.</p>
+            </div>
+            <div class="curriculum-card">
+                <div class="curriculum-number">07</div>
+                <h4>Leadership & Ministry Management</h4>
+                <p>Biblical principles of leadership, church administration, team building, and the practical aspects of leading a Spirit-filled ministry.</p>
+            </div>
+            <div class="curriculum-card">
+                <div class="curriculum-number">08</div>
+                <h4>Christian Ethics & Marriage</h4>
+                <p>Navigating moral and ethical challenges in ministry, building godly homes, and understanding biblical standards for Christian living.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Faculty Section -->
+    <section class="faculty-section" id="faculty">
+        <div class="section-header">
+            <span class="section-eyebrow">Our Faculty</span>
+            <h2 class="section-title">Apostolic Mentors</h2>
+            <p class="section-subtitle">Learn from seasoned ministers who carry the fire of the Spirit and decades of ministry experience.</p>
+        </div>
+
+        <div class="faculty-grid">
+            <div class="faculty-card">
+                <div class="faculty-image">
+                    <img src="images/testimonial-michael.jpg" alt="Pastor John James">
+                </div>
+                <div class="faculty-info">
+                    <h4>Pst. John James</h4>
+                    <div class="faculty-role">President & Chancellor</div>
+                    <p class="faculty-bio">Founder of WHGRM with over 20 years of apostolic ministry and a passion for raising Spirit-filled leaders.</p>
+                </div>
+            </div>
+            <div class="faculty-card">
+                <div class="faculty-image">
+                    <img src="images/testimonial-sarah.jpg" alt="Pastor Mrs. Joice James">
+                </div>
+                <div class="faculty-info">
+                    <h4>Pst. Mrs. Joice James</h4>
+                    <div class="faculty-role">Dean of Students</div>
+                    <p class="faculty-bio">Oversees student spiritual formation and pastoral care with a heart for women's ministry and family.</p>
+                </div>
+            </div>
+            <div class="faculty-card">
+                <div class="faculty-image">
+                    <img src="images/testimonial-david.jpg" alt="David Okonkwo">
+                </div>
+                <div class="faculty-info">
+                    <h4>David Okonkwo</h4>
+                    <div class="faculty-role">Director of Missions</div>
+                    <p class="faculty-bio">Leads our global outreach initiatives with expertise in cross-cultural ministry and church planting.</p>
+                </div>
+            </div>
+            <div class="faculty-card">
+                <div class="faculty-image">
+                    <img src="images/hero-worship.jpg" alt="Rev. Michael Thompson">
+                </div>
+                <div class="faculty-info">
+                    <h4>Rev. Michael Thompson</h4>
+                    <div class="faculty-role">Head of Theology</div>
+                    <p class="faculty-bio">A theologian and teacher dedicated to making complex biblical truths accessible and transformative.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tuition Section -->
+    <section class="tuition-section" id="tuition">
+        <div class="section-header">
+            <span class="section-eyebrow">Investment</span>
+            <h2 class="section-title">Tuition & Fees</h2>
+            <p class="section-subtitle">Transparent pricing designed to make quality ministry education accessible to all who are called.</p>
+        </div>
+
+        <div class="tuition-grid">
+            <div class="tuition-card">
+                <div class="tuition-icon">
+                    <i class="fas fa-seedling"></i>
+                </div>
+                <h3>Certificate</h3>
+                <div class="tuition-price">$500<span>/year</span></div>
+                <p>Perfect for new believers and those seeking foundational biblical knowledge.</p>
+                <ul class="tuition-features">
+                    <li><i class="fas fa-check"></i> All course materials included</li>
+                    <li><i class="fas fa-check"></i> Weekend & evening classes</li>
+                    <li><i class="fas fa-check"></i> Library access</li>
+                    <li><i class="fas fa-check"></i> Certificate of completion</li>
+                </ul>
+                <a href="#apply" class="program-btn">Choose Plan</a>
+            </div>
+
+            <div class="tuition-card featured">
+                <div class="tuition-icon">
+                    <i class="fas fa-fire"></i>
+                </div>
+                <h3>Diploma</h3>
+                <div class="tuition-price">$900<span>/year</span></div>
+                <p>Our most popular program for those pursuing full-time ministry and leadership.</p>
+                <ul class="tuition-features">
+                    <li><i class="fas fa-check"></i> Everything in Certificate</li>
+                    <li><i class="fas fa-check"></i> Mentorship program</li>
+                    <li><i class="fas fa-check"></i> Ministry practicum</li>
+                    <li><i class="fas fa-check"></i> Conference access</li>
+                    <li><i class="fas fa-check"></i> Diploma certification</li>
+                </ul>
+                <a href="#apply" class="program-btn">Choose Plan</a>
+            </div>
+
+            <div class="tuition-card">
+                <div class="tuition-icon">
+                    <i class="fas fa-crown"></i>
+                </div>
+                <h3>Advanced Diploma</h3>
+                <div class="tuition-price">$1,200<span>/year</span></div>
+                <p>For seasoned ministers ready for apostolic leadership and strategic ministry.</p>
+                <ul class="tuition-features">
+                    <li><i class="fas fa-check"></i> Everything in Diploma</li>
+                    <li><i class="fas fa-check"></i> Apostolic internship</li>
+                    <li><i class="fas fa-check"></i> Global mission trip</li>
+                    <li><i class="fas fa-check"></i> Ordination track</li>
+                </ul>
+                <a href="#apply" class="program-btn">Choose Plan</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section style="background: var(--color-bg-elevated);">
+        <div class="section-header">
+            <span class="section-eyebrow">Student Stories</span>
+            <h2 class="section-title">Transformed for Ministry</h2>
+            <p class="section-subtitle">Hear from graduates whose lives were forever changed through the Ministry School of the Spirit.</p>
+        </div>
+
+        <div class="testimonial-carousel">
+            <div class="testimonial-slide active">
+                <div class="testimonial-avatar">
+                    <img src="images/testimonial-michael.jpg" alt="Student Testimony">
+                </div>
+                <p class="testimonial-text">"The Ministry School didn't just teach me theology—it ignited a fire in my bones. I entered as a confused believer and graduated as a confident minister ready to plant churches across Africa."</p>
+                <div class="testimonial-author">Samuel Adeyemi</div>
+                <div class="testimonial-location">Advanced Diploma Graduate, 2025</div>
+            </div>
+
+            <div class="testimonial-slide">
+                <div class="testimonial-avatar">
+                    <img src="images/testimonial-sarah.jpg" alt="Student Testimony">
+                </div>
+                <p class="testimonial-text">"The depth of teaching on the Holy Ghost and the Messianic revelation transformed my understanding of Scripture. I now lead a thriving congregation with confidence and power."</p>
+                <div class="testimonial-author">Grace Emmanuel</div>
+                <div class="testimonial-location">Diploma Graduate, 2024</div>
+            </div>
+
+            <div class="testimonial-slide">
+                <div class="testimonial-avatar">
+                    <img src="images/testimonial-david.jpg" alt="Student Testimony">
+                </div>
+                <p class="testimonial-text">"From the first day, I knew this was not an ordinary Bible school. The combination of rigorous academics and Spirit-filled impartation created an atmosphere where destinies are shaped."</p>
+                <div class="testimonial-author">Daniel Okafor</div>
+                <div class="testimonial-location">Certificate Graduate, 2025</div>
+            </div>
+
+            <div class="carousel-dots">
+                <span class="dot active" onclick="goToSlide(0)"></span>
+                <span class="dot" onclick="goToSlide(1)"></span>
+                <span class="dot" onclick="goToSlide(2)"></span>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section" id="faq">
+        <div class="section-header">
+            <span class="section-eyebrow">Questions</span>
+            <h2 class="section-title">Frequently Asked</h2>
+            <p class="section-subtitle">Everything you need to know about enrolling in the Ministry School of the Spirit.</p>
+        </div>
+
+        <div class="faq-container">
+            <div class="faq-item active">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <h4>What are the admission requirements?</h4>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Applicants must be born-again believers with a genuine call to ministry. A high school diploma or equivalent is required for the Diploma and Advanced Diploma programs. All applicants undergo a pastoral reference check and a brief interview to confirm their readiness for the program.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <h4>Can I study while working full-time?</h4>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Absolutely. We offer flexible learning options including weekend intensives (Friday evenings and Saturdays) and evening classes (Sunday through Tuesday, 5pm–9:30pm). Many of our students successfully balance work, family, and ministry while completing their studies.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <h4>Are the classes available online?</h4>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Yes, we offer a hybrid learning model. While we encourage physical attendance for the full impartation experience, all core lectures are live-streamed and recorded for remote students. Practical ministry components require in-person participation.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <h4>What payment options are available?</h4>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>We accept bank transfers, card payments at the ministry office, and structured payment plans. A non-refundable application fee of $50 is due with your application. Tuition can be paid in full or in semester installments. Scholarships are available for deserving students.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <h4>Will I be ordained after graduation?</h4>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Advanced Diploma graduates who complete the ordination track, including the apostolic internship and mission practicum, are eligible for ministerial ordination through Messianic Movement. Diploma graduates receive ministerial licensing.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section" id="apply">
+        <div class="cta-container">
+            <div class="hero-eyebrow" style="justify-content: center; margin-bottom: 1.5rem;">
+                <div class="eyebrow-line"></div>
+                <span class="eyebrow-text">Your Calling Awaits</span>
+                <div class="eyebrow-line" style="transform: rotate(180deg);"></div>
+            </div>
+            <h2>Begin Your Journey Today</h2>
+            <p>Applications are now open for the 2026 academic year. Step into the training ground of the Spirit and emerge as a vessel prepared for the Master's use.</p>
+            <div class="cta-buttons">
+                <a href="#" class="btn btn-primary" onclick="openApplyModal(); return false;">
+                    <i class="fas fa-file-alt btn-icon"></i>
+                    Download Application
+                </a>
+                <a href="mailto:admissions@whgrministry.org" class="btn btn-secondary">
+                    Contact Admissions
+                    <i class="fas fa-envelope btn-icon"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <a href="index.html" class="logo">
+                    <div class="logo-icon"><img src="images/logowtb.png" alt="Messianic Movement logo" class="logo-mark-img"></div>
+                    <div class="logo-text">
+                        <span class="logo-title">Messianic Movement</span>
+                        <span class="logo-subtitle">Regenerational Ministry</span>
+                    </div>
+                </a>
+                <p>Raising a generation of Spirit-filled believers who will transform nations through the power of the Holy Ghost.</p>
+                <div class="social-links">
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html#home">Home</a></li>
+                    <li><a href="index.html#ministries">Ministries</a></li>
+                    <li><a href="index.html#calendar">Calendar</a></li>
+                    <li><a href="index.html#resources">Resources</a></li>
+                    <li><a href="index.html#live">Live Service</a></li>
+                    <li><a href="index.html#give">Give</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-links">
+                <h4>School Resources</h4>
+                <ul>
+                    <li><a href="#programs">Programs</a></li>
+                    <li><a href="#curriculum">Curriculum</a></li>
+                    <li><a href="#faculty">Faculty</a></li>
+                    <li><a href="#tuition">Tuition</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-links">
+                <h4>Contact School</h4>
+                <ul>
+                    <li><i class="fas fa-map-marker-alt"></i> 123 Faith Avenue, Glory City</li>
+                    <li><i class="fas fa-phone"></i> +1 (555) 123-4567</li>
+                    <li><i class="fas fa-envelope"></i> admissions@whgrministry.org</li>
+                    <li><i class="fas fa-clock"></i> Mon-Fri: 9AM - 5PM EST</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2026 Messianic Movement. All rights reserved.</p>
+            <p>Designed with <i class="fas fa-heart" style="color: var(--color-gold);"></i> by the Spirit</p>
+        </div>
+    </footer>
+
+    <!-- Cart Sidebar -->
+    <div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h3>Your Cart</h3>
+            <button class="close-cart" onclick="toggleCart()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="cart-items" id="cartItems"></div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Total:</span>
+                <span id="cartTotal">$0.00</span>
+            </div>
+            <button class="checkout-btn" onclick="checkout()">Proceed to Checkout</button>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModal()">
+                <i class="fas fa-times"></i>
+            </button>
+            <h2 id="modalTitle">Title</h2>
+            <p id="modalBody" style="color: var(--text-secondary); margin-top: 1rem; line-height: 1.8;">Content goes here...</p>
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div class="toast" id="toast">
+        <i class="fas fa-check-circle toast-icon"></i>
+        <span id="toastMessage">Item added to cart</span>
+    </div>
+
+    <!-- Floating Buttons -->
+    <a href="https://wa.me/1234567890" class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+    <button class="scroll-top" id="scrollTop" onclick="scrollToTop()" aria-label="Scroll to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
+    <script>
+        // ==================== SCHOOL PAGE SPECIFIC SCRIPTS ====================
+
+        // Counter Animation
+        function animateCounters() {
+            const counters = document.querySelectorAll('.stat-number');
+            counters.forEach(counter => {
+                const target = parseInt(counter.getAttribute('data-count'));
+                const duration = 2000;
+                const increment = target / (duration / 16);
+                let current = 0;
+
+                const updateCounter = () => {
+                    current += increment;
+                    if (current < target) {
+                        counter.textContent = Math.floor(current) + (target === 98 ? '%' : '+');
+                        requestAnimationFrame(updateCounter);
+                    } else {
+                        counter.textContent = target + (target === 98 ? '%' : '+');
+                    }
+                };
+
+                // Use Intersection Observer to trigger when visible
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            updateCounter();
+                            observer.unobserve(counter);
+                        }
+                    });
+                }, { threshold: 0.5 });
+
+                observer.observe(counter);
+            });
+        }
+
+        // FAQ Toggle
+        function toggleFaq(element) {
+            const item = element.parentElement;
+            const wasActive = item.classList.contains('active');
+
+            // Close all
+            document.querySelectorAll('.faq-item').forEach(faq => {
+                faq.classList.remove('active');
+            });
+
+            // Open clicked if it wasn't active
+            if (!wasActive) {
+                item.classList.add('active');
+            }
+        }
+
+        // Application Modal
+        function openApplyModal() {
+            const modal = document.getElementById('modal');
+            const title = document.getElementById('modalTitle');
+            const body = document.getElementById('modalBody');
+
+            title.textContent = 'Application Form';
+            body.innerHTML = `
+                <div style="text-align: center; padding: 2rem 0;">
+                    <div style="width: 80px; height: 80px; background: rgba(212,175,55,0.1); border: 1px solid rgba(212,175,55,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; font-size: 2rem; color: var(--color-gold);">
+                        <i class="fas fa-file-download"></i>
+                    </div>
+                    <p style="margin-bottom: 1.5rem;">Download the official Ministry School application form. Complete and submit to admissions@whgrministry.org or bring to our campus office.</p>
+                    <a href="#" class="btn btn-primary" style="display: inline-flex;" onclick="showToast('Application download started'); return false;">
+                        <i class="fas fa-download btn-icon"></i>
+                        Download PDF
+                    </a>
+                </div>
+            `;
+            modal.classList.add('open');
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            animateCounters();
+        });
+
+        // Override loader for this page
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('loader')?.classList.add('hidden');
+            }, 1500);
+        });
+    </script>
+</body>
+</html>

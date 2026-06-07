@@ -1,0 +1,1194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Watch Now | Messianic Movement</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --color-bg: #050505;
+            --color-bg-elevated: #0a0a0a;
+            --color-surface: #111111;
+            --color-gold: #d4af37;
+            --color-gold-light: #f4d03f;
+            --color-gold-dark: #aa8c2c;
+            --color-purple: #6b46c1;
+            --color-purple-rich: #7c3aed;
+            --color-soft-blue: #3b82f6;
+            --color-text: #ffffff;
+            --color-text-secondary: #b0b0c0;
+            --color-text-muted: #71717a;
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background-color: var(--color-bg);
+            color: var(--color-text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 400;
+        }
+
+        /* Netflix-style Header */
+        .watch-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 1.5rem 4%;
+            background: linear-gradient(to bottom, rgba(5,5,5,0.95) 0%, transparent 100%);
+            transition: all 0.4s ease;
+        }
+
+        .watch-header.scrolled {
+            background: rgba(5, 5, 5, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .header-content {
+            max-width: 1600px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            text-decoration: none;
+            color: var(--color-text);
+        }
+
+        .logo-mark {
+    overflow: hidden;
+            width: 48px;
+            height: 48px;
+            border: 1px solid var(--color-gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            color: var(--color-gold);}
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            font-weight: 400;
+        }
+
+        .logo-subtitle {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            color: var(--color-text-muted);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--color-text-secondary);
+            text-decoration: none;
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--color-gold);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0%;
+            height: 2px;
+            background: var(--color-gold);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Banner */
+        .hero-banner {
+            position: relative;
+            height: 85vh;
+            min-height: 600px;
+            display: flex;
+            align-items: flex-end;
+            padding: 0 4% 4rem;
+            margin-bottom: 3rem;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            z-index: -1;
+        }
+
+        .hero-bg img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.4);
+        }
+
+        .hero-gradient {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, var(--color-bg) 0%, transparent 50%, rgba(5,5,5,0.5) 100%);
+        }
+
+        .hero-content {
+            max-width: 800px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: rgba(212,175,55,0.2);
+            border: 1px solid rgba(212,175,55,0.3);
+            border-radius: 100px;
+            font-size: 0.75rem;
+            color: var(--color-gold);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-title {
+            font-size: clamp(3rem, 6vw, 5rem);
+            line-height: 1;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(to right, #fff, var(--color-gold-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-description {
+            font-size: 1.125rem;
+            color: var(--color-text-secondary);
+            margin-bottom: 2rem;
+            max-width: 600px;
+            line-height: 1.7;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            padding: 1rem 2.5rem;
+            background: linear-gradient(135deg, var(--color-gold), var(--color-gold-dark));
+            border: none;
+            border-radius: 8px;
+            color: var(--color-bg);
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .btn-primary:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(212,175,55,0.4);
+        }
+
+        .btn-secondary {
+            padding: 1rem 2.5rem;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 8px;
+            color: var(--color-text);
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            font-family: 'Space Grotesk', sans-serif;
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255,255,255,0.2);
+            border-color: rgba(255,255,255,0.3);
+        }
+
+        /* Content Sections */
+        .content-section {
+            padding: 2rem 4%;
+            margin-bottom: 3rem;
+        }
+
+        .section-header-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            color: var(--color-text);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .section-title i {
+            color: var(--color-gold);
+            font-size: 1.25rem;
+        }
+
+        .see-all {
+            color: var(--color-gold);
+            text-decoration: none;
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .see-all:hover {
+            text-shadow: 0 0 10px rgba(212,175,55,0.5);
+        }
+
+        /* Video Row */
+        .video-row {
+            display: flex;
+            gap: 1.5rem;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            scroll-snap-type: x mandatory;
+            padding: 1rem 0;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+        }
+
+        .video-row::-webkit-scrollbar {
+            display: none;
+        }
+
+        .video-card {
+            flex: 0 0 320px;
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.4s var(--ease-out-expo);
+            scroll-snap-align: start;
+            background: var(--color-surface);
+            border: 1px solid var(--glass-border);
+        }
+
+        .video-card:hover {
+            transform: scale(1.05) translateY(-10px);
+            border-color: rgba(212,175,55,0.3);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5), 0 0 30px rgba(212,175,55,0.1);
+            z-index: 10;
+        }
+
+        .video-thumbnail {
+            position: relative;
+            aspect-ratio: 16/9;
+            overflow: hidden;
+        }
+
+        .video-thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .video-card:hover .video-thumbnail img {
+            transform: scale(1.1);
+        }
+
+        .play-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0,0,0,0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .video-card:hover .play-overlay {
+            opacity: 1;
+        }
+
+        .play-icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(212,175,55,0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-bg);
+            font-size: 1.5rem;
+            transform: scale(0.8);
+            transition: all 0.3s ease;
+        }
+
+        .video-card:hover .play-icon {
+            transform: scale(1);
+            box-shadow: 0 0 30px rgba(212,175,55,0.5);
+        }
+
+        .video-duration {
+            position: absolute;
+            bottom: 0.75rem;
+            right: 0.75rem;
+            padding: 0.25rem 0.5rem;
+            background: rgba(0,0,0,0.8);
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .video-info {
+            padding: 1rem;
+        }
+
+        .video-category {
+            font-size: 0.75rem;
+            color: var(--color-gold);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .video-title {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--color-text);
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .video-meta {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-size: 0.875rem;
+            color: var(--color-text-muted);
+        }
+
+        .video-meta span {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        /* Video Player Modal */
+        .video-modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.95);
+            z-index: 2000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .video-modal.active {
+            display: flex;
+        }
+
+        .video-container {
+            width: 100%;
+            max-width: 1200px;
+            aspect-ratio: 16/9;
+            background: #000;
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 40px 80px rgba(0,0,0,0.8);
+        }
+
+        .video-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .close-video {
+            position: absolute;
+            top: -50px;
+            right: 0;
+            background: none;
+            border: none;
+            color: var(--color-text);
+            font-size: 2rem;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .close-video:hover {
+            color: var(--color-gold);
+        }
+
+        /* Categories Grid */
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .category-card {
+            position: relative;
+            height: 160px;
+            border-radius: 12px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            border: 1px solid var(--glass-border);
+        }
+
+        .category-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(212,175,55,0.3);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+        }
+
+        .category-card img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.5);
+            transition: all 0.4s ease;
+        }
+
+        .category-card:hover img {
+            filter: brightness(0.7);
+            transform: scale(1.1);
+        }
+
+        .category-content {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 1.5rem;
+            background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, transparent 100%);
+        }
+
+        .category-icon {
+            width: 48px;
+            height: 48px;
+            background: rgba(212,175,55,0.2);
+            border: 1px solid rgba(212,175,55,0.3);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-gold);
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+        }
+
+        .category-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .category-count {
+            font-size: 0.875rem;
+            color: var(--color-text-muted);
+        }
+
+        /* Footer */
+        .watch-footer {
+            background: var(--color-bg-elevated);
+            border-top: 1px solid var(--glass-border);
+            padding: 3rem 4%;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1600px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .footer-links a {
+            color: var(--color-text-secondary);
+            text-decoration: none;
+            font-size: 0.875rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--color-gold);
+        }
+
+        .copyright {
+            color: var(--color-text-muted);
+            font-size: 0.875rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero-banner {
+                height: 70vh;
+                min-height: 500px;
+            }
+
+            .video-card {
+                flex: 0 0 260px;
+            }
+
+            .categories-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .footer-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
+    
+    /* LOGO IMAGE FALLBACK */
+    
+    /* HOMEPAGE HEADER LOGO MATCH */
+    nav .logo .logo-mark,
+    .study-nav .logo .logo-mark,
+    .watch-header .logo .logo-mark {
+        width: 48px;
+        height: 48px;
+        flex: 0 0 48px;
+        border: 1px solid var(--color-gold);
+        border-radius: 50%;
+        background: transparent;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        position: relative;
+        box-shadow: 0 0 20px rgba(212,175,55,0.1);
+    }
+
+    nav .logo .logo-mark img,
+    .study-nav .logo .logo-mark img,
+    .watch-header .logo .logo-mark img,
+    nav .logo .logo-mark-img,
+    .study-nav .logo .logo-mark-img,
+    .watch-header .logo .logo-mark-img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        display: block;
+        position: relative;
+        z-index: 1;
+    }
+
+    nav .logo .logo-title,
+    .study-nav .logo .logo-title,
+    .watch-header .logo .logo-title {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 1.5rem;
+        font-weight: 400;
+        line-height: 1;
+        letter-spacing: 0;
+    }
+
+    nav .logo .logo-subtitle,
+    .study-nav .logo .logo-subtitle,
+    .watch-header .logo .logo-subtitle {
+        font-size: 0.65rem;
+        text-transform: uppercase;
+        letter-spacing: 0.3em;
+        color: var(--color-text-muted);
+        margin-top: 0.25rem;
+    }
+
+    .loader-ring,
+    .loader-ring--soft,
+    .loader-dots,
+    .loader-bar,
+    .loader-progress {
+        display: none !important;
+    }
+</style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="watch-header" id="watchHeader">
+        <div class="header-content">
+            <a href="index.html" class="logo">
+                <div class="logo-mark"><img src="images/logowtb.png" alt="Messianic Movement logo" class="logo-mark-img"></div>
+                <div class="logo-text">
+                    <span class="logo-title">Messianic Movement</span>
+                    <span class="logo-subtitle">Regenerational Ministry</span>
+                </div>
+            </a>
+            
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="#" class="active" style="color: var(--color-gold);">Watch</a></li>
+                    <li><a href="index.html#resources">Resources</a></li>
+                    <li><a href="index.html#live">Live</a></li>
+                    <li><a href="index.html#give">Give</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Banner -->
+    <section class="hero-banner">
+        <div class="hero-bg">
+            <img src="images/featured-sermon.jpg" alt="Featured sermon">
+            <div class="hero-gradient"></div>
+        </div>
+        <div class="hero-content">
+            <div class="hero-badge">
+                <i class="fas fa-star"></i>
+                Featured Teaching
+            </div>
+            <h1 class="hero-title">The Power of Divine Regeneration</h1>
+            <p class="hero-description">Discover the transformative power of being born again in the Spirit. This powerful message will revolutionize your understanding of salvation and spiritual rebirth.</p>
+            <div class="hero-actions">
+                <button class="btn-primary" onclick="playVideo('dQw4w9WgXcQ')">
+                    <i class="fas fa-play"></i>
+                    Play Now
+                </button>
+                <button class="btn-secondary" onclick="showInfo()">
+                    <i class="fas fa-info-circle"></i>
+                    More Info
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Messianic Teachings Row -->
+    <section class="content-section">
+        <div class="section-header-row">
+            <h2 class="section-title">
+                <i class="fas fa-star-of-david"></i>
+                Messianic Teachings
+            </h2>
+            <a href="#" class="see-all">See All <i class="fas fa-chevron-right"></i></a>
+        </div>
+        <div class="video-row">
+            <div class="video-card" onclick="playVideo('dQw4w9WgXcQ')">
+                <div class="video-thumbnail">
+                    <img src="images/teaching-1.jpg" alt="Teaching thumbnail">
+                    <div class="play-overlay">
+                        <div class="play-icon"><i class="fas fa-play"></i></div>
+                    </div>
+                    <span class="video-duration">45:32</span>
+                </div>
+                <div class="video-info">
+                    <div class="video-category">Torah Portion</div>
+                    <h3 class="video-title">Understanding the Feasts of the Lord</h3>
+                    <div class="video-meta">
+                        <span><i class="fas fa-eye"></i> 12.5K views</span>
+                        <span><i class="fas fa-clock"></i> 2 days ago</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="video-card" onclick="playVideo('dQw4w9WgXcQ')">
+                <div class="video-thumbnail">
+                    <img src="images/teaching-2.jpg" alt="Teaching thumbnail">
+                    <div class="play-overlay">
+                        <div class="play-icon"><i class="fas fa-play"></i></div>
+                    </div>
+                    <span class="video-duration">38:15</span>
+                </div>
+                <div class="video-info">
+                    <div class="video-category">Prophetic</div>
+                    <h3 class="video-title">The Messianic Era is Now</h3>
+                    <div class="video-meta">
+                        <span><i class="fas fa-eye"></i> 8.2K views</span>
+                        <span><i class="fas fa-clock"></i> 5 days ago</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="video-card" onclick="playVideo('dQw4w9WgXcQ')">
+                <div class="video-thumbnail">
+                    <img src="images/teaching-3.jpg" alt="Teaching thumbnail">
+                    <div class="play-overlay">
+                        <div class="play-icon"><i class="fas fa-play"></i></div>
+                    </div>
+                    <span class="video-duration">52:08</span>
+                </div>
+                <div class="video-info">
+                    <div class="video-category">Hebrew Roots</div>
+                    <h3 class="video-title">Walking in the Ancient Paths</h3>
+                    <div class="video-meta">
+                        <span><i class="fas fa-eye"></i> 15.1K views</span>
+                        <span><i class="fas fa-clock"></i> 1 week ago</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="video-card" onclick="playVideo('dQw4w9WgXcQ')">
+                <div class="video-thumbnail">
+                    <img src="images/teaching-4.jpg" alt="Teaching thumbnail">
+                    <div class="play-overlay">
+                        <div class="play-icon"><i class="fas fa-play"></i></div>
+                    </div>
+                    <span class="video-duration">41:22</span>
+                </div>
+                <div class="video-info">
+                    <div class="video-category">Kingdom Living</div>
+                    <h3 class="video-title">The Gospel of the Kingdom</h3>
+                    <div class="video-meta">
+                        <span><i class="fas fa-eye"></i> 6.8K views</span>
+                        <span><i class="fas fa-clock"></i> 2 weeks ago</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="video-card" onclick="playVideo('dQw4w9WgXcQ')">
+                <div class="video-thumbnail">
+                    <img src="images/teaching-5.jpg" alt="Teaching thumbnail">
+                    <div class="play-overlay">
+                        <div class="play-icon"><i class="fas fa-play"></i></div>
+                    </div>
+                    <span class="video-duration">35:45</span>
+                </div>
+                <div class="video-info">
+                    <div class="video-category">Biblical Studies</div>
+                    <h3 class="video-title">Covenant Understanding</h3>
+                    <div class="video-meta">
+                        <span><i class="fas fa-eye"></i> 9.3K views</span>
+                        <span><i class="fas fa-clock"></i> 3 weeks ago</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sunday Sermons Row -->
+    <section class="content-section">
+        <div class="section-header-row">
+            <h2 class="section-title">
+                <i class="fas fa-church"></i>
+                Sunday Sermons
+            </h2>
+            <a href="#" class="see-all">See All <i class="fas fa-chevron-right"></i></a>
+        </div>
+        <div class="video-row">
+            <div class="video-card" onclick="playVideo('dQw4w9WgXcQ')">
+                <div class="video-thumbnail">
+                    <img src="images/sermon-1.jpg" alt="Sermon thumbnail">
+                    <div class="play-overlay">
+                        <div class="play-icon"><i class="fas fa-play"></i></div>
+                    </div>
+                    <span class="video-duration">1:15:30</span>
+                </div>
+                <div class="video-info">
+                    <div class="video-category">Holy Ghost Assembly</div>
+                    <h3 class="video-title">The Fire of Regeneration</h3>
+                    <div class="video-meta">
+                        <span><i class="fas fa-eye"></i> 25.3K views</span>
+                        <span><i class="fas fa-clock"></i> Last Sunday</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="video-card" onclick="playVideo('dQw4w9WgXcQ')">
+                <div class="video-thumbnail">
+                    <img src="images/sermon-2.jpg" alt="Sermon thumbnail">
+                    <div class="play-overlay">
+                        <div class="play-icon"><i class="fas fa-play"></i></div>
+                    </div>
+                    <span class="video-duration">1:08:45</span>
+                </div>
+                <div class="video-info">
+                    <div class="video-category">Power Service</div>
+                    <h3 class="video-title">Breaking Generational Curses</h3>
+                    <div class="video-meta">
+                        <span><i class="fas fa-eye"></i> 18.7K views</span>
+                        <span><i class="fas fa-clock"></i> 2 weeks ago</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="video-card" onclick="playVideo('dQw4w9WgXcQ')">
+                <div class="video-thumbnail">
+                    <img src="images/sermon-3.jpg" alt="Sermon thumbnail">
+                    <div class="play-overlay">
+                        <div class="play-icon"><i class="fas fa-play"></i></div>
+                    </div>
+                    <span class="video-duration">1:22:15</span>
+                </div>
+                <div class="video-info">
+                    <div class="video-category">Special Service</div>
+                    <h3 class="video-title">The Anointing for Exploits</h3>
+                    <div class="video-meta">
+                        <span><i class="fas fa-eye"></i> 31.2K views</span>
+                        <span><i class="fas fa-clock"></i> 3 weeks ago</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="video-card" onclick="playVideo('dQw4w9WgXcQ')">
+                <div class="video-thumbnail">
+                    <img src="images/sermon-4.jpg" alt="Sermon thumbnail">
+                    <div class="play-overlay">
+                        <div class="play-icon"><i class="fas fa-play"></i></div>
+                    </div>
+                    <span class="video-duration">1:05:20</span>
+                </div>
+                <div class="video-info">
+                    <div class="video-category">Youth Service</div>
+                    <h3 class="video-title">Raising Kingdom Champions</h3>
+                    <div class="video-meta">
+                        <span><i class="fas fa-eye"></i> 14.5K views</span>
+                        <span><i class="fas fa-clock"></i> 1 month ago</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="video-card" onclick="playVideo('dQw4w9WgXcQ')">
+                <div class="video-thumbnail">
+                    <img src="images/sermon-5.jpg" alt="Sermon thumbnail">
+                    <div class="play-overlay">
+                        <div class="play-icon"><i class="fas fa-play"></i></div>
+                    </div>
+                    <span class="video-duration">1:18:00</span>
+                </div>
+                <div class="video-info">
+                    <div class="video-category">Miracle Service</div>
+                    <h3 class="video-title">Signs and Wonders Today</h3>
+                    <div class="video-meta">
+                        <span><i class="fas fa-eye"></i> 42.1K views</span>
+                        <span><i class="fas fa-clock"></i> 1 month ago</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Conferences Row -->
+    <section class="content-section">
+        <div class="section-header-row">
+            <h2 class="section-title">
+                <i class="fas fa-users"></i>
+                Conferences & Events
+            </h2>
+            <a href="#" class="see-all">See All <i class="fas fa-chevron-right"></i></a>
+        </div>
+        <div class="video-row">
+            <div class="video-card" onclick="playVideo('dQw4w9WgXcQ')">
+                <div class="video-thumbnail">
+                    <img src="images/conference-1.jpg" alt="Conference thumbnail">
+                    <div class="play-overlay">
+                        <div class="play-icon"><i class="fas fa-play"></i></div>
+                    </div>
+                    <span class="video-duration">2:45:00</span>
+                </div>
+                <div class="video-info">
+                    <div class="video-category">Global Summit</div>
+                    <h3 class="video-title">Messianic Movement Conference 2025</h3>
+                    <div class="video-meta">
+                        <span><i class="fas fa-eye"></i> 156K views</span>
+                        <span><i class="fas fa-clock"></i> 3 months ago</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="video-card" onclick="playVideo('dQw4w9WgXcQ')">
+                <div class="video-thumbnail">
+                    <img src="images/conference-2.jpg" alt="Conference thumbnail">
+                    <div class="play-overlay">
+                        <div class="play-icon"><i class="fas fa-play"></i></div>
+                    </div>
+                    <span class="video-duration">3:12:30</span>
+                </div>
+                <div class="video-info">
+                    <div class="video-category">Leadership</div>
+                    <h3 class="video-title">Kingdom Leaders Summit</h3>
+                    <div class="video-meta">
+                        <span><i class="fas fa-eye"></i> 89K views</span>
+                        <span><i class="fas fa-clock"></i> 6 months ago</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="video-card" onclick="playVideo('dQw4w9WgXcQ')">
+                <div class="video-thumbnail">
+                    <img src="images/conference-3.jpg" alt="Conference thumbnail">
+                    <div class="play-overlay">
+                        <div class="play-icon"><i class="fas fa-play"></i></div>
+                    </div>
+                    <span class="video-duration">1:55:00</span>
+                </div>
+                <div class="video-info">
+                    <div class="video-category">Youth Conference</div>
+                    <h3 class="video-title">Generation Fire 2025</h3>
+                    <div class="video-meta">
+                        <span><i class="fas fa-eye"></i> 67K views</span>
+                        <span><i class="fas fa-clock"></i> 8 months ago</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="video-card" onclick="playVideo('dQw4w9WgXcQ')">
+                <div class="video-thumbnail">
+                    <img src="images/conference-4.jpg" alt="Conference thumbnail">
+                    <div class="play-overlay">
+                        <div class="play-icon"><i class="fas fa-play"></i></div>
+                    </div>
+                    <span class="video-duration">2:30:15</span>
+                </div>
+                <div class="video-info">
+                    <div class="video-category">Prayer Conference</div>
+                    <h3 class="video-title">Upper Room Prayer Summit</h3>
+                    <div class="video-meta">
+                        <span><i class="fas fa-eye"></i> 112K views</span>
+                        <span><i class="fas fa-clock"></i> 10 months ago</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories -->
+    <section class="content-section">
+        <div class="section-header-row">
+            <h2 class="section-title">
+                <i class="fas fa-th-large"></i>
+                Browse by Category
+            </h2>
+        </div>
+        <div class="categories-grid">
+            <div class="category-card" onclick="filterByCategory('deliverance')">
+                <img src="images/cat-deliverance.jpg" alt="Deliverance">
+                <div class="category-content">
+                    <div class="category-icon"><i class="fas fa-dove"></i></div>
+                    <h3 class="category-title">Deliverance</h3>
+                    <span class="category-count">48 videos</span>
+                </div>
+            </div>
+
+            <div class="category-card" onclick="filterByCategory('healing')">
+                <img src="images/cat-healing.jpg" alt="Healing">
+                <div class="category-content">
+                    <div class="category-icon"><i class="fas fa-heartbeat"></i></div>
+                    <h3 class="category-title">Divine Healing</h3>
+                    <span class="category-count">36 videos</span>
+                </div>
+            </div>
+
+            <div class="category-card" onclick="filterByCategory('prophecy')">
+                <img src="images/cat-prophecy.jpg" alt="Prophecy">
+                <div class="category-content">
+                    <div class="category-icon"><i class="fas fa-eye"></i></div>
+                    <h3 class="category-title">Prophetic</h3>
+                    <span class="category-count">52 videos</span>
+                </div>
+            </div>
+
+            <div class="category-card" onclick="filterByCategory('worship')">
+                <img src="images/cat-worship.jpg" alt="Worship">
+                <div class="category-content">
+                    <div class="category-icon"><i class="fas fa-music"></i></div>
+                    <h3 class="category-title">Worship</h3>
+                    <span class="category-count">64 videos</span>
+                </div>
+            </div>
+
+            <div class="category-card" onclick="filterByCategory('testimonies')">
+                <img src="images/cat-testimonies.jpg" alt="Testimonies">
+                <div class="category-content">
+                    <div class="category-icon"><i class="fas fa-microphone"></i></div>
+                    <h3 class="category-title">Testimonies</h3>
+                    <span class="category-count">128 videos</span>
+                </div>
+            </div>
+
+            <div class="category-card" onclick="filterByCategory('bible-study')">
+                <img src="images/cat-bible.jpg" alt="Bible Study">
+                <div class="category-content">
+                    <div class="category-icon"><i class="fas fa-book-open"></i></div>
+                    <h3 class="category-title">Bible Study</h3>
+                    <span class="category-count">95 videos</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Video Player Modal -->
+    <div class="video-modal" id="videoModal">
+        <div style="position: relative; width: 100%; max-width: 1200px;">
+            <button class="close-video" onclick="closeVideo()">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="video-container" id="videoContainer">
+                <!-- YouTube iframe will be inserted here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="watch-footer">
+        <div class="footer-content">
+            <ul class="footer-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="index.html#resources">Resources</a></li>
+                <li><a href="index.html#give">Give</a></li>
+                <li><a href="#">Privacy</a></li>
+                <li><a href="#">Terms</a></li>
+            </ul>
+            <p class="copyright">&copy; 2026 Messianic Movement. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('watchHeader');
+            if (window.pageYOffset > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Video Player Functions
+        function playVideo(videoId) {
+            const modal = document.getElementById('videoModal');
+            const container = document.getElementById('videoContainer');
+            
+            container.innerHTML = `
+                <iframe 
+                    src="https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0" 
+                    title="YouTube video player" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen>
+                </iframe>
+            `;
+            
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeVideo() {
+            const modal = document.getElementById('videoModal');
+            const container = document.getElementById('videoContainer');
+            
+            container.innerHTML = '';
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        function showInfo() {
+            alert('The Power of Divine Regeneration - A transformative teaching on spiritual rebirth and the work of the Holy Spirit in the life of a believer. Recorded live at Holy Ghost Assembly.');
+        }
+
+        function filterByCategory(category) {
+            alert(`Filtering videos by category: ${category}`);
+        }
+
+        // Close modal on background click
+        document.getElementById('videoModal').addEventListener('click', (e) => {
+            if (e.target === e.currentTarget) {
+                closeVideo();
+            }
+        });
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeVideo();
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,796 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Messianic Movement worship, ministries, live teachings, prayer support, and giving. Join a global community walking in the Spirit.">
+    <meta property="og:title" content="Messianic Movement | Raising Men in the Power of the Spirit">
+    <meta property="og:description" content="Experience the transformative power of the Holy Ghost through worship, teaching, outreach, and giving.">
+    <meta property="og:image" content="images/hero-worship.jpg">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://yourdomain.com/">
+    <meta name="twitter:card" content="summary_large_image">
+    <title>Messianic Movement | Raising Men in the Power of the Spirit</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Film Grain Overlay -->
+    <div class="grain-overlay"></div>
+    <div class="vignette"></div>
+
+    <!-- Custom Cursor -->
+    <div class="cursor" id="cursor"></div>
+    <div class="cursor-dot" id="cursorDot"></div>
+
+    <!-- Navigation -->
+    <nav id="navbar" class="scrolled" style="background: rgba(5,5,5,0.85); backdrop-filter: blur(20px);">
+        <div class="nav-container">
+            <a href="#home" class="logo">
+                <div class="logo-mark"><img src="images/logowtb.png" alt="Messianic Movement logo" class="logo-mark-img"></div>
+                <div class="logo-text">
+                    <span class="logo-title">Messianic Movement</span>
+                    <span class="logo-subtitle">Regenerational Ministry</span>
+                </div>
+            </a>
+            
+            <ul class="nav-links">
+                <li><a href="#home" class="nav-link">Home</a></li>
+                <li><a href="#ministries" class="nav-link">Ministries</a></li>
+                <li><a href="#calendar" class="nav-link">Calendar</a></li>
+                <li><a href="#resources" class="nav-link">Resources</a></li>
+                <li><a href="#store" class="nav-link">Store</a></li>
+                <li><a href="#live" class="nav-link">Live</a></li>
+                <li style="margin-left: 1rem;">
+                    <button class="nav-cta" onclick="toggleCart()">
+                        Cart (<span id="cartCount">0</span>)
+                    </button>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section - SINGLE CLEAN VERSION -->
+    <section class="hero" id="home">
+        <div class="hero-bg">
+            <div class="hero-gradient"></div>
+            <img src="images/hero-worship.jpg" alt="Worship atmosphere with raised hands" class="hero-background-img">
+            <div class="hero-grid"></div>
+        </div>
+        <div class="hero-particles" id="particles"></div>
+        
+        <div class="hero-content">
+            <div class="hero-eyebrow">
+                <div class="eyebrow-line"></div>
+                <div class="live-pulse"></div>
+                <span class="eyebrow-text">Live Now</span>
+                <div class="eyebrow-line" style="transform: rotate(180deg);"></div>
+            </div>
+            
+            <h1>
+                <span class="hero-title-line">Raising Men in the</span>
+                <span class="hero-title-line">Power of the Spirit</span>
+            </h1>
+            
+            <!-- Premium Scrolling Manifesto - BELOW TITLE -->
+            <div class="manifesto-ticker">
+                <div class="ticker-fade-left"></div>
+                <div class="ticker-fade-right"></div>
+                <div class="ticker-track">
+                    <div class="ticker-item">
+                        <i class="fas fa-globe-americas"></i>
+                        <span>Preparing the world for the messianic era through global awareness and divine engagement</span>
+                    </div>
+                    <div class="ticker-dot"></div>
+                    <div class="ticker-item">
+                        <i class="fas fa-envelope-open-text"></i>
+                        <span>Divine messengers equipped with Truth, calling men to the Obedience of Faith</span>
+                    </div>
+                    <div class="ticker-dot"></div>
+                    <div class="ticker-item">
+                        <i class="fas fa-menorah"></i>
+                        <span>Celebrating Jewish heritage and the rich cultural traditions of God's people</span>
+                    </div>
+                    <div class="ticker-dot"></div>
+                    <div class="ticker-item">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>Standing against religious persecution, terrorism, and anti-Semitism worldwide</span>
+                    </div>
+                    <div class="ticker-dot"></div>
+                    <div class="ticker-item">
+                        <i class="fas fa-hands-helping"></i>
+                        <span>Bringing liberty and comfort to the oppressed through Compassion Works</span>
+                    </div>
+                    <div class="ticker-dot"></div>
+                    <div class="ticker-item">
+                        <i class="fas fa-book-open"></i>
+                        <span>World Bible Education Project—disseminating divine knowledge to all nations</span>
+                    </div>
+                    <div class="ticker-dot"></div>
+                    <div class="ticker-item">
+                        <i class="fas fa-praying-hands"></i>
+                        <span>Building a global prayer force to influence nations and shape history</span>
+                    </div>
+                    <div class="ticker-dot"></div>
+                    <!-- Seamless loop -->
+                    <div class="ticker-item">
+                        <i class="fas fa-globe-americas"></i>
+                        <span>Preparing the world for the messianic era through global awareness and divine engagement</span>
+                    </div>
+                    <div class="ticker-dot"></div>
+                    <div class="ticker-item">
+                        <i class="fas fa-envelope-open-text"></i>
+                        <span>Divine messengers equipped with Truth, calling men to the Obedience of Faith</span>
+                    </div>
+                </div>
+            </div>
+            
+            <p class="hero-subtitle">Experience the transformative power of the Holy Ghost. Join a global community of believers walking in divine purpose and supernatural regeneration.</p>
+            
+            <div class="hero-actions">
+                <a href="#live" class="btn btn-primary">
+                    <i class="fas fa-play btn-icon"></i>
+                    Watch Live
+                </a>
+                <a href="#ministries" class="btn btn-secondary">
+                    Explore Ministries
+                    <i class="fas fa-arrow-right btn-icon"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Ministries -->
+    <section id="ministries">
+        <div class="section-header">
+            <span class="section-eyebrow">Our Ministries</span>
+            <h2 class="section-title">Dimensions of Faith</h2>
+            <p class="section-subtitle">Discover the various arms of our ministry designed to equip, empower, and regenerate lives through the power of the Holy Spirit.</p>
+        </div>
+
+        <div class="featured-grid">
+            <!-- FIX 1: Faith Dimension - Links to dedicated page -->
+            <div class="featured-card" style="position: relative;">
+                <a href="faith_dimension.html" style="display: block; position: absolute; inset: 0; z-index: 10; text-decoration: none;">
+                    <span style="position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;">Navigate to Faith Dimension page</span>
+                </a>
+                <div class="featured-card-bg">
+                    <img src="images/faith-dimension.jpg" alt="Bible study and teaching">
+                </div>
+                <div class="featured-card-overlay"></div>
+                <div class="featured-card-arrow">
+                    <i class="fas fa-arrow-up-right"></i>
+                </div>
+                <div class="featured-card-content">
+                    <div class="featured-icon">
+                        <i class="fas fa-cross"></i>
+                    </div>
+                    <h3>Faith Dimension</h3>
+                    <p>Deep biblical teaching that builds unshakeable faith and spiritual understanding.</p>
+                </div>
+            </div>
+
+            <!-- FIX 2: Zion Worship - Links to dedicated Spotify-like music page -->
+            <div class="featured-card" style="position: relative;">
+                <a href="zion_music.html" style="display: block; position: absolute; inset: 0; z-index: 10; text-decoration: none;">
+                    <span style="position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;">Navigate to Zion Music page</span>
+                </a>
+                <div class="featured-card-bg">
+                    <img src="images/zion-worship.jpg" alt="Worship team with lights">
+                </div>
+                <div class="featured-card-overlay"></div>
+                <div class="featured-card-arrow">
+                    <i class="fas fa-arrow-up-right"></i>
+                </div>
+                <div class="featured-card-content">
+                    <div class="featured-icon">
+                        <i class="fas fa-music"></i>
+                    </div>
+                    <h3>Zion Worship</h3>
+                    <p>Heavenly worship experiences that usher believers into the presence of God.</p>
+                </div>
+            </div>
+
+            <!-- FIX 3: Holy Ghost Assembly - Links to dedicated page -->
+            <div class="featured-card" style="position: relative;">
+                <a href="holy_ghost_assembly.html" style="display: block; position: absolute; inset: 0; z-index: 10; text-decoration: none;">
+                    <span style="position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;">Navigate to Holy Ghost Assembly page</span>
+                </a>
+                <div class="featured-card-bg">
+                    <img src="images/holy-ghost-assembly.jpg" alt="Large congregation worship">
+                </div>
+                <div class="featured-card-overlay"></div>
+                <div class="featured-card-arrow">
+                    <i class="fas fa-arrow-up-right"></i>
+                </div>
+                <div class="featured-card-content">
+                    <div class="featured-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Holy Ghost Assembly</h3>
+                    <p>Gatherings of fire-filled believers seeking the manifestation of the Spirit.</p>
+                </div>
+            </div>
+
+            <!-- FIX 4: Gospel Revolution - Links to dedicated page -->
+            <div class="featured-card" style="position: relative;">
+                <a href="gospel_revolution.html" style="display: block; position: absolute; inset: 0; z-index: 10; text-decoration: none;">
+                    <span style="position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;">Navigate to Gospel Revolution page</span>
+                </a>
+                <div class="featured-card-bg">
+                    <img src="images/gospel-revolution.jpg" alt="Outreach and evangelism">
+                </div>
+                <div class="featured-card-overlay"></div>
+                <div class="featured-card-arrow">
+                    <i class="fas fa-arrow-up-right"></i>
+                </div>
+                <div class="featured-card-content">
+                    <div class="featured-icon">
+                        <i class="fas fa-fire"></i>
+                    </div>
+                    <h3>Gospel Revolution</h3>
+                    <p>Outreach programs taking the message of regeneration to the ends of the earth.</p>
+                </div>
+            </div>
+
+            <!-- FIX 5: Never Again - Links to dedicated page -->
+            <div class="featured-card" style="position: relative;">
+                <a href="never_again.html" style="display: block; position: absolute; inset: 0; z-index: 10; text-decoration: none;">
+                    <span style="position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;">Navigate to Never Again page</span>
+                </a>
+                <div class="featured-card-bg">
+                    <img src="images/never-again.jpg" alt="Never Again - Breaking chains">
+                </div>
+                <div class="featured-card-overlay"></div>
+                <div class="featured-card-arrow">
+                    <i class="fas fa-arrow-up-right"></i>
+                </div>
+                <div class="featured-card-content">
+                    <div class="featured-icon">
+                        <i class="fas fa-link-slash"></i>
+                    </div>
+                    <h3>Never Again</h3>
+                    <p>Breaking generational curses and establishing freedom through the power of redemption. A ministry dedicated to total liberation.</p>
+                </div>
+            </div>
+
+            <!-- FIX 6: Global Response - Links to dedicated page -->
+            <div class="featured-card" style="position: relative;">
+                <a href="global_response.html" style="display: block; position: absolute; inset: 0; z-index: 10; text-decoration: none;">
+                    <span style="position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;">Navigate to Global Response page</span>
+                </a>
+                <div class="featured-card-bg">
+                    <img src="images/global-response.jpg" alt="Global Response - World outreach">
+                </div>
+                <div class="featured-card-overlay"></div>
+                <div class="featured-card-arrow">
+                    <i class="fas fa-arrow-up-right"></i>
+                </div>
+                <div class="featured-card-content">
+                    <div class="featured-icon">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <h3>Global Response</h3>
+                    <p>Rapid deployment teams responding to global crises with spiritual and humanitarian aid. Bringing hope to the nations.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Torah Portions Schedule Section (NEW) -->
+    <section class="torah-section" id="torah">
+        <div class="section-header">
+            <span class="section-eyebrow">Weekly Readings</span>
+            <h2 class="section-title">Global Complete Torah Portions Schedule</h2>
+            <p class="section-subtitle">2025–26 schedule of upcoming weekly readings from the Torah, the Prophets, and the Gospels (Weekly Parashah).</p>
+        </div>
+
+        <div class="torah-container">
+            <div class="torah-slider-wrapper">
+                <button class="torah-nav-btn prev" onclick="scrollTorah('left')">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                
+                <div class="torah-slider" id="torahSlider">
+                    <!-- Torah portions will be injected here via JS -->
+                </div>
+                
+                <button class="torah-nav-btn next" onclick="scrollTorah('right')">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+            
+            <div class="torah-progress">
+                <div class="torah-progress-bar" id="torahProgress"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Messianic Calendar Section -->
+    <section class="calendar-section" id="calendar">
+        <div class="section-header">
+            <span class="section-eyebrow">Sacred Times</span>
+            <h2 class="section-title">Messianic Calendar</h2>
+            <p class="section-subtitle">Walk in the appointed times of the Lord. Discover the rich biblical feasts that illuminate God's prophetic timeline and redemptive plan.</p>
+        </div>
+
+        <div class="calendar-container">
+            <div class="calendar-filters">
+                <button class="filter-btn active" data-filter="upcoming" onclick="filterCalendar('upcoming')">
+                    <i class="fas fa-calendar-day"></i>
+                    Upcoming
+                </button>
+                <button class="filter-btn" data-filter="all" onclick="filterCalendar('all')">
+                    <i class="fas fa-calendar-alt"></i>
+                    All Events
+                </button>
+            </div>
+
+            <div class="calendar-grid" id="calendarGrid">
+                <!-- Calendar items injected via JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Resources Grid -->
+    <section style="background: var(--color-bg-elevated);" id="resources">
+        <div class="section-header">
+            <span class="section-eyebrow">Quick Access</span>
+            <h2 class="section-title">Spiritual Resources</h2>
+            <p class="section-subtitle">Everything you need to grow in faith and connect with our global community.</p>
+        </div>
+
+        <div class="main-grid">
+            <div class="grid-card large" onclick="window.location.href='watch.html'">
+                <img src="images/sermons.jpg" alt="Sermon video thumbnail" class="grid-card-img">
+                <div class="grid-card-content">
+                    <div class="grid-card-icon"><i class="fas fa-play-circle"></i></div>
+                    <h4>Watch Now</h4>
+                    <p>Latest sermons and teachings</p>
+                </div>
+            </div>
+
+            <div class="grid-card" onclick="window.location.href='prayer_request.html'" style="cursor: pointer;">
+                <img src="images/prayer-room.jpg" alt="Prayer room" class="grid-card-img">
+                <div class="grid-card-content">
+                    <div class="grid-card-icon"><i class="fas fa-praying-hands"></i></div>
+                    <h4>Prayer Request</h4>
+                    <p>Submit to the Upper Room</p>
+                </div>
+            </div>
+
+            <div class="grid-card" onclick="window.location.href='compassion_works.html'" style="cursor: pointer;">
+                <img src="images/compassion.jpg" alt="Humanitarian aid" class="grid-card-img">
+                <div class="grid-card-content">
+                    <div class="grid-card-icon"><i class="fas fa-hand-holding-heart"></i></div>
+                    <h4>Compassion Works</h4>
+                    <p>Humanitarian outreach</p>
+                </div>
+            </div>
+
+            <div class="grid-card" onclick="window.location.href='divine_episodes.html'" style="cursor: pointer;">
+                <img src="images/testimonies.jpg" alt="Testimony interview" class="grid-card-img">
+                <div class="grid-card-content">
+                    <div class="grid-card-icon"><i class="fas fa-video"></i></div>
+                    <h4>Divine Episodes</h4>
+                    <p>Testimony series</p>
+                </div>
+            </div>
+
+            <div class="grid-card" onclick="window.location.href='items.html'" style="cursor: pointer;">
+                <img src="images/bookstore.jpg" alt="Bookstore interior" class="grid-card-img">
+                <div class="grid-card-content">
+                    <div class="grid-card-icon"><i class="fas fa-book"></i></div>
+                    <h4>Books & Items</h4>
+                    <p>Spiritual resources & materials</p>
+                </div>
+            </div>
+
+            <div class="grid-card" onclick="window.location.href='ministry_school.html'" style="cursor: pointer;">
+                <img src="images/bible-school.jpg" alt="Bible school classroom" class="grid-card-img">
+                <div class="grid-card-content">
+                    <div class="grid-card-icon"><i class="fas fa-graduation-cap"></i></div>
+                    <h4>Ministry School</h4>
+                    <p>Training center</p>
+                </div>
+            </div>
+
+            <div class="grid-card" onclick="window.location.href='giving.html'" style="cursor: pointer;">
+                <img src="images/giving.jpg" alt="Hands giving" class="grid-card-img">
+                <div class="grid-card-content">
+                    <div class="grid-card-icon"><i class="fas fa-gift"></i></div>
+                    <h4>Giving</h4>
+                    <p>Partner with us</p>
+                </div>
+            </div>
+
+            <div class="grid-card" onclick="window.location.href='holy_land_adventure.html'" style="cursor: pointer;">
+                <img src="images/holyland.jpg" alt="Jerusalem landscape" class="grid-card-img">
+                <div class="grid-card-content">
+                    <div class="grid-card-icon"><i class="fas fa-plane"></i></div>
+                    <h4>Holy Land Adventure</h4>
+                    <p>Pilgrimage to Israel</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Store Section -->
+    <section class="store-section" id="store">
+        <div class="section-header">
+            <span class="section-eyebrow">Resources</span>
+            <h2 class="section-title">Books & Holy Materials</h2>
+            <p class="section-subtitle">Equip yourself with anointed materials for spiritual growth and transformation.</p>
+        </div>
+
+        <div class="store-grid">
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="images/book-daily-fire.jpg" alt="Daily Fire Devotional Book">
+                    <span class="product-badge">Best Seller</span>
+                    <div class="product-actions">
+                        <button class="action-btn" onclick="event.stopPropagation(); toggleWishlist(this)"><i class="fas fa-heart"></i></button>
+                        <button class="action-btn" onclick="event.stopPropagation(); quickView('Daily Fire Devotional')"><i class="fas fa-eye"></i></button>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <div class="product-category">Devotional</div>
+                    <h3 class="product-title">Daily Fire Devotional</h3>
+                    <div class="product-price">$25.00</div>
+                    <button class="add-to-cart" onclick="addToCart('Daily Fire Devotional', 25, 'book-daily-fire.jpg')">
+                        <i class="fas fa-cart-plus"></i>
+                        Add to Cart
+                    </button>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="images/book-manual.jpg" alt="Holy Ghost Manual">
+                    <div class="product-actions">
+                        <button class="action-btn" onclick="event.stopPropagation(); toggleWishlist(this)"><i class="fas fa-heart"></i></button>
+                        <button class="action-btn" onclick="event.stopPropagation(); quickView('Holy Ghost Manual')"><i class="fas fa-eye"></i></button>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <div class="product-category">Manual</div>
+                    <h3 class="product-title">Holy Ghost Manual Vol. 1</h3>
+                    <div class="product-price">$35.00</div>
+                    <button class="add-to-cart" onclick="addToCart('Holy Ghost Manual Vol. 1', 35, 'book-manual.jpg')">
+                        <i class="fas fa-cart-plus"></i>
+                        Add to Cart
+                    </button>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="images/book-prayers.jpg" alt="Prayers That Avail Much">
+                    <span class="product-badge">New</span>
+                    <div class="product-actions">
+                        <button class="action-btn" onclick="event.stopPropagation(); toggleWishlist(this)"><i class="fas fa-heart"></i></button>
+                        <button class="action-btn" onclick="event.stopPropagation(); quickView('Prayers That Avail Much')"><i class="fas fa-eye"></i></button>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <div class="product-category">Prayer Guide</div>
+                    <h3 class="product-title">Prayers That Avail Much</h3>
+                    <div class="product-price">$20.00</div>
+                    <button class="add-to-cart" onclick="addToCart('Prayers That Avail Much', 20, 'book-prayers.jpg')">
+                        <i class="fas fa-cart-plus"></i>
+                        Add to Cart
+                    </button>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="images/cd-worship.jpg" alt="Worship Experience CD">
+                    <div class="product-actions">
+                        <button class="action-btn" onclick="event.stopPropagation(); toggleWishlist(this)"><i class="fas fa-heart"></i></button>
+                        <button class="action-btn" onclick="event.stopPropagation(); quickView('Worship CD')"><i class="fas fa-eye"></i></button>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <div class="product-category">Audio</div>
+                    <h3 class="product-title">Worship Experience CD</h3>
+                    <div class="product-price">$15.00</div>
+                    <button class="add-to-cart" onclick="addToCart('Worship Experience CD', 15, 'cd-worship.jpg')">
+                        <i class="fas fa-cart-plus"></i>
+                        Add to Cart
+                    </button>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="images/shirt-regeneration.jpg" alt="Regeneration T-Shirt">
+                    <div class="product-actions">
+                        <button class="action-btn" onclick="event.stopPropagation(); toggleWishlist(this)"><i class="fas fa-heart"></i></button>
+                        <button class="action-btn" onclick="event.stopPropagation(); quickView('T-Shirt')"><i class="fas fa-eye"></i></button>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <div class="product-category">Apparel</div>
+                    <h3 class="product-title">Regeneration T-Shirt</h3>
+                    <div class="product-price">$30.00</div>
+                    <button class="add-to-cart" onclick="addToCart('Regeneration T-Shirt', 30, 'shirt-regeneration.jpg')">
+                        <i class="fas fa-cart-plus"></i>
+                        Add to Cart
+                    </button>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="images/bundle-leadership.jpg" alt="Leadership Course Bundle">
+                    <span class="product-badge">Bundle</span>
+                    <div class="product-actions">
+                        <button class="action-btn" onclick="event.stopPropagation(); toggleWishlist(this)"><i class="fas fa-heart"></i></button>
+                        <button class="action-btn" onclick="event.stopPropagation(); quickView('Leadership Bundle')"><i class="fas fa-eye"></i></button>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <div class="product-category">Study Pack</div>
+                    <h3 class="product-title">Leadership Course Bundle</h3>
+                    <div class="product-price">$150.00</div>
+                    <button class="add-to-cart" onclick="addToCart('Leadership Course Bundle', 150, 'bundle-leadership.jpg')">
+                        <i class="fas fa-cart-plus"></i>
+                        Add to Cart
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Live Service Section -->
+    <section class="live-section" id="live">
+        <div class="section-header">
+            <span class="section-eyebrow">Streaming Now</span>
+            <h2 class="section-title">Join Us Live</h2>
+            <p class="section-subtitle">Experience the power of God in real-time with believers around the world.</p>
+        </div>
+
+        <div class="live-container">
+            <div class="video-wrapper">
+                <div class="video-placeholder">
+                    <img src="images/live-service.jpg" alt="Live service streaming">
+                    <div class="live-overlay"></div>
+                    <div class="live-badge-large">
+                        <span class="blink"></span>
+                        LIVE NOW
+                    </div>
+                    <button class="play-button" onclick="playVideo()">
+                        <i class="fas fa-play"></i>
+                    </button>
+                    <p class="live-cta">Click to Join the Service</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonies Section -->
+    <section style="background: var(--color-bg-elevated);">
+        <div class="section-header">
+            <span class="section-eyebrow">Testimonies</span>
+            <h2 class="section-title">Lives Transformed</h2>
+            <p class="section-subtitle">Powerful stories of regeneration and breakthrough from our global community.</p>
+        </div>
+
+        <div class="testimonial-carousel">
+            <div class="testimonial-slide active">
+                <div class="testimonial-avatar">
+                    <img src="images/testimonial-michael.jpg" alt="Michael Thompson">
+                </div>
+                <p class="testimonial-text">"After attending the Holy Ghost Assembly, my life was completely transformed. I was delivered from a 10-year addiction and now serve in the ministry full-time. The power of God is real here!"</p>
+                <div class="testimonial-author">Pst.John James</div>
+                <div class="testimonial-location">Lagos, Nigeria</div>
+            </div>
+
+            <div class="testimonial-slide">
+                <div class="testimonial-avatar">
+                    <img src="images/testimonial-sarah.jpg" alt="Sarah Chen">
+                </div>
+                <p class="testimonial-text">"The teaching on divine regeneration opened my eyes to my true identity in Christ. I went from depression to destiny, from pain to purpose. This ministry saved my life."</p>
+                <div class="testimonial-author">Pst. Mrs. Joice James</div>
+                <div class="testimonial-location">Toronto, Canada</div>
+            </div>
+
+            <div class="testimonial-slide">
+                <div class="testimonial-avatar">
+                    <img src="images/testimonial-david.jpg" alt="David Okonkwo">
+                </div>
+                <p class="testimonial-text">"I received a miracle healing during the online service. Doctors said it was impossible, but with God all things are possible! I am forever grateful for this ministry."</p>
+                <div class="testimonial-author">David Okonkwo</div>
+                <div class="testimonial-location">London, UK</div>
+            </div>
+
+            <div class="carousel-dots">
+                <span class="dot active" onclick="goToSlide(0)"></span>
+                <span class="dot" onclick="goToSlide(1)"></span>
+                <span class="dot" onclick="goToSlide(2)"></span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Donation Section -->
+    <section id="give">
+        <div class="section-header">
+            <span class="section-eyebrow">Partner With Us</span>
+            <h2 class="section-title">Give & Support</h2>
+            <p class="section-subtitle">Your generosity enables us to take the Gospel to the ends of the earth.</p>
+        </div>
+
+        <div class="donation-grid">
+            <div class="donation-card">
+                <div class="donation-icon">
+                    <i class="fas fa-hand-holding-usd"></i>
+                </div>
+                <h3>Tithe</h3>
+                <p>Honor the Lord with your first fruits and experience the windows of heaven opening in your finances.</p>
+                <div class="amount-buttons">
+                    <button class="amount-btn" onclick="selectAmount(this)">$50</button>
+                    <button class="amount-btn" onclick="selectAmount(this)">$100</button>
+                    <button class="amount-btn" onclick="selectAmount(this)">$500</button>
+                </div>
+                <button class="donate-btn" onclick="openDonateModal('tithe')">Give Tithe</button>
+            </div>
+
+            <div class="donation-card">
+                <div class="donation-icon">
+                    <i class="fas fa-heart"></i>
+                </div>
+                <h3>Offering</h3>
+                <p>Support the ongoing work of the ministry and help spread the message of regeneration worldwide.</p>
+                <div class="amount-buttons">
+                    <button class="amount-btn" onclick="selectAmount(this)">$25</button>
+                    <button class="amount-btn" onclick="selectAmount(this)">$50</button>
+                    <button class="amount-btn" onclick="selectAmount(this)">$100</button>
+                </div>
+                <button class="donate-btn" onclick="openDonateModal('offering')">Give Offering</button>
+            </div>
+
+            <div class="donation-card">
+                <div class="donation-icon">
+                    <i class="fas fa-handshake"></i>
+                </div>
+                <h3>Partnership</h3>
+                <p>Become a monthly partner and join a covenant of blessing with global impact and eternal rewards.</p>
+                <div class="amount-buttons">
+                    <button class="amount-btn" onclick="selectAmount(this)">$30/mo</button>
+                    <button class="amount-btn" onclick="selectAmount(this)">$50/mo</button>
+                    <button class="amount-btn" onclick="selectAmount(this)">$100/mo</button>
+                </div>
+                <button class="donate-btn" onclick="openDonateModal('partnership')">Partner Now</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <a href="#home" class="logo">
+                    <div class="logo-icon"><img src="images/logowtb.png" alt="Messianic Movement logo" class="logo-mark-img"></div>
+                    <div class="logo-text">
+                        <span class="logo-title">Messianic Movement</span>
+                        <span class="logo-subtitle">Regenerational Ministry</span>
+                    </div>
+                </a>
+                <p>Raising a generation of Spirit-filled believers who will transform nations through the power of the Holy Ghost.</p>
+                <div class="social-links">
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#ministries">Ministries</a></li>
+                    <li><a href="#calendar">Calendar</a></li>
+                    <li><a href="#resources">Resources</a></li>
+                    <li><a href="#live">Live Service</a></li>
+                    <li><a href="#give">Give</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-links">
+                <h4>Resources</h4>
+                <ul>
+                    <li><a href="watch.html">Sermon Archive</a></li>
+                    <li><a href="ministry_school.html">Bible Study</a></li>
+                    <li><a href="prayer_request.html">Prayer Request</a></li>
+                    <li><a href="divine_episodes.html">Testimonies</a></li>
+                    <li><a href="holy_land_adventure.html">Events</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-links">
+                <h4>Contact</h4>
+                <ul>
+                    <li><i class="fas fa-map-marker-alt"></i> 123 Faith Avenue, Glory City</li>
+                    <li><i class="fas fa-phone"></i> +1 (555) 123-4567</li>
+                    <li><i class="fas fa-envelope"></i> info@whgrministry.org</li>
+                    <li><i class="fas fa-clock"></i> Sun: 9AM & 11AM EST</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2026 Messianic Movement. All rights reserved.</p>
+            <p>Designed with <i class="fas fa-heart" style="color: var(--color-gold);"></i> by the Spirit</p>
+        </div>
+    </footer>
+
+    <!-- Cart Sidebar -->
+    <div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h3>Your Cart</h3>
+            <button class="close-cart" onclick="toggleCart()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <!-- Cart items injected here -->
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Total:</span>
+                <span id="cartTotal">$0.00</span>
+            </div>
+            <button class="checkout-btn" onclick="checkout()">Proceed to Checkout</button>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModal()">
+                <i class="fas fa-times"></i>
+            </button>
+            <h2 id="modalTitle">Title</h2>
+            <p id="modalBody" style="color: var(--text-secondary); margin-top: 1rem; line-height: 1.8;">Content goes here...</p>
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div class="toast" id="toast">
+        <i class="fas fa-check-circle toast-icon"></i>
+        <span id="toastMessage">Item added to cart</span>
+    </div>
+
+    <!-- Floating Buttons -->
+    <a href="https://wa.me/1234567890" class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+    <button class="scroll-top" id="scrollTop" onclick="scrollToTop()" aria-label="Scroll to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
+<script>
+window.addEventListener('load', () => {
+    const loader = document.getElementById('loader');
+    if (loader) {
+        setTimeout(() => loader.classList.add('hidden'), 2200);
+    }
+});
+</script>
+</body>
+</html>

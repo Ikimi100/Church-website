@@ -1,0 +1,1043 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weekly Study | Vayakhel — Messianic Movement</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --color-bg: #050505;
+            --color-bg-elevated: #0a0a0a;
+            --color-surface: #111111;
+            --color-gold: #d4af37;
+            --color-gold-light: #f4d03f;
+            --color-gold-muted: rgba(212, 175, 55, 0.15);
+            --color-purple: #6b46c1;
+            --color-purple-rich: #7c3aed;
+            --color-soft-blue: #3b82f6;
+            --color-text: #ffffff;
+            --color-text-secondary: #b0b0c0;
+            --color-text-muted: #71717a;
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background-color: var(--color-bg);
+            color: var(--color-text);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 400;
+            letter-spacing: -0.02em;
+        }
+
+        /* Film Grain Overlay */
+        .grain-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            pointer-events: none;
+            opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+
+        /* Navigation */
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            text-decoration: none;
+            color: var(--color-text);
+        }
+
+        .logo-mark {
+            width: 48px;
+            height: 48px;
+            border: 1px solid var(--color-gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            box-shadow: 0 0 20px rgba(212,175,55,0.1);
+            background: linear-gradient(135deg, rgba(212,175,55,0.12), rgba(124,58,237,0.12));
+        }
+
+        .logo-mark img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            font-weight: 400;
+            line-height: 1;
+        }
+
+        .logo-subtitle {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--color-text-secondary);
+            margin-top: 0.15rem;
+        }
+
+        .logo-mark::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, var(--color-gold), var(--color-purple-rich));
+            transform: scale(0);
+            transition: transform 0.6s var(--ease-out-expo);
+            border-radius: 50%;
+        }
+
+        .logo:hover .logo-mark::before {
+            transform: scale(1);
+        }
+
+        .logo:hover .logo-mark {
+            color: var(--color-bg);
+            box-shadow: 0 0 30px rgba(212,175,55,0.3);
+        }
+
+        .study-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 1.5rem 4%;
+            background: rgba(5, 5, 5, 0.85);
+            backdrop-filter: blur(20px) saturate(180%);
+            border-bottom: 1px solid var(--glass-border);
+            transition: all 0.6s var(--ease-out-expo);
+        }
+
+        .nav-inner {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-back {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            color: var(--color-text-secondary);
+            text-decoration: none;
+            font-size: 0.875rem;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            transition: all 0.3s ease;
+        }
+
+        .nav-back:hover {
+            color: var(--color-gold);
+            transform: translateX(-5px);
+        }
+
+        .nav-back i {
+            font-size: 1.25rem;
+        }
+
+        .nav-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.25rem;
+            color: var(--color-gold);
+            letter-spacing: 0.1em;
+        }
+
+        /* Hero Section - Cinematic */
+        .study-hero {
+            position: relative;
+            min-height: 85vh;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            overflow: hidden;
+            padding: 0 4%;
+            padding-bottom: 6rem;
+        }
+
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            z-index: -2;
+        }
+
+        .hero-bg::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, rgba(5,5,5,0.3) 0%, rgba(5,5,5,0.7) 50%, var(--color-bg) 100%);
+            z-index: 2;
+        }
+
+        .hero-bg::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 30% 50%, rgba(212, 175, 55, 0.15) 0%, transparent 60%),
+                        radial-gradient(circle at 70% 80%, rgba(107, 33, 168, 0.1) 0%, transparent 50%);
+            z-index: 3;
+        }
+
+        .hero-image {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.5;
+            filter: brightness(0.4) contrast(1.2) saturate(0.8);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            max-width: 1200px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .hero-meta {
+            display: inline-flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeUp 1s var(--ease-out-expo) 0.3s forwards;
+        }
+
+        .meta-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.6rem 1.2rem;
+            background: rgba(212, 175, 55, 0.1);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 100px;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--color-gold);
+            font-weight: 600;
+        }
+
+        .meta-divider {
+            width: 40px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--color-gold), transparent);
+        }
+
+        .meta-date {
+            font-size: 0.875rem;
+            color: var(--color-text-secondary);
+            letter-spacing: 0.1em;
+        }
+
+        .hero-hebrew {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(4rem, 12vw, 10rem);
+            color: transparent;
+            -webkit-text-stroke: 1px rgba(212, 175, 55, 0.4);
+            line-height: 1;
+            margin-bottom: 1rem;
+            opacity: 0;
+            transform: translateY(40px);
+            animation: fadeUp 1.2s var(--ease-out-expo) 0.5s forwards;
+            letter-spacing: 0.05em;
+        }
+
+        .hero-title {
+            font-size: clamp(3rem, 8vw, 6rem);
+            line-height: 1;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #fff 0%, var(--color-gold-light) 50%, var(--color-gold) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            opacity: 0;
+            transform: translateY(40px);
+            animation: fadeUp 1.2s var(--ease-out-expo) 0.7s forwards;
+            filter: drop-shadow(0 0 40px rgba(212,175,55,0.2));
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.125rem, 2vw, 1.5rem);
+            color: var(--color-text-secondary);
+            max-width: 700px;
+            margin: 0 auto 3rem;
+            font-weight: 300;
+            line-height: 1.7;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeUp 1s var(--ease-out-expo) 0.9s forwards;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--color-text-muted);
+            font-size: 0.75rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            opacity: 0;
+            animation: fadeUp 1s var(--ease-out-expo) 1.5s forwards;
+        }
+
+        .scroll-line {
+            width: 1px;
+            height: 60px;
+            background: linear-gradient(to bottom, var(--color-gold), transparent);
+            animation: scrollPulse 2s infinite;
+        }
+
+        @keyframes scrollPulse {
+            0%, 100% { opacity: 1; transform: scaleY(1); }
+            50% { opacity: 0.5; transform: scaleY(0.5); }
+        }
+
+        @keyframes fadeUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Readings Bar - Floating */
+        .readings-bar {
+            position: relative;
+            z-index: 100;
+            max-width: 1100px;
+            margin: -60px auto 0;
+            padding: 0 4%;
+        }
+
+        .readings-inner {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            background: rgba(10, 10, 15, 0.95);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 24px;
+            padding: 2.5rem;
+            backdrop-filter: blur(20px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 40px rgba(212,175,55,0.05);
+        }
+
+        .reading-card {
+            position: relative;
+            padding: 2rem;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            transition: all 0.6s var(--ease-out-expo);
+            overflow: hidden;
+        }
+
+        .reading-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--color-gold), var(--color-purple-rich), var(--color-soft-blue));
+            transform: scaleX(0);
+            transition: transform 0.6s var(--ease-out-expo);
+        }
+
+        .reading-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(212, 175, 55, 0.3);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3), 0 0 30px rgba(212,175,55,0.1);
+        }
+
+        .reading-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .reading-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            transition: all 0.4s ease;
+        }
+
+        .reading-card:nth-child(1) .reading-icon {
+            background: rgba(212, 175, 55, 0.1);
+            color: var(--color-gold);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .reading-card:nth-child(2) .reading-icon {
+            background: rgba(124, 58, 237, 0.1);
+            color: var(--color-purple-rich);
+            border: 1px solid rgba(124, 58, 237, 0.2);
+        }
+
+        .reading-card:nth-child(3) .reading-icon {
+            background: rgba(59, 130, 246, 0.1);
+            color: var(--color-soft-blue);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+        }
+
+        .reading-card:hover .reading-icon {
+            transform: scale(1.1) rotate(-5deg);
+        }
+
+        .reading-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--color-text-muted);
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .reading-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            color: var(--color-text);
+            line-height: 1.3;
+        }
+
+        .reading-ref {
+            margin-top: 0.75rem;
+            font-size: 0.875rem;
+            color: var(--color-text-secondary);
+        }
+
+        /* Main Content */
+        .study-content {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 6rem 4%;
+        }
+
+        .content-section {
+            margin-bottom: 5rem;
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s var(--ease-out-expo);
+        }
+
+        .content-section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .section-number {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 5rem;
+            font-weight: 300;
+            color: rgba(212, 175, 55, 0.15);
+            line-height: 1;
+            flex-shrink: 0;
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 4vw, 3rem);
+            color: var(--color-gold);
+            line-height: 1.1;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -0.5rem;
+            left: 0;
+            width: 60px;
+            height: 2px;
+            background: linear-gradient(90deg, var(--color-gold), transparent);
+        }
+
+        .section-body {
+            padding-left: 6.5rem;
+        }
+
+        .section-body p {
+            font-size: 1.125rem;
+            line-height: 1.9;
+            color: var(--color-text-secondary);
+            margin-bottom: 1.5rem;
+        }
+
+        .section-body strong {
+            color: var(--color-gold);
+            font-weight: 600;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(212,175,55,0.08), rgba(124,58,237,0.06));
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 20px;
+            padding: 2.5rem;
+            margin: 2.5rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .highlight-box::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(212,175,55,0.1) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .highlight-box h3 {
+            font-size: 1.75rem;
+            color: var(--color-gold);
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .highlight-box p {
+            position: relative;
+        }
+
+        .scripture-quote {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            font-style: italic;
+            color: var(--color-text);
+            line-height: 1.6;
+            padding: 2rem;
+            border-left: 3px solid var(--color-gold);
+            background: rgba(212, 175, 55, 0.05);
+            margin: 2rem 0;
+            border-radius: 0 16px 16px 0;
+        }
+
+        .scripture-quote cite {
+            display: block;
+            margin-top: 1rem;
+            font-size: 0.875rem;
+            font-style: normal;
+            color: var(--color-gold);
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        /* Action Steps */
+        .action-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .action-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.4s ease;
+        }
+
+        .action-card:hover {
+            border-color: rgba(212, 175, 55, 0.3);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .action-card h4 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--color-gold);
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .action-card p {
+            font-size: 0.95rem;
+            color: var(--color-text-secondary);
+            line-height: 1.7;
+            margin: 0;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            max-width: 1100px;
+            margin: 0 auto 6rem;
+            padding: 0 4%;
+        }
+
+        .cta-inner {
+            background: linear-gradient(135deg, rgba(212,175,55,0.1), rgba(107,33,168,0.1));
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 24px;
+            padding: 4rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-inner::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 50% 0%, rgba(212,175,55,0.1) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .cta-title {
+            font-size: clamp(2rem, 4vw, 3rem);
+            color: var(--color-text);
+            margin-bottom: 1rem;
+            position: relative;
+        }
+
+        .cta-text {
+            color: var(--color-text-secondary);
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            font-size: 1.125rem;
+            line-height: 1.7;
+            position: relative;
+        }
+
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.25rem 3rem;
+            background: linear-gradient(135deg, var(--color-gold), var(--color-purple-rich));
+            color: var(--color-bg);
+            text-decoration: none;
+            border-radius: 100px;
+            font-weight: 700;
+            font-size: 1rem;
+            letter-spacing: 0.05em;
+            transition: all 0.4s var(--ease-out-expo);
+            position: relative;
+            border: none;
+            cursor: pointer;
+            font-family: 'Space Grotesk', sans-serif;
+            box-shadow: 0 10px 30px rgba(212,175,55,0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(212,175,55,0.4);
+        }
+
+        .cta-button i {
+            transition: transform 0.3s ease;
+        }
+
+        .cta-button:hover i {
+            transform: translateX(5px);
+        }
+
+        /* Footer */
+        .study-footer {
+            border-top: 1px solid var(--glass-border);
+            padding: 3rem 4%;
+            text-align: center;
+            color: var(--color-text-muted);
+            font-size: 0.875rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .readings-inner {
+                grid-template-columns: 1fr;
+            }
+            
+            .section-body {
+                padding-left: 0;
+            }
+            
+            .section-number {
+                display: none;
+            }
+            
+            .action-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .study-hero {
+                min-height: 70vh;
+                padding-bottom: 4rem;
+            }
+            
+            .hero-hebrew {
+                font-size: 3rem;
+            }
+            
+            .readings-inner {
+                padding: 1.5rem;
+                margin-top: -40px;
+            }
+            
+            .reading-card {
+                padding: 1.5rem;
+            }
+            
+            .cta-inner {
+                padding: 2.5rem 1.5rem;
+            }
+        }
+
+        /* Selection */
+        ::selection {
+            background: rgba(212, 175, 55, 0.3);
+            color: #fff;
+        }
+    
+    /* LOGO IMAGE FALLBACK */
+    
+    /* HOMEPAGE HEADER LOGO MATCH */
+    nav .logo .logo-mark,
+    .study-nav .logo .logo-mark,
+    .watch-header .logo .logo-mark {
+        width: 48px;
+        height: 48px;
+        flex: 0 0 48px;
+        border: 1px solid var(--color-gold);
+        border-radius: 50%;
+        background: transparent;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        position: relative;
+        box-shadow: 0 0 20px rgba(212,175,55,0.1);
+    }
+
+    nav .logo .logo-mark img,
+    .study-nav .logo .logo-mark img,
+    .watch-header .logo .logo-mark img,
+    nav .logo .logo-mark-img,
+    .study-nav .logo .logo-mark-img,
+    .watch-header .logo .logo-mark-img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        display: block;
+        position: relative;
+        z-index: 1;
+    }
+
+    nav .logo .logo-title,
+    .study-nav .logo .logo-title,
+    .watch-header .logo .logo-title {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 1.5rem;
+        font-weight: 400;
+        line-height: 1;
+        letter-spacing: 0;
+    }
+
+    nav .logo .logo-subtitle,
+    .study-nav .logo .logo-subtitle,
+    .watch-header .logo .logo-subtitle {
+        font-size: 0.65rem;
+        text-transform: uppercase;
+        letter-spacing: 0.3em;
+        color: var(--color-text-muted);
+        margin-top: 0.25rem;
+    }
+
+    .loader-ring,
+    .loader-ring--soft,
+    .loader-dots,
+    .loader-bar,
+    .loader-progress {
+        display: none !important;
+    }
+</style>
+</head>
+<body>
+
+    <div class="grain-overlay"></div>
+
+    <!-- Navigation -->
+    <nav id="navbar" class="study-nav scrolled" style="background: rgba(5,5,5,0.85); backdrop-filter: blur(20px);">
+        <div class="nav-inner">
+        <a href="index.html" class="logo">
+            <div class="logo-mark"><img src="images/logowtb.png" alt="Messianic Movement logo" class="logo-mark-img"></div>
+            <div class="logo-text">
+                <span class="logo-title">Messianic Movement</span>
+                <span class="logo-subtitle">Regenerational Ministry</span>
+            </div>
+        </a>
+
+            <a href="index.html#torah" class="nav-back">
+                <i class="fas fa-arrow-left"></i>
+                <span>Back to Torah Portions</span>
+            </a>
+            <div class="nav-title">Weekly Study</div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="study-hero">
+        <div class="hero-bg">
+            <img src="https://images.unsplash.com/photo-1504198458649-3128b932f49e?w=1920&q=80" alt="Vayakhel - Hands crafting gold, the Tabernacle rising" class="hero-image">
+        </div>
+        
+        <div class="hero-content">
+            <div class="hero-meta">
+                <span class="meta-badge">
+                    <i class="fas fa-scroll"></i>
+                    Parashah
+                </span>
+                <div class="meta-divider"></div>
+                <span class="meta-date">Week 22 • March 14, 2026</span>
+            </div>
+            
+            <div class="hero-hebrew">ויקהל</div>
+            <h1 class="hero-title">Vayakhel</h1>
+            <p class="hero-subtitle">And He Assembled — The Spirit-Filled Craftsmen and the Sanctuary Built by Many Hands</p>
+        </div>
+
+        <div class="scroll-indicator">
+            <span>Explore</span>
+            <div class="scroll-line"></div>
+        </div>
+    </section>
+
+    <!-- Readings Bar -->
+    <div class="readings-bar">
+        <div class="readings-inner">
+            <div class="reading-card">
+                <div class="reading-icon">
+                    <i class="fas fa-book"></i>
+                </div>
+                <div class="reading-label">Torah</div>
+                <div class="reading-text">Exodus</div>
+                <div class="reading-ref">35:1 – 38:20</div>
+            </div>
+            
+            <div class="reading-card">
+                <div class="reading-icon">
+                    <i class="fas fa-fire"></i>
+                </div>
+                <div class="reading-label">Haftarah</div>
+                <div class="reading-text">1 Kings</div>
+                <div class="reading-ref">7:40-50</div>
+            </div>
+            
+            <div class="reading-card">
+                <div class="reading-icon">
+                    <i class="fas fa-cross"></i>
+                </div>
+                <div class="reading-label">Gospel</div>
+                <div class="reading-text">Hebrews</div>
+                <div class="reading-ref">9:1-14</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="study-content">
+        
+        <!-- Messianic Insights -->
+        <section class="content-section">
+            <div class="section-header">
+                <span class="section-number">01</span>
+                <h2 class="section-title">Messianic Insights</h2>
+            </div>
+            <div class="section-body">
+                <p><strong>ויקהל — Vayakhel: "And he assembled."</strong> Moses gathered the entire congregation of Israel — the same congregation that had built the golden calf. He stood before the people who had betrayed God, and he called them to build. The word <em>vayakhel</em> is the same root as <em>kahal</em> — assembly, congregation, church. <strong>The first assembly after the fall was not for judgment but for construction.</strong> God does not discard His people after failure; He reassembles them for purpose.</p>
+                
+                <div class="scripture-quote">
+                    "See, the Lord has called by name Bezalel… and He has filled him with the Spirit of God, with wisdom, with understanding, with knowledge, and with all manner of workmanship."
+                    <cite>Exodus 35:30-31</cite>
+                </div>
+
+                <p><strong>Bezalel is a type of Messiah.</strong> His name means "in the shadow of God" — hidden, protected, covered by the divine presence. He was from the tribe of Judah, the royal line. He was filled with the Spirit of God — not for prophecy or miracles, but for craftsmanship. Wisdom, understanding, knowledge — these are the Spirit's gifts for building. <strong>Yeshua is the true Bezalel.</strong> He is the Shadow of God — the exact representation of His nature. He is from Judah. He is filled with the Spirit without measure. And He builds the true Tabernacle — the church — not with gold and acacia wood, but with living stones.</p>
+                
+                <p><strong>Oholiab means "Father's tent."</strong> He was from the tribe of Dan, the outsider, the judge. Together, Judah and Dan — royalty and servanthood — built the dwelling of God. This is the Gospel: <strong>the Tabernacle is built by the union of the kingly and the humble, the honored and the overlooked.</strong> In Messiah, there is neither Jew nor Gentile, slave nor free — we are all builders of the same sanctuary, filled with the same Spirit, working to the same pattern.</p>
+            </div>
+        </section>
+
+        <!-- Gospel Insights -->
+        <section class="content-section">
+            <div class="section-header">
+                <span class="section-number">02</span>
+                <h2 class="section-title">Gospel Insights</h2>
+            </div>
+            <div class="section-body">
+                <p><strong>The Sabbath Precedes the Building.</strong> Before Moses called for offerings or appointed craftsmen, he repeated the Sabbath command: "Six days work shall be done, but on the seventh day you shall have a Sabbath of solemn rest, holy to the Lord." <strong>Rest is the foundation of work.</strong> The Israelites had just broken the covenant through idolatry. They needed to remember that they were not defined by their productivity but by their relationship with the Creator. The church often builds on exhaustion, anxiety, and ambition. God builds on rest. The Tabernacle rose from a people who knew how to stop — because the God who commanded the work also commanded the rest. Yeshua invites us: "Come to Me, all who labor and are heavy laden, and I will give you rest." Rest is not the reward for finishing; it is the prerequisite for beginning.</p>
+                
+                <p><strong>"The People Brought Much More Than Enough."</strong> Moses issued the call for offerings, and the response was overwhelming. Every man and woman whose heart stirred them, whose spirit moved them — they brought gold, silver, bronze, yarn, linen, goat hair, ram skins, acacia wood, oil, spices, stones. The artisans came to Moses and said, "The people are bringing much more than enough for doing the work that the Lord has commanded us to do." Moses had to send a command throughout the camp: <strong>"Let no man or woman do anything more for the contribution for the sanctuary."</strong> This is the only time in Scripture where God had to stop His people from giving. Grace creates generosity that outruns need. The church does not have a resources problem; it has a vision problem. When people see what God is building, they give more than enough.</p>
+
+                <div class="highlight-box">
+                    <h3>Practical Application</h3>
+                    <p>What is your Bezalel calling? You have been filled with the Spirit — not to spectate but to build. This week, identify your craftsmanship. Are you a teacher? A musician? An organizer? A counselor? A host? A writer? A builder? Whatever your hands know how to do, the Spirit can anoint it for the sanctuary. Do not despise your skill because it seems "secular." Bezalel was a craftsman, not a prophet — yet the Spirit filled him for the work. Offer your craft to the congregation. And examine your rest. Are you building from exhaustion or from Sabbath? Stop one project this week to keep the rest. The work that rises from rest bears the mark of heaven. The work that rises from anxiety bears the mark of the golden calf.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Thematic Focus -->
+        <section class="content-section">
+            <div class="section-header">
+                <span class="section-number">03</span>
+                <h2 class="section-title">Thematic Focus</h2>
+            </div>
+            <div class="section-body">
+                <h3 style="font-size: 1.75rem; color: var(--color-gold); margin-bottom: 1.5rem;">"In the Shadow of God" — The Craftsmanship of the Spirit</h3>
+                
+                <p>Bezalel's name — <em>betzel El</em> — reveals the posture of every disciple. We do not build in our own strength; we build in the shadow of the Almighty. The shadow is not darkness; it is protection. It is the place of nearness, where the heat of the sun does not scorch and the glare does not blind. <strong>To work in the shadow of God is to work under His covering, according to His pattern, by His Spirit.</strong> The Tabernacle was not built by committee or by consensus; it was built by revelation. "See that you make them after the pattern for them, which was shown to you on the mountain."</p>
+
+                <p>The construction of the Tabernacle is the most detailed account of work in the Bible. Every board, every clasp, every curtain, every basin is recorded. <strong>God notices details.</strong> He sees the stitch, the join, the overlay of gold. The church is not built by grand gestures alone; it is built by faithful details — the cup of cold water, the visit to the prisoner, the meal shared in secret, the prayer whispered at midnight. Bezalel and Oholiab did not build the Tabernacle in a day. They worked piece by piece, day by day, according to the pattern. The sanctuary rose in increments, not explosions.</p>
+
+                <p>As disciples of Yeshua, we are living stones being built into a spiritual house. The pattern has been shown to us — not on Sinai, but in the Son. We do not need a new revelation; we need faithful execution of the one we have received. <strong>The church is not a building project; it is a building people.</strong> Every act of obedience lays another board. Every act of love hangs another curtain. Every act of worship overlays another layer of gold. And when the work is finished, the glory will fill what the hands have built.</p>
+
+                <div class="action-grid">
+                    <div class="action-card">
+                        <h4><i class="fas fa-hammer" style="color: var(--color-gold);"></i> Discover Your Craft</h4>
+                        <p>What has the Spirit equipped you to build? Name it. Claim it. Do not wait for a title. Bezalel was not a priest — he was a craftsman. Offer your skill to the sanctuary this week.</p>
+                    </div>
+                    
+                    <div class="action-card">
+                        <h4><i class="fas fa-hand-holding-heart" style="color: var(--color-purple-rich);"></i> Give Overflowing</h4>
+                        <p>The people brought much more than enough. Identify one resource you can offer beyond what is comfortable — time, money, skill, or encouragement. Let grace produce generosity that surprises you.</p>
+                    </div>
+                    
+                    <div class="action-card">
+                        <h4><i class="fas fa-bed" style="color: var(--color-soft-blue);"></i> Guard the Sabbath</h4>
+                        <p>Before the building came the rest. Choose one full day this week to cease from your labor. Trust that the God who commands work also commands rest. Build from stillness, not stress.</p>
+                    </div>
+                    
+                    <div class="action-card">
+                        <h4><i class="fas fa-people-carry-box" style="color: var(--color-gold);"></i> Build in Community</h4>
+                        <p>Bezalel needed Oholiab. The Tabernacle needed many hands. Invite someone to build with you this week — a project, a prayer, a ministry. The sanctuary rises when the congregation assembles.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="cta-inner">
+            <h2 class="cta-title">Continue the Journey</h2>
+            <p class="cta-text">Join our global community of disciples exploring the depths of God's Word. Share your insights, ask questions, and grow together in Messiah.</p>
+            <a href="#" class="cta-button">
+                <i class="fas fa-comments"></i>
+                Join the Community Discussion
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="study-footer">
+        <p> Messianic Movement. All rights reserved.</p>
+        <p style="margin-top: 0.5rem; font-size: 0.75rem;">Torah Portions • Vayakhel • Week 22 of 54</p>
+    </footer>
+
+    <script>
+        // Intersection Observer for scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.content-section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Reading cards hover effect
+        document.querySelectorAll('.reading-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-8px)';
+            });
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+            });
+        });
+    </script>
+
+<script>
+window.addEventListener('load', () => {
+    const loader = document.getElementById('loader');
+    if (loader) {
+        setTimeout(() => loader.classList.add('hidden'), 2200);
+    }
+});
+</script>
+</body>
+</html>
+
+
+

@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Secure checkout for Messianic Movement purchases. Review your order summary and proceed with confidence.">
+    <meta property="og:title" content="Messianic Movement | Premium Checkout">
+    <meta property="og:description" content="Secure checkout for Messianic Movement purchases. Review your order summary and proceed with confidence.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://yourdomain.com/checkout.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <title>Messianic Movement | Premium Checkout</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="grain-overlay"></div>
+    <div class="vignette"></div>
+    <div class="cursor" id="cursor"></div>
+    <div class="cursor-dot" id="cursorDot"></div>
+
+    <nav id="navbar" class="scrolled" style="background: rgba(5,5,5,0.85); backdrop-filter: blur(20px);">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <div class="logo-mark"><img src="images/logowtb.png" alt="Messianic Movement logo" class="logo-mark-img"></div>
+                <div class="logo-text">
+                    <span class="logo-title">Messianic Movement</span>
+                    <span class="logo-subtitle">Regenerational Ministry</span>
+                </div>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="items.html" class="nav-link">Store</a></li>
+                <li><a href="watch.html" class="nav-link">Sermons</a></li>
+                <li><a href="ministry_school.html" class="nav-link">Study</a></li>
+                <li><a href="about_church.html" class="nav-link">About</a></li>
+                <li style="margin-left: 1rem;">
+                    <button class="nav-cta" onclick="toggleCart()">
+                        Cart (<span id="cartCount">0</span>)
+                    </button>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="checkout-hero">
+        <p class="hero-subtitle" style="color:var(--color-gold);letter-spacing:0.3em;text-transform:uppercase;font-size:0.85rem;margin-bottom:1rem;">Secure Premium Checkout</p>
+        <h1>Complete your order with confidence</h1>
+        <p>Review your selected resources, confirm your premium bundle, and submit payment with the same Messianic Movement style and safety.</p>
+        <div class="hero-actions">
+            <a href="items.html" class="btn-secondary">Continue Shopping</a>
+            <button class="checkout-btn" onclick="toggleCart()"><span>Open Cart</span></button>
+        </div>
+    </section>
+
+    <section class="checkout-section">
+        <div class="checkout-panel">
+            <div class="panel-heading" style="display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;">
+                <div>
+                    <h2>Billing & Payment</h2>
+                    <p style="color:var(--color-text-secondary);max-width:620px;">Fill in your details to finalize your premium order. All card information is processed securely.</p>
+                </div>
+                <div class="payment-badge"><i class="fas fa-lock"></i> Secure checkout</div>
+            </div>
+
+            <form id="checkoutForm">
+                <div class="input-field">
+                    <label for="billingName">Full name</label>
+                    <input type="text" id="billingName" placeholder="Jane Doe" autocomplete="name" required>
+                </div>
+                <div class="input-field">
+                    <label for="billingEmail">Email address</label>
+                    <input type="email" id="billingEmail" placeholder="jane@example.com" autocomplete="email" required>
+                </div>
+                <div class="input-field">
+                    <label for="billingPhone">Phone number</label>
+                    <input type="tel" id="billingPhone" placeholder="(555) 123-4567" autocomplete="tel">
+                </div>
+                <div class="checkout-note" style="color:#ffb4b4;margin-bottom:1rem;">
+                    <strong>Note:</strong> This checkout page is a demo order summary and does not process real payment card data. Use the donation flow on the Give page for actual Stripe Checkout payments.
+                </div>
+                <div class="input-field">
+                    <label for="cardNumber">Card number</label>
+                    <input type="text" id="cardNumber" placeholder="4242 4242 4242 4242" inputmode="numeric" maxlength="19" disabled>
+                </div>
+                <div class="form-grid">
+                    <div class="input-field">
+                        <label for="cardExpiry">Expiry date</label>
+                        <input type="text" id="cardExpiry" placeholder="MM / YY" maxlength="7" disabled>
+                    </div>
+                    <div class="input-field">
+                        <label for="cardCVC">CVC</label>
+                        <input type="text" id="cardCVC" placeholder="123" maxlength="4" disabled>
+                    </div>
+                </div>
+                <div class="input-field">
+                    <label for="billingCountry">Country</label>
+                    <select id="billingCountry" disabled>
+                        <option value="US">United States</option>
+                        <option value="CA">Canada</option>
+                        <option value="GB">United Kingdom</option>
+                        <option value="AU">Australia</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                <button type="submit" class="checkout-btn"><span>Confirm Payment</span></button>
+                <p class="checkout-note">* This is a premium checkout experience. No real payment is processed on this demo page.</p>
+            </form>
+            <div id="checkoutResult"></div>
+        </div>
+
+        <aside class="order-summary">
+            <h2>Order summary</h2>
+            <div class="summary-card">
+                <div>
+                    <div style="font-size:0.95rem;color:var(--color-text-secondary);text-transform:uppercase;letter-spacing:0.14em;">Premium Bundle</div>
+                    <div style="font-size:1rem;margin-top:0.5rem;">Instant access to all selected Messianic Movement resources.</div>
+                </div>
+                <span style="color:var(--color-gold);font-size:1rem;font-weight:700;">Best value</span>
+            </div>
+
+            <div id="checkoutItems"></div>
+
+            <div class="summary-total">
+                <span>Total</span>
+                <span id="summaryTotal">$0.00</span>
+            </div>
+            <div class="checkout-note">Your order total is calculated based on cart quantity and item pricing. Review before submitting.</div>
+        </aside>
+    </section>
+
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <a href="index.html" class="logo">
+                    <div class="logo-icon"><img src="images/logowtb.png" alt="Messianic Movement logo" class="logo-mark-img"></div>
+                    <div class="logo-text">
+                        <span class="logo-title">Messianic Movement</span>
+                        <span class="logo-subtitle">Regenerational Ministry</span>
+                    </div>
+                </a>
+                <p>Raising a generation of Spirit-filled believers who will transform nations through the power of the Holy Ghost.</p>
+                <div class="social-links">
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-links">
+                <h4>Links</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="items.html">Store</a></li>
+                    <li><a href="watch.html">Sermons</a></li>
+                    <li><a href="prayer_request.html">Prayer Request</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Contact</h4>
+                <ul>
+                    <li><i class="fas fa-map-marker-alt"></i> 123 Faith Avenue, Glory City</li>
+                    <li><i class="fas fa-phone"></i> +1 (555) 123-4567</li>
+                    <li><i class="fas fa-envelope"></i> info@whgrministry.org</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Messianic Movement. All rights reserved.</p>
+            <p>Designed with <i class="fas fa-heart" style="color: var(--color-gold);"></i> by the Spirit</p>
+        </div>
+    </footer>
+
+    <div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h3>Your Cart</h3>
+            <button class="close-cart" onclick="toggleCart()"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="cart-items" id="cartItems"></div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Total:</span>
+                <span id="cartTotal">$0.00</span>
+            </div>
+            <button class="checkout-btn" onclick="checkout()">Proceed to Checkout</button>
+        </div>
+    </div>
+
+    <div class="toast" id="toast">
+        <i class="fas fa-check-circle toast-icon"></i>
+        <span id="toastMessage">Item added to cart</span>
+    </div>
+
+    <a href="https://wa.me/1234567890" class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+    <button class="scroll-top" id="scrollTop" onclick="scrollToTop()" aria-label="Scroll to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            renderCheckoutPage();
+            document.getElementById('checkoutForm')?.addEventListener('submit', placeOrder);
+        });
+    </script>
+<script>
+window.addEventListener('load', () => {
+    const loader = document.getElementById('loader');
+    if (loader) {
+        setTimeout(() => loader.classList.add('hidden'), 2200);
+    }
+});
+</script>
+</body>
+</html>

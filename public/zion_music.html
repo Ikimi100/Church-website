@@ -1,0 +1,1305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zion Worship | Messianic Movement</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --color-bg: #0a0a0a;
+            --color-bg-elevated: #111111;
+            --color-bg-card: #161616;
+            --color-bg-player: #181818;
+            --color-gold: #c9a962;
+            --color-gold-light: #e8d5a3;
+            --color-gold-dark: #8a7340;
+            --text-primary: #f5f5f5;
+            --text-secondary: #a0a0a0;
+            --text-muted: #666666;
+            --border-subtle: rgba(201, 169, 98, 0.15);
+            --border-hover: rgba(201, 169, 98, 0.4);
+            --transition-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background: var(--color-bg);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            cursor: none;
+            padding-bottom: 100px;
+        }
+
+        /* Film Grain */
+        .grain-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none; z-index: 9998; opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+        }
+        .vignette {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none; z-index: 9997;
+            background: radial-gradient(ellipse at center, transparent 0%, transparent 60%, rgba(0,0,0,0.4) 100%);
+        }
+
+        /* Custom Cursor */
+        .cursor {
+            position: fixed; width: 40px; height: 40px;
+            border: 1px solid var(--color-gold); border-radius: 50%;
+            pointer-events: none; z-index: 9999;
+            transition: transform 0.15s var(--transition-smooth), opacity 0.15s;
+            transform: translate(-50%, -50%); mix-blend-mode: difference;
+        }
+        .cursor-dot {
+            position: fixed; width: 6px; height: 6px;
+            background: var(--color-gold); border-radius: 50%;
+            pointer-events: none; z-index: 9999;
+            transform: translate(-50%, -50%);
+        }
+        .cursor.hover {
+            transform: translate(-50%, -50%) scale(1.5);
+            background: rgba(201, 169, 98, 0.1);
+        }
+
+        /* Loader */
+        .loader {
+            position: fixed; inset: 0; background: var(--color-bg);
+            display: flex; align-items: center; justify-content: center;
+            z-index: 10000;
+            transition: opacity 0.8s var(--transition-smooth), visibility 0.8s;
+        }
+        .loader.hidden { opacity: 0; visibility: hidden; }
+        .loader-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.5rem; font-weight: 300; letter-spacing: 0.3em;
+            color: var(--color-gold); margin-bottom: 2rem;
+        }
+        .loader-text span { display: inline-block; opacity: 0; animation: loaderLetter 0.6s ease forwards; }
+        @keyframes loaderLetter { to { opacity: 1; transform: translateY(0); } from { opacity: 0; transform: translateY(20px); } }
+        .loader-bar { width: 200px; height: 1px; background: rgba(201, 169, 98, 0.2); margin: 0 auto; position: relative; overflow: hidden; }
+        .loader-progress { position: absolute; left: 0; top: 0; height: 100%; width: 0%; background: var(--color-gold); animation: loadProgress 2s ease forwards; }
+        @keyframes loadProgress { 0% { width: 0%; } 50% { width: 70%; } 100% { width: 100%; } }
+
+        /* Navigation */
+        nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+            padding: 1.5rem 3rem;
+            background: linear-gradient(to bottom, rgba(10,10,10,0.9) 0%, transparent 100%);
+            backdrop-filter: blur(10px);
+            transition: all 0.4s var(--transition-smooth);
+        }
+        nav.scrolled { background: rgba(10,10,10,0.95); padding: 1rem 3rem; border-bottom: 1px solid var(--border-subtle); }
+        .nav-container { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .logo { display: flex; align-items: center; gap: 1rem; text-decoration: none; color: var(--text-primary); }
+        .logo-mark {
+    overflow: hidden; width: 45px; height: 45px; border: 1px solid var(--color-gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--color-gold); font-size: 1.1rem;     }
+        .logo-text { display: flex; flex-direction: column; }
+        .logo-title { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 500; letter-spacing: 0.05em; line-height: 1.2; }
+        .logo-subtitle { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--color-gold); font-weight: 500; }
+        .nav-links { display: flex; list-style: none; gap: 2.5rem; align-items: center; }
+        .nav-links a { text-decoration: none; color: var(--text-secondary); font-size: 0.85rem; letter-spacing: 0.1em; text-transform: uppercase; transition: color 0.3s; position: relative; }
+        .nav-links a::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 1px; background: var(--color-gold); transition: width 0.3s var(--transition-smooth); }
+        .nav-links a:hover { color: var(--color-gold); }
+        .nav-links a:hover::after { width: 100%; }
+        .nav-cta { background: transparent; border: 1px solid var(--color-gold); color: var(--color-gold); padding: 0.6rem 1.5rem; font-family: 'Space Grotesk', sans-serif; font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; transition: all 0.3s; }
+        .nav-cta:hover { background: var(--color-gold); color: var(--color-bg); }
+
+        /* Music Hero */
+        .music-hero {
+            position: relative;
+            min-height: 50vh;
+            display: flex;
+            align-items: flex-end;
+            padding: 8rem 3rem 3rem;
+            background: linear-gradient(180deg, rgba(201,169,98,0.15) 0%, var(--color-bg) 100%);
+            overflow: hidden;
+        }
+        .music-hero-bg {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+            opacity: 0.3;
+        }
+        .music-hero-bg img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(30%) contrast(1.2);
+        }
+        .music-hero-gradient {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, rgba(10,10,10,0.3) 0%, var(--color-bg) 100%);
+            z-index: 1;
+        }
+        .music-hero-content {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            align-items: flex-end;
+            gap: 2rem;
+            max-width: 1400px;
+            width: 100%;
+            margin: 0 auto;
+        }
+        .album-art {
+            width: 232px;
+            height: 232px;
+            background: linear-gradient(135deg, var(--color-gold-dark) 0%, var(--color-gold) 50%, var(--color-gold-light) 100%);
+            border-radius: 4px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .album-art i {
+            font-size: 5rem;
+            color: var(--color-bg);
+            opacity: 0.8;
+        }
+        .music-hero-info h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2.5rem, 6vw, 5rem);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+        }
+        .music-hero-info .playlist-meta {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+        }
+        .music-hero-info .playlist-meta img {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        .music-hero-info .playlist-meta a {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .music-hero-info .playlist-meta a:hover {
+            text-decoration: underline;
+        }
+        .music-hero-actions {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+        .play-btn-large {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: var(--color-gold);
+            border: none;
+            color: var(--color-bg);
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 8px 30px rgba(201, 169, 98, 0.4);
+        }
+        .play-btn-large:hover {
+            transform: scale(1.05);
+            background: var(--color-gold-light);
+        }
+        .like-btn, .more-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: transparent;
+            border: 1px solid var(--border-subtle);
+            color: var(--text-secondary);
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .like-btn:hover, .more-btn:hover {
+            border-color: var(--color-gold);
+            color: var(--color-gold);
+            transform: scale(1.1);
+        }
+        .like-btn.liked {
+            color: var(--color-gold);
+            border-color: var(--color-gold);
+        }
+
+        /* Section Headers */
+        .section-header { text-align: center; margin-bottom: 3rem; padding: 0 2rem; }
+        .section-eyebrow { display: inline-block; font-size: 0.75rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--color-gold); margin-bottom: 1rem; position: relative; }
+        .section-eyebrow::before, .section-eyebrow::after { content: ''; position: absolute; top: 50%; width: 30px; height: 1px; background: var(--color-gold); }
+        .section-eyebrow::before { right: calc(100% + 1rem); }
+        .section-eyebrow::after { left: calc(100% + 1rem); }
+        .section-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 300; margin-bottom: 1rem; }
+        .section-subtitle { color: var(--text-secondary); max-width: 600px; margin: 0 auto; line-height: 1.8; font-size: 1rem; }
+
+        /* Track List - Spotify Style */
+        .tracklist-section {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem 3rem;
+        }
+        .tracklist-header {
+            display: grid;
+            grid-template-columns: 50px 1fr 200px 100px;
+            gap: 1rem;
+            padding: 0 1rem 0.75rem;
+            border-bottom: 1px solid var(--border-subtle);
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+        .track-item {
+            display: grid;
+            grid-template-columns: 50px 1fr 200px 100px;
+            gap: 1rem;
+            align-items: center;
+            padding: 0.75rem 1rem;
+            border-radius: 4px;
+            transition: background 0.2s;
+            cursor: pointer;
+        }
+        .track-item:hover {
+            background: rgba(255,255,255,0.05);
+        }
+        .track-item:hover .track-number {
+            display: none;
+        }
+        .track-item:hover .track-play {
+            display: flex;
+        }
+        .track-number {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            text-align: center;
+        }
+        .track-play {
+            display: none;
+            width: 24px;
+            height: 24px;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-primary);
+            font-size: 0.8rem;
+            margin: 0 auto;
+        }
+        .track-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .track-thumb {
+            width: 40px;
+            height: 40px;
+            border-radius: 4px;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+        .track-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .track-details h4 {
+            font-size: 0.95rem;
+            font-weight: 500;
+            margin-bottom: 0.2rem;
+            color: var(--text-primary);
+        }
+        .track-details p {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+        .track-album {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+        .track-duration {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            text-align: right;
+        }
+        .track-item.active {
+            background: rgba(201, 169, 98, 0.1);
+        }
+        .track-item.active .track-number {
+            color: var(--color-gold);
+        }
+        .track-item.active .track-details h4 {
+            color: var(--color-gold);
+        }
+
+        /* Hymn Section */
+        .hymn-section {
+            max-width: 1400px;
+            margin: 4rem auto;
+            padding: 0 3rem;
+        }
+        .hymn-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+        .hymn-card {
+            background: var(--color-bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 8px;
+            padding: 1.5rem;
+            transition: all 0.3s var(--transition-smooth);
+            cursor: pointer;
+        }
+        .hymn-card:hover {
+            border-color: var(--border-hover);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+        }
+        .hymn-card:hover .hymn-play {
+            opacity: 1;
+            transform: scale(1);
+        }
+        .hymn-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+        .hymn-number {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            font-weight: 300;
+            color: var(--color-gold);
+            opacity: 0.5;
+        }
+        .hymn-play {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--color-gold);
+            color: var(--color-bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transform: scale(0.8);
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(201, 169, 98, 0.3);
+        }
+        .hymn-card h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.3rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+        .hymn-card p {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+        .hymn-meta {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+        .hymn-meta i {
+            color: var(--color-gold);
+        }
+
+        /* Now Playing Bar - Fixed Bottom */
+        .now-playing-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 90px;
+            background: var(--color-bg-player);
+            border-top: 1px solid var(--border-subtle);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 1.5rem;
+            transition: transform 0.3s;
+        }
+        .now-playing-bar.hidden {
+            transform: translateY(100%);
+        }
+        .np-track {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            width: 30%;
+            min-width: 180px;
+        }
+        .np-thumb {
+            width: 56px;
+            height: 56px;
+            border-radius: 4px;
+            overflow: hidden;
+            background: var(--color-bg-elevated);
+        }
+        .np-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .np-info h4 {
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-bottom: 0.2rem;
+        }
+        .np-info p {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+        .np-like {
+            color: var(--text-muted);
+            background: none;
+            border: none;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        .np-like:hover, .np-like.liked {
+            color: var(--color-gold);
+        }
+
+        .np-controls {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            flex: 1;
+            max-width: 40%;
+        }
+        .np-buttons {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+        .np-btn {
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        .np-btn:hover {
+            color: var(--text-primary);
+        }
+        .np-play {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            background: var(--text-primary);
+            color: var(--color-bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            transition: transform 0.2s;
+        }
+        .np-play:hover {
+            transform: scale(1.1);
+        }
+        .np-progress {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            width: 100%;
+        }
+        .np-time {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            min-width: 35px;
+            text-align: center;
+        }
+        .np-bar {
+            flex: 1;
+            height: 4px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 2px;
+            cursor: pointer;
+            position: relative;
+        }
+        .np-bar-fill {
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 30%;
+            background: var(--text-primary);
+            border-radius: 2px;
+        }
+        .np-bar:hover .np-bar-fill {
+            background: var(--color-gold);
+        }
+
+        .np-volume {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            width: 30%;
+            min-width: 180px;
+            justify-content: flex-end;
+        }
+        .np-vol-bar {
+            width: 100px;
+            height: 4px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 2px;
+            cursor: pointer;
+            position: relative;
+        }
+        .np-vol-fill {
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 70%;
+            background: var(--text-primary);
+            border-radius: 2px;
+        }
+
+        /* Categories */
+        .categories-section {
+            max-width: 1400px;
+            margin: 3rem auto;
+            padding: 0 3rem;
+        }
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+        }
+        .category-card {
+            position: relative;
+            height: 200px;
+            border-radius: 8px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        .category-card:hover {
+            transform: scale(1.02);
+        }
+        .category-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.6;
+            transition: opacity 0.3s;
+        }
+        .category-card:hover img {
+            opacity: 0.8;
+        }
+        .category-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(10,10,10,0.8) 0%, transparent 100%);
+        }
+        .category-card h3 {
+            position: absolute;
+            bottom: 1rem;
+            left: 1rem;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        /* Footer */
+        footer { background: var(--color-bg-elevated); border-top: 1px solid var(--border-subtle); padding: 4rem 2rem 2rem; margin-bottom: 90px; }
+        .footer-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; margin-bottom: 3rem; }
+        .footer-brand p { color: var(--text-secondary); font-size: 0.9rem; line-height: 1.7; margin: 1.5rem 0; max-width: 300px; }
+        .social-links { display: flex; gap: 1rem; }
+        .social-links a { width: 40px; height: 40px; border: 1px solid var(--border-subtle); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--text-secondary); text-decoration: none; transition: all 0.3s; }
+        .social-links a:hover { border-color: var(--color-gold); color: var(--color-gold); transform: translateY(-2px); }
+        .footer-links h4 { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-weight: 500; margin-bottom: 1.5rem; color: var(--text-primary); }
+        .footer-links ul { list-style: none; }
+        .footer-links li { margin-bottom: 0.75rem; }
+        .footer-links a { color: var(--text-secondary); text-decoration: none; font-size: 0.9rem; transition: color 0.3s; }
+        .footer-links a:hover { color: var(--color-gold); }
+        .footer-bottom { max-width: 1200px; margin: 0 auto; padding-top: 2rem; border-top: 1px solid var(--border-subtle); display: flex; justify-content: space-between; align-items: center; font-size: 0.8rem; color: var(--text-muted); }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .categories-grid { grid-template-columns: repeat(2, 1fr); }
+            .hymn-grid { grid-template-columns: repeat(2, 1fr); }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+            .tracklist-header, .track-item { grid-template-columns: 40px 1fr 80px; }
+            .track-album { display: none; }
+        }
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .music-hero-content { flex-direction: column; align-items: center; text-align: center; }
+            .album-art { width: 160px; height: 160px; }
+            .categories-grid { grid-template-columns: 1fr; }
+            .hymn-grid { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr; }
+            .tracklist-header, .track-item { grid-template-columns: 40px 1fr 60px; }
+            .np-track, .np-volume { display: none; }
+            body { cursor: auto; }
+            .cursor, .cursor-dot { display: none; }
+        }
+
+        .fade-in { opacity: 0; transform: translateY(30px); transition: opacity 0.8s var(--transition-smooth), transform 0.8s var(--transition-smooth); }
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
+    
+    /* LOGO IMAGE FALLBACK */
+    
+    /* HOMEPAGE HEADER LOGO MATCH */
+    nav .logo .logo-mark,
+    .study-nav .logo .logo-mark,
+    .watch-header .logo .logo-mark {
+        width: 48px;
+        height: 48px;
+        flex: 0 0 48px;
+        border: 1px solid var(--color-gold);
+        border-radius: 50%;
+        background: transparent;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        position: relative;
+        box-shadow: 0 0 20px rgba(212,175,55,0.1);
+    }
+
+    nav .logo .logo-mark img,
+    .study-nav .logo .logo-mark img,
+    .watch-header .logo .logo-mark img,
+    nav .logo .logo-mark-img,
+    .study-nav .logo .logo-mark-img,
+    .watch-header .logo .logo-mark-img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        display: block;
+        position: relative;
+        z-index: 1;
+    }
+
+    nav .logo .logo-title,
+    .study-nav .logo .logo-title,
+    .watch-header .logo .logo-title {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 1.5rem;
+        font-weight: 400;
+        line-height: 1;
+        letter-spacing: 0;
+    }
+
+    nav .logo .logo-subtitle,
+    .study-nav .logo .logo-subtitle,
+    .watch-header .logo .logo-subtitle {
+        font-size: 0.65rem;
+        text-transform: uppercase;
+        letter-spacing: 0.3em;
+        color: var(--color-text-muted);
+        margin-top: 0.25rem;
+    }
+
+    .loader-ring,
+    .loader-ring--soft,
+    .loader-dots,
+    .loader-bar,
+    .loader-progress {
+        display: none !important;
+    }
+</style>
+</head>
+<body>
+    <div class="grain-overlay"></div>
+    <div class="vignette"></div>
+    <div class="cursor" id="cursor"></div>
+    <div class="cursor-dot" id="cursorDot"></div>
+
+    <nav id="navbar" class="scrolled" style="background: rgba(5,5,5,0.85); backdrop-filter: blur(20px);">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <div class="logo-mark"><img src="images/logowtb.png" alt="Messianic Movement logo" class="logo-mark-img"></div>
+                <div class="logo-text">
+                    <span class="logo-title">Messianic Movement</span>
+                    <span class="logo-subtitle">Regenerational Ministry</span>
+                </div>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#ministries">Ministries</a></li>
+                <li><a href="#worship">Zion Worship</a></li>
+                <li><a href="#hymns">Hymns</a></li>
+                <li><a href="#live">Live</a></li>
+                <li style="margin-left:1rem;"><button class="nav-cta">Give</button></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Music Hero -->
+    <section class="music-hero" id="worship">
+        <div class="music-hero-bg">
+            <img src="https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?w=1920&q=80" alt="Worship atmosphere">
+        </div>
+        <div class="music-hero-gradient"></div>
+        <div class="music-hero-content">
+            <div class="album-art">
+                <i class="fas fa-music"></i>
+            </div>
+            <div class="music-hero-info">
+                <span style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.2em; color: var(--text-secondary);">Official Playlist</span>
+                <h1>Zion Worship</h1>
+                <div class="playlist-meta">
+                    <img src="https://images.unsplash.com/photo-1504052434569-70ad5836ab65?w=100&q=80" alt="WHGRM">
+                    <a href="index.html">Messianic Movement</a>
+                    <span>&middot;</span>
+                    <span>24 songs</span>
+                    <span>&middot;</span>
+                    <span>2 hr 15 min</span>
+                </div>
+                <div class="music-hero-actions">
+                    <button class="play-btn-large" onclick="playPlaylist()" title="Play All">
+                        <i class="fas fa-play"></i>
+                    </button>
+                    <button class="like-btn" onclick="toggleLike(this)" title="Save to Library">
+                        <i class="far fa-heart"></i>
+                    </button>
+                    <button class="more-btn" title="More Options">
+                        <i class="fas fa-ellipsis-h"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Track List -->
+    <section class="tracklist-section">
+        <div class="tracklist-header">
+            <span>#</span>
+            <span>Title</span>
+            <span>Album</span>
+            <span><i class="far fa-clock"></i></span>
+        </div>
+
+        <div class="track-item active" onclick="playTrack(0)">
+            <div>
+                <span class="track-number">1</span>
+                <span class="track-play"><i class="fas fa-play"></i></span>
+            </div>
+            <div class="track-info">
+                <div class="track-thumb">
+                    <img src="https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?w=100&q=80" alt="Track">
+                </div>
+                <div class="track-details">
+                    <h4>Holy Ghost Fire</h4>
+                    <p>Zion Worship Choir</p>
+                </div>
+            </div>
+            <div class="track-album">Zion Worship Live</div>
+            <div class="track-duration">4:32</div>
+        </div>
+
+        <div class="track-item" onclick="playTrack(1)">
+            <div>
+                <span class="track-number">2</span>
+                <span class="track-play"><i class="fas fa-play"></i></span>
+            </div>
+            <div class="track-info">
+                <div class="track-thumb">
+                    <img src="https://images.unsplash.com/photo-1493225255756-d9584f8606e9?w=100&q=80" alt="Track">
+                </div>
+                <div class="track-details">
+                    <h4>Raise a Hallelujah</h4>
+                    <p>Zion Worship Choir</p>
+                </div>
+            </div>
+            <div class="track-album">Victory Sessions</div>
+            <div class="track-duration">5:18</div>
+        </div>
+
+        <div class="track-item" onclick="playTrack(2)">
+            <div>
+                <span class="track-number">3</span>
+                <span class="track-play"><i class="fas fa-play"></i></span>
+            </div>
+            <div class="track-info">
+                <div class="track-thumb">
+                    <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=100&q=80" alt="Track">
+                </div>
+                <div class="track-details">
+                    <h4>Spirit Break Out</h4>
+                    <p>Zion Worship Choir</p>
+                </div>
+            </div>
+            <div class="track-album">Zion Worship Live</div>
+            <div class="track-duration">6:45</div>
+        </div>
+
+        <div class="track-item" onclick="playTrack(3)">
+            <div>
+                <span class="track-number">4</span>
+                <span class="track-play"><i class="fas fa-play"></i></span>
+            </div>
+            <div class="track-info">
+                <div class="track-thumb">
+                    <img src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=100&q=80" alt="Track">
+                </div>
+                <div class="track-details">
+                    <h4>Way Maker (Live)</h4>
+                    <p>Zion Worship Choir</p>
+                </div>
+            </div>
+            <div class="track-album">Miracle Night</div>
+            <div class="track-duration">8:12</div>
+        </div>
+
+        <div class="track-item" onclick="playTrack(4)">
+            <div>
+                <span class="track-number">5</span>
+                <span class="track-play"><i class="fas fa-play"></i></span>
+            </div>
+            <div class="track-info">
+                <div class="track-thumb">
+                    <img src="https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=100&q=80" alt="Track">
+                </div>
+                <div class="track-details">
+                    <h4>Graves into Gardens</h4>
+                    <p>Zion Worship Choir</p>
+                </div>
+            </div>
+            <div class="track-album">Resurrection Power</div>
+            <div class="track-duration">4:55</div>
+        </div>
+
+        <div class="track-item" onclick="playTrack(5)">
+            <div>
+                <span class="track-number">6</span>
+                <span class="track-play"><i class="fas fa-play"></i></span>
+            </div>
+            <div class="track-info">
+                <div class="track-thumb">
+                    <img src="https://images.unsplash.com/photo-1507838153414-b4b713384a76?w=100&q=80" alt="Track">
+                </div>
+                <div class="track-details">
+                    <h4>Build My Life</h4>
+                    <p>Zion Worship Choir</p>
+                </div>
+            </div>
+            <div class="track-album">Foundation</div>
+            <div class="track-duration">5:03</div>
+        </div>
+
+        <div class="track-item" onclick="playTrack(6)">
+            <div>
+                <span class="track-number">7</span>
+                <span class="track-play"><i class="fas fa-play"></i></span>
+            </div>
+            <div class="track-info">
+                <div class="track-thumb">
+                    <img src="https://images.unsplash.com/photo-1510915361894-db8b60106cb1?w=100&q=80" alt="Track">
+                </div>
+                <div class="track-details">
+                    <h4>Goodness of God</h4>
+                    <p>Zion Worship Choir</p>
+                </div>
+            </div>
+            <div class="track-album">Zion Worship Live</div>
+            <div class="track-duration">4:48</div>
+        </div>
+
+        <div class="track-item" onclick="playTrack(7)">
+            <div>
+                <span class="track-number">8</span>
+                <span class="track-play"><i class="fas fa-play"></i></span>
+            </div>
+            <div class="track-info">
+                <div class="track-thumb">
+                    <img src="https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=100&q=80" alt="Track">
+                </div>
+                <div class="track-details">
+                    <h4>Tremble (Live)</h4>
+                    <p>Zion Worship Choir</p>
+                </div>
+            </div>
+            <div class="track-album">Miracle Night</div>
+            <div class="track-duration">6:22</div>
+        </div>
+    </section>
+
+    <!-- Categories -->
+    <section class="categories-section">
+        <div class="section-header fade-in">
+            <span class="section-eyebrow">Browse</span>
+            <h2 class="section-title">Worship Categories</h2>
+        </div>
+        <div class="categories-grid">
+            <div class="category-card" onclick="filterCategory('praise')">
+                <img src="https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?w=600&q=80" alt="Praise">
+                <div class="category-overlay"></div>
+                <h3>Praise & Worship</h3>
+            </div>
+            <div class="category-card" onclick="filterCategory('gospel')">
+                <img src="https://images.unsplash.com/photo-1493225255756-d9584f8606e9?w=600&q=80" alt="Gospel">
+                <div class="category-overlay"></div>
+                <h3>Gospel</h3>
+            </div>
+            <div class="category-card" onclick="filterCategory('contemporary')">
+                <img src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=600&q=80" alt="Contemporary">
+                <div class="category-overlay"></div>
+                <h3>Contemporary</h3>
+            </div>
+            <div class="category-card" onclick="filterCategory('instrumental')">
+                <img src="https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=600&q=80" alt="Instrumental">
+                <div class="category-overlay"></div>
+                <h3>Instrumental</h3>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hymn Section -->
+    <section class="hymn-section" id="hymns">
+        <div class="section-header fade-in">
+            <span class="section-eyebrow">Sacred Songs</span>
+            <h2 class="section-title">Hymns of the Faith</h2>
+            <p class="section-subtitle">Timeless hymns that have carried generations through worship and prayer.</p>
+        </div>
+        <div class="hymn-grid">
+            <div class="hymn-card fade-in" onclick="playHymn('amazing-grace')">
+                <div class="hymn-header">
+                    <span class="hymn-number">001</span>
+                    <div class="hymn-play"><i class="fas fa-play"></i></div>
+                </div>
+                <h3>Amazing Grace</h3>
+                <p>Amazing grace, how sweet the sound that saved a wretch like me. I once was lost, but now am found...</p>
+                <div class="hymn-meta">
+                    <i class="fas fa-music"></i>
+                    <span>John Newton, 1779</span>
+                </div>
+            </div>
+
+            <div class="hymn-card fade-in" onclick="playHymn('how-great-thou-art')">
+                <div class="hymn-header">
+                    <span class="hymn-number">002</span>
+                    <div class="hymn-play"><i class="fas fa-play"></i></div>
+                </div>
+                <h3>How Great Thou Art</h3>
+                <p>O Lord my God, when I in awesome wonder consider all the worlds Thy hands have made...</p>
+                <div class="hymn-meta">
+                    <i class="fas fa-music"></i>
+                    <span>Carl Boberg, 1885</span>
+                </div>
+            </div>
+
+            <div class="hymn-card fade-in" onclick="playHymn('it-is-well')">
+                <div class="hymn-header">
+                    <span class="hymn-number">003</span>
+                    <div class="hymn-play"><i class="fas fa-play"></i></div>
+                </div>
+                <h3>It Is Well With My Soul</h3>
+                <p>When peace like a river attendeth my way, when sorrows like sea billows roll...</p>
+                <div class="hymn-meta">
+                    <i class="fas fa-music"></i>
+                    <span>Horatio Spafford, 1873</span>
+                </div>
+            </div>
+
+            <div class="hymn-card fade-in" onclick="playHymn('great-is-thy-faithfulness')">
+                <div class="hymn-header">
+                    <span class="hymn-number">004</span>
+                    <div class="hymn-play"><i class="fas fa-play"></i></div>
+                </div>
+                <h3>Great Is Thy Faithfulness</h3>
+                <p>Great is Thy faithfulness, O God my Father. There is no shadow of turning with Thee...</p>
+                <div class="hymn-meta">
+                    <i class="fas fa-music"></i>
+                    <span>Thomas Chisholm, 1923</span>
+                </div>
+            </div>
+
+            <div class="hymn-card fade-in" onclick="playHymn('old-rugged-cross')">
+                <div class="hymn-header">
+                    <span class="hymn-number">005</span>
+                    <div class="hymn-play"><i class="fas fa-play"></i></div>
+                </div>
+                <h3>The Old Rugged Cross</h3>
+                <p>On a hill far away stood an old rugged cross, the emblem of suffering and shame...</p>
+                <div class="hymn-meta">
+                    <i class="fas fa-music"></i>
+                    <span>George Bennard, 1912</span>
+                </div>
+            </div>
+
+            <div class="hymn-card fade-in" onclick="playHymn('blessed-assurance')">
+                <div class="hymn-header">
+                    <span class="hymn-number">006</span>
+                    <div class="hymn-play"><i class="fas fa-play"></i></div>
+                </div>
+                <h3>Blessed Assurance</h3>
+                <p>Blessed assurance, Jesus is mine. Oh, what a foretaste of glory divine...</p>
+                <div class="hymn-meta">
+                    <i class="fas fa-music"></i>
+                    <span>Fanny Crosby, 1873</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <a href="index.html" class="logo">
+                    <div class="logo-icon"><img src="images/logowtb.png" alt="Messianic Movement logo" class="logo-mark-img"></div>
+                    <div class="logo-text">
+                        <span class="logo-title">Messianic Movement</span>
+                        <span class="logo-subtitle">Regenerational Ministry</span>
+                    </div>
+                </a>
+                <p>Raising a generation of Spirit-filled believers who will transform nations through the power of the Holy Ghost.</p>
+                <div class="social-links">
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="index.html#ministries">Ministries</a></li>
+                    <li><a href="index.html#calendar">Calendar</a></li>
+                    <li><a href="index.html#resources">Resources</a></li>
+                    <li><a href="index.html#live">Live Service</a></li>
+                    <li><a href="index.html#give">Give</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Resources</h4>
+                <ul>
+                    <li><a href="#">Sermon Archive</a></li>
+                    <li><a href="#">Bible Study</a></li>
+                    <li><a href="#">Prayer Request</a></li>
+                    <li><a href="#">Testimonies</a></li>
+                    <li><a href="#">Events</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Contact</h4>
+                <ul>
+                    <li><i class="fas fa-map-marker-alt"></i> 123 Faith Avenue, Glory City</li>
+                    <li><i class="fas fa-phone"></i> +1 (555) 123-4567</li>
+                    <li><i class="fas fa-envelope"></i> info@whgrministry.org</li>
+                    <li><i class="fas fa-clock"></i> Sun: 9AM & 11AM EST</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Messianic Movement. All rights reserved.</p>
+            <p>Designed with <i class="fas fa-heart" style="color:var(--color-gold)"></i> by the Spirit</p>
+        </div>
+    </footer>
+
+    <!-- Now Playing Bar -->
+    <div class="now-playing-bar" id="nowPlayingBar">
+        <div class="np-track">
+            <div class="np-thumb">
+                <img src="https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?w=100&q=80" alt="Now Playing" id="npThumb">
+            </div>
+            <div class="np-info">
+                <h4 id="npTitle">Holy Ghost Fire</h4>
+                <p id="npArtist">Zion Worship Choir</p>
+            </div>
+            <button class="np-like" onclick="toggleLike(this)"><i class="far fa-heart"></i></button>
+        </div>
+
+        <div class="np-controls">
+            <div class="np-buttons">
+                <button class="np-btn" onclick="prevTrack()"><i class="fas fa-step-backward"></i></button>
+                <button class="np-play" onclick="togglePlay()" id="npPlayBtn"><i class="fas fa-pause"></i></button>
+                <button class="np-btn" onclick="nextTrack()"><i class="fas fa-step-forward"></i></button>
+            </div>
+            <div class="np-progress">
+                <span class="np-time" id="currentTime">1:24</span>
+                <div class="np-bar" onclick="seek(event)">
+                    <div class="np-bar-fill" id="progressBar"></div>
+                </div>
+                <span class="np-time" id="totalTime">4:32</span>
+            </div>
+        </div>
+
+        <div class="np-volume">
+            <button class="np-btn"><i class="fas fa-volume-up"></i></button>
+            <div class="np-vol-bar" onclick="setVolume(event)">
+                <div class="np-vol-fill"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Loader
+        setTimeout(() => { document.getElementById('loader')?.classList.add('hidden'); }, 2200);
+
+        // Custom Cursor
+        const cursor = document.getElementById('cursor');
+        const cursorDot = document.getElementById('cursorDot');
+
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+            cursorDot.style.left = e.clientX + 'px';
+            cursorDot.style.top = e.clientY + 'px';
+        });
+
+        document.querySelectorAll('a, button, .track-item, .hymn-card, .category-card').forEach(el => {
+            el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+            el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+        });
+
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            navbar.classList.toggle('scrolled', window.scrollY > 50);
+        });
+
+        // Intersection Observer for fade-in animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+        // Track data
+        const tracks = [
+            { title: 'Holy Ghost Fire', artist: 'Zion Worship Choir', album: 'Zion Worship Live', duration: '4:32', thumb: 'https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?w=100&q=80' },
+            { title: 'Raise a Hallelujah', artist: 'Zion Worship Choir', album: 'Victory Sessions', duration: '5:18', thumb: 'https://images.unsplash.com/photo-1493225255756-d9584f8606e9?w=100&q=80' },
+            { title: 'Spirit Break Out', artist: 'Zion Worship Choir', album: 'Zion Worship Live', duration: '6:45', thumb: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=100&q=80' },
+            { title: 'Way Maker (Live)', artist: 'Zion Worship Choir', album: 'Miracle Night', duration: '8:12', thumb: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=100&q=80' },
+            { title: 'Graves into Gardens', artist: 'Zion Worship Choir', album: 'Resurrection Power', duration: '4:55', thumb: 'https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=100&q=80' },
+            { title: 'Build My Life', artist: 'Zion Worship Choir', album: 'Foundation', duration: '5:03', thumb: 'https://images.unsplash.com/photo-1507838153414-b4b713384a76?w=100&q=80' },
+            { title: 'Goodness of God', artist: 'Zion Worship Choir', album: 'Zion Worship Live', duration: '4:48', thumb: 'https://images.unsplash.com/photo-1510915361894-db8b60106cb1?w=100&q=80' },
+            { title: 'Tremble (Live)', artist: 'Zion Worship Choir', album: 'Miracle Night', duration: '6:22', thumb: 'https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=100&q=80' }
+        ];
+
+        let currentTrackIndex = 0;
+        let isPlaying = true;
+
+        function playTrack(index) {
+            currentTrackIndex = index;
+            const track = tracks[index];
+            document.getElementById('npTitle').textContent = track.title;
+            document.getElementById('npArtist').textContent = track.artist;
+            document.getElementById('npThumb').src = track.thumb;
+            document.getElementById('totalTime').textContent = track.duration;
+            document.getElementById('currentTime').textContent = '0:00';
+            document.getElementById('progressBar').style.width = '0%';
+            isPlaying = true;
+            updatePlayButton();
+
+            // Update active state
+            document.querySelectorAll('.track-item').forEach((item, i) => {
+                item.classList.toggle('active', i === index);
+            });
+        }
+
+        function togglePlay() {
+            isPlaying = !isPlaying;
+            updatePlayButton();
+        }
+
+        function updatePlayButton() {
+            const btn = document.getElementById('npPlayBtn');
+            btn.innerHTML = isPlaying ? '<i class="fas fa-pause"></i>' : '<i class="fas fa-play"></i>';
+        }
+
+        function prevTrack() {
+            currentTrackIndex = (currentTrackIndex - 1 + tracks.length) % tracks.length;
+            playTrack(currentTrackIndex);
+        }
+
+        function nextTrack() {
+            currentTrackIndex = (currentTrackIndex + 1) % tracks.length;
+            playTrack(currentTrackIndex);
+        }
+
+        function playPlaylist() {
+            currentTrackIndex = 0;
+            playTrack(0);
+        }
+
+        function seek(event) {
+            const bar = event.currentTarget;
+            const rect = bar.getBoundingClientRect();
+            const percent = (event.clientX - rect.left) / rect.width;
+            document.getElementById('progressBar').style.width = (percent * 100) + '%';
+        }
+
+        function setVolume(event) {
+            const bar = event.currentTarget;
+            const rect = bar.getBoundingClientRect();
+            const percent = (event.clientX - rect.left) / rect.width;
+            bar.querySelector('.np-vol-fill').style.width = (percent * 100) + '%';
+        }
+
+        function toggleLike(btn) {
+            btn.classList.toggle('liked');
+            const icon = btn.querySelector('i');
+            if (btn.classList.contains('liked')) {
+                icon.classList.remove('far');
+                icon.classList.add('fas');
+            } else {
+                icon.classList.remove('fas');
+                icon.classList.add('far');
+            }
+        }
+
+        function filterCategory(category) {
+            alert('Filtering by: ' + category + ' (Connect to your music CMS)');
+        }
+
+        function playHymn(hymn) {
+            alert('Playing hymn: ' + hymn + ' (Connect to your hymn database)');
+        }
+
+        // Simulate progress
+        setInterval(() => {
+            if (isPlaying) {
+                const bar = document.getElementById('progressBar');
+                const currentWidth = parseFloat(bar.style.width) || 0;
+                if (currentWidth < 100) {
+                    bar.style.width = (currentWidth + 0.1) + '%';
+                }
+            }
+        }, 1000);
+    </script>
+</body>
+</html>

@@ -1,0 +1,1343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About the Church | Messianic Movement</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* ===== ABOUT CHURCH SPECIFIC STYLES ===== */
+
+        /* Page Hero */
+        .about-hero {
+            min-height: 80vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            padding: 0 4%;
+            padding-top: 140px;
+            background: linear-gradient(135deg, rgba(10,10,15,0.95) 0%, rgba(5,5,5,0.98) 100%);
+        }
+
+        .about-hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: 
+                radial-gradient(circle at 30% 50%, rgba(212, 175, 55, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 70% 20%, rgba(139, 92, 246, 0.05) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .about-hero-bg {
+            position: absolute;
+            inset: 0;
+            z-index: -1;
+        }
+
+        .about-hero-bg img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.2;
+            filter: brightness(0.4) contrast(1.1);
+        }
+
+        .about-hero-content {
+            text-align: center;
+            max-width: 900px;
+            z-index: 10;
+            position: relative;
+        }
+
+        .about-hero h1 {
+            font-size: clamp(3rem, 8vw, 6rem);
+            line-height: 1;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #fff 0%, var(--color-gold-light) 50%, var(--color-gold) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            filter: drop-shadow(0 0 30px rgba(212,175,55,0.2));
+        }
+
+        .about-hero p {
+            font-size: clamp(1.125rem, 2vw, 1.35rem);
+            color: var(--color-text-secondary);
+            max-width: 650px;
+            margin: 0 auto 2.5rem;
+            font-weight: 300;
+            line-height: 1.7;
+        }
+
+        /* Vision & Mission */
+        .vision-section {
+            background: var(--color-bg-elevated);
+            position: relative;
+        }
+
+        .vision-section::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 50% 0%, rgba(212,175,55,0.03) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .vision-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 3rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .vision-card {
+            background: var(--color-surface);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 3rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.6s var(--ease-out-expo);
+        }
+
+        .vision-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--color-gold), var(--color-purple-rich));
+            transform: scaleX(0);
+            transition: transform 0.6s var(--ease-out-expo);
+        }
+
+        .vision-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(212,175,55,0.2);
+            box-shadow: 0 30px 60px -20px rgba(0,0,0,0.4), 0 0 40px rgba(212,175,55,0.1);
+        }
+
+        .vision-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .vision-card-icon {
+            width: 72px;
+            height: 72px;
+            background: linear-gradient(135deg, rgba(212,175,55,0.1), rgba(107,33,168,0.1));
+            border: 1px solid rgba(212,175,55,0.2);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.75rem;
+            color: var(--color-gold);
+            margin-bottom: 1.5rem;
+            transition: all 0.4s ease;
+        }
+
+        .vision-card:hover .vision-card-icon {
+            background: linear-gradient(135deg, var(--color-gold), var(--color-purple-rich));
+            color: var(--color-bg);
+            transform: scale(1.1) rotate(-5deg);
+            box-shadow: 0 10px 30px rgba(212,175,55,0.3);
+        }
+
+        .vision-card h3 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--color-text);
+        }
+
+        .vision-card p {
+            color: var(--color-text-secondary);
+            font-size: 1.05rem;
+            line-height: 1.8;
+        }
+
+        /* Core Values */
+        .values-section {
+            position: relative;
+        }
+
+        .values-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        .value-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 2.5rem 2rem;
+            text-align: center;
+            transition: all 0.6s var(--ease-out-expo);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .value-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--color-gold), var(--color-purple-rich));
+            transform: scaleX(0);
+            transition: transform 0.6s var(--ease-out-expo);
+        }
+
+        .value-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(212,175,55,0.2);
+            box-shadow: 0 20px 40px -20px rgba(0,0,0,0.4);
+        }
+
+        .value-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .value-number {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3rem;
+            font-weight: 300;
+            color: var(--color-gold);
+            opacity: 0.4;
+            line-height: 1;
+            margin-bottom: 1rem;
+        }
+
+        .value-card h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.15rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: var(--color-text);
+        }
+
+        .value-card p {
+            color: var(--color-text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        /* Leadership Section */
+        .leadership-section {
+            background: var(--color-bg-elevated);
+            position: relative;
+        }
+
+        .leadership-section::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 50% 100%, rgba(212,175,55,0.03) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        /* Founder Hero */
+        .founder-hero {
+            max-width: 1400px;
+            margin: 0 auto 6rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .founder-image {
+            position: relative;
+            border-radius: 24px;
+            overflow: hidden;
+            aspect-ratio: 3/4;
+        }
+
+        .founder-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 1.2s var(--ease-out-expo);
+        }
+
+        .founder-image:hover img {
+            transform: scale(1.05);
+        }
+
+        .founder-image::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(5,5,5,0.7) 0%, transparent 40%);
+        }
+
+        .founder-image-badge {
+            position: absolute;
+            bottom: 2rem;
+            left: 2rem;
+            right: 2rem;
+            z-index: 5;
+        }
+
+        .founder-image-badge h3 {
+            font-size: 2rem;
+            margin-bottom: 0.25rem;
+            color: var(--color-text);
+        }
+
+        .founder-image-badge p {
+            color: var(--color-gold);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            font-weight: 600;
+        }
+
+        .founder-content h2 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(to bottom, #fff, var(--color-text-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .founder-content .role-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1.25rem;
+            background: rgba(212,175,55,0.1);
+            border: 1px solid rgba(212,175,55,0.2);
+            border-radius: 100px;
+            font-size: 0.8rem;
+            color: var(--color-gold);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 1.5rem;
+        }
+
+        .founder-content p {
+            color: var(--color-text-secondary);
+            font-size: 1.05rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .founder-quote {
+            padding: 1.5rem 2rem;
+            background: rgba(212,175,55,0.05);
+            border-left: 3px solid var(--color-gold);
+            border-radius: 0 16px 16px 0;
+            margin: 2rem 0;
+        }
+
+        .founder-quote p {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.35rem;
+            font-style: italic;
+            color: var(--color-text);
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        .founder-quote span {
+            display: block;
+            margin-top: 1rem;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.85rem;
+            color: var(--color-gold);
+            font-style: normal;
+            font-weight: 600;
+        }
+
+        .founder-social {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .founder-social a {
+            width: 48px;
+            height: 48px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-text-secondary);
+            text-decoration: none;
+            transition: all 0.4s var(--ease-out-expo);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .founder-social a::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, var(--color-gold), var(--color-purple-rich));
+            transform: translateY(100%);
+            transition: transform 0.4s var(--ease-out-expo);
+            z-index: -1;
+        }
+
+        .founder-social a:hover {
+            color: var(--color-bg);
+            border-color: transparent;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(212,175,55,0.2);
+        }
+
+        .founder-social a:hover::before {
+            transform: translateY(0);
+        }
+
+        /* Ministry Team Grid */
+        .team-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+        }
+
+        .team-card {
+            background: var(--color-surface);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            overflow: hidden;
+            transition: all 0.6s var(--ease-out-expo);
+            position: relative;
+        }
+
+        .team-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            border-color: rgba(212,175,55,0.2);
+            box-shadow: 0 30px 60px -20px rgba(0,0,0,0.5), 0 0 40px rgba(212,175,55,0.1);
+        }
+
+        .team-card-image {
+            position: relative;
+            aspect-ratio: 1;
+            overflow: hidden;
+        }
+
+        .team-card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s var(--ease-out-expo);
+        }
+
+        .team-card:hover .team-card-image img {
+            transform: scale(1.1);
+        }
+
+        .team-card-image::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(5,5,5,0.8) 0%, transparent 50%);
+        }
+
+        .team-card-content {
+            padding: 1.5rem;
+            text-align: center;
+            position: relative;
+            margin-top: -3rem;
+            z-index: 5;
+        }
+
+        .team-card h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+            color: var(--color-text);
+        }
+
+        .team-card .role {
+            font-size: 0.8rem;
+            color: var(--color-gold);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+        }
+
+        .team-card p {
+            color: var(--color-text-secondary);
+            font-size: 0.85rem;
+            line-height: 1.6;
+        }
+
+        /* History Timeline */
+        .history-section {
+            position: relative;
+        }
+
+        .history-section::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 20% 50%, rgba(212,175,55,0.03) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .timeline {
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--color-gold), var(--color-purple-rich), var(--color-gold));
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 4rem;
+            position: relative;
+        }
+
+        .timeline-item:nth-child(even) .timeline-content {
+            grid-column: 2;
+        }
+
+        .timeline-item:nth-child(even) .timeline-year {
+            grid-column: 1;
+            text-align: right;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 20px;
+            background: var(--color-gold);
+            border-radius: 50%;
+            border: 4px solid var(--color-bg);
+            box-shadow: 0 0 20px rgba(212,175,55,0.5);
+            z-index: 5;
+        }
+
+        .timeline-year {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3rem;
+            font-weight: 600;
+            color: var(--color-gold);
+            opacity: 0.6;
+            line-height: 1;
+        }
+
+        .timeline-content {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.4s ease;
+        }
+
+        .timeline-content:hover {
+            border-color: rgba(212,175,55,0.2);
+            transform: translateX(5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .timeline-item:nth-child(even) .timeline-content:hover {
+            transform: translateX(-5px);
+        }
+
+        .timeline-content h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.15rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: var(--color-text);
+        }
+
+        .timeline-content p {
+            color: var(--color-text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        /* Statement of Faith */
+        .faith-section {
+            background: var(--color-bg-elevated);
+            position: relative;
+        }
+
+        .faith-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+
+        .faith-card {
+            background: var(--color-surface);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 2rem;
+            display: flex;
+            gap: 1.25rem;
+            align-items: flex-start;
+            transition: all 0.4s ease;
+        }
+
+        .faith-card:hover {
+            border-color: rgba(212,175,55,0.2);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+        }
+
+        .faith-number {
+            width: 48px;
+            height: 48px;
+            background: rgba(212,175,55,0.1);
+            border: 1px solid rgba(212,175,55,0.2);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--color-gold);
+            flex-shrink: 0;
+        }
+
+        .faith-card h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.05rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--color-text);
+        }
+
+        .faith-card p {
+            color: var(--color-text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        /* CTA Banner */
+        .cta-banner {
+            background: linear-gradient(135deg, rgba(212,175,55,0.1), rgba(107,33,168,0.1));
+            border-top: 1px solid rgba(212,175,55,0.1);
+            border-bottom: 1px solid rgba(212,175,55,0.1);
+            padding: 6rem 4%;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-banner::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 50% 50%, rgba(212,175,55,0.05) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .cta-banner h2 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(to bottom, #fff, var(--color-text-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .cta-banner p {
+            color: var(--color-text-secondary);
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 2.5rem;
+            line-height: 1.7;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .vision-grid { grid-template-columns: 1fr; }
+            .values-grid { grid-template-columns: repeat(2, 1fr); }
+            .founder-hero { grid-template-columns: 1fr; gap: 3rem; }
+            .founder-image { aspect-ratio: 16/9; }
+            .team-grid { grid-template-columns: repeat(2, 1fr); }
+            .timeline::before { left: 20px; }
+            .timeline-item { grid-template-columns: 1fr; gap: 1.5rem; padding-left: 50px; }
+            .timeline-item:nth-child(even) .timeline-content,
+            .timeline-item:nth-child(even) .timeline-year { grid-column: 1; text-align: left; }
+            .timeline-dot { left: 20px; transform: translateX(-50%); }
+            .faith-grid { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            .values-grid { grid-template-columns: 1fr; }
+            .team-grid { grid-template-columns: 1fr; }
+            .about-hero { padding-top: 100px; }
+        }
+    
+    /* LOGO IMAGE FALLBACK */
+    
+    /* HOMEPAGE HEADER LOGO MATCH */
+    nav .logo .logo-mark,
+    .study-nav .logo .logo-mark,
+    .watch-header .logo .logo-mark {
+        width: 48px;
+        height: 48px;
+        flex: 0 0 48px;
+        border: 1px solid var(--color-gold);
+        border-radius: 50%;
+        background: transparent;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        position: relative;
+        box-shadow: 0 0 20px rgba(212,175,55,0.1);
+    }
+
+    nav .logo .logo-mark img,
+    .study-nav .logo .logo-mark img,
+    .watch-header .logo .logo-mark img,
+    nav .logo .logo-mark-img,
+    .study-nav .logo .logo-mark-img,
+    .watch-header .logo .logo-mark-img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        display: block;
+        position: relative;
+        z-index: 1;
+    }
+
+    nav .logo .logo-title,
+    .study-nav .logo .logo-title,
+    .watch-header .logo .logo-title {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 1.5rem;
+        font-weight: 400;
+        line-height: 1;
+        letter-spacing: 0;
+    }
+
+    nav .logo .logo-subtitle,
+    .study-nav .logo .logo-subtitle,
+    .watch-header .logo .logo-subtitle {
+        font-size: 0.65rem;
+        text-transform: uppercase;
+        letter-spacing: 0.3em;
+        color: var(--color-text-muted);
+        margin-top: 0.25rem;
+    }
+
+    .loader-ring,
+    .loader-ring--soft,
+    .loader-dots,
+    .loader-bar,
+    .loader-progress {
+        display: none !important;
+    }
+</style>
+</head>
+<body>
+    <!-- Film Grain Overlay -->
+    <div class="grain-overlay"></div>
+    <div class="vignette"></div>
+
+    <!-- Custom Cursor -->
+    <div class="cursor" id="cursor"></div>
+    <div class="cursor-dot" id="cursorDot"></div>
+
+    <!-- Navigation -->
+    <nav id="navbar" class="scrolled" style="background: rgba(5,5,5,0.85); backdrop-filter: blur(20px);">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <div class="logo-mark"><img src="images/logowtb.png" alt="Messianic Movement logo" class="logo-mark-img"></div>
+                <div class="logo-text">
+                    <span class="logo-title">Messianic Movement</span>
+                    <span class="logo-subtitle">Regenerational Ministry</span>
+                </div>
+            </a>
+
+            <ul class="nav-links">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="holy_ghost_assembly.html" class="nav-link">Assembly</a></li>
+                <li><a href="index.html#ministries" class="nav-link">Ministries</a></li>
+                <li><a href="index.html#calendar" class="nav-link">Calendar</a></li>
+                <li><a href="index.html#resources" class="nav-link">Resources</a></li>
+                <li><a href="index.html#live" class="nav-link">Live</a></li>
+                <li><a href="index.html#give" class="nav-link">Give</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Page Hero -->
+    <section class="about-hero">
+        <div class="about-hero-bg">
+            <img src="images/holy-ghost-assembly.jpg" alt="Church congregation worshipping">
+        </div>
+        <div class="hero-particles" id="particles"></div>
+
+        <div class="about-hero-content">
+            <div class="hero-eyebrow">
+                <div class="eyebrow-line"></div>
+                <span class="eyebrow-text">Our Story</span>
+                <div class="eyebrow-line" style="transform: rotate(180deg);"></div>
+            </div>
+
+            <h1>About the Church</h1>
+
+            <p>Discover the heart, history, and vision behind Messianic Movement. A movement birthed in prayer, built on faith, and blazing with holy fire.</p>
+
+            <div class="hero-actions">
+                <a href="#vision" class="btn btn-primary">
+                    <i class="fas fa-eye btn-icon"></i>
+                    Our Vision
+                </a>
+                <a href="#leadership" class="btn btn-secondary">
+                    Meet the Leaders
+                    <i class="fas fa-arrow-right btn-icon"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Vision & Mission -->
+    <section class="vision-section" id="vision">
+        <div class="section-header">
+            <span class="section-eyebrow">Divine Mandate</span>
+            <h2 class="section-title">Vision & Mission</h2>
+            <p class="section-subtitle">We exist to raise a generation of Spirit-filled believers who will transform nations through the power of the Holy Ghost.</p>
+        </div>
+
+        <div class="vision-grid">
+            <div class="vision-card">
+                <div class="vision-card-icon"><i class="fas fa-eye"></i></div>
+                <h3>Our Vision</h3>
+                <p>To see a global army of regenerated men and women walking in the fullness of the Holy Spirit, demonstrating the power of God in every sphere of society. We envision churches planted in every nation, communities transformed by the Gospel, and a generation that knows no limits in the supernatural.</p>
+            </div>
+            <div class="vision-card">
+                <div class="vision-card-icon"><i class="fas fa-bullseye"></i></div>
+                <h3>Our Mission</h3>
+                <p>To preach the Gospel of Jesus Christ with signs and wonders, to disciple believers into maturity through the Word and the Spirit, to equip ministers for end-time harvest, and to demonstrate compassion to the poor and oppressed. We are committed to preparing the world for the messianic era.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Core Values -->
+    <section class="values-section">
+        <div class="section-header">
+            <span class="section-eyebrow">What We Stand For</span>
+            <h2 class="section-title">Our Core Values</h2>
+            <p class="section-subtitle">These principles shape everything we do. They are the foundation upon which this ministry stands.</p>
+        </div>
+
+        <div class="values-grid">
+            <div class="value-card">
+                <div class="value-number">01</div>
+                <h3>The Supremacy of Scripture</h3>
+                <p>We believe the Bible is the inspired, infallible Word of God and the final authority for all faith and practice.</p>
+            </div>
+            <div class="value-card">
+                <div class="value-number">02</div>
+                <h3>The Power of the Holy Ghost</h3>
+                <p>We pursue the fullness of the Spirit, embracing the gifts, fruit, and operations of the Holy Ghost in our lives and gatherings.</p>
+            </div>
+            <div class="value-card">
+                <div class="value-number">03</div>
+                <h3>Radical Discipleship</h3>
+                <p>We are committed to the process of regeneration—being transformed into the image of Christ through obedience and surrender.</p>
+            </div>
+            <div class="value-card">
+                <div class="value-number">04</div>
+                <h3>Apostolic Foundations</h3>
+                <p>We honor the fivefold ministry and operate under apostolic governance, alignment, and covering.</p>
+            </div>
+            <div class="value-card">
+                <div class="value-number">05</div>
+                <h3>Compassion & Justice</h3>
+                <p>We serve the poor, defend the oppressed, and stand against injustice as an expression of the heart of God.</p>
+            </div>
+            <div class="value-card">
+                <div class="value-number">06</div>
+                <h3>Global Impact</h3>
+                <p>We are a sending church. Every believer is called to reach their world—locally, nationally, and globally.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Leadership Section -->
+    <section class="leadership-section" id="leadership">
+        <div class="section-header">
+            <span class="section-eyebrow">God's Generals</span>
+            <h2 class="section-title">Our Leadership</h2>
+            <p class="section-subtitle">Meet the men and women God has set apart to shepherd this great house and advance His kingdom across the earth.</p>
+        </div>
+
+        <!-- Founder -->
+        <div class="founder-hero">
+            <div class="founder-image">
+                <img src="images/testimonial-michael.jpg" alt="Pastor John James - Founder & Senior Pastor">
+                <div class="founder-image-badge">
+                    <h3>Pastor John James</h3>
+                    <p>Founder & Senior Pastor</p>
+                </div>
+            </div>
+            <div class="founder-content">
+                <span class="role-badge"><i class="fas fa-crown"></i> Founder & Senior Pastor</span>
+                <h2>Pastor John James</h2>
+                <p>Pastor John James is the visionary founder and Senior Pastor of Messianic Movement. Born in Lagos, Nigeria, he received a powerful calling to ministry at the age of 19 after a life-changing encounter with the Holy Ghost during a prayer retreat.</p>
+                <p>With over 25 years of apostolic ministry, Pastor John has pioneered a movement that spans over 50 nations. His teachings on divine regeneration, the baptism of the Holy Spirit, and apostolic authority have transformed countless lives worldwide.</p>
+                <p>He holds a Doctorate in Theology and is a respected voice in the global Pentecostal community. Under his leadership, WHGRM has grown from a small prayer group to a global network of churches, Bible schools, and humanitarian organizations.</p>
+
+                <div class="founder-quote">
+                    <p>"The church is not a building. It is a people—a burning, shining generation that carries the fire of God into every dark place. We were born for such a time as this."</p>
+                    <span>— Pastor John James</span>
+                </div>
+
+                <div class="founder-social">
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Co-Pastor -->
+        <div class="founder-hero" style="margin-bottom: 6rem;">
+            <div class="founder-content" style="order: 1;">
+                <span class="role-badge"><i class="fas fa-heart"></i> Co-Senior Pastor</span>
+                <h2>Pastor Mrs. Joice James</h2>
+                <p>Pastor Mrs. Joice James serves as Co-Senior Pastor alongside her husband, bringing a powerful dimension of grace, wisdom, and prophetic insight to the ministry. A woman of deep prayer and uncompromising faith, she leads the women's ministry and oversees the pastoral care department.</p>
+                <p>With a background in counseling and ministry training, Pastor Joice has developed programs that have restored marriages, healed broken families, and raised up women leaders across Africa and beyond. Her annual "Women of Fire" conference draws thousands of women seeking spiritual empowerment.</p>
+                <p>She is also the founder of the Compassion Works initiative, which has provided food, education, and medical care to over 100,000 vulnerable children and families across sub-Saharan Africa.</p>
+
+                <div class="founder-quote">
+                    <p>"Every woman is a vessel of fire. When a woman catches the flame of the Holy Ghost, she doesn't just burn—she ignites nations."</p>
+                    <span>— Pastor Mrs. Joice James</span>
+                </div>
+
+                <div class="founder-social">
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+            <div class="founder-image" style="order: 2;">
+                <img src="images/testimonial-sarah.jpg" alt="Pastor Mrs. Joice James - Co-Senior Pastor">
+                <div class="founder-image-badge">
+                    <h3>Pastor Mrs. Joice James</h3>
+                    <p>Co-Senior Pastor</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ministry Team -->
+        <div class="section-header" style="margin-bottom: 4rem;">
+            <span class="section-eyebrow">The Team</span>
+            <h2 class="section-title" style="font-size: clamp(2rem, 4vw, 3.5rem);">Ministry Leadership</h2>
+        </div>
+
+        <div class="team-grid">
+            <div class="team-card">
+                <div class="team-card-image">
+                    <img src="images/testimonial-david.jpg" alt="David Okonkwo">
+                </div>
+                <div class="team-card-content">
+                    <h3>David Okonkwo</h3>
+                    <div class="role">Executive Pastor</div>
+                    <p>Oversees church operations, staff, and strategic planning. A gifted administrator with a shepherd's heart.</p>
+                </div>
+            </div>
+            <div class="team-card">
+                <div class="team-card-image">
+                    <img src="images/testimonial-michael.jpg" alt="Rev. Michael Thompson">
+                </div>
+                <div class="team-card-content">
+                    <h3>Rev. Michael Thompson</h3>
+                    <div class="role">Worship Pastor</div>
+                    <p>Leads Zion Worship with an anointing that ushers believers into the manifest presence of God.</p>
+                </div>
+            </div>
+            <div class="team-card">
+                <div class="team-card-image">
+                    <img src="images/testimonial-sarah.jpg" alt="Dr. Sarah Chen">
+                </div>
+                <div class="team-card-content">
+                    <h3>Dr. Sarah Chen</h3>
+                    <div class="role">Head of Bible School</div>
+                    <p>Doctor of Theology leading the School of the Spirit with academic excellence and spiritual depth.</p>
+                </div>
+            </div>
+            <div class="team-card">
+                <div class="team-card-image">
+                    <img src="images/testimonial-david.jpg" alt="Pastor Emmanuel Adeyemi">
+                </div>
+                <div class="team-card-content">
+                    <h3>Pastor Emmanuel Adeyemi</h3>
+                    <div class="role">Youth & Missions Pastor</div>
+                    <p>Passionate about reaching the next generation and mobilizing missionaries to the nations.</p>
+                </div>
+            </div>
+            <div class="team-card">
+                <div class="team-card-image">
+                    <img src="images/testimonial-sarah.jpg" alt="Prophetess Grace Okafor">
+                </div>
+                <div class="team-card-content">
+                    <h3>Prophetess Grace Okafor</h3>
+                    <div class="role">Prophetic Ministry</div>
+                    <p>A seasoned prophetic voice guiding the church with divine direction, counsel, and intercession.</p>
+                </div>
+            </div>
+            <div class="team-card">
+                <div class="team-card-image">
+                    <img src="images/testimonial-michael.jpg" alt="Elder Thomas Williams">
+                </div>
+                <div class="team-card-content">
+                    <h3>Elder Thomas Williams</h3>
+                    <div class="role">Church Administrator</div>
+                    <p>Oversees finance, facilities, and governance with integrity, wisdom, and decades of experience.</p>
+                </div>
+            </div>
+            <div class="team-card">
+                <div class="team-card-image">
+                    <img src="images/testimonial-david.jpg" alt="Pastor Daniel Mensah">
+                </div>
+                <div class="team-card-content">
+                    <h3>Pastor Daniel Mensah</h3>
+                    <div class="role">Evangelism Director</div>
+                    <p>Leads Gospel Revolution with crusades, street evangelism, and digital outreach reaching millions.</p>
+                </div>
+            </div>
+            <div class="team-card">
+                <div class="team-card-image">
+                    <img src="images/testimonial-sarah.jpg" alt="Minister Rebecca Nwosu">
+                </div>
+                <div class="team-card-content">
+                    <h3>Minister Rebecca Nwosu</h3>
+                    <div class="role">Children's Ministry</div>
+                    <p>Building the next generation of fire-filled kids through creative teaching and Spirit-led programs.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- History Timeline -->
+    <section class="history-section">
+        <div class="section-header">
+            <span class="section-eyebrow">Our Journey</span>
+            <h2 class="section-title">History of the Ministry</h2>
+            <p class="section-subtitle">From a small prayer gathering to a global movement. Every milestone is a testimony of God's faithfulness.</p>
+        </div>
+
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-year">2001</div>
+                <div class="timeline-content">
+                    <h3>The Birth of a Vision</h3>
+                    <p>Pastor John James receives a divine mandate during a 40-day fast. A small prayer group of 12 people gathers in his living room in Lagos, Nigeria. The first service is held under a mango tree with plastic chairs and a heart full of faith.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-year">2005</div>
+                <div class="timeline-content">
+                    <h3>First Permanent Sanctuary</h3>
+                    <p>After four years of explosive growth, the ministry acquires its first property—a 500-seat auditorium on Faith Avenue. The dedication service sees over 1,200 people in attendance, with miracles, healings, and mass baptisms in the Holy Spirit.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-year">2008</div>
+                <div class="timeline-content">
+                    <h3>Global Expansion Begins</h3>
+                    <p>The first international branch is planted in Accra, Ghana. Within the same year, branches open in London, Toronto, and Johannesburg. The ministry officially adopts the name Messianic Movement.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-year">2012</div>
+                <div class="timeline-content">
+                    <h3>School of the Spirit Launched</h3>
+                    <p>The Bible training institute opens its doors, offering systematic theological education combined with hands-on ministry training. Over 500 students enroll in the first year. Today, the school has graduated over 10,000 ministers.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-year">2015</div>
+                <div class="timeline-content">
+                    <h3>Compassion Works Initiative</h3>
+                    <p>Pastor Mrs. Joice James launches the humanitarian arm of the ministry. The first project provides clean water to 50 villages in rural Nigeria. Today, Compassion Works operates in 15 countries.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-year">2018</div>
+                <div class="timeline-content">
+                    <h3>The New Worship Center</h3>
+                    <p>Construction begins on the 15,000-seat Glory Dome—a state-of-the-art worship center designed to host international conferences, crusades, and gatherings. The project is completed debt-free in 2020.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-year">2023</div>
+                <div class="timeline-content">
+                    <h3>50 Nations & Counting</h3>
+                    <p>The ministry celebrates reaching 50 nations with the Gospel. Over 200 churches, 50 Bible schools, and countless humanitarian projects now operate under the WHGRM banner. The vision continues to expand.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-year">2026</div>
+                <div class="timeline-content">
+                    <h3>The Era of Regeneration</h3>
+                    <p>Today, WHGRM stands as a global force for the Gospel. With over 15,000 members at the flagship assembly and millions reached through media, the ministry continues to blaze forward—raising men in the power of the Spirit.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Statement of Faith -->
+    <section class="faith-section">
+        <div class="section-header">
+            <span class="section-eyebrow">What We Believe</span>
+            <h2 class="section-title">Statement of Faith</h2>
+            <p class="section-subtitle">These are the foundational truths that guide our doctrine, teaching, and practice as a ministry.</p>
+        </div>
+
+        <div class="faith-grid">
+            <div class="faith-card">
+                <div class="faith-number">1</div>
+                <div>
+                    <h3>The Trinity</h3>
+                    <p>We believe in one God, eternally existent in three persons: Father, Son, and Holy Spirit—co-equal, co-eternal, and co-existent.</p>
+                </div>
+            </div>
+            <div class="faith-card">
+                <div class="faith-number">2</div>
+                <div>
+                    <h3>The Bible</h3>
+                    <p>We believe the Holy Scriptures, both Old and New Testaments, are the inspired, infallible, and authoritative Word of God.</p>
+                </div>
+            </div>
+            <div class="faith-card">
+                <div class="faith-number">3</div>
+                <div>
+                    <h3>Jesus Christ</h3>
+                    <p>We believe in the deity of Jesus Christ, His virgin birth, sinless life, miracles, atoning death, bodily resurrection, and His personal return in power and glory.</p>
+                </div>
+            </div>
+            <div class="faith-card">
+                <div class="faith-number">4</div>
+                <div>
+                    <h3>Salvation</h3>
+                    <p>We believe salvation is by grace through faith in Jesus Christ. It is a free gift that cannot be earned, only received through repentance and confession.</p>
+                </div>
+            </div>
+            <div class="faith-card">
+                <div class="faith-number">5</div>
+                <div>
+                    <h3>The Holy Spirit</h3>
+                    <p>We believe in the baptism of the Holy Spirit, the manifestation of spiritual gifts, and the ongoing work of the Spirit in regeneration, empowerment, and guidance.</p>
+                </div>
+            </div>
+            <div class="faith-card">
+                <div class="faith-number">6</div>
+                <div>
+                    <h3>Divine Healing</h3>
+                    <p>We believe in divine healing for the body, soul, and spirit through the atoning work of Christ. Healing is the children's bread and available to all believers.</p>
+                </div>
+            </div>
+            <div class="faith-card">
+                <div class="faith-number">7</div>
+                <div>
+                    <h3>The Church</h3>
+                    <p>We believe the Church is the Body of Christ, called to worship, fellowship, discipleship, ministry, and evangelism until Christ returns.</p>
+                </div>
+            </div>
+            <div class="faith-card">
+                <div class="faith-number">8</div>
+                <div>
+                    <h3>The Second Coming</h3>
+                    <p>We believe in the literal, personal, and imminent return of Jesus Christ to establish His kingdom, judge the nations, and dwell with His people forever.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Banner -->
+    <section class="cta-banner">
+        <h2>Come Be Part of the Story</h2>
+        <p>We believe God has a unique place for you in this family. Whether you are seeking God for the first time or looking for a spiritual home, you belong here.</p>
+        <div class="hero-actions" style="justify-content: center;">
+            <a href="holy_ghost_assembly.html" class="btn btn-primary">
+                <i class="fas fa-calendar-alt btn-icon"></i>
+                Visit the Assembly
+            </a>
+            <a href="index.html#give" class="btn btn-secondary">
+                Partner With Us
+                <i class="fas fa-heart btn-icon"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <a href="index.html" class="logo">
+                    <div class="logo-icon"><img src="images/logowtb.png" alt="Messianic Movement logo" class="logo-mark-img"></div>
+                    <div class="logo-text">
+                        <span class="logo-title">Messianic Movement</span>
+                        <span class="logo-subtitle">Regenerational Ministry</span>
+                    </div>
+                </a>
+                <p>Raising a generation of Spirit-filled believers who will transform nations through the power of the Holy Ghost.</p>
+                <div class="social-links">
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-links">
+                <h4>About</h4>
+                <ul>
+                    <li><a href="#vision">Vision & Mission</a></li>
+                    <li><a href="#leadership">Leadership</a></li>
+                    <li><a href="#">Our History</a></li>
+                    <li><a href="#">Statement of Faith</a></li>
+                    <li><a href="holy_ghost_assembly.html">Holy Ghost Assembly</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-links">
+                <h4>Connect</h4>
+                <ul>
+                    <li><a href="index.html#live">Watch Live</a></li>
+                    <li><a href="#">Prayer Request</a></li>
+                    <li><a href="index.html#give">Give</a></li>
+                    <li><a href="#">Volunteer</a></li>
+                    <li><a href="#">Membership</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-links">
+                <h4>Contact</h4>
+                <ul>
+                    <li><i class="fas fa-map-marker-alt"></i> 123 Faith Avenue, Glory City</li>
+                    <li><i class="fas fa-phone"></i> +234 (0) 800 123 4567</li>
+                    <li><i class="fas fa-envelope"></i> info@whgrministry.org</li>
+                    <li><i class="fas fa-clock"></i> Sun: 8AM, 10:30AM & 5PM WAT</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2026 Messianic Movement. All rights reserved.</p>
+            <p>Designed with <i class="fas fa-heart" style="color: var(--color-gold);"></i> by the Spirit</p>
+        </div>
+    </footer>
+
+    <!-- Modal -->
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModal()">
+                <i class="fas fa-times"></i>
+            </button>
+            <h2 id="modalTitle">Title</h2>
+            <p id="modalBody" style="color: var(--text-secondary); margin-top: 1rem; line-height: 1.8;">Content goes here...</p>
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div class="toast" id="toast">
+        <i class="fas fa-check-circle toast-icon"></i>
+        <span id="toastMessage">Item added to cart</span>
+    </div>
+
+    <!-- Floating Buttons -->
+    <a href="https://wa.me/2348001234567" class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+    <button class="scroll-top" id="scrollTop" onclick="scrollToTop()" aria-label="Scroll to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
+    <script>
+        function openModal(title, body) {
+            document.getElementById('modalTitle').textContent = title;
+            document.getElementById('modalBody').textContent = body;
+            document.getElementById('modal').classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            document.getElementById('modal').classList.remove('open');
+            document.body.style.overflow = '';
+        }
+
+        document.getElementById('modal').addEventListener('click', function(e) {
+            if (e.target === this) closeModal();
+        });
+
+        // Loading screen
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('loader')?.classList.add('hidden');
+                initParticles();
+            }, 2000);
+        });
+
+        // Scroll top button
+        const scrollTopBtn = document.getElementById('scrollTop');
+        window.addEventListener('scroll', () => {
+            scrollTopBtn.classList.toggle('visible', window.scrollY > 500);
+        });
+    </script>
+</body>
+</html>

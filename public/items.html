@@ -1,0 +1,1314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Books & Items | Messianic Movement</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --color-bg: #050505;
+            --color-bg-elevated: #0a0a0a;
+            --color-surface: #111111;
+            --color-surface-hover: #1a1a1a;
+            --color-gold: #d4af37;
+            --color-gold-light: #f4d03f;
+            --color-gold-dark: #aa8c2c;
+            --color-purple: #6b46c1;
+            --color-purple-dark: #4c1d95;
+            --color-deep-purple: #5b21b6;
+            --color-purple-rich: #7c3aed;
+            --color-soft-blue: #3b82f6;
+            --color-blue-muted: #60a5fa;
+            --color-accent: #d4af37;
+            --color-text: #ffffff;
+            --color-text-secondary: #b0b0c0;
+            --color-text-muted: #71717a;
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --glow-purple: rgba(107, 70, 193, 0.6);
+            --glow-purple-strong: rgba(124, 58, 237, 0.4);
+            --glow-gold: rgba(212, 175, 55, 0.4);
+            --glow-blue: rgba(59, 130, 246, 0.3);
+            --gradient-spiritual: linear-gradient(135deg, rgba(212,175,55,0.15) 0%, rgba(107,33,168,0.1) 50%, rgba(59,130,246,0.05) 100%);
+            --gradient-gold-purple: linear-gradient(135deg, rgba(212,175,55,0.1) 0%, rgba(107,33,168,0.15) 100%);
+            --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+            --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; font-size: 16px; }
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background-color: var(--color-bg);
+            color: var(--color-text);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+        h1, h2, h3, h4, .serif { font-family: 'Cormorant Garamond', serif; font-weight: 400; letter-spacing: -0.02em; }
+
+        /* Film Grain & Vignette */
+        .grain-overlay {
+            position: fixed; inset: 0; z-index: 9999; pointer-events: none; opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+        .vignette {
+            position: fixed; inset: 0;
+            background: radial-gradient(circle at center, transparent 0%, var(--color-bg) 120%);
+            pointer-events: none; z-index: 9998; opacity: 0.6;
+        }
+
+        /* Custom Cursor */
+        .cursor {
+            width: 20px; height: 20px; border: 1px solid var(--color-gold); border-radius: 50%;
+            position: fixed; pointer-events: none; z-index: 10000;
+            transition: transform 0.15s ease, width 0.3s ease, height 0.3s ease, background 0.3s ease;
+            mix-blend-mode: difference; transform: translate(-50%, -50%);
+        }
+        .cursor.hover { width: 60px; height: 60px; background: rgba(212, 175, 55, 0.1); border-color: transparent; }
+        .cursor-dot {
+            width: 4px; height: 4px; background: var(--color-gold); border-radius: 50%;
+            position: fixed; pointer-events: none; z-index: 10001; transform: translate(-50%, -50%);
+        }
+
+        /* Loading Screen */
+        .loader {
+            position: fixed; inset: 0; background: var(--color-bg); z-index: 99999;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            transition: opacity 0.8s var(--ease-out-expo), visibility 0.8s;
+        }
+        .loader.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+        .loader-text {
+            font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; color: var(--color-gold);
+            letter-spacing: 0.5em; text-transform: uppercase; overflow: hidden;
+        }
+        .loader-text span { display: inline-block; opacity: 0; transform: translateY(100%); animation: revealText 0.8s var(--ease-out-expo) forwards; }
+        @keyframes revealText { to { opacity: 1; transform: translateY(0); } }
+        .loader-bar { width: 200px; height: 1px; background: rgba(255,255,255,0.1); margin-top: 2rem; position: relative; overflow: hidden; }
+        .loader-progress { position: absolute; left: 0; top: 0; height: 100%; width: 0%; background: var(--color-gold); animation: loadProgress 2s var(--ease-out-expo) forwards; box-shadow: 0 0 20px var(--color-gold); }
+        @keyframes loadProgress { to { width: 100%; } }
+
+        /* Navigation */
+        nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 1.5rem 4%;
+            transition: all 0.6s var(--ease-out-expo); transform: translateY(0);
+            background: rgba(5, 5, 5, 0.85); backdrop-filter: blur(20px) saturate(180%);
+            border-bottom: 1px solid var(--glass-border);
+            box-shadow: 0 4px 30px rgba(0,0,0,0.3);
+        }
+        .nav-container { max-width: 1600px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .logo { display: flex; align-items: center; gap: 1rem; text-decoration: none; color: var(--color-text); }
+        .logo-mark {
+            width: 48px; height: 48px; border: 1px solid var(--color-gold); border-radius: 50%;
+            display: flex; align-items: center; justify-content: center; font-size: 1.25rem;
+            color: var(--color-gold); position: relative; overflow: hidden; transition: all 0.4s ease;
+            box-shadow: 0 0 20px rgba(212,175,55,0.1);}
+        .logo-mark::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, var(--color-gold), var(--color-purple-rich)); transform: scale(0); transition: transform 0.6s var(--ease-out-expo); border-radius: 50%; }
+        .logo:hover .logo-mark::before { transform: scale(1); }
+        .logo:hover .logo-mark {
+    overflow: hidden; color: var(--color-bg); box-shadow: 0 0 30px rgba(212,175,55,0.3);     }
+        .logo-text { display: flex; flex-direction: column; }
+        .logo-title { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 400; line-height: 1; }
+        .logo-subtitle { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.3em; color: var(--color-text-muted); margin-top: 0.25rem; }
+        .nav-links { display: flex; gap: 3rem; list-style: none; align-items: center; }
+        .nav-link {
+            color: var(--color-text-secondary); text-decoration: none; font-size: 0.875rem; font-weight: 500;
+            letter-spacing: 0.05em; position: relative; padding: 0.5rem 0; transition: all 0.4s ease;
+        }
+        .nav-link::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0%; height: 1px; background: linear-gradient(90deg, var(--color-gold), var(--color-purple-rich)); transition: width 0.6s var(--ease-out-expo); box-shadow: 0 0 10px var(--glow-gold); }
+        .nav-link:hover { color: var(--color-gold); text-shadow: 0 0 20px rgba(212,175,55,0.3); }
+        .nav-link:hover::after { width: 100%; }
+        .nav-link.active { color: var(--color-gold); }
+        .nav-link.active::after { width: 100%; }
+        .nav-cta {
+            padding: 0.875rem 2rem; background: transparent; border: 1px solid var(--color-gold); color: var(--color-gold);
+            border-radius: 100px; font-size: 0.875rem; font-weight: 600; letter-spacing: 0.05em; cursor: pointer;
+            transition: all 0.4s var(--ease-out-expo); position: relative; overflow: hidden;
+            font-family: 'Space Grotesk', sans-serif; box-shadow: 0 0 20px rgba(212,175,55,0.1);
+        }
+        .nav-cta::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(135deg, var(--color-gold), var(--color-purple-rich)); transform: translateY(100%); transition: transform 0.4s var(--ease-out-expo); z-index: -1; }
+        .nav-cta:hover { color: var(--color-bg); box-shadow: 0 0 30px rgba(212,175,55,0.3); transform: translateY(-2px); }
+        .nav-cta:hover::before { transform: translateY(0); }
+
+        /* Mobile Menu */
+        .mobile-menu-btn { display: none; background: none; border: none; color: var(--color-gold); font-size: 1.5rem; cursor: pointer; }
+
+        /* Hero Section */
+        .page-hero {
+            min-height: 50vh; position: relative; display: flex; align-items: center; justify-content: center;
+            overflow: hidden; padding: 140px 4% 4rem; background: linear-gradient(135deg, rgba(10,10,15,0.98) 0%, rgba(5,5,5,0.98) 100%);
+        }
+        .page-hero::before {
+            content: ''; position: absolute; inset: 0;
+            background: radial-gradient(circle at 20% 50%, rgba(212,175,55,0.08) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 50%, rgba(107,33,168,0.06) 0%, transparent 50%);
+            pointer-events: none;
+        }
+        .page-hero-content { text-align: center; max-width: 900px; z-index: 10; position: relative; }
+        .page-hero h1 {
+            font-size: clamp(3rem, 8vw, 6rem); line-height: 1; margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #fff 0%, var(--color-gold-light) 50%, var(--color-gold) 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+            filter: drop-shadow(0 0 30px rgba(212,175,55,0.2));
+        }
+        .page-hero p { font-size: 1.25rem; color: var(--color-text-secondary); max-width: 600px; margin: 0 auto; font-weight: 300; line-height: 1.7; }
+
+        /* Search & Filter Bar */
+        .search-section { padding: 3rem 4%; background: var(--color-bg-elevated); border-bottom: 1px solid var(--glass-border); position: sticky; top: 80px; z-index: 100; }
+        .search-container { max-width: 1400px; margin: 0 auto; display: flex; gap: 2rem; align-items: center; flex-wrap: wrap; }
+        .search-box { flex: 1; min-width: 300px; position: relative; }
+        .search-box input {
+            width: 100%; padding: 1.25rem 1.5rem 1.25rem 3.5rem; background: var(--glass-bg); border: 1px solid var(--glass-border);
+            border-radius: 100px; color: var(--color-text); font-family: 'Space Grotesk', sans-serif; font-size: 1rem;
+            transition: all 0.4s ease; outline: none;
+        }
+        .search-box input:focus { border-color: var(--color-gold); box-shadow: 0 0 30px rgba(212,175,55,0.1); }
+        .search-box input::placeholder { color: var(--color-text-muted); }
+        .search-box i { position: absolute; left: 1.25rem; top: 50%; transform: translateY(-50%); color: var(--color-gold); font-size: 1.1rem; }
+        .search-box .search-clear {
+            position: absolute; right: 1.25rem; top: 50%; transform: translateY(-50%);
+            background: none; border: none; color: var(--color-text-muted); cursor: pointer;
+            font-size: 1rem; display: none;
+        }
+        .search-box .search-clear.visible { display: block; }
+
+        .filter-pills { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+        .filter-pill {
+            padding: 0.75rem 1.5rem; background: var(--glass-bg); border: 1px solid var(--glass-border);
+            border-radius: 100px; color: var(--color-text-secondary); font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.875rem; font-weight: 500; cursor: pointer; transition: all 0.4s var(--ease-out-expo);
+            display: flex; align-items: center; gap: 0.5rem;
+        }
+        .filter-pill:hover { border-color: rgba(212,175,55,0.3); color: var(--color-text); transform: translateY(-2px); }
+        .filter-pill.active {
+            background: linear-gradient(135deg, rgba(212,175,55,0.15), rgba(107,33,168,0.15));
+            border-color: var(--color-gold); color: var(--color-gold);
+            box-shadow: 0 0 20px rgba(212,175,55,0.15);
+        }
+        .filter-pill .count { font-size: 0.75rem; opacity: 0.6; }
+
+        .sort-dropdown { position: relative; }
+        .sort-dropdown select {
+            padding: 0.875rem 2.5rem 0.875rem 1.5rem; background: var(--glass-bg); border: 1px solid var(--glass-border);
+            border-radius: 100px; color: var(--color-text-secondary); font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.875rem; cursor: pointer; outline: none; appearance: none;
+            transition: all 0.3s ease;
+        }
+        .sort-dropdown select:focus { border-color: var(--color-gold); }
+        .sort-dropdown i { position: absolute; right: 1rem; top: 50%; transform: translateY(-50%); color: var(--color-gold); pointer-events: none; }
+
+        /* Results Count */
+        .results-bar { max-width: 1400px; margin: 0 auto; padding: 1.5rem 4%; display: flex; justify-content: space-between; align-items: center; color: var(--color-text-muted); font-size: 0.875rem; }
+        .results-bar span { color: var(--color-gold); font-weight: 600; }
+
+        /* Book Grid - Reference Style */
+        .books-section { padding: 2rem 4% 8rem; }
+        .books-container { max-width: 1400px; margin: 0 auto; }
+
+        /* Two layout modes: List (like reference) and Grid */
+        .books-list { display: flex; flex-direction: column; gap: 2rem; }
+        .books-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(380px, 1fr)); gap: 2rem; }
+
+        .book-card {
+            background: var(--color-surface); border: 1px solid var(--glass-border); border-radius: 24px;
+            overflow: hidden; transition: all 0.6s var(--ease-out-expo); display: flex;
+            position: relative; backdrop-filter: blur(10px);
+        }
+        .book-card:hover {
+            border-color: rgba(212,175,55,0.2);
+            box-shadow: 0 30px 60px -20px rgba(0,0,0,0.5), 0 0 40px rgba(212,175,55,0.08);
+            transform: translateY(-5px);
+        }
+        .book-card::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+            background: linear-gradient(90deg, var(--color-gold), var(--color-purple-rich), var(--color-soft-blue));
+            transform: scaleX(0); transition: transform 0.6s var(--ease-out-expo);
+        }
+        .book-card:hover::before { transform: scaleX(1); }
+
+        .book-card.list-layout { flex-direction: row; }
+        .book-card.grid-layout { flex-direction: column; }
+
+        /* Book Cover */
+        .book-cover {
+            position: relative; overflow: hidden; flex-shrink: 0; display: flex; align-items: center; justify-content: center;
+            background: linear-gradient(135deg, #1a0f0f 0%, #0f0f1a 100%);
+        }
+        .book-card.list-layout .book-cover { width: 280px; min-height: 380px; }
+        .book-card.grid-layout .book-cover { width: 100%; aspect-ratio: 3/4; }
+
+        .book-cover-inner {
+            width: 75%; height: 80%; position: relative;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.6), 0 0 20px rgba(212,175,55,0.1);
+            transform-style: preserve-3d; transition: transform 0.6s var(--ease-out-expo);
+        }
+        .book-card:hover .book-cover-inner { transform: translateZ(20px) rotateY(-5deg); }
+
+        .book-spine {
+            position: absolute; left: 0; top: 0; bottom: 0; width: 12px;
+            background: linear-gradient(to right, rgba(0,0,0,0.4), rgba(0,0,0,0.1));
+            z-index: 2;
+        }
+        .book-front {
+            position: absolute; inset: 0; left: 12px; border-radius: 0 4px 4px 0;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            padding: 1.5rem; text-align: center; overflow: hidden;
+            border: 1px solid rgba(212,175,55,0.15);
+        }
+        .book-front::before {
+            content: ''; position: absolute; inset: 8px; border: 1px solid rgba(212,175,55,0.2); border-radius: 2px; pointer-events: none;
+        }
+        .book-front::after {
+            content: ''; position: absolute; inset: 0;
+            background: linear-gradient(135deg, rgba(212,175,55,0.05) 0%, transparent 50%, rgba(107,33,168,0.05) 100%);
+            pointer-events: none;
+        }
+        .book-corner-tl, .book-corner-tr, .book-corner-bl, .book-corner-br {
+            position: absolute; width: 20px; height: 20px; border: 1px solid rgba(212,175,55,0.3); pointer-events: none; z-index: 3;
+        }
+        .book-corner-tl { top: 12px; left: 20px; border-right: none; border-bottom: none; }
+        .book-corner-tr { top: 12px; right: 12px; border-left: none; border-bottom: none; }
+        .book-corner-bl { bottom: 12px; left: 20px; border-right: none; border-top: none; }
+        .book-corner-br { bottom: 12px; right: 12px; border-left: none; border-top: none; }
+
+        .book-cover-title {
+            font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; color: var(--color-gold);
+            line-height: 1.3; margin-bottom: 0.5rem; position: relative; z-index: 2; text-shadow: 0 0 10px rgba(212,175,55,0.2);
+        }
+        .book-cover-subtitle {
+            font-family: 'Space Grotesk', sans-serif; font-size: 0.65rem; color: var(--color-text-muted);
+            text-transform: uppercase; letter-spacing: 0.15em; position: relative; z-index: 2;
+        }
+        .book-cover-icon { font-size: 2.5rem; color: rgba(212,175,55,0.3); margin-bottom: 1rem; position: relative; z-index: 2; }
+        .book-cover-line { width: 40px; height: 1px; background: var(--color-gold); margin: 0.75rem 0; position: relative; z-index: 2; opacity: 0.5; }
+
+        /* Cover color variations */
+        .cover-gold .book-front { background: linear-gradient(135deg, #2a1f1f 0%, #1f1a14 50%, #1a1410 100%); }
+        .cover-purple .book-front { background: linear-gradient(135deg, #1f1428 0%, #1a1020 50%, #140d1a 100%); }
+        .cover-blue .book-front { background: linear-gradient(135deg, #0f1a2a 0%, #0d1520 50%, #0a111a 100%); }
+        .cover-red .book-front { background: linear-gradient(135deg, #2a1414 0%, #1f1010 50%, #1a0d0d 100%); }
+        .cover-green .book-front { background: linear-gradient(135deg, #142a1a 0%, #101f14 50%, #0d1a10 100%); }
+        .cover-dark .book-front { background: linear-gradient(135deg, #1a1a1a 0%, #141414 50%, #0f0f0f 100%); }
+
+        .book-content {
+            flex: 1; padding: 2.5rem; display: flex; flex-direction: column; justify-content: center;
+        }
+        .book-card.grid-layout .book-content { padding: 1.75rem; }
+
+        .book-meta { display: flex; gap: 1rem; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; }
+        .book-category {
+            padding: 0.4rem 1rem; background: rgba(212,175,55,0.1); border: 1px solid rgba(212,175,55,0.2);
+            border-radius: 100px; font-size: 0.7rem; color: var(--color-gold); font-weight: 600;
+            text-transform: uppercase; letter-spacing: 0.1em;
+        }
+        .book-badge {
+            padding: 0.4rem 1rem; border-radius: 100px; font-size: 0.7rem; font-weight: 600;
+            text-transform: uppercase; letter-spacing: 0.1em;
+        }
+        .badge-bestseller { background: rgba(212,175,55,0.15); border: 1px solid rgba(212,175,55,0.3); color: var(--color-gold); }
+        .badge-new { background: rgba(59,130,246,0.15); border: 1px solid rgba(59,130,246,0.3); color: var(--color-soft-blue); }
+        .badge-bundle { background: rgba(107,33,168,0.15); border: 1px solid rgba(107,33,168,0.3); color: var(--color-purple-rich); }
+
+        .book-title { font-family: 'Cormorant Garamond', serif; font-size: 1.75rem; margin-bottom: 0.5rem; color: var(--color-text); transition: color 0.3s ease; }
+        .book-card:hover .book-title { color: var(--color-gold); }
+        .book-subtitle { font-size: 0.9rem; color: var(--color-text-muted); margin-bottom: 1rem; font-style: italic; }
+        .book-description { color: var(--color-text-secondary); font-size: 0.95rem; line-height: 1.8; margin-bottom: 1.5rem; }
+        .book-card.grid-layout .book-description { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+
+        .book-footer { display: flex; justify-content: space-between; align-items: center; margin-top: auto; gap: 1rem; flex-wrap: wrap; }
+        .book-price { font-family: 'Cormorant Garamond', serif; font-size: 1.75rem; color: var(--color-gold); text-shadow: 0 0 10px rgba(212,175,55,0.2); }
+        .book-price .original { font-size: 1rem; color: var(--color-text-muted); text-decoration: line-through; margin-right: 0.5rem; }
+        .book-actions { display: flex; gap: 0.75rem; }
+        .btn-add-cart {
+            padding: 0.875rem 1.75rem; background: transparent; border: 1px solid var(--color-gold); color: var(--color-gold);
+            border-radius: 100px; font-weight: 600; font-size: 0.875rem; cursor: pointer; transition: all 0.4s var(--ease-out-expo);
+            display: flex; align-items: center; gap: 0.5rem; font-family: 'Space Grotesk', sans-serif; position: relative; overflow: hidden;
+        }
+        .btn-add-cart::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, var(--color-gold), var(--color-purple-rich)); transform: translateX(-100%); transition: transform 0.4s var(--ease-out-expo); z-index: -1; }
+        .btn-add-cart:hover { color: var(--color-bg); border-color: transparent; box-shadow: 0 10px 20px rgba(212,175,55,0.3); }
+        .btn-add-cart:hover::before { transform: translateX(0); }
+        .btn-read {
+            padding: 0.875rem 1.5rem; background: var(--glass-bg); border: 1px solid var(--glass-border); color: var(--color-text-secondary);
+            border-radius: 100px; font-weight: 600; font-size: 0.875rem; cursor: pointer; transition: all 0.3s ease;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+        .btn-read:hover { border-color: rgba(212,175,55,0.3); color: var(--color-text); }
+
+        /* Layout Toggle */
+        .layout-toggle { display: flex; gap: 0.5rem; background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 12px; padding: 0.25rem; }
+        .layout-toggle button {
+            width: 36px; height: 36px; border-radius: 8px; border: none; background: transparent;
+            color: var(--color-text-muted); cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; justify-content: center;
+        }
+        .layout-toggle button.active { background: rgba(212,175,55,0.15); color: var(--color-gold); }
+        .layout-toggle button:hover:not(.active) { color: var(--color-text); }
+
+        /* Collections Banner */
+        .collections-section { padding: 6rem 4%; background: linear-gradient(135deg, rgba(10,10,15,0.95) 0%, rgba(5,5,5,0.98) 100%); position: relative; overflow: hidden; }
+        .collections-section::before {
+            content: ''; position: absolute; inset: 0;
+            background: radial-gradient(circle at 30% 50%, rgba(212,175,55,0.05) 0%, transparent 50%),
+                        radial-gradient(circle at 70% 50%, rgba(107,33,168,0.05) 0%, transparent 50%);
+            pointer-events: none;
+        }
+        .collections-grid {
+            max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; position: relative; z-index: 1;
+        }
+        .collection-card {
+            background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 20px;
+            padding: 2rem; text-align: center; transition: all 0.6s var(--ease-out-expo); cursor: pointer;
+            backdrop-filter: blur(10px); position: relative; overflow: hidden;
+        }
+        .collection-card::before {
+            content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(212,175,55,0.05), rgba(107,33,168,0.05)); opacity: 0; transition: opacity 0.3s ease;
+        }
+        .collection-card:hover { transform: translateY(-10px); border-color: rgba(212,175,55,0.2); box-shadow: 0 20px 40px -20px rgba(0,0,0,0.4), 0 0 30px rgba(212,175,55,0.08); }
+        .collection-card:hover::before { opacity: 1; }
+        .collection-icon { font-size: 2rem; color: var(--color-gold); margin-bottom: 1rem; position: relative; z-index: 1; }
+        .collection-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; margin-bottom: 0.5rem; position: relative; z-index: 1; }
+        .collection-card p { font-size: 0.875rem; color: var(--color-text-muted); position: relative; z-index: 1; }
+        .collection-count { display: inline-block; margin-top: 0.75rem; padding: 0.25rem 0.75rem; background: rgba(212,175,55,0.1); border-radius: 100px; font-size: 0.75rem; color: var(--color-gold); position: relative; z-index: 1; }
+
+        /* Newsletter Section */
+        .newsletter-section { padding: 6rem 4%; background: var(--color-bg-elevated); position: relative; }
+        .newsletter-container {
+            max-width: 800px; margin: 0 auto; text-align: center; padding: 4rem;
+            background: var(--gradient-spiritual); border: 1px solid var(--glass-border); border-radius: 24px;
+            position: relative; overflow: hidden;
+        }
+        .newsletter-container::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+            background: linear-gradient(90deg, transparent, var(--color-gold), var(--color-purple-rich), transparent);
+        }
+        .newsletter-container h2 { font-family: 'Cormorant Garamond', serif; font-size: 2.5rem; margin-bottom: 1rem; }
+        .newsletter-container p { color: var(--color-text-secondary); margin-bottom: 2rem; }
+        .newsletter-form { display: flex; gap: 1rem; max-width: 500px; margin: 0 auto; }
+        .newsletter-form input {
+            flex: 1; padding: 1rem 1.5rem; background: var(--glass-bg); border: 1px solid var(--glass-border);
+            border-radius: 100px; color: var(--color-text); font-family: 'Space Grotesk', sans-serif; outline: none; transition: all 0.3s ease;
+        }
+        .newsletter-form input:focus { border-color: var(--color-gold); box-shadow: 0 0 20px rgba(212,175,55,0.1); }
+        .newsletter-form button {
+            padding: 1rem 2rem; background: linear-gradient(135deg, var(--color-gold), var(--color-purple-rich));
+            border: none; border-radius: 100px; color: var(--color-bg); font-weight: 700; font-family: 'Space Grotesk', sans-serif;
+            cursor: pointer; transition: all 0.3s ease; white-space: nowrap;
+        }
+        .newsletter-form button:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(212,175,55,0.3); }
+
+        /* Section Header */
+        .section-header { max-width: 800px; margin: 0 auto 4rem; text-align: center; }
+        .section-eyebrow {
+            display: inline-flex; align-items: center; gap: 1rem; font-size: 0.75rem; text-transform: uppercase;
+            letter-spacing: 0.3em; color: var(--color-gold); margin-bottom: 1.5rem; font-weight: 600;
+        }
+        .section-eyebrow::before, .section-eyebrow::after { content: ''; width: 30px; height: 1px; background: linear-gradient(90deg, transparent, var(--color-gold), transparent); opacity: 0.5; }
+        .section-title { font-size: clamp(2.5rem, 5vw, 4rem); line-height: 1; margin-bottom: 1rem; background: linear-gradient(to bottom, #fff, var(--color-text-secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .section-subtitle { color: var(--color-text-secondary); font-size: 1.125rem; font-weight: 300; line-height: 1.7; }
+
+        /* Footer */
+        footer { background: #020202; border-top: 1px solid var(--glass-border); padding: 6rem 4% 3rem; position: relative; }
+        footer::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(212,175,55,0.3), transparent); }
+        .footer-grid { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 4rem; margin-bottom: 4rem; }
+        .footer-brand .logo { margin-bottom: 1.5rem; }
+        .footer-brand p { color: var(--color-text-secondary); line-height: 1.8; margin-bottom: 2rem; max-width: 300px; }
+        .social-links { display: flex; gap: 1rem; }
+        .social-links a {
+            width: 44px; height: 44px; background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 50%;
+            display: flex; align-items: center; justify-content: center; color: var(--color-text-secondary); text-decoration: none;
+            transition: all 0.4s var(--ease-out-expo); position: relative; overflow: hidden;
+        }
+        .social-links a::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, var(--color-gold), var(--color-purple-rich)); transform: translateY(100%); transition: transform 0.4s var(--ease-out-expo); z-index: -1; }
+        .social-links a:hover { color: var(--color-bg); border-color: transparent; transform: translateY(-3px); box-shadow: 0 10px 20px rgba(212,175,55,0.2); }
+        .social-links a:hover::before { transform: translateY(0); }
+        .footer-links h4 { font-size: 0.875rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--color-gold); margin-bottom: 1.5rem; }
+        .footer-links ul { list-style: none; }
+        .footer-links li { margin-bottom: 0.75rem; color: var(--color-text-secondary); display: flex; align-items: center; gap: 0.5rem; }
+        .footer-links a { color: var(--color-text-secondary); text-decoration: none; transition: all 0.3s ease; display: inline-block; }
+        .footer-links a:hover { color: var(--color-gold); transform: translateX(5px); }
+        .footer-bottom { max-width: 1400px; margin: 0 auto; padding-top: 2rem; border-top: 1px solid var(--glass-border); display: flex; justify-content: space-between; align-items: center; color: var(--color-text-muted); font-size: 0.875rem; flex-wrap: wrap; gap: 1rem; }
+
+        /* Cart Sidebar */
+        .cart-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.8); backdrop-filter: blur(5px); z-index: 1999; opacity: 0; visibility: hidden; transition: all 0.4s ease; }
+        .cart-overlay.open { opacity: 1; visibility: visible; }
+        .cart-sidebar { position: fixed; top: 0; right: -450px; width: 450px; max-width: 100%; height: 100vh; background: rgba(18, 18, 26, 0.98); backdrop-filter: blur(20px); border-left: 1px solid var(--glass-border); z-index: 2000; transition: right 0.6s var(--ease-out-expo); display: flex; flex-direction: column; }
+        .cart-sidebar.open { right: 0; }
+        .cart-header { padding: 2rem; border-bottom: 1px solid var(--glass-border); display: flex; justify-content: space-between; align-items: center; }
+        .cart-header h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.75rem; background: linear-gradient(to right, #fff, var(--color-gold)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .close-cart { background: none; border: none; color: var(--color-text); font-size: 1.5rem; cursor: pointer; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; }
+        .close-cart:hover { background: var(--glass-bg); color: var(--color-gold); transform: rotate(90deg); }
+        .cart-items { flex: 1; overflow-y: auto; padding: 1.5rem; }
+        .cart-item { display: flex; gap: 1rem; padding: 1rem; background: var(--glass-bg); border-radius: 15px; margin-bottom: 1rem; border: 1px solid var(--glass-border); align-items: center; }
+        .cart-item-image { width: 70px; height: 70px; border-radius: 10px; overflow: hidden; background: var(--color-surface); flex-shrink: 0; border: 1px solid var(--glass-border); }
+        .cart-item-image img { width: 100%; height: 100%; object-fit: cover; }
+        .cart-item-details { flex: 1; }
+        .cart-item-title { font-weight: 600; margin-bottom: 0.25rem; font-size: 0.95rem; }
+        .cart-item-price { color: var(--color-gold); font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; }
+        .cart-item-qty { display: flex; align-items: center; gap: 0.5rem; font-size: 0.875rem; color: var(--color-text-secondary); }
+        .qty-btn-small { width: 24px; height: 24px; border-radius: 6px; border: 1px solid var(--glass-border); background: transparent; color: var(--color-text); cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; transition: all 0.2s; }
+        .qty-btn-small:hover { border-color: var(--color-gold); color: var(--color-gold); }
+        .remove-item { background: none; border: none; color: var(--color-text-muted); cursor: pointer; padding: 0.5rem; transition: all 0.2s; }
+        .remove-item:hover { color: #ff3366; transform: scale(1.1); }
+        .cart-footer { padding: 2rem; border-top: 1px solid var(--glass-border); background: rgba(0,0,0,0.2); }
+        .cart-total { display: flex; justify-content: space-between; margin-bottom: 1.5rem; font-size: 1.25rem; align-items: center; }
+        .cart-total span:last-child { color: var(--color-gold); font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 600; }
+        .checkout-btn { width: 100%; padding: 1.25rem; background: linear-gradient(135deg, var(--color-gold), var(--color-purple-rich)); border: none; border-radius: 100px; color: var(--color-bg); font-weight: 700; font-size: 1rem; cursor: pointer; transition: all 0.3s ease; font-family: 'Space Grotesk', sans-serif; box-shadow: 0 10px 30px rgba(212,175,55,0.3); }
+        .checkout-btn:hover { transform: translateY(-2px); box-shadow: 0 15px 40px rgba(212,175,55,0.4); }
+
+        /* Modal */
+        .modal { position: fixed; inset: 0; background: rgba(0,0,0,0.9); backdrop-filter: blur(10px); z-index: 3000; display: flex; align-items: center; justify-content: center; opacity: 0; visibility: hidden; transition: all 0.4s ease; padding: 2rem; }
+        .modal.open { opacity: 1; visibility: visible; }
+        .modal-content { background: var(--color-surface); border: 1px solid var(--glass-border); border-radius: 24px; max-width: 700px; width: 100%; padding: 3rem; position: relative; transform: scale(0.9) translateY(20px); transition: transform 0.4s var(--ease-out-expo); max-height: 90vh; overflow-y: auto; }
+        .modal.open .modal-content { transform: scale(1) translateY(0); }
+        .close-modal { position: absolute; top: 1.5rem; right: 1.5rem; width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--glass-border); background: transparent; color: var(--color-text); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; }
+        .close-modal:hover { background: var(--glass-bg); color: var(--color-gold); transform: rotate(90deg); }
+        .modal h2 { font-family: 'Cormorant Garamond', serif; font-size: 2.5rem; margin-bottom: 1rem; background: linear-gradient(to right, #fff, var(--color-gold)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .modal-body { color: var(--color-text-secondary); line-height: 1.8; }
+        .modal-body h4 { color: var(--color-gold); margin: 1.5rem 0 0.5rem; font-family: 'Space Grotesk', sans-serif; font-size: 1rem; text-transform: uppercase; letter-spacing: 0.1em; }
+        .modal-body ul { margin-left: 1.5rem; color: var(--color-text-secondary); }
+        .modal-body li { margin-bottom: 0.5rem; }
+        .modal-actions { display: flex; gap: 1rem; margin-top: 2rem; }
+
+        /* Toast */
+        .toast { position: fixed; bottom: 100px; left: 50%; transform: translateX(-50%) translateY(100px); background: rgba(17,17,17,0.95); backdrop-filter: blur(20px); border: 1px solid rgba(212,175,55,0.3); padding: 1rem 2rem; border-radius: 100px; color: var(--color-text); z-index: 5000; opacity: 0; transition: all 0.6s var(--ease-out-expo); display: flex; align-items: center; gap: 1rem; box-shadow: 0 10px 30px rgba(0,0,0,0.5), 0 0 30px rgba(212,175,55,0.1); }
+        .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+        .toast-icon { color: var(--color-gold); font-size: 1.25rem; }
+
+        /* Floating Buttons */
+        .whatsapp-float { position: fixed; bottom: 2rem; left: 2rem; width: 60px; height: 60px; background: linear-gradient(135deg, #25d366, #128c7e); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.75rem; box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4); cursor: pointer; z-index: 999; transition: all 0.4s var(--ease-out-expo); text-decoration: none; }
+        .whatsapp-float:hover { transform: scale(1.1) rotate(10deg); box-shadow: 0 6px 30px rgba(37, 211, 102, 0.6); }
+        .scroll-top { position: fixed; bottom: 2rem; right: 2rem; width: 50px; height: 50px; background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--color-text); cursor: pointer; z-index: 999; opacity: 0; visibility: hidden; transition: all 0.4s var(--ease-out-expo); backdrop-filter: blur(10px); }
+        .scroll-top.visible { opacity: 1; visibility: visible; }
+        .scroll-top:hover { background: linear-gradient(135deg, var(--color-gold), var(--color-purple-rich)); color: var(--color-bg); border-color: transparent; transform: translateY(-5px); box-shadow: 0 10px 20px rgba(212,175,55,0.3); }
+
+        /* Animations */
+        @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+        .fade-in { opacity: 0; transform: translateY(30px); animation: fadeUp 0.8s var(--ease-out-expo) forwards; }
+
+        /* No Results */
+        .no-results { text-align: center; padding: 6rem 2rem; color: var(--color-text-muted); }
+        .no-results i { font-size: 4rem; color: var(--color-gold); opacity: 0.3; margin-bottom: 1.5rem; display: block; }
+        .no-results h3 { font-family: 'Cormorant Garamond', serif; font-size: 2rem; color: var(--color-text); margin-bottom: 0.5rem; }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--color-bg); }
+        ::-webkit-scrollbar-thumb { background: linear-gradient(180deg, var(--color-gold), var(--color-purple-rich)); border-radius: 4px; }
+        ::selection { background: rgba(212, 175, 55, 0.3); color: #fff; }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .collections-grid { grid-template-columns: repeat(2, 1fr); }
+            .book-card.list-layout { flex-direction: column; }
+            .book-card.list-layout .book-cover { width: 100%; aspect-ratio: 3/4; }
+            .footer-grid { grid-template-columns: 1fr 1fr; gap: 3rem; }
+            .cursor, .cursor-dot { display: none; }
+            .newsletter-form { flex-direction: column; }
+        }
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .mobile-menu-btn { display: block; }
+            .books-grid { grid-template-columns: 1fr; }
+            .collections-grid { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr; }
+            .cart-sidebar { width: 100%; }
+            .search-container { flex-direction: column; align-items: stretch; }
+            .search-box { min-width: auto; }
+            .filter-pills { justify-content: center; }
+            .book-footer { flex-direction: column; align-items: flex-start; }
+            .layout-toggle { display: none; }
+        }
+    
+    /* LOGO IMAGE FALLBACK */
+    
+    /* HOMEPAGE HEADER LOGO MATCH */
+    nav .logo .logo-mark,
+    .study-nav .logo .logo-mark,
+    .watch-header .logo .logo-mark {
+        width: 48px;
+        height: 48px;
+        flex: 0 0 48px;
+        border: 1px solid var(--color-gold);
+        border-radius: 50%;
+        background: transparent;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        position: relative;
+        box-shadow: 0 0 20px rgba(212,175,55,0.1);
+    }
+
+    nav .logo .logo-mark img,
+    .study-nav .logo .logo-mark img,
+    .watch-header .logo .logo-mark img,
+    nav .logo .logo-mark-img,
+    .study-nav .logo .logo-mark-img,
+    .watch-header .logo .logo-mark-img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        display: block;
+        position: relative;
+        z-index: 1;
+    }
+
+    nav .logo .logo-title,
+    .study-nav .logo .logo-title,
+    .watch-header .logo .logo-title {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 1.5rem;
+        font-weight: 400;
+        line-height: 1;
+        letter-spacing: 0;
+    }
+
+    nav .logo .logo-subtitle,
+    .study-nav .logo .logo-subtitle,
+    .watch-header .logo .logo-subtitle {
+        font-size: 0.65rem;
+        text-transform: uppercase;
+        letter-spacing: 0.3em;
+        color: var(--color-text-muted);
+        margin-top: 0.25rem;
+    }
+
+    .loader-ring,
+    .loader-ring--soft,
+    .loader-dots,
+    .loader-bar,
+    .loader-progress {
+        display: none !important;
+    }
+</style>
+</head>
+<body>
+    <!-- Film Grain Overlay -->
+    <div class="grain-overlay"></div>
+    <div class="vignette"></div>
+
+    <!-- Custom Cursor -->
+    <div class="cursor" id="cursor"></div>
+    <div class="cursor-dot" id="cursorDot"></div>
+
+    <!-- Navigation -->
+    <nav id="navbar" class="scrolled" style="background: rgba(5,5,5,0.85); backdrop-filter: blur(20px);">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <div class="logo-mark"><img src="images/logowtb.png" alt="Messianic Movement logo" class="logo-mark-img"></div>
+                <div class="logo-text">
+                    <span class="logo-title">Messianic Movement</span>
+                    <span class="logo-subtitle">Regenerational Ministry</span>
+                </div>
+            </a>
+
+            <ul class="nav-links">
+                <li><a href="index.html#home" class="nav-link">Home</a></li>
+                <li><a href="index.html#ministries" class="nav-link">Ministries</a></li>
+                <li><a href="index.html#calendar" class="nav-link">Calendar</a></li>
+                <li><a href="index.html#resources" class="nav-link active">Resources</a></li>
+                <li><a href="index.html#store" class="nav-link">Store</a></li>
+                <li><a href="index.html#live" class="nav-link">Live</a></li>
+                <li style="margin-left: 1rem;">
+                    <button type="button" class="nav-cta" onclick="toggleCart()">
+                        <i class="fas fa-shopping-bag" style="margin-right:0.5rem;"></i>
+                        Cart (<span id="cartCount">0</span>)
+                    </button>
+                </li>
+            </ul>
+            <button class="mobile-menu-btn" onclick="toggleMobileMenu()"><i class="fas fa-bars"></i></button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="page-hero">
+        <div class="page-hero-content">
+            <div class="section-eyebrow" style="margin-bottom:1.5rem;">
+                <div style="width:60px;height:1px;background:linear-gradient(to right,transparent,var(--color-gold));box-shadow:0 0 10px rgba(212,175,55,0.3);"></div>
+                <span>Spiritual Library</span>
+                <div style="width:60px;height:1px;background:linear-gradient(to left,transparent,var(--color-gold));box-shadow:0 0 10px rgba(212,175,55,0.3);"></div>
+            </div>
+            <h1>Books & Holy Materials</h1>
+            <p>Equip yourself with anointed writings, study guides, and spiritual resources designed to transform your walk with God and ignite the fire of the Holy Ghost within you.</p>
+        </div>
+    </section>
+
+    <!-- Search & Filters -->
+    <section class="search-section">
+        <div class="search-container">
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" id="searchInput" placeholder="Search by title, author, or topic..." oninput="handleSearch()">
+                <button class="search-clear" id="searchClear" onclick="clearSearch()"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="filter-pills" id="categoryFilters">
+                <button class="filter-pill active" data-category="all" onclick="filterCategory('all')">All <span class="count">20</span></button>
+                <button class="filter-pill" data-category="devotional" onclick="filterCategory('devotional')">Devotionals <span class="count">4</span></button>
+                <button class="filter-pill" data-category="doctrine" onclick="filterCategory('doctrine')">Doctrine <span class="count">5</span></button>
+                <button class="filter-pill" data-category="prayer" onclick="filterCategory('prayer')">Prayer <span class="count">3</span></button>
+                <button class="filter-pill" data-category="study" onclick="filterCategory('study')">Study Guides <span class="count">4</span></button>
+                <button class="filter-pill" data-category="testimony" onclick="filterCategory('testimony')">Testimonies <span class="count">2</span></button>
+                <button class="filter-pill" data-category="bundle" onclick="filterCategory('bundle')">Bundles <span class="count">2</span></button>
+            </div>
+            <div style="display:flex;gap:1rem;align-items:center;margin-left:auto;">
+                <div class="layout-toggle">
+                    <button class="active" onclick="setLayout('list')" title="List view"><i class="fas fa-list"></i></button>
+                    <button onclick="setLayout('grid')" title="Grid view"><i class="fas fa-th-large"></i></button>
+                </div>
+                <div class="sort-dropdown">
+                    <select id="sortSelect" onchange="sortBooks()">
+                        <option value="featured">Featured</option>
+                        <option value="newest">Newest First</option>
+                        <option value="price-low">Price: Low to High</option>
+                        <option value="price-high">Price: High to Low</option>
+                        <option value="name">Name A-Z</option>
+                    </select>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Results Count -->
+    <div class="results-bar">
+        <div>Showing <span id="showingCount">20</span> of <span id="totalCount">20</span> resources</div>
+        <div style="display:flex;gap:0.5rem;align-items:center;">
+            <span style="color:var(--color-text-muted);">View:</span>
+            <span id="activeCategory" style="color:var(--color-gold);font-weight:600;">All Collections</span>
+        </div>
+    </div>
+
+    <!-- Books Section -->
+    <section class="books-section">
+        <div class="books-container">
+            <div class="books-list" id="booksContainer">
+                <!-- Books injected via JS -->
+            </div>
+            <div class="no-results" id="noResults" style="display:none;">
+                <i class="fas fa-book-open"></i>
+                <h3>No books found</h3>
+                <p>Try adjusting your search or filters to find what you are looking for.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Collections -->
+    <section class="collections-section">
+        <div class="section-header">
+            <span class="section-eyebrow">Curated For You</span>
+            <h2 class="section-title">Browse Collections</h2>
+            <p class="section-subtitle">Explore our carefully curated collections designed for every stage of your spiritual journey.</p>
+        </div>
+        <div class="collections-grid">
+            <div class="collection-card" onclick="filterCategory('devotional')">
+                <div class="collection-icon"><i class="fas fa-fire-alt"></i></div>
+                <h3>Daily Fire</h3>
+                <p>Morning devotionals to ignite your spirit</p>
+                <span class="collection-count">4 Books</span>
+            </div>
+            <div class="collection-card" onclick="filterCategory('doctrine')">
+                <div class="collection-icon"><i class="fas fa-cross"></i></div>
+                <h3>Foundations of Faith</h3>
+                <p>Deep doctrinal truths for solid ground</p>
+                <span class="collection-count">5 Books</span>
+            </div>
+            <div class="collection-card" onclick="filterCategory('prayer')">
+                <div class="collection-icon"><i class="fas fa-praying-hands"></i></div>
+                <h3>Upper Room</h3>
+                <p>Prayer manuals and intercession guides</p>
+                <span class="collection-count">3 Books</span>
+            </div>
+            <div class="collection-card" onclick="filterCategory('study')">
+                <div class="collection-icon"><i class="fas fa-graduation-cap"></i></div>
+                <h3>Ministry School</h3>
+                <p>Training materials for leaders</p>
+                <span class="collection-count">4 Books</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="newsletter-section">
+        <div class="newsletter-container">
+            <i class="fas fa-envelope-open-text" style="font-size:3rem;color:var(--color-gold);margin-bottom:1.5rem;opacity:0.5;"></i>
+            <h2>Join the Scroll</h2>
+            <p>Subscribe to receive updates on new releases, exclusive study notes, and early access to limited edition materials.</p>
+            <form class="newsletter-form" onsubmit="event.preventDefault(); showToast('Thank you for subscribing!');">
+                <input type="email" placeholder="Enter your email address" required>
+                <button type="submit">Subscribe</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <a href="index.html" class="logo">
+                    <div class="logo-mark" style="width:40px;height:40px;font-size:1rem;"><img src="images/logowtb.png" alt="Messianic Movement logo" class="logo-mark-img"></div>
+                    <div class="logo-text">
+                        <span class="logo-title" style="font-size:1.25rem;">Messianic Movement</span>
+                        <span class="logo-subtitle">Regenerational Ministry</span>
+                    </div>
+                </a>
+                <p>Raising a generation of Spirit-filled believers who will transform nations through the power of the Holy Ghost.</p>
+                <div class="social-links">
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html#home">Home</a></li>
+                    <li><a href="index.html#ministries">Ministries</a></li>
+                    <li><a href="index.html#calendar">Calendar</a></li>
+                    <li><a href="index.html#resources">Resources</a></li>
+                    <li><a href="index.html#live">Live Service</a></li>
+                    <li><a href="index.html#give">Give</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Resources</h4>
+                <ul>
+                    <li><a href="watch.html">Sermon Archive</a></li>
+                    <li><a href="#">Bible Study</a></li>
+                    <li><a href="prayer_request.html">Prayer Request</a></li>
+                    <li><a href="#">Testimonies</a></li>
+                    <li><a href="items.html">Bookstore</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Contact</h4>
+                <ul>
+                    <li><i class="fas fa-map-marker-alt"></i> 123 Faith Avenue, Glory City</li>
+                    <li><i class="fas fa-phone"></i> +1 (555) 123-4567</li>
+                    <li><i class="fas fa-envelope"></i> info@whgrministry.org</li>
+                    <li><i class="fas fa-clock"></i> Sun: 9AM & 11AM EST</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Messianic Movement. All rights reserved.</p>
+            <p>Designed with <i class="fas fa-heart" style="color: var(--color-gold);"></i> by the Spirit</p>
+        </div>
+    </footer>
+
+    <!-- Cart Sidebar -->
+    <div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h3>Your Cart</h3>
+            <button type="button" class="close-cart" onclick="toggleCart()"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="cart-items" id="cartItems"></div>
+        <div class="cart-footer">
+            <div class="cart-total"><span>Total:</span><span id="cartTotal">$0.00</span></div>
+            <button type="button" class="checkout-btn" onclick="checkout()">Proceed to Checkout</button>
+        </div>
+    </div>
+
+    <!-- Book Detail Modal -->
+    <div class="modal" id="bookModal">
+        <div class="modal-content">
+            <button type="button" class="close-modal" onclick="closeBookModal()"><i class="fas fa-times"></i></button>
+            <div id="modalBookContent"></div>
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div class="toast" id="toast">
+        <i class="fas fa-check-circle toast-icon"></i>
+        <span id="toastMessage">Item added to cart</span>
+    </div>
+
+    <!-- Floating Buttons -->
+    <a href="https://wa.me/1234567890" class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+    <button type="button" class="scroll-top" id="scrollTop" onclick="scrollToTop()" aria-label="Scroll to top"><i class="fas fa-arrow-up"></i></button>
+
+    <script>
+        // ==================== BOOKS DATA ====================
+        const booksData = [
+            {
+                id: 1, title: "Daily Fire Devotional", subtitle: "365 Days of Holy Ghost Ignition",
+                category: "devotional", badge: "bestseller", price: 25, originalPrice: 35,
+                coverClass: "cover-gold", icon: "fa-fire-alt",
+                description: "A year-long journey into the presence of the Holy Spirit. Each day brings fresh manna, prophetic insight, and prayer activations designed to keep your spiritual fire burning brightly from January to December.",
+                details: "This devotional is not merely a reading plan—it is a ignition system for the soul. Each entry includes a scripture focus, a prophetic declaration, and a prayer of activation. Written from the furnace of global revival experience.",
+                chapters: ["The Fire of Consecration", "The Language of the Spirit", "Throne Room Encounters", "Prophetic Activation", "Healing and Deliverance"]
+            },
+            {
+                id: 2, title: "Holy Ghost Manual Vol. 1", subtitle: "The Operations of the Spirit",
+                category: "doctrine", badge: "bestseller", price: 35, originalPrice: 45,
+                coverClass: "cover-purple", icon: "fa-dove",
+                description: "The definitive guide to understanding the person, power, and operations of the Holy Spirit in the life of the believer. This volume establishes the theological foundation for a Spirit-filled existence.",
+                details: "Volume One explores the personality of the Holy Spirit, the baptism in the Holy Ghost, the nine gifts of the Spirit, and the fruit of the Spirit. Essential reading for every believer seeking to move beyond theory into tangible experience.",
+                chapters: ["The Personhood of the Spirit", "The Baptism of Fire", "The Ninefold Gifts", "The Fruit of the Spirit", "The Anointing Oil"]
+            },
+            {
+                id: 3, title: "Holy Ghost Manual Vol. 2", subtitle: "Advanced Spiritual Warfare",
+                category: "doctrine", badge: "", price: 35, originalPrice: 45,
+                coverClass: "cover-purple", icon: "fa-shield-alt",
+                description: "An advanced training manual for soldiers in the army of the Lord. Learn to discern principalities, bind strongholds, and release angelic assistance through the authority of the Holy Ghost.",
+                details: "Volume Two delves into territorial spirits, the architecture of strongholds, prophetic intelligence gathering, and the deployment of warring angels. Includes case studies from global deliverance ministries.",
+                chapters: ["Mapping Territorial Spirits", "The Armor of Light", "Binding and Loosing", "Angelology for Believers", "Victory Protocols"]
+            },
+            {
+                id: 4, title: "Holy Ghost Manual Vol. 3", subtitle: "The Prophetic Dimension",
+                category: "doctrine", badge: "new", price: 40, originalPrice: 50,
+                coverClass: "cover-purple", icon: "fa-eye",
+                description: "Unlock the seer realm and operate in the gift of prophecy with clarity, accuracy, and humility. This volume trains you to see, hear, and declare the oracles of God with precision.",
+                details: "Volume Three covers the difference between the gift of prophecy and the office of the prophet, dream interpretation, trances and visions, and the protocols of prophetic ministry. Includes activation exercises.",
+                chapters: ["The Seer Anointing", "Dream Language", "Trances and Open Visions", "Prophetic Protocol", "The Testing of Words"]
+            },
+            {
+                id: 5, title: "Prayers That Avail Much", subtitle: "The Upper Room Prayer Manual",
+                category: "prayer", badge: "bestseller", price: 20, originalPrice: 28,
+                coverClass: "cover-blue", icon: "fa-praying-hands",
+                description: "A comprehensive prayer manual containing over 200 Spirit-led prayers for every area of life. From breakthrough to healing, from family restoration to financial miracle—these prayers move heaven.",
+                details: "Each prayer is scripturally grounded and strategically crafted to align with God's will. Categories include prayers for the morning watch, midnight battles, intercession for nations, and personal breakthrough.",
+                chapters: ["Morning Watch Prayers", "Midnight Warfare", "Healing Declarations", "Financial Breakthrough", "Family Restoration"]
+            },
+            {
+                id: 6, title: "The Anointing Oil", subtitle: "Sacred Oils and Their Uses",
+                category: "study", badge: "", price: 18, originalPrice: 25,
+                coverClass: "cover-gold", icon: "fa-oil-can",
+                description: "Discover the biblical significance of anointing oil, from the tabernacle of Moses to the ministry of Jesus. Learn to prepare, consecrate, and use oil as a point of contact for faith.",
+                details: "This guide explores the 38 biblical references to anointing oil, the chemistry of biblical spices, and the spiritual principles behind physical consecration. Includes recipes for holy anointing oil.",
+                chapters: ["Oil in the Torah", "The Olive Tree Mystery", "Preparation and Consecration", "Points of Contact", "Testimonies of Healing"]
+            },
+            {
+                id: 7, title: "Breaking Generational Curses", subtitle: "The Never Again Protocol",
+                category: "doctrine", badge: "", price: 22, originalPrice: 30,
+                coverClass: "cover-red", icon: "fa-link-slash",
+                description: "A deliverance manual that exposes the roots of generational bondage and provides the spiritual tools to break every chain. Walk in the freedom purchased by the blood of Jesus.",
+                details: "Identify the signs of generational curses, understand the legal ground they hold, and execute the court-of-heaven protocol for permanent freedom. Includes a 21-day deliverance prayer plan.",
+                chapters: ["The Anatomy of Curses", "Legal Ground and Repentance", "The Bloodline Cleansing", "The Never Again Declaration", "Maintaining Deliverance"]
+            },
+            {
+                id: 8, title: "The Seven Spirits of God", subtitle: "Understanding the Fullness of the Spirit",
+                category: "doctrine", badge: "new", price: 28, originalPrice: 38,
+                coverClass: "cover-purple", icon: "fa-star",
+                description: "An in-depth study of the seven Spirits of God mentioned in Isaiah 11 and Revelation. Understand the Spirit of the Lord, wisdom, understanding, counsel, might, knowledge, and the fear of the Lord.",
+                details: "This theological masterpiece unpacks each of the seven Spirits, their operations in the Old and New Testaments, and how to cultivate each dimension in your personal walk with God.",
+                chapters: ["The Spirit of the Lord", "The Spirit of Wisdom", "The Spirit of Understanding", "The Spirit of Counsel", "The Spirit of Might", "The Spirit of Knowledge", "The Fear of the Lord"]
+            },
+            {
+                id: 9, title: "Torah Foundations", subtitle: "Messianic Roots for Believers",
+                category: "study", badge: "", price: 30, originalPrice: 40,
+                coverClass: "cover-green", icon: "fa-scroll",
+                description: "A comprehensive study guide connecting the Torah to the Messianic fulfillment in Yeshua. Perfect for believers seeking to understand their Jewish roots and the feasts of the Lord.",
+                details: "Walk through Genesis to Deuteronomy with Messianic eyes. Each chapter includes Hebrew word studies, historical context, and prophetic shadows pointing to the coming Messiah.",
+                chapters: ["Bereshit: In the Beginning", "The Patriarchs", "The Exodus Pattern", "The Wilderness Journey", "The Second Torah"]
+            },
+            {
+                id: 10, title: "Messianic Prophecies Fulfilled", subtitle: "Proof That Jesus Is the Messiah",
+                category: "study", badge: "", price: 24, originalPrice: 32,
+                coverClass: "cover-blue", icon: "fa-check-double",
+                description: "Over 300 prophecies from the Tanakh fulfilled in the life, death, and resurrection of Yeshua HaMashiach. An evangelistic powerhouse and personal faith builder.",
+                details: "Organized by prophetic theme—birth, ministry, death, resurrection—this book provides the original Hebrew text, translation, New Testament fulfillment, and statistical probability analysis.",
+                chapters: ["The Seed of the Woman", "The Suffering Servant", "The Triumphant King", "The Resurrection", "Statistical Impossibility"]
+            },
+            {
+                id: 11, title: "Divine Healing Manual", subtitle: "By His Stripes You Are Healed",
+                category: "study", badge: "", price: 22, originalPrice: 30,
+                coverClass: "cover-gold", icon: "fa-heartbeat",
+                description: "A practical guide to divine healing covering the biblical basis, historical evidence, and practical application of faith for the sick. Includes testimonies from global healing crusades.",
+                details: "Learn the 40 biblical names of God that reveal His healing nature, the covenant of healing in the atonement, and how to minister healing with compassion and authority.",
+                chapters: ["Jehovah-Rapha", "The Atonement and Healing", "The Healing Ministry of Jesus", "Ministering to the Sick", "Testimonies of the Miraculous"]
+            },
+            {
+                id: 12, title: "Spiritual Warfare 101", subtitle: "Basic Training for New Believers",
+                category: "study", badge: "new", price: 15, originalPrice: 22,
+                coverClass: "cover-red", icon: "fa-shield-alt",
+                description: "An entry-level guide to recognizing and resisting the enemy's tactics. Written for new believers but powerful enough for seasoned saints who need a refresher on foundational warfare.",
+                details: "Covers the reality of the unseen realm, the armor of God piece by piece, the weapons of our warfare, and how to maintain victory in daily life. Simple, direct, and life-changing.",
+                chapters: ["The Unseen Realm", "Knowing Your Enemy", "The Full Armor", "The Sword of the Spirit", "Daily Victory"]
+            },
+            {
+                id: 13, title: "The Regeneration Process", subtitle: "From Sinner to Saint",
+                category: "devotional", badge: "", price: 20, originalPrice: 28,
+                coverClass: "cover-gold", icon: "fa-seedling",
+                description: "A 40-day journey through the process of spiritual regeneration. Understand what happens when you are born again and how to cooperate with the Holy Spirit in your transformation.",
+                details: "Day by day, this book walks you through the new creation reality, the renewal of the mind, the circumcision of the heart, and the manifestation of Christ in your mortal body.",
+                chapters: ["The New Creation", "The Renewed Mind", "The Circumcised Heart", "Christ in You", "The Manifested Sons"]
+            },
+            {
+                id: 14, title: "Walking in the Supernatural", subtitle: "A Lifestyle of Miracles",
+                category: "devotional", badge: "", price: 26, originalPrice: 35,
+                coverClass: "cover-purple", icon: "fa-walking",
+                description: "Miracles are not meant to be rare events—they are the normal lifestyle of every Spirit-filled believer. Learn to cultivate an atmosphere where the supernatural is expected.",
+                details: "Discover the principles of faith that release miracles, how to recognize divine appointments, and how to steward supernatural encounters without becoming weird or proud.",
+                chapters: ["Faith That Moves Mountains", "Divine Appointments", "Words of Knowledge", "The Creative Miracle", "Stewarding the Supernatural"]
+            },
+            {
+                id: 15, title: "Kingdom Finance", subtitle: "Wealth With Purpose",
+                category: "devotional", badge: "", price: 28, originalPrice: 38,
+                coverClass: "cover-green", icon: "fa-crown",
+                description: "God's plan for your financial prosperity is not about greed—it is about funding the Great Commission. Learn the covenant of abundance and how to use wealth as a tool for kingdom expansion.",
+                details: "Covers the tithe, the offering, the firstfruit, sowing and reaping, and the divine protection of covenant wealth. Includes practical budgeting for kingdom families.",
+                chapters: ["The Covenant of Wealth", "The Tithe Mystery", "The Firstfruit Principle", "Sowing and Reaping", "Kingdom Budgeting"]
+            },
+            {
+                id: 16, title: "The Upper Room Experience", subtitle: "Preparing for Pentecost",
+                category: "prayer", badge: "bestseller", price: 20, originalPrice: 28,
+                coverClass: "cover-blue", icon: "fa-wind",
+                description: "A 10-day preparation guide for receiving the baptism in the Holy Spirit. Modeled after the 120 who waited in the Upper Room, this manual prepares your heart for a personal Pentecost.",
+                details: "Each day includes a teaching, a meditation, a prayer focus, and an activation. By day 10, you will be spiritually positioned to receive the fullness of the Spirit with evidence.",
+                chapters: ["The Waiting Room", "The Unity Factor", "The Sound from Heaven", "Tongues of Fire", "The Evidence of Speaking"]
+            },
+            {
+                id: 17, title: "Apostolic Foundations", subtitle: "Building According to Pattern",
+                category: "study", badge: "", price: 32, originalPrice: 42,
+                coverClass: "cover-dark", icon: "fa-building",
+                description: "The church was never meant to be a building—it is a living organism built upon apostolic doctrine and prophetic alignment. This book restores the blueprint of the early church.",
+                details: "Explore the fivefold ministry, the government of the church, the role of elders and deacons, and the pattern of the tabernacle as a template for modern church structure.",
+                chapters: ["The Fivefold Blueprint", "Apostolic Doctrine", "The Government of God", "The Tabernacle Pattern", "The Local Church"]
+            },
+            {
+                id: 18, title: "Experiential Testimonies Vol. 1", subtitle: "Miracles From the Judgment Seat",
+                category: "testimony", badge: "new", price: 18, originalPrice: 25,
+                coverClass: "cover-red", icon: "fa-fire",
+                description: "Real stories from real people who encountered the transforming power of the Holy Ghost. From cancer healings to financial miracles, these testimonies will build your faith.",
+                details: "Volume One contains 50 verified testimonies from believers across 12 nations. Each story includes the background, the prayer, the manifestation, and the aftermath. Faith comes by hearing.",
+                chapters: ["Healing Testimonies", "Deliverance Stories", "Financial Miracles", "Family Restorations", "Supernatural Protection"]
+            },
+            {
+                id: 19, title: "Experiential Testimonies Vol. 2", subtitle: "More Fire, More Glory",
+                category: "testimony", badge: "", price: 18, originalPrice: 25,
+                coverClass: "cover-red", icon: "fa-fire",
+                description: "The second volume of supernatural testimonies featuring encounters with angels, resurrections from death, and impossible situations turned around by the finger of God.",
+                details: "Volume Two pushes deeper into the realm of the impossible. Includes testimonies of raising the dead, creative miracles of body parts, and angelic interventions in warfare.",
+                chapters: ["Angel Encounters", "Resurrection Power", "Creative Miracles", "Warfare Victories", "Prophetic Fulfillment"]
+            },
+            {
+                id: 20, title: "The Complete Library Bundle", subtitle: "All 19 Books + Exclusive Study Journal",
+                category: "bundle", badge: "bundle", price: 350, originalPrice: 550,
+                coverClass: "cover-gold", icon: "fa-gift",
+                description: "The ultimate collection for the serious student of the Spirit. Receive all 19 published books plus an exclusive leather-bound study journal available only with this bundle.",
+                details: "This bundle includes every book in the WHGRM library, a premium study journal with guided note-taking sections, and access to a private online study community with monthly live Q&A sessions.",
+                chapters: ["All 19 Published Books", "Exclusive Leather Journal", "Private Online Community", "Monthly Live Q&A", "Lifetime Updates"]
+            }
+        ];
+
+        let cart = JSON.parse(localStorage.getItem('whgrm_cart')) || [];
+        let currentLayout = 'list';
+        let currentCategory = 'all';
+        let searchQuery = '';
+        let sortMethod = 'featured';
+
+        // ==================== LOADING ====================
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('loader')?.classList.add('hidden');
+                initCursor();
+                renderBooks();
+                updateCartUI();
+            }, 2000);
+        });
+
+        // ==================== CURSOR ====================
+        function initCursor() {
+            const cursor = document.getElementById('cursor');
+            const cursorDot = document.getElementById('cursorDot');
+            if (!cursor || !cursorDot || window.innerWidth < 1024) return;
+            let mx=0, my=0, cx=0, cy=0, dx=0, dy=0;
+            document.addEventListener('mousemove', e => { mx=e.clientX; my=e.clientY; });
+            function animate() {
+                cx += (mx-cx)*0.1; cy += (my-cy)*0.1;
+                dx += (mx-dx)*0.5; dy += (my-dy)*0.5;
+                cursor.style.left = cx+'px'; cursor.style.top = cy+'px';
+                cursorDot.style.left = dx+'px'; cursorDot.style.top = dy+'px';
+                requestAnimationFrame(animate);
+            }
+            animate();
+            document.querySelectorAll('a, button, .book-card, .filter-pill, .collection-card').forEach(el => {
+                el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+                el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+            });
+        }
+
+        // ==================== RENDER BOOKS ====================
+        function renderBooks() {
+            const container = document.getElementById('booksContainer');
+            const noResults = document.getElementById('noResults');
+
+            let filtered = booksData.filter(book => {
+                const matchesCategory = currentCategory === 'all' || book.category === currentCategory;
+                const matchesSearch = !searchQuery || 
+                    book.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                    book.subtitle.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                    book.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                    book.category.toLowerCase().includes(searchQuery.toLowerCase());
+                return matchesCategory && matchesSearch;
+            });
+
+            // Sort
+            if (sortMethod === 'newest') filtered.sort((a,b) => (b.badge==='new'?1:0) - (a.badge==='new'?1:0));
+            else if (sortMethod === 'price-low') filtered.sort((a,b) => a.price - b.price);
+            else if (sortMethod === 'price-high') filtered.sort((a,b) => b.price - a.price);
+            else if (sortMethod === 'name') filtered.sort((a,b) => a.title.localeCompare(b.title));
+
+            document.getElementById('showingCount').textContent = filtered.length;
+            document.getElementById('totalCount').textContent = booksData.length;
+
+            if (filtered.length === 0) {
+                container.style.display = 'none';
+                noResults.style.display = 'block';
+                return;
+            }
+            container.style.display = 'flex';
+            noResults.style.display = 'none';
+
+            container.className = currentLayout === 'list' ? 'books-list' : 'books-grid';
+            container.innerHTML = '';
+
+            filtered.forEach((book, index) => {
+                const card = document.createElement('div');
+                card.className = `book-card ${currentLayout}-layout fade-in`;
+                card.style.animationDelay = (index * 0.05) + 's';
+
+                const badgeHtml = book.badge ? `<span class="book-badge badge-${book.badge}">${book.badge.replace('-', ' ')}</span>` : '';
+                const originalPriceHtml = book.originalPrice ? `<span class="original">$${book.originalPrice.toFixed(2)}</span>` : '';
+
+                card.innerHTML = `
+                    <div class="book-cover ${book.coverClass}">
+                        <div class="book-cover-inner">
+                            <div class="book-spine"></div>
+                            <div class="book-front">
+                                <div class="book-corner-tl"></div><div class="book-corner-tr"></div>
+                                <div class="book-corner-bl"></div><div class="book-corner-br"></div>
+                                <i class="fas ${book.icon} book-cover-icon"></i>
+                                <div class="book-cover-line"></div>
+                                <div class="book-cover-title">${book.title}</div>
+                                <div class="book-cover-subtitle">${book.subtitle}</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="book-content">
+                        <div class="book-meta">
+                            <span class="book-category">${book.category}</span>
+                            ${badgeHtml}
+                        </div>
+                        <h3 class="book-title">${book.title}</h3>
+                        <div class="book-subtitle">${book.subtitle}</div>
+                        <p class="book-description">${book.description}</p>
+                        <div class="book-footer">
+                            <div class="book-price">${originalPriceHtml}$${book.price.toFixed(2)}</div>
+                            <div class="book-actions">
+                                <button type="button" class="btn-read" onclick="openBookModal(${book.id})"><i class="fas fa-book-open"></i> Read More</button>
+                                <button type="button" class="btn-add-cart" onclick="addToCart(${book.id})"><i class="fas fa-cart-plus"></i> Add</button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        // ==================== SEARCH & FILTER ====================
+        function handleSearch() {
+            const input = document.getElementById('searchInput');
+            const clearBtn = document.getElementById('searchClear');
+            searchQuery = input.value.trim();
+            clearBtn.classList.toggle('visible', searchQuery.length > 0);
+            renderBooks();
+        }
+        function clearSearch() {
+            document.getElementById('searchInput').value = '';
+            searchQuery = '';
+            document.getElementById('searchClear').classList.remove('visible');
+            renderBooks();
+        }
+        function filterCategory(cat) {
+            currentCategory = cat;
+            document.querySelectorAll('.filter-pill').forEach(pill => {
+                pill.classList.toggle('active', pill.dataset.category === cat);
+            });
+            const catNames = { all: 'All Collections', devotional: 'Devotionals', doctrine: 'Foundations of Faith', prayer: 'Upper Room', study: 'Ministry School', testimony: 'Testimonies', bundle: 'Bundles' };
+            document.getElementById('activeCategory').textContent = catNames[cat] || cat;
+            renderBooks();
+        }
+        function sortBooks() {
+            sortMethod = document.getElementById('sortSelect').value;
+            renderBooks();
+        }
+        function setLayout(layout) {
+            currentLayout = layout;
+            document.querySelectorAll('.layout-toggle button').forEach(btn => btn.classList.remove('active'));
+            event.currentTarget.classList.add('active');
+            renderBooks();
+        }
+
+        // ==================== BOOK MODAL ====================
+        function openBookModal(id) {
+            const book = booksData.find(b => b.id === id);
+            if (!book) return;
+            const content = document.getElementById('modalBookContent');
+            const chaptersHtml = book.chapters.map(c => `<li><i class="fas fa-feather-alt" style="color:var(--color-gold);margin-right:0.5rem;font-size:0.75rem;"></i>${c}</li>`).join('');
+            content.innerHTML = `
+                <div style="display:flex;gap:2rem;margin-bottom:2rem;flex-wrap:wrap;">
+                    <div class="book-cover ${book.coverClass}" style="width:200px;height:260px;flex-shrink:0;border-radius:12px;">
+                        <div class="book-cover-inner" style="width:80%;height:85%;">
+                            <div class="book-spine"></div>
+                            <div class="book-front">
+                                <div class="book-corner-tl"></div><div class="book-corner-tr"></div>
+                                <div class="book-corner-bl"></div><div class="book-corner-br"></div>
+                                <i class="fas ${book.icon} book-cover-icon" style="font-size:1.5rem;"></i>
+                                <div class="book-cover-line" style="width:30px;"></div>
+                                <div class="book-cover-title" style="font-size:0.8rem;">${book.title}</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="flex:1;min-width:250px;">
+                        <span class="book-category" style="display:inline-block;margin-bottom:1rem;">${book.category}</span>
+                        <h2 style="font-family:'Cormorant Garamond',serif;font-size:2rem;margin-bottom:0.5rem;">${book.title}</h2>
+                        <p style="color:var(--color-text-muted);font-style:italic;margin-bottom:1rem;">${book.subtitle}</p>
+                        <div class="book-price" style="font-size:2rem;margin-bottom:1rem;">${book.originalPrice ? `<span class="original">$${book.originalPrice.toFixed(2)}</span>` : ''}$${book.price.toFixed(2)}</div>
+                        <div class="modal-actions">
+                            <button type="button" class="btn-add-cart" onclick="addToCart(${book.id}); closeBookModal();"><i class="fas fa-cart-plus"></i> Add to Cart</button>
+                            <button type="button" class="btn-read" onclick="showToast('Preview coming soon!')"><i class="fas fa-eye"></i> Preview</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <h4>Description</h4>
+                    <p>${book.details}</p>
+                    <h4>Chapters & Topics</h4>
+                    <ul>${chaptersHtml}</ul>
+                </div>
+            `;
+            document.getElementById('bookModal').classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeBookModal() {
+            document.getElementById('bookModal').classList.remove('open');
+            document.body.style.overflow = '';
+        }
+
+        // ==================== CART ====================
+        function addToCart(id) {
+            const book = booksData.find(b => b.id === id);
+            if (!book) return;
+            const existing = cart.find(item => item.id === id);
+            if (existing) {
+                existing.qty++;
+            } else {
+                cart.push({ id: book.id, title: book.title, price: book.price, qty: 1, coverClass: book.coverClass, icon: book.icon });
+            }
+            saveCart();
+            updateCartUI();
+            showToast(`${book.title} added to cart`);
+        }
+        function removeFromCart(id) {
+            cart = cart.filter(item => item.id !== id);
+            saveCart();
+            updateCartUI();
+        }
+        function updateQty(id, delta) {
+            const item = cart.find(i => i.id === id);
+            if (item) {
+                item.qty += delta;
+                if (item.qty <= 0) removeFromCart(id);
+                else { saveCart(); updateCartUI(); }
+            }
+        }
+        function saveCart() {
+            localStorage.setItem('whgrm_cart', JSON.stringify(cart));
+        }
+        function updateCartUI() {
+            const count = cart.reduce((sum, item) => sum + item.qty, 0);
+            document.getElementById('cartCount').textContent = count;
+            const itemsContainer = document.getElementById('cartItems');
+            const totalEl = document.getElementById('cartTotal');
+            if (cart.length === 0) {
+                itemsContainer.innerHTML = '<div style="text-align:center;padding:3rem;color:var(--color-text-muted);"><i class="fas fa-shopping-bag" style="font-size:3rem;display:block;margin-bottom:1rem;opacity:0.3;"></i>Your cart is empty</div>';
+                totalEl.textContent = '$0.00';
+                return;
+            }
+            itemsContainer.innerHTML = cart.map(item => `
+                <div class="cart-item">
+                    <div class="cart-item-image" style="display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#1a0f0f,#0f0f1a);">
+                        <i class="fas ${item.icon}" style="color:var(--color-gold);font-size:1.5rem;"></i>
+                    </div>
+                    <div class="cart-item-details">
+                        <div class="cart-item-title">${item.title}</div>
+                        <div class="cart-item-price">$${item.price.toFixed(2)}</div>
+                        <div class="cart-item-qty">
+                            <button class="qty-btn-small" onclick="updateQty(${item.id}, -1)"><i class="fas fa-minus"></i></button>
+                            <span>${item.qty}</span>
+                            <button class="qty-btn-small" onclick="updateQty(${item.id}, 1)"><i class="fas fa-plus"></i></button>
+                        </div>
+                    </div>
+                    <button class="remove-item" onclick="removeFromCart(${item.id})"><i class="fas fa-trash"></i></button>
+                </div>
+            `).join('');
+            const total = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+            totalEl.textContent = '$' + total.toFixed(2);
+        }
+        function toggleCart() {
+            document.getElementById('cartOverlay').classList.toggle('open');
+            document.getElementById('cartSidebar').classList.toggle('open');
+        }
+        function checkout() {
+            if (cart.length === 0) { showToast('Your cart is empty'); return; }
+            window.location.href = 'checkout.html';
+        }
+
+        // ==================== TOAST ====================
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toastMessage').textContent = msg;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 3000);
+        }
+
+        // ==================== SCROLL ====================
+        function scrollToTop() { window.scrollTo({top:0, behavior:'smooth'}); }
+        window.addEventListener('scroll', () => {
+            document.getElementById('scrollTop').classList.toggle('visible', window.scrollY > 500);
+        });
+
+        // ==================== MOBILE MENU ====================
+        function toggleMobileMenu() {
+            const nav = document.querySelector('.nav-links');
+            nav.style.display = nav.style.display === 'flex' ? 'none' : 'flex';
+            nav.style.position = 'absolute';
+            nav.style.top = '100%';
+            nav.style.left = '0';
+            nav.style.right = '0';
+            nav.style.flexDirection = 'column';
+            nav.style.background = 'rgba(5,5,5,0.98)';
+            nav.style.padding = '2rem';
+            nav.style.backdropFilter = 'blur(20px)';
+            nav.style.borderBottom = '1px solid var(--glass-border)';
+            nav.style.gap = '1.5rem';
+        }
+
+        // ==================== CLOSE MODAL ON ESCAPE ====================
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Escape') { closeBookModal(); }
+        });
+        document.getElementById('bookModal').addEventListener('click', e => {
+            if (e.target === document.getElementById('bookModal')) closeBookModal();
+        });
+
+        window.toggleCart = toggleCart;
+        window.checkout = checkout;
+        window.addToCart = addToCart;
+        window.updateQty = updateQty;
+        window.removeFromCart = removeFromCart;
+        window.closeBookModal = closeBookModal;
+    </script>
+</body>
+</html>

@@ -1,0 +1,985 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Divine Episodes | WHGRM Sunday School</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Page-Specific Styles */
+        .classroom-hero {
+            min-height: 70vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            padding: 140px 4% 4rem;
+            overflow: hidden;
+        }
+        .classroom-hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(212,175,55,0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(139,92,246,0.06) 0%, transparent 50%);
+            z-index: 0;
+        }
+        .classroom-hero-content {
+            max-width: 900px;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+        .classroom-hero h1 {
+            font-size: clamp(3rem, 7vw, 5.5rem);
+            line-height: 1;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #fff 0%, var(--color-gold-light) 50%, var(--color-gold) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .classroom-hero p {
+            font-size: 1.25rem;
+            color: var(--color-text-secondary);
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            font-weight: 300;
+        }
+        .classroom-stats {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-top: 3rem;
+            flex-wrap: wrap;
+        }
+        .stat-item {
+            text-align: center;
+        }
+        .stat-number {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3rem;
+            color: var(--color-gold);
+            line-height: 1;
+            text-shadow: 0 0 20px rgba(212,175,55,0.3);
+        }
+        .stat-label {
+            font-size: 0.875rem;
+            color: var(--color-text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-top: 0.5rem;
+        }
+
+        /* This Sunday Feature */
+        .this-sunday {
+            background: linear-gradient(135deg, rgba(10,10,15,0.95), rgba(5,5,5,0.98));
+            border-top: 1px solid rgba(212,175,55,0.1);
+            border-bottom: 1px solid rgba(212,175,55,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        .this-sunday::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 50% 0%, rgba(212,175,55,0.05), transparent 60%);
+        }
+        .sunday-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+        .sunday-video {
+            position: relative;
+            border-radius: 24px;
+            overflow: hidden;
+            border: 1px solid rgba(212,175,55,0.15);
+            box-shadow: 0 40px 80px -40px rgba(0,0,0,0.8);
+        }
+        .sunday-video img {
+            width: 100%;
+            aspect-ratio: 16/9;
+            object-fit: cover;
+            filter: brightness(0.6);
+        }
+        .sunday-play {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100px;
+            height: 100px;
+            background: rgba(212,175,55,0.2);
+            backdrop-filter: blur(10px);
+            border: 2px solid var(--color-gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-gold);
+            font-size: 2rem;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            box-shadow: 0 0 40px rgba(212,175,55,0.3);
+        }
+        .sunday-play:hover {
+            transform: translate(-50%, -50%) scale(1.1);
+            background: var(--color-gold);
+            color: var(--color-bg);
+        }
+        .sunday-live-badge {
+            position: absolute;
+            top: 1.5rem;
+            left: 1.5rem;
+            padding: 0.5rem 1rem;
+            background: rgba(255,51,102,0.2);
+            border: 1px solid rgba(255,51,102,0.4);
+            border-radius: 100px;
+            color: #ff3366;
+            font-size: 0.875rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            backdrop-filter: blur(10px);
+        }
+        .sunday-live-badge::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: #ff3366;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #ff3366;
+            animation: pulse 2s infinite;
+        }
+        .sunday-info h3 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--color-text);
+        }
+        .sunday-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .sunday-meta span {
+            padding: 0.5rem 1rem;
+            background: rgba(212,175,55,0.08);
+            border: 1px solid rgba(212,175,55,0.15);
+            border-radius: 100px;
+            font-size: 0.875rem;
+            color: var(--color-gold);
+        }
+        .sunday-info p {
+            color: var(--color-text-secondary);
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
+        .media-toggle {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        .media-btn {
+            padding: 0.875rem 2rem;
+            background: transparent;
+            border: 1px solid var(--glass-border);
+            border-radius: 100px;
+            color: var(--color-text-secondary);
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        .media-btn.active, .media-btn:hover {
+            background: linear-gradient(135deg, rgba(212,175,55,0.15), rgba(107,33,168,0.15));
+            border-color: var(--color-gold);
+            color: var(--color-gold);
+            box-shadow: 0 0 20px rgba(212,175,55,0.1);
+        }
+        .download-notes {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, var(--color-gold), var(--color-gold-dark));
+            color: var(--color-bg);
+            border-radius: 100px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(212,175,55,0.3);
+        }
+        .download-notes:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(212,175,55,0.5);
+        }
+
+        /* Course Categories */
+        .category-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 4rem;
+            flex-wrap: wrap;
+        }
+        .category-tab {
+            padding: 1rem 2.5rem;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid var(--glass-border);
+            border-radius: 100px;
+            color: var(--color-text-secondary);
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.875rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.4s ease;
+        }
+        .category-tab.active, .category-tab:hover {
+            background: linear-gradient(135deg, rgba(212,175,55,0.15), rgba(107,33,168,0.15));
+            border-color: rgba(212,175,55,0.4);
+            color: var(--color-gold);
+            box-shadow: 0 0 30px rgba(212,175,55,0.1);
+        }
+
+        /* Course Grid - BibleProject Style */
+        .courses-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+            gap: 2.5rem;
+        }
+        .course-card {
+            background: rgba(17,17,17,0.6);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            overflow: hidden;
+            transition: all 0.6s var(--ease-out-expo);
+            cursor: pointer;
+            position: relative;
+            backdrop-filter: blur(10px);
+        }
+        .course-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--color-gold), var(--color-purple-rich), var(--color-soft-blue));
+            transform: scaleX(0);
+            transition: transform 0.6s var(--ease-out-expo);
+        }
+        .course-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            border-color: rgba(212,175,55,0.2);
+            box-shadow: 0 30px 60px -20px rgba(0,0,0,0.5), 0 0 40px rgba(212,175,55,0.1);
+        }
+        .course-card:hover::before {
+            transform: scaleX(1);
+        }
+        .course-image {
+            position: relative;
+            aspect-ratio: 16/10;
+            overflow: hidden;
+        }
+        .course-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 1.2s var(--ease-out-expo);
+        }
+        .course-card:hover .course-image img {
+            transform: scale(1.1);
+        }
+        .course-sessions {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            padding: 0.5rem 1rem;
+            background: rgba(0,0,0,0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(212,175,55,0.3);
+            border-radius: 100px;
+            color: var(--color-gold);
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .course-body {
+            padding: 2rem;
+        }
+        .course-teacher {
+            font-size: 0.875rem;
+            color: var(--color-text-muted);
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .course-teacher i {
+            color: var(--color-gold);
+        }
+        .course-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.75rem;
+            margin-bottom: 0.75rem;
+            color: var(--color-text);
+            transition: color 0.3s ease;
+        }
+        .course-card:hover .course-title {
+            color: var(--color-gold);
+        }
+        .course-scripture {
+            font-size: 0.9rem;
+            color: var(--color-soft-blue);
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--glass-border);
+        }
+        .course-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .course-progress {
+            font-size: 0.875rem;
+            color: var(--color-text-muted);
+        }
+        .course-progress-bar {
+            width: 100px;
+            height: 3px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 3px;
+            margin-top: 0.5rem;
+            overflow: hidden;
+        }
+        .course-progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--color-gold), var(--color-purple-rich));
+            border-radius: 3px;
+        }
+        .course-arrow {
+            width: 44px;
+            height: 44px;
+            background: rgba(212,175,55,0.1);
+            border: 1px solid rgba(212,175,55,0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-gold);
+            transition: all 0.3s ease;
+        }
+        .course-card:hover .course-arrow {
+            background: linear-gradient(135deg, var(--color-gold), var(--color-purple-rich));
+            color: var(--color-bg);
+            transform: scale(1.1);
+        }
+
+        /* Study Materials */
+        .materials-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+        .material-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 2.5rem;
+            text-align: center;
+            transition: all 0.4s ease;
+            backdrop-filter: blur(10px);
+        }
+        .material-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(212,175,55,0.2);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+        .material-icon {
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, rgba(212,175,55,0.1), rgba(107,33,168,0.1));
+            border: 1px solid rgba(212,175,55,0.2);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--color-gold);
+            margin: 0 auto 1.5rem;
+        }
+        .material-card h4 {
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+        }
+        .material-card p {
+            color: var(--color-text-secondary);
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+        }
+        .material-link {
+            color: var(--color-gold);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.875rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+        }
+        .material-link:hover {
+            gap: 1rem;
+            text-shadow: 0 0 10px rgba(212,175,55,0.3);
+        }
+
+        /* FAQ */
+        .faq-item {
+            max-width: 800px;
+            margin: 0 auto 1rem;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        .faq-item:hover {
+            border-color: rgba(212,175,55,0.15);
+        }
+        .faq-question {
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            font-weight: 600;
+        }
+        .faq-question i {
+            transition: transform 0.3s ease;
+            color: var(--color-gold);
+        }
+        .faq-item.open .faq-question i {
+            transform: rotate(180deg);
+        }
+        .faq-answer {
+            padding: 0 2rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            color: var(--color-text-secondary);
+            line-height: 1.7;
+        }
+        .faq-item.open .faq-answer {
+            padding: 0 2rem 1.5rem;
+            max-height: 300px;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .sunday-grid { grid-template-columns: 1fr; }
+            .courses-grid { grid-template-columns: repeat(2, 1fr); }
+            .materials-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 768px) {
+            .courses-grid { grid-template-columns: 1fr; }
+            .materials-grid { grid-template-columns: 1fr; }
+            .classroom-stats { gap: 2rem; }
+        }
+    
+    /* LOGO IMAGE FALLBACK */
+    
+    /* HOMEPAGE HEADER LOGO MATCH */
+    nav .logo .logo-mark,
+    .study-nav .logo .logo-mark,
+    .watch-header .logo .logo-mark {
+        width: 48px;
+        height: 48px;
+        flex: 0 0 48px;
+        border: 1px solid var(--color-gold);
+        border-radius: 50%;
+        background: transparent;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        position: relative;
+        box-shadow: 0 0 20px rgba(212,175,55,0.1);
+    }
+
+    nav .logo .logo-mark img,
+    .study-nav .logo .logo-mark img,
+    .watch-header .logo .logo-mark img,
+    nav .logo .logo-mark-img,
+    .study-nav .logo .logo-mark-img,
+    .watch-header .logo .logo-mark-img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        display: block;
+        position: relative;
+        z-index: 1;
+    }
+
+    nav .logo .logo-title,
+    .study-nav .logo .logo-title,
+    .watch-header .logo .logo-title {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 1.5rem;
+        font-weight: 400;
+        line-height: 1;
+        letter-spacing: 0;
+    }
+
+    nav .logo .logo-subtitle,
+    .study-nav .logo .logo-subtitle,
+    .watch-header .logo .logo-subtitle {
+        font-size: 0.65rem;
+        text-transform: uppercase;
+        letter-spacing: 0.3em;
+        color: var(--color-text-muted);
+        margin-top: 0.25rem;
+    }
+
+    .loader-ring,
+    .loader-ring--soft,
+    .loader-dots,
+    .loader-bar,
+    .loader-progress {
+        display: none !important;
+    }
+</style>
+</head>
+<body>
+    <div class="grain-overlay"></div>
+    <div class="vignette"></div>
+
+    <!-- Navigation -->
+    <nav id="navbar" class="scrolled" style="background: rgba(5,5,5,0.85); backdrop-filter: blur(20px);">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <div class="logo-mark"><img src="images/logowtb.png" alt="Messianic Movement logo" class="logo-mark-img"></div>
+                <div class="logo-text">
+                    <span class="logo-title">Messianic Movement</span>
+                    <span class="logo-subtitle">Regenerational Ministry</span>
+                </div>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="index.html#ministries" class="nav-link">Ministries</a></li>
+                <li><a href="divine_episodes.html" class="nav-link" style="color: var(--color-gold);">Divine Episodes</a></li>
+                <li><a href="index.html#resources" class="nav-link">Resources</a></li>
+                <li><a href="index.html#live" class="nav-link">Live</a></li>
+                <li><a href="index.html#give" class="nav-link">Give</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="classroom-hero">
+        <div class="classroom-hero-content">
+            <div class="hero-eyebrow" style="justify-content: center; margin-bottom: 1.5rem;">
+                <div class="eyebrow-line"></div>
+                <span class="eyebrow-text">Sunday School Reimagined</span>
+                <div class="eyebrow-line" style="transform: rotate(180deg);"></div>
+            </div>
+            <h1>Divine Episodes</h1>
+            <p>Deep biblical study taught by anointed teachers. Explore Scripture book-by-book, theme-by-theme, at your own pace—completely free.</p>
+            <div class="hero-actions" style="margin-top: 2rem;">
+                <a href="#this-sunday" class="btn btn-primary">
+                    <i class="fas fa-play btn-icon"></i>
+                    This Sunday's Episode
+                </a>
+                <a href="#courses" class="btn btn-secondary">
+                    Browse All Courses
+                    <i class="fas fa-arrow-right btn-icon"></i>
+                </a>
+            </div>
+            <div class="classroom-stats">
+                <div class="stat-item">
+                    <div class="stat-number">24</div>
+                    <div class="stat-label">Courses</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">312</div>
+                    <div class="stat-label">Episodes</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">18k</div>
+                    <div class="stat-label">Students</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">12</div>
+                    <div class="stat-label">Teachers</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- This Sunday Feature -->
+    <section class="this-sunday" id="this-sunday">
+        <div class="section-header">
+            <span class="section-eyebrow">Streaming This Week</span>
+            <h2 class="section-title">The Covenant of Abraham</h2>
+            <p class="section-subtitle">Join us this Sunday as we explore the unconditional promises of Genesis 12–17 and their fulfillment in Messiah.</p>
+        </div>
+        <div class="sunday-grid">
+            <div class="sunday-video">
+                <img src="images/testimonies.jpg" alt="This Sunday's Divine Episode">
+                <div class="sunday-live-badge">Live Sunday 9AM EST</div>
+                <div class="sunday-play"><i class="fas fa-play"></i></div>
+            </div>
+            <div class="sunday-info">
+                <h3>Genesis 12:1–17:27 • Lech Lecha</h3>
+                <div class="sunday-meta">
+                    <span><i class="fas fa-user"></i> Pst. John James</span>
+                    <span><i class="fas fa-clock"></i> 58 min</span>
+                    <span><i class="fas fa-book"></i> Torah Portion</span>
+                    <span><i class="fas fa-layer-group"></i> Session 3 of 12</span>
+                </div>
+                <p>Discover how Abraham's call to leave everything behind mirrors our own journey of faith. This episode unpacks the covenant promises, the challenge of waiting on God, and the ultimate fulfillment through Yeshua HaMashiach. Includes Hebrew word studies and prophetic parallels.</p>
+                
+                <div class="media-toggle">
+                    <button class="media-btn active" onclick="toggleMedia(this, 'video')">
+                        <i class="fas fa-video"></i> Video Session
+                    </button>
+                    <button class="media-btn" onclick="toggleMedia(this, 'audio')">
+                        <i class="fas fa-headphones"></i> Podcast Audio
+                    </button>
+                </div>
+
+                <a href="#" class="download-notes">
+                    <i class="fas fa-download"></i>
+                    Download Study Notes
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Course Categories -->
+    <section id="courses">
+        <div class="section-header">
+            <span class="section-eyebrow">Library</span>
+            <h2 class="section-title">Explore the Collection</h2>
+            <p class="section-subtitle">Self-paced biblical courses designed to transform your understanding of Scripture.</p>
+        </div>
+        <div class="category-tabs">
+            <button class="category-tab active" onclick="filterCourses('all', this)">All Courses</button>
+            <button class="category-tab" onclick="filterCourses('torah', this)">Torah Studies</button>
+            <button class="category-tab" onclick="filterCourses('new-testament', this)">New Testament</button>
+            <button class="category-tab" onclick="filterCourses('spiritual', this)">Spiritual Growth</button>
+            <button class="category-tab" onclick="filterCourses('leadership', this)">Leadership</button>
+        </div>
+
+        <div class="courses-grid" id="coursesGrid">
+            <!-- Course Card 1 -->
+            <div class="course-card" data-category="torah">
+                <div class="course-image">
+                    <img src="images/faith-dimension.jpg" alt="Genesis Course">
+                    <div class="course-sessions"><i class="fas fa-list"></i> 12 Sessions</div>
+                </div>
+                <div class="course-body">
+                    <div class="course-teacher"><i class="fas fa-user-tie"></i> Pst. John James</div>
+                    <h3 class="course-title">The Book of Beginnings</h3>
+                    <div class="course-scripture">Genesis 1:1 – 50:26</div>
+                    <div class="course-footer">
+                        <div class="course-progress">
+                            <span>Progress</span>
+                            <div class="course-progress-bar"><div class="course-progress-fill" style="width: 75%"></div></div>
+                        </div>
+                        <div class="course-arrow"><i class="fas fa-arrow-right"></i></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Course Card 2 -->
+            <div class="course-card" data-category="torah">
+                <div class="course-image">
+                    <img src="images/never-again.jpg" alt="Exodus Course">
+                    <div class="course-sessions"><i class="fas fa-list"></i> 15 Sessions</div>
+                </div>
+                <div class="course-body">
+                    <div class="course-teacher"><i class="fas fa-user-tie"></i> Pst. Mrs. Joice James</div>
+                    <h3 class="course-title">Names of Redemption</h3>
+                    <div class="course-scripture">Exodus 1:1 – 40:38</div>
+                    <div class="course-footer">
+                        <div class="course-progress">
+                            <span>Progress</span>
+                            <div class="course-progress-bar"><div class="course-progress-fill" style="width: 40%"></div></div>
+                        </div>
+                        <div class="course-arrow"><i class="fas fa-arrow-right"></i></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Course Card 3 -->
+            <div class="course-card" data-category="new-testament">
+                <div class="course-image">
+                    <img src="images/holy-ghost-assembly.jpg" alt="Gospel of John">
+                    <div class="course-sessions"><i class="fas fa-list"></i> 21 Sessions</div>
+                </div>
+                <div class="course-body">
+                    <div class="course-teacher"><i class="fas fa-user-tie"></i> Pst. David Okonkwo</div>
+                    <h3 class="course-title">The I AM Revelation</h3>
+                    <div class="course-scripture">John 1:1 – 21:25</div>
+                    <div class="course-footer">
+                        <div class="course-progress">
+                            <span>Progress</span>
+                            <div class="course-progress-bar"><div class="course-progress-fill" style="width: 0%"></div></div>
+                        </div>
+                        <div class="course-arrow"><i class="fas fa-arrow-right"></i></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Course Card 4 -->
+            <div class="course-card" data-category="new-testament">
+                <div class="course-image">
+                    <img src="images/gospel-revolution.jpg" alt="Ephesians">
+                    <div class="course-sessions"><i class="fas fa-list"></i> 8 Sessions</div>
+                </div>
+                <div class="course-body">
+                    <div class="course-teacher"><i class="fas fa-user-tie"></i> Pst. John James</div>
+                    <h3 class="course-title">Seated in Heavenly Places</h3>
+                    <div class="course-scripture">Ephesians 1:1 – 6:24</div>
+                    <div class="course-footer">
+                        <div class="course-progress">
+                            <span>Progress</span>
+                            <div class="course-progress-bar"><div class="course-progress-fill" style="width: 100%"></div></div>
+                        </div>
+                        <div class="course-arrow"><i class="fas fa-arrow-right"></i></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Course Card 5 -->
+            <div class="course-card" data-category="spiritual">
+                <div class="course-image">
+                    <img src="images/zion-worship.jpg" alt="Worship">
+                    <div class="course-sessions"><i class="fas fa-list"></i> 6 Sessions</div>
+                </div>
+                <div class="course-body">
+                    <div class="course-teacher"><i class="fas fa-user-tie"></i> Pst. Mrs. Joice James</div>
+                    <h3 class="course-title">The Throne Room of Zion</h3>
+                    <div class="course-scripture">Psalms 120 – 134</div>
+                    <div class="course-footer">
+                        <div class="course-progress">
+                            <span>Progress</span>
+                            <div class="course-progress-bar"><div class="course-progress-fill" style="width: 30%"></div></div>
+                        </div>
+                        <div class="course-arrow"><i class="fas fa-arrow-right"></i></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Course Card 6 -->
+            <div class="course-card" data-category="leadership">
+                <div class="course-image">
+                    <img src="images/global-response.jpg" alt="Leadership">
+                    <div class="course-sessions"><i class="fas fa-list"></i> 10 Sessions</div>
+                </div>
+                <div class="course-body">
+                    <div class="course-teacher"><i class="fas fa-user-tie"></i> Pst. John James</div>
+                    <h3 class="course-title">Fivefold Ministry Blueprint</h3>
+                    <div class="course-scripture">Ephesians 4:11-16</div>
+                    <div class="course-footer">
+                        <div class="course-progress">
+                            <span>Progress</span>
+                            <div class="course-progress-bar"><div class="course-progress-fill" style="width: 0%"></div></div>
+                        </div>
+                        <div class="course-arrow"><i class="fas fa-arrow-right"></i></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Study Materials -->
+    <section style="background: var(--color-bg-elevated);">
+        <div class="section-header">
+            <span class="section-eyebrow">Downloads</span>
+            <h2 class="section-title">Study Materials</h2>
+            <p class="section-subtitle">Equip yourself with notes, reading plans, and discussion guides for every episode.</p>
+        </div>
+        <div class="materials-grid">
+            <div class="material-card">
+                <div class="material-icon"><i class="fas fa-file-pdf"></i></div>
+                <h4>Session Notes</h4>
+                <p>Detailed scholar-written guides for every Divine Episode with Hebrew insights.</p>
+                <a href="#" class="material-link">Download PDF <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="material-card">
+                <div class="material-icon"><i class="fas fa-book-open"></i></div>
+                <h4>Reading Plans</h4>
+                <p>7-day and 30-day Scripture reading plans aligned with each course series.</p>
+                <a href="#" class="material-link">View Plans <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="material-card">
+                <div class="material-icon"><i class="fas fa-users"></i></div>
+                <h4>Group Studies</h4>
+                <p>Discussion questions and facilitator guides for small groups and cells.</p>
+                <a href="#" class="material-link">Get Guides <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section>
+        <div class="section-header">
+            <span class="section-eyebrow">Questions</span>
+            <h2 class="section-title">Frequently Asked</h2>
+        </div>
+        <div class="faq-item open">
+            <div class="faq-question" onclick="toggleFaq(this)">
+                <span>Is Divine Episodes completely free?</span>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">Yes. Every episode, course, and study material is offered freely as part of our mandate to disseminate divine knowledge to all nations. No subscription required.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">
+                <span>Can I watch past episodes?</span>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">Absolutely. Our full archive of 312+ episodes is available on-demand. Browse by book, theme, or teacher to find exactly what you need.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">
+                <span>Are there certificates for completing courses?</span>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">Yes. Students who complete a full course series with all session quizzes receive a digital Certificate of Biblical Studies from WHGRM Ministry School.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">
+                <span>How do I join the live Sunday broadcast?</span>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">Divine Episodes airs live every Sunday at 9:00 AM EST on our Live page, YouTube, and Facebook. You can also set a reminder via the notification bell.</div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section style="background: linear-gradient(135deg, rgba(212,175,55,0.05), rgba(107,33,168,0.05));">
+        <div class="section-header">
+            <span class="section-eyebrow">Get Started</span>
+            <h2 class="section-title">Begin Your Journey</h2>
+            <p class="section-subtitle">Join 18,000+ students walking through Scripture together.</p>
+            <div class="hero-actions" style="justify-content: center; margin-top: 3rem;">
+                <a href="#courses" class="btn btn-primary">
+                    <i class="fas fa-play btn-icon"></i>
+                    Start First Course
+                </a>
+                <a href="index.html#give" class="btn btn-secondary">
+                    Support Divine Episodes
+                    <i class="fas fa-arrow-right btn-icon"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <a href="index.html" class="logo">
+                    <div class="logo-icon"><img src="images/logowtb.png" alt="Messianic Movement logo" class="logo-mark-img"></div>
+                    <div class="logo-text">
+                        <span class="logo-title">Messianic Movement</span>
+                        <span class="logo-subtitle">Regenerational Ministry</span>
+                    </div>
+                </a>
+                <p>Raising a generation of Spirit-filled believers who will transform nations through the power of the Holy Ghost.</p>
+                <div class="social-links">
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="index.html#ministries">Ministries</a></li>
+                    <li><a href="divine_episodes.html">Divine Episodes</a></li>
+                    <li><a href="index.html#live">Live Service</a></li>
+                    <li><a href="index.html#give">Give</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Resources</h4>
+                <ul>
+                    <li><a href="watch.html">Sermon Archive</a></li>
+                    <li><a href="divine_episodes.html">Divine Episodes</a></li>
+                    <li><a href="prayer_request.html">Prayer Request</a></li>
+                    <li><a href="ministry_school.html">Ministry School</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Contact</h4>
+                <ul>
+                    <li><i class="fas fa-map-marker-alt"></i> 123 Faith Avenue, Glory City</li>
+                    <li><i class="fas fa-phone"></i> +1 (555) 123-4567</li>
+                    <li><i class="fas fa-envelope"></i> info@whgrministry.org</li>
+                    <li><i class="fas fa-clock"></i> Sun: 9AM & 11AM EST</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Messianic Movement. All rights reserved.</p>
+            <p>Designed with <i class="fas fa-heart" style="color: var(--color-gold);"></i> by the Spirit</p>
+        </div>
+    </footer>
+
+    <script>
+        function toggleMedia(btn, type) {
+            document.querySelectorAll('.media-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+        }
+        function filterCourses(cat, btn) {
+            document.querySelectorAll('.category-tab').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            document.querySelectorAll('.course-card').forEach(card => {
+                if (cat === 'all' || card.dataset.category === cat) {
+                    card.style.display = 'block';
+                    setTimeout(() => card.style.opacity = '1', 10);
+                } else {
+                    card.style.opacity = '0';
+                    setTimeout(() => card.style.display = 'none', 300);
+                }
+            });
+        }
+        function toggleFaq(el) {
+            el.parentElement.classList.toggle('open');
+        }
+    </script>
+<script>
+window.addEventListener('load', () => {
+    const loader = document.getElementById('loader');
+    if (loader) {
+        setTimeout(() => loader.classList.add('hidden'), 2200);
+    }
+});
+</script>
+</body>
+</html>

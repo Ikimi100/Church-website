@@ -1,0 +1,1242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Holy Ghost Assembly | Messianic Movement</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* ===== HOLY GHOST ASSEMBLY SPECIFIC STYLES ===== */
+
+        /* Page Header */
+        .page-hero {
+            min-height: 70vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            padding: 0 4%;
+            padding-top: 160px;
+            background: linear-gradient(135deg, rgba(10,10,15,0.95) 0%, rgba(5,5,5,0.98) 100%);
+        }
+
+        .page-hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(212, 175, 55, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(139, 92, 246, 0.05) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .page-hero-bg {
+            position: absolute;
+            inset: 0;
+            z-index: -1;
+        }
+
+        .page-hero-bg img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.25;
+            filter: brightness(0.5) contrast(1.1);
+        }
+
+        .page-hero-content {
+            text-align: center;
+            max-width: 900px;
+            z-index: 10;
+            position: relative;
+        }
+
+        .page-hero h1 {
+            font-size: clamp(3rem, 8vw, 6rem);
+            line-height: 1;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #fff 0%, var(--color-gold-light) 50%, var(--color-gold) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            filter: drop-shadow(0 0 30px rgba(212,175,55,0.2));
+        }
+
+        .page-hero p {
+            font-size: clamp(1.125rem, 2vw, 1.35rem);
+            color: var(--color-text-secondary);
+            max-width: 600px;
+            margin: 0 auto 2.5rem;
+            font-weight: 300;
+            line-height: 1.7;
+        }
+
+        /* Service Times Strip */
+        .service-strip {
+            background: linear-gradient(135deg, rgba(212,175,55,0.08), rgba(107,33,168,0.08));
+            border-top: 1px solid rgba(212,175,55,0.1);
+            border-bottom: 1px solid rgba(212,175,55,0.1);
+            padding: 3rem 4%;
+        }
+
+        .service-strip-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .service-strip-item {
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+        }
+
+        .service-strip-item:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 20%;
+            bottom: 20%;
+            width: 1px;
+            background: linear-gradient(to bottom, transparent, rgba(212,175,55,0.3), transparent);
+        }
+
+        .service-strip-icon {
+            width: 64px;
+            height: 64px;
+            background: rgba(212,175,55,0.1);
+            border: 1px solid rgba(212,175,55,0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--color-gold);
+            margin: 0 auto 1.25rem;
+            transition: all 0.4s ease;
+        }
+
+        .service-strip-item:hover .service-strip-icon {
+            background: linear-gradient(135deg, var(--color-gold), var(--color-purple-rich));
+            color: var(--color-bg);
+            transform: scale(1.1);
+            box-shadow: 0 10px 30px rgba(212,175,55,0.3);
+        }
+
+        .service-strip-item h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--color-text);
+        }
+
+        .service-strip-item p {
+            color: var(--color-text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* Events Section */
+        .events-section {
+            background: var(--color-bg-elevated);
+            position: relative;
+        }
+
+        .events-section::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 50% 0%, rgba(212,175,55,0.03) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .events-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .event-card {
+            background: var(--color-surface);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            overflow: hidden;
+            transition: all 0.6s var(--ease-out-expo);
+            position: relative;
+        }
+
+        .event-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            border-color: rgba(212,175,55,0.2);
+            box-shadow: 0 40px 80px -30px rgba(0,0,0,0.6), 0 0 40px rgba(212,175,55,0.1);
+        }
+
+        .event-card-image {
+            position: relative;
+            aspect-ratio: 16/10;
+            overflow: hidden;
+        }
+
+        .event-card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s var(--ease-out-expo);
+        }
+
+        .event-card:hover .event-card-image img {
+            transform: scale(1.1);
+        }
+
+        .event-date-badge {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            background: rgba(5,5,5,0.85);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(212,175,55,0.3);
+            border-radius: 16px;
+            padding: 1rem 1.25rem;
+            text-align: center;
+            min-width: 70px;
+        }
+
+        .event-date-badge .month {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--color-gold);
+            font-weight: 600;
+            display: block;
+        }
+
+        .event-date-badge .day {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--color-text);
+            line-height: 1;
+            display: block;
+            margin: 0.25rem 0;
+        }
+
+        .event-date-badge .year {
+            font-size: 0.75rem;
+            color: var(--color-text-muted);
+        }
+
+        .event-status {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            padding: 0.4rem 1rem;
+            border-radius: 100px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            backdrop-filter: blur(10px);
+        }
+
+        .event-status.upcoming {
+            background: rgba(34,197,94,0.15);
+            border: 1px solid rgba(34,197,94,0.3);
+            color: #22c55e;
+        }
+
+        .event-status.crusade {
+            background: rgba(212,175,55,0.15);
+            border: 1px solid rgba(212,175,55,0.3);
+            color: var(--color-gold);
+        }
+
+        .event-status.special {
+            background: rgba(255,51,102,0.15);
+            border: 1px solid rgba(255,51,102,0.3);
+            color: #ff3366;
+        }
+
+        .event-card-content {
+            padding: 1.75rem;
+        }
+
+        .event-meta {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .event-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.8rem;
+            color: var(--color-text-muted);
+        }
+
+        .event-meta-item i {
+            color: var(--color-gold);
+            font-size: 0.85rem;
+        }
+
+        .event-card h3 {
+            font-size: 1.35rem;
+            margin-bottom: 0.75rem;
+            color: var(--color-text);
+            transition: color 0.3s ease;
+        }
+
+        .event-card:hover h3 {
+            color: var(--color-gold);
+        }
+
+        .event-card p {
+            color: var(--color-text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .event-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            background: transparent;
+            border: 1px solid var(--glass-border);
+            border-radius: 100px;
+            color: var(--color-text);
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-family: 'Space Grotesk', sans-serif;
+            cursor: pointer;
+        }
+
+        .event-btn:hover {
+            background: linear-gradient(135deg, var(--color-gold), var(--color-purple-rich));
+            border-color: transparent;
+            color: var(--color-bg);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(212,175,55,0.3);
+        }
+
+        /* About Preview Section */
+        .about-preview {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about-preview::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 30% 50%, rgba(212,175,55,0.05) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .about-preview-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-preview-image {
+            position: relative;
+            border-radius: 24px;
+            overflow: hidden;
+            aspect-ratio: 4/5;
+        }
+
+        .about-preview-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 1.2s var(--ease-out-expo);
+        }
+
+        .about-preview-image:hover img {
+            transform: scale(1.05);
+        }
+
+        .about-preview-image::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(5,5,5,0.6) 0%, transparent 50%);
+        }
+
+        .about-preview-content h2 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(to bottom, #fff, var(--color-text-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .about-preview-content p {
+            color: var(--color-text-secondary);
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
+
+        .about-preview-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 1.5rem;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            transition: all 0.4s ease;
+        }
+
+        .stat-item:hover {
+            border-color: rgba(212,175,55,0.2);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .stat-number {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: var(--color-gold);
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: var(--color-text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        /* Ministries Within Assembly */
+        .assembly-ministries {
+            background: var(--color-bg-elevated);
+            position: relative;
+        }
+
+        .ministry-cards {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+        }
+
+        .ministry-card {
+            background: var(--color-surface);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 2.5rem 2rem;
+            text-align: center;
+            transition: all 0.6s var(--ease-out-expo);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ministry-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--color-gold), var(--color-purple-rich));
+            transform: scaleX(0);
+            transition: transform 0.6s var(--ease-out-expo);
+        }
+
+        .ministry-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(212,175,55,0.2);
+            box-shadow: 0 30px 60px -20px rgba(0,0,0,0.4), 0 0 40px rgba(212,175,55,0.1);
+        }
+
+        .ministry-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .ministry-card-icon {
+            width: 72px;
+            height: 72px;
+            background: linear-gradient(135deg, rgba(212,175,55,0.1), rgba(107,33,168,0.1));
+            border: 1px solid rgba(212,175,55,0.2);
+            border-radius: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.75rem;
+            color: var(--color-gold);
+            margin: 0 auto 1.5rem;
+            transition: all 0.4s ease;
+            box-shadow: 0 0 30px rgba(212,175,55,0.1);
+        }
+
+        .ministry-card:hover .ministry-card-icon {
+            background: linear-gradient(135deg, var(--color-gold), var(--color-purple-rich));
+            color: var(--color-bg);
+            transform: scale(1.1) rotate(-5deg);
+            box-shadow: 0 15px 30px rgba(212,175,55,0.3);
+        }
+
+        .ministry-card h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: var(--color-text);
+        }
+
+        .ministry-card p {
+            color: var(--color-text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        /* Location Section */
+        .location-section {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .location-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .location-map {
+            background: var(--color-surface);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            overflow: hidden;
+            aspect-ratio: 16/10;
+            position: relative;
+        }
+
+        .location-map iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            filter: grayscale(0.8) invert(0.9) contrast(1.2);
+        }
+
+        .location-info h3 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--color-text);
+        }
+
+        .location-detail {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding: 1.25rem;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .location-detail:hover {
+            border-color: rgba(212,175,55,0.2);
+            transform: translateX(5px);
+        }
+
+        .location-detail i {
+            width: 44px;
+            height: 44px;
+            background: rgba(212,175,55,0.1);
+            border: 1px solid rgba(212,175,55,0.2);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            color: var(--color-gold);
+            flex-shrink: 0;
+        }
+
+        .location-detail h4 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+            color: var(--color-text);
+        }
+
+        .location-detail p {
+            color: var(--color-text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .events-grid { grid-template-columns: repeat(2, 1fr); }
+            .ministry-cards { grid-template-columns: repeat(2, 1fr); }
+            .about-preview-grid { grid-template-columns: 1fr; gap: 3rem; }
+            .about-preview-image { aspect-ratio: 16/9; }
+            .location-grid { grid-template-columns: 1fr; }
+            .service-strip-grid { grid-template-columns: 1fr; }
+            .service-strip-item:not(:last-child)::after { display: none; }
+            .service-strip-item { border-bottom: 1px solid var(--glass-border); }
+        }
+
+        @media (max-width: 768px) {
+            .events-grid { grid-template-columns: 1fr; }
+            .ministry-cards { grid-template-columns: 1fr; }
+            .about-preview-stats { grid-template-columns: 1fr; }
+            .page-hero { padding-top: 140px; }
+            .announcement-bar { display: none; }
+        }
+    
+    /* LOGO IMAGE FALLBACK */
+    
+    /* HOMEPAGE HEADER LOGO MATCH */
+    nav .logo .logo-mark,
+    .study-nav .logo .logo-mark,
+    .watch-header .logo .logo-mark {
+        width: 48px;
+        height: 48px;
+        flex: 0 0 48px;
+        border: 1px solid var(--color-gold);
+        border-radius: 50%;
+        background: transparent;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        position: relative;
+        box-shadow: 0 0 20px rgba(212,175,55,0.1);
+    }
+
+    nav .logo .logo-mark img,
+    .study-nav .logo .logo-mark img,
+    .watch-header .logo .logo-mark img,
+    nav .logo .logo-mark-img,
+    .study-nav .logo .logo-mark-img,
+    .watch-header .logo .logo-mark-img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        display: block;
+        position: relative;
+        z-index: 1;
+    }
+
+    nav .logo .logo-title,
+    .study-nav .logo .logo-title,
+    .watch-header .logo .logo-title {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 1.5rem;
+        font-weight: 400;
+        line-height: 1;
+        letter-spacing: 0;
+    }
+
+    nav .logo .logo-subtitle,
+    .study-nav .logo .logo-subtitle,
+    .watch-header .logo .logo-subtitle {
+        font-size: 0.65rem;
+        text-transform: uppercase;
+        letter-spacing: 0.3em;
+        color: var(--color-text-muted);
+        margin-top: 0.25rem;
+    }
+
+    .loader-ring,
+    .loader-ring--soft,
+    .loader-dots,
+    .loader-bar,
+    .loader-progress {
+        display: none !important;
+    }
+</style>
+</head>
+<body>
+    <!-- Film Grain Overlay -->
+    <div class="grain-overlay"></div>
+    <div class="vignette"></div>
+
+    <!-- Custom Cursor -->
+    <div class="cursor" id="cursor"></div>
+    <div class="cursor-dot" id="cursorDot"></div>
+
+    <!-- Navigation -->
+    <nav id="navbar" class="scrolled" style="background: rgba(5,5,5,0.85); backdrop-filter: blur(20px);">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <div class="logo-mark"><img src="images/logowtb.png" alt="Messianic Movement logo" class="logo-mark-img"></div>
+                <div class="logo-text">
+                    <span class="logo-title">Messianic Movement</span>
+                    <span class="logo-subtitle">Regenerational Ministry</span>
+                </div>
+            </a>
+
+            <ul class="nav-links">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="index.html#ministries" class="nav-link">Ministries</a></li>
+                <li><a href="index.html#calendar" class="nav-link">Calendar</a></li>
+                <li><a href="index.html#resources" class="nav-link">Resources</a></li>
+                <li><a href="index.html#live" class="nav-link">Live</a></li>
+                <li><a href="index.html#give" class="nav-link">Give</a></li>
+                <li style="margin-left: 1rem;">
+                    <button class="nav-cta" onclick="window.location.href='about_church.html'">
+                        About the Church
+                    </button>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Page Hero -->
+    <section class="page-hero" id="home">
+        <div class="page-hero-bg">
+            <img src="images/holy-ghost-assembly.jpg" alt="Holy Ghost Assembly worship gathering">
+        </div>
+        <div class="hero-particles" id="particles"></div>
+
+        <div class="page-hero-content">
+            <div class="hero-eyebrow">
+                <div class="eyebrow-line"></div>
+                <span class="eyebrow-text">The Gathering of Fire</span>
+                <div class="eyebrow-line" style="transform: rotate(180deg);"></div>
+            </div>
+
+            <h1>Holy Ghost Assembly</h1>
+
+            <p>Where the Spirit moves freely, lives are transformed, and the fire of God ignites a generation. Join us as we gather in the power and presence of the Holy Ghost.</p>
+
+            <div class="hero-actions">
+                <a href="#events" class="btn btn-primary">
+                    <i class="fas fa-calendar-alt btn-icon"></i>
+                    Upcoming Programs
+                </a>
+                <a href="about_church.html" class="btn btn-secondary">
+                    About the Church
+                    <i class="fas fa-arrow-right btn-icon"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Service Times Strip -->
+    <section class="service-strip" style="padding: 0;">
+        <div class="service-strip-grid">
+            <div class="service-strip-item">
+                <div class="service-strip-icon"><i class="fas fa-sun"></i></div>
+                <h3>Sunday Services</h3>
+                <p>First Service: 8:00 AM WAT<br>Second Service: 10:30 AM WAT<br>Evening Revival: 5:00 PM WAT</p>
+            </div>
+            <div class="service-strip-item">
+                <div class="service-strip-icon"><i class="fas fa-moon"></i></div>
+                <h3>Midweek Services</h3>
+                <p>Tuesday Bible Study: 6:00 PM WAT<br>Thursday Prayer Force: 6:00 PM WAT<br>Friday Night of Encounter: 10:00 PM WAT</p>
+            </div>
+            <div class="service-strip-item">
+                <div class="service-strip-icon"><i class="fas fa-map-marker-alt"></i></div>
+                <h3>Location</h3>
+                <p>123 Faith Avenue, Glory City<br>Lagos, Nigeria<br>+234 (0) 800 123 4567</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Upcoming Programs & Crusades -->
+    <section class="events-section" id="events">
+        <div class="section-header">
+            <span class="section-eyebrow">Mark Your Calendar</span>
+            <h2 class="section-title">Upcoming Programs & Crusades</h2>
+            <p class="section-subtitle">Power-packed gatherings designed to equip, empower, and release you into your divine destiny. Every event is a divine appointment.</p>
+        </div>
+
+        <div class="events-grid">
+            <!-- Event 1 -->
+            <div class="event-card">
+                <div class="event-card-image">
+                    <img src="images/FB_IMG_1778417791684.jpg" alt="Global Holy Ghost Crusade">
+                    <div class="event-date-badge">
+                        <span class="month">JUN</span>
+                        <span class="day">15</span>
+                        <span class="year">2026</span>
+                    </div>
+                    <span class="event-status crusade">Crusade</span>
+                </div>
+                <div class="event-card-content">
+                    <div class="event-meta">
+                        <span class="event-meta-item"><i class="fas fa-clock"></i> 5:00 PM WAT</span>
+                        <span class="event-meta-item"><i class="fas fa-map-marker-alt"></i> Main Auditorium</span>
+                    </div>
+                    <h3>Global Holy Ghost Crusade 2026</h3>
+                    <p>A three-day apostolic invasion of the Spirit. Featuring international ministers, mass healings, and a mighty outpouring of the Holy Ghost.</p>
+                    <a href="#" class="event-btn" onclick="openModal('crusade')">Register Now <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <!-- Event 2 -->
+            <div class="event-card">
+                <div class="event-card-image">
+                    <img src="images/FB_IMG_1778417807706.jpg" alt="Night of Divine Encounter">
+                    <div class="event-date-badge">
+                        <span class="month">MAY</span>
+                        <span class="day">30</span>
+                        <span class="year">2026</span>
+                    </div>
+                    <span class="event-status special">Special</span>
+                </div>
+                <div class="event-card-content">
+                    <div class="event-meta">
+                        <span class="event-meta-item"><i class="fas fa-clock"></i> 10:00 PM WAT</span>
+                        <span class="event-meta-item"><i class="fas fa-map-marker-alt"></i> Prayer Dome</span>
+                    </div>
+                    <h3>Night of Divine Encounter</h3>
+                    <p>An all-night vigil of worship, prophetic impartation, and supernatural encounters. Come hungry and leave burning with holy fire.</p>
+                    <a href="#" class="event-btn" onclick="openModal('encounter')">Learn More <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <!-- Event 3 -->
+            <div class="event-card">
+                <div class="event-card-image">
+                    <img src="images/FB_IMG_1778417873326.jpg" alt="Leadership Summit">
+                    <div class="event-date-badge">
+                        <span class="month">JUL</span>
+                        <span class="day">10</span>
+                        <span class="year">2026</span>
+                    </div>
+                    <span class="event-status upcoming">Upcoming</span>
+                </div>
+                <div class="event-card-content">
+                    <div class="event-meta">
+                        <span class="event-meta-item"><i class="fas fa-clock"></i> 9:00 AM WAT</span>
+                        <span class="event-meta-item"><i class="fas fa-map-marker-alt"></i> Conference Hall</span>
+                    </div>
+                    <h3>Apostolic Leadership Summit</h3>
+                    <p>Equipping ministers and leaders with cutting-edge revelation, strategic insight, and the anointing for kingdom expansion.</p>
+                    <a href="#" class="event-btn" onclick="openModal('summit')">Register Now <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <!-- Event 4 -->
+            <div class="event-card">
+                <div class="event-card-image">
+                    <img src="images/FB_IMG_1778417815014.jpg" alt="Youth Fire Conference">
+                    <div class="event-date-badge">
+                        <span class="month">AUG</span>
+                        <span class="day">20</span>
+                        <span class="year">2026</span>
+                    </div>
+                    <span class="event-status special">Special</span>
+                </div>
+                <div class="event-card-content">
+                    <div class="event-meta">
+                        <span class="event-meta-item"><i class="fas fa-clock"></i> 10:00 AM WAT</span>
+                        <span class="event-meta-item"><i class="fas fa-map-marker-alt"></i> Youth Arena</span>
+                    </div>
+                    <h3>Youth Fire Conference 2026</h3>
+                    <p>Three days of explosive worship, radical teaching, and prophetic activation for young people aged 16-35. This generation shall know fire.</p>
+                    <a href="#" class="event-btn" onclick="openModal('youth')">Learn More <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <!-- Event 5 -->
+            <div class="event-card">
+                <div class="event-card-image">
+                    <img src="images/hassan-kibwana-Q3A3En_7HM4-unsplash.jpg" alt="Mission Trip Kenya">
+                    <div class="event-date-badge">
+                        <span class="month">JUL</span>
+                        <span class="day">25</span>
+                        <span class="year">2026</span>
+                    </div>
+                    <span class="event-status upcoming">Upcoming</span>
+                </div>
+                <div class="event-card-content">
+                    <div class="event-meta">
+                        <span class="event-meta-item"><i class="fas fa-clock"></i> 2 Weeks</span>
+                        <span class="event-meta-item"><i class="fas fa-map-marker-alt"></i> Nairobi, Kenya</span>
+                    </div>
+                    <h3>Mission Trip to Kenya</h3>
+                    <p>Join our Global Response team for a life-changing mission to Kenya. Evangelism, medical outreach, and school building projects.</p>
+                    <a href="#" class="event-btn" onclick="openModal('mission')">Apply Now <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <!-- Event 6 -->
+            <div class="event-card">
+                <div class="event-card-image">
+                    <img src="images/emmanuel-offei-bOrjvtn7aY0-unsplash.jpg" alt="School of the Spirit">
+                    <div class="event-date-badge">
+                        <span class="month">SEP</span>
+                        <span class="day">05</span>
+                        <span class="year">2026</span>
+                    </div>
+                    <span class="event-status upcoming">Upcoming</span>
+                </div>
+                <div class="event-card-content">
+                    <div class="event-meta">
+                        <span class="event-meta-item"><i class="fas fa-clock"></i> 6:00 PM WAT</span>
+                        <span class="event-meta-item"><i class="fas fa-map-marker-alt"></i> Teaching Center</span>
+                    </div>
+                    <h3>School of the Spirit — Term 3</h3>
+                    <p>A 12-week intensive on the gifts, fruit, and operations of the Holy Spirit. Graduate equipped for supernatural ministry.</p>
+                    <a href="#" class="event-btn" onclick="openModal('school')">Enroll Now <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Preview Section -->
+    <section class="about-preview" id="about">
+        <div class="about-preview-grid">
+            <div class="about-preview-image">
+                <img src="images/holy-ghost-assembly.jpg" alt="Holy Ghost Assembly congregation">
+            </div>
+            <div class="about-preview-content">
+                <span class="section-eyebrow" style="justify-content: flex-start; margin-bottom: 1.5rem;">Who We Are</span>
+                <h2>Rooted in Faith.<br>Reaching the World.</h2>
+                <p>Holy Ghost Assembly is the flagship congregation of Messianic Movement. Founded under a divine mandate to raise a generation of Spirit-filled believers, we are a community where the supernatural is normal, faith is contagious, and every life is destined for greatness in God.</p>
+
+                <div class="about-preview-stats">
+                    <div class="stat-item">
+                        <div class="stat-number">15K+</div>
+                        <div class="stat-label">Members</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">50+</div>
+                        <div class="stat-label">Nations Reached</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">25</div>
+                        <div class="stat-label">Years of Ministry</div>
+                    </div>
+                </div>
+
+                <a href="about_church.html" class="btn btn-primary">
+                    <i class="fas fa-church btn-icon"></i>
+                    Discover Our Story
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Assembly Ministries -->
+    <section class="assembly-ministries">
+        <div class="section-header">
+            <span class="section-eyebrow">Get Involved</span>
+            <h2 class="section-title">Ministries at the Assembly</h2>
+            <p class="section-subtitle">There's a place for everyone to grow, serve, and belong. Find your tribe and fulfill your calling.</p>
+        </div>
+
+        <div class="ministry-cards">
+            <div class="ministry-card">
+                <div class="ministry-card-icon"><i class="fas fa-child"></i></div>
+                <h3>Destiny Kids</h3>
+                <p>Raising a generation of young champions who know their identity in Christ from an early age.</p>
+            </div>
+            <div class="ministry-card">
+                <div class="ministry-card-icon"><i class="fas fa-fire-alt"></i></div>
+                <h3>FireHouse Youth</h3>
+                <p>Dynamic youth ministry for ages 13-25. Worship, word, and wild encounters with God.</p>
+            </div>
+            <div class="ministry-card">
+                <div class="ministry-card-icon"><i class="fas fa-ring"></i></div>
+                <h3>Marriage & Family</h3>
+                <p>Building godly homes through covenant teaching, couples retreats, and family enrichment.</p>
+            </div>
+            <div class="ministry-card">
+                <div class="ministry-card-icon"><i class="fas fa-hands-helping"></i></div>
+                <h3>Compassion Works</h3>
+                <p>Humanitarian outreach feeding the hungry, clothing the naked, and bringing hope to the poor.</p>
+            </div>
+            <div class="ministry-card">
+                <div class="ministry-card-icon"><i class="fas fa-music"></i></div>
+                <h3>Zion Worship</h3>
+                <p>Our worship ministry creating atmospheres of heaven and training the next generation of psalmists.</p>
+            </div>
+            <div class="ministry-card">
+                <div class="ministry-card-icon"><i class="fas fa-praying-hands"></i></div>
+                <h3>Intercessors</h3>
+                <p>The prayer backbone of the ministry. Join the force that shapes history on our knees.</p>
+            </div>
+            <div class="ministry-card">
+                <div class="ministry-card-icon"><i class="fas fa-graduation-cap"></i></div>
+                <h3>Bible School</h3>
+                <p>Systematic theological training and practical ministry equipping for every believer.</p>
+            </div>
+            <div class="ministry-card">
+                <div class="ministry-card-icon"><i class="fas fa-globe-africa"></i></div>
+                <h3>Missions</h3>
+                <p>Taking the Gospel to unreached nations. Short-term and long-term mission opportunities.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Location Section -->
+    <section class="location-section">
+        <div class="section-header">
+            <span class="section-eyebrow">Plan Your Visit</span>
+            <h2 class="section-title">Find Us</h2>
+            <p class="section-subtitle">We would love to welcome you in person. Our doors are always open to those seeking the presence of God.</p>
+        </div>
+
+        <div class="location-grid">
+            <div class="location-map">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d253682.45932584812!2d3.1198875!3d6.5243795!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x103bf2bae0a4a7c5%3A0x1234567890abcdef!2sLagos%2C%20Nigeria!5e0!3m2!1sen!2sus!4v1700000000000!5m2!1sen!2sus" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <div class="location-info">
+                <h3>Visit Holy Ghost Assembly</h3>
+
+                <div class="location-detail">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <div>
+                        <h4>Address</h4>
+                        <p>123 Faith Avenue, Glory City<br>Lagos, Nigeria 101233</p>
+                    </div>
+                </div>
+
+                <div class="location-detail">
+                    <i class="fas fa-clock"></i>
+                    <div>
+                        <h4>Service Times</h4>
+                        <p>Sundays: 8:00 AM, 10:30 AM & 5:00 PM WAT<br>Tuesdays: Bible Study 6:00 PM WAT<br>Thursdays: Prayer Force 6:00 PM WAT<br>Fridays: Night of Encounter 10:00 PM WAT</p>
+                    </div>
+                </div>
+
+                <div class="location-detail">
+                    <i class="fas fa-phone"></i>
+                    <div>
+                        <h4>Contact</h4>
+                        <p>Phone: +234 (0) 800 123 4567<br>Email: assembly@whgrministry.org</p>
+                    </div>
+                </div>
+
+                <div class="location-detail">
+                    <i class="fas fa-parking"></i>
+                    <div>
+                        <h4>Parking & Accessibility</h4>
+                        <p>Free parking available on-site. Wheelchair accessible entrances and seating.</p>
+                    </div>
+                </div>
+
+                <a href="#" class="btn btn-primary" style="margin-top: 1rem;" onclick="openModal('visit')">
+                    <i class="fas fa-calendar-check btn-icon"></i>
+                    Plan Your First Visit
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section style="background: linear-gradient(135deg, rgba(212,175,55,0.08), rgba(107,33,168,0.08)); text-align: center; padding: 8rem 4%;">
+        <div class="section-header" style="margin-bottom: 3rem;">
+            <span class="section-eyebrow">You Belong Here</span>
+            <h2 class="section-title">Come Experience the Fire</h2>
+            <p class="section-subtitle">Whether you are seeking God for the first time or looking for a spiritual home, Holy Ghost Assembly welcomes you with open arms.</p>
+        </div>
+        <div class="hero-actions" style="justify-content: center;">
+            <a href="about_church.html" class="btn btn-primary">
+                <i class="fas fa-church btn-icon"></i>
+                About the Church
+            </a>
+            <a href="index.html#live" class="btn btn-secondary">
+                Watch Live
+                <i class="fas fa-play btn-icon"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <a href="index.html" class="logo">
+                    <div class="logo-icon"><img src="images/logowtb.png" alt="Messianic Movement logo" class="logo-mark-img"></div>
+                    <div class="logo-text">
+                        <span class="logo-title">Messianic Movement</span>
+                        <span class="logo-subtitle">Regenerational Ministry</span>
+                    </div>
+                </a>
+                <p>Raising a generation of Spirit-filled believers who will transform nations through the power of the Holy Ghost.</p>
+                <div class="social-links">
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-links">
+                <h4>Assembly</h4>
+                <ul>
+                    <li><a href="about_church.html">About the Church</a></li>
+                    <li><a href="#events">Upcoming Events</a></li>
+                    <li><a href="#about">Our Story</a></li>
+                    <li><a href="#">Service Times</a></li>
+                    <li><a href="#">Plan a Visit</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-links">
+                <h4>Connect</h4>
+                <ul>
+                    <li><a href="#">Prayer Request</a></li>
+                    <li><a href="#">Testimonies</a></li>
+                    <li><a href="index.html#give">Give</a></li>
+                    <li><a href="#">Volunteer</a></li>
+                    <li><a href="#">Membership</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-links">
+                <h4>Contact</h4>
+                <ul>
+                    <li><i class="fas fa-map-marker-alt"></i> 123 Faith Avenue, Glory City</li>
+                    <li><i class="fas fa-phone"></i> +234 (0) 800 123 4567</li>
+                    <li><i class="fas fa-envelope"></i> assembly@whgrministry.org</li>
+                    <li><i class="fas fa-clock"></i> Sun: 8AM, 10:30AM & 5PM WAT</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2026 Messianic Movement. All rights reserved.</p>
+            <p>Holy Ghost Assembly — <i class="fas fa-fire" style="color: var(--color-gold);"></i> A Fire-Filled Community</p>
+        </div>
+    </footer>
+
+    <!-- Modal -->
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModal()">
+                <i class="fas fa-times"></i>
+            </button>
+            <h2 id="modalTitle">Title</h2>
+            <p id="modalBody" style="color: var(--text-secondary); margin-top: 1rem; line-height: 1.8;">Content goes here...</p>
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div class="toast" id="toast">
+        <i class="fas fa-check-circle toast-icon"></i>
+        <span id="toastMessage">Item added to cart</span>
+    </div>
+
+    <!-- Floating Buttons -->
+    <a href="https://wa.me/2348001234567" class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+    <button class="scroll-top" id="scrollTop" onclick="scrollToTop()" aria-label="Scroll to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
+    <script>
+        // Modal content for events
+        const modalContent = {
+            crusade: {
+                title: 'Global Holy Ghost Crusade 2026',
+                body: 'Join us for a three-day apostolic invasion of the Spirit from June 15-17, 2026. This year\'s crusade features international guest ministers, mass healing services, prophetic impartation, and a mighty outpouring of the Holy Ghost. Registration is free but required for seating. Hotel accommodation available for out-of-town guests. Childcare provided during all sessions.'
+            },
+            encounter: {
+                title: 'Night of Divine Encounter',
+                body: 'Every last Friday of the month, we gather for an all-night vigil of worship, prophetic impartation, and supernatural encounters. Come hungry and leave burning with holy fire. The Night of Divine Encounter has been the birthplace of countless miracles, deliverances, and prophetic destinies. Doors open at 9:00 PM. Bring your prayer requests and expect God to move.'
+            },
+            summit: {
+                title: 'Apostolic Leadership Summit',
+                body: 'A premier gathering for pastors, ministers, and kingdom leaders. July 10-12, 2026. Featuring intensive sessions on apostolic ministry, church growth, spiritual warfare, and the manifestation of the gifts of the Spirit. Early bird registration ends June 1st. Group discounts available for teams of 5 or more.'
+            },
+            youth: {
+                title: 'Youth Fire Conference 2026',
+                body: 'Three days of explosive worship, radical teaching, and prophetic activation for young people aged 16-35. August 20-22, 2026 at the Youth Arena. This year\'s theme: "Arise and Shine." Guest artists, powerful speakers, and an encounter you will never forget. Registration includes meals and conference materials.'
+            },
+            mission: {
+                title: 'Mission Trip to Kenya',
+                body: 'Join our Global Response team for a two-week mission to Nairobi, Kenya from July 25 - August 8, 2026. Activities include mass evangelism crusades, medical outreach, school building projects, and minister training. Application deadline: May 30, 2026. Fundraising support and training provided for all accepted applicants.'
+            },
+            school: {
+                title: 'School of the Spirit — Term 3',
+                body: 'A 12-week intensive starting September 5, 2026. Classes meet every Tuesday and Thursday at 6:00 PM WAT. Curriculum covers the gifts of the Spirit, the fruit of the Spirit, prophetic ministry, healing and deliverance, and apostolic foundations. Tuition: ₦25,000. Scholarships available. Graduate equipped for supernatural ministry.'
+            },
+            visit: {
+                title: 'Plan Your First Visit',
+                body: 'We are so excited to welcome you to Holy Ghost Assembly! When you arrive, our Guest Experience team will be waiting to greet you at the main entrance. We offer free parking, wheelchair accessibility, and a warm nursery for your little ones. First-time visitors receive a special welcome gift. Fill out the form at the welcome desk to receive a complimentary copy of Pastor John James\' book, "The Fire Within."'
+            }
+        };
+
+        function openModal(key) {
+            const content = modalContent[key];
+            if (content) {
+                document.getElementById('modalTitle').textContent = content.title;
+                document.getElementById('modalBody').textContent = content.body;
+                document.getElementById('modal').classList.add('open');
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        function closeModal() {
+            document.getElementById('modal').classList.remove('open');
+            document.body.style.overflow = '';
+        }
+
+        document.getElementById('modal').addEventListener('click', function(e) {
+            if (e.target === this) closeModal();
+        });
+
+
+
+        // Loading screen
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('loader')?.classList.add('hidden');
+                initParticles();
+            }, 2000);
+        });
+
+        // Scroll top button
+        const scrollTopBtn = document.getElementById('scrollTop');
+        window.addEventListener('scroll', () => {
+            scrollTopBtn.classList.toggle('visible', window.scrollY > 500);
+        });
+    </script>
+</body>
+</html>

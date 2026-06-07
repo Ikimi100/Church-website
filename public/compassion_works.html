@@ -1,0 +1,1181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compassion Works | Messianic Movement</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Compassion Works Specific Styles */
+        .compassion-hero {
+            min-height: 85vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            padding: 0 4%;
+            padding-top: 140px;
+            background: linear-gradient(135deg, rgba(10,10,15,0.95) 0%, rgba(5,5,5,0.98) 100%);
+        }
+
+        .compassion-hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(212, 175, 55, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(139, 92, 246, 0.05) 0%, transparent 50%);
+            z-index: 1;
+        }
+
+        .compassion-hero-bg {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+            opacity: 0.25;
+        }
+
+        .compassion-hero-bg img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.5) contrast(1.2) saturate(0.8);
+        }
+
+        .compassion-hero-content {
+            position: relative;
+            z-index: 10;
+            max-width: 1100px;
+            text-align: center;
+        }
+
+        .compassion-hero-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .compassion-hero-eyebrow .eyebrow-line {
+            width: 60px;
+            height: 1px;
+            background: linear-gradient(to right, transparent, var(--color-gold));
+        }
+
+        .compassion-hero-eyebrow span {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            color: var(--color-gold);
+        }
+
+        .compassion-hero h1 {
+            font-size: clamp(3rem, 8vw, 6rem);
+            line-height: 1;
+            margin-bottom: 2rem;
+            background: linear-gradient(135deg, #fff 0%, var(--color-gold-light) 50%, var(--color-gold) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 0 30px rgba(212,175,55,0.2));
+        }
+
+        .compassion-hero p.lead {
+            font-size: clamp(1.125rem, 2vw, 1.5rem);
+            color: var(--color-text-secondary);
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            font-weight: 300;
+            line-height: 1.8;
+        }
+
+        .hero-stats-bar {
+            display: flex;
+            justify-content: center;
+            gap: 4rem;
+            margin-top: 4rem;
+            flex-wrap: wrap;
+        }
+
+        .hero-stat {
+            text-align: center;
+        }
+
+        .hero-stat-number {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3rem;
+            color: var(--color-gold);
+            line-height: 1;
+            text-shadow: 0 0 20px rgba(212,175,55,0.3);
+        }
+
+        .hero-stat-label {
+            font-size: 0.875rem;
+            color: var(--color-text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-top: 0.5rem;
+        }
+
+        /* Mission Statement Section */
+        .mission-section {
+            background: var(--color-bg-elevated);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .mission-section::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 50% 0%, rgba(212,175,55,0.03) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .mission-container {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .mission-container p {
+            font-size: clamp(1.125rem, 2vw, 1.35rem);
+            color: var(--color-text-secondary);
+            line-height: 1.9;
+            font-weight: 300;
+        }
+
+        .mission-container p strong {
+            color: var(--color-gold);
+            font-weight: 600;
+        }
+
+        /* Services Grid */
+        .services-section {
+            background: var(--color-bg);
+            position: relative;
+        }
+
+        .services-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: var(--color-surface);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 3rem 2.5rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.6s var(--ease-out-expo);
+            cursor: pointer;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--color-gold), var(--color-purple-rich), var(--color-soft-blue));
+            transform: scaleX(0);
+            transition: transform 0.6s var(--ease-out-expo);
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            border-color: rgba(212,175,55,0.2);
+            box-shadow: 0 30px 60px -20px rgba(0,0,0,0.5), 0 0 40px rgba(212,175,55,0.1);
+        }
+
+        .service-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .service-icon {
+            width: 72px;
+            height: 72px;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), rgba(107, 33, 168, 0.1));
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.75rem;
+            color: var(--color-gold);
+            margin-bottom: 2rem;
+            transition: all 0.4s ease;
+            box-shadow: 0 0 30px rgba(212,175,55,0.1);
+        }
+
+        .service-card:hover .service-icon {
+            background: linear-gradient(135deg, var(--color-gold), var(--color-purple-rich));
+            color: var(--color-bg);
+            transform: scale(1.1) rotate(-5deg);
+            box-shadow: 0 10px 30px rgba(212,175,55,0.3);
+        }
+
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            font-family: 'Cormorant Garamond', serif;
+            transition: color 0.3s ease;
+        }
+
+        .service-card:hover h3 {
+            color: var(--color-gold);
+        }
+
+        .service-card p {
+            color: var(--color-text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--color-gold);
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .service-link i {
+            transition: transform 0.3s ease;
+        }
+
+        .service-link:hover i {
+            transform: translateX(5px);
+        }
+
+        /* Impact Section */
+        .impact-section {
+            background: linear-gradient(135deg, rgba(10,10,15,0.98) 0%, rgba(5,5,5,0.99) 100%);
+            position: relative;
+            overflow: hidden;
+            border-top: 1px solid rgba(212,175,55,0.1);
+            border-bottom: 1px solid rgba(212,175,55,0.1);
+        }
+
+        .impact-section::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: 
+                radial-gradient(circle at 30% 50%, rgba(212,175,55,0.05) 0%, transparent 50%),
+                radial-gradient(circle at 70% 50%, rgba(107,33,168,0.05) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .impact-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 3rem;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .impact-item {
+            padding: 2rem;
+        }
+
+        .impact-number {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(3rem, 5vw, 4.5rem);
+            color: var(--color-gold);
+            line-height: 1;
+            text-shadow: 0 0 30px rgba(212,175,55,0.3);
+            margin-bottom: 1rem;
+        }
+
+        .impact-label {
+            font-size: 1rem;
+            color: var(--color-text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-weight: 500;
+        }
+
+        .impact-divider {
+            width: 1px;
+            background: linear-gradient(180deg, transparent, rgba(212,175,55,0.3), transparent);
+        }
+
+        /* Operations / In Focus */
+        .operations-section {
+            background: var(--color-bg-elevated);
+        }
+
+        .operations-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .operation-card {
+            position: relative;
+            height: 450px;
+            border-radius: 24px;
+            overflow: hidden;
+            cursor: pointer;
+            border: 1px solid var(--glass-border);
+            transition: all 0.6s var(--ease-out-expo);
+        }
+
+        .operation-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(212,175,55,0.2);
+            box-shadow: 0 30px 60px -20px rgba(0,0,0,0.5), 0 0 40px rgba(212,175,55,0.1);
+        }
+
+        .operation-card img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 1.2s var(--ease-out-expo);
+        }
+
+        .operation-card:hover img {
+            transform: scale(1.1);
+        }
+
+        .operation-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(5,5,5,0.95) 0%, rgba(5,5,5,0.3) 50%, transparent 100%);
+        }
+
+        .operation-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 2.5rem;
+            transform: translateY(20px);
+            transition: transform 0.6s var(--ease-out-expo);
+        }
+
+        .operation-card:hover .operation-content {
+            transform: translateY(0);
+        }
+
+        .operation-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: rgba(212,175,55,0.15);
+            border: 1px solid rgba(212,175,55,0.3);
+            border-radius: 100px;
+            font-size: 0.75rem;
+            color: var(--color-gold);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 1rem;
+        }
+
+        .operation-content h3 {
+            font-size: 1.75rem;
+            margin-bottom: 0.75rem;
+            font-family: 'Cormorant Garamond', serif;
+        }
+
+        .operation-content p {
+            color: var(--color-text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.7;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.4s ease 0.1s;
+        }
+
+        .operation-card:hover .operation-content p {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, rgba(212,175,55,0.05) 0%, rgba(107,33,168,0.05) 50%, rgba(59,130,246,0.03) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 50% 50%, rgba(212,175,55,0.08) 0%, transparent 60%);
+            pointer-events: none;
+        }
+
+        .cta-container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-container h2 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            margin-bottom: 1.5rem;
+            background: linear-gradient(to bottom, #fff, var(--color-text-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .cta-container p {
+            color: var(--color-text-secondary);
+            font-size: 1.25rem;
+            line-height: 1.8;
+            margin-bottom: 3rem;
+            font-weight: 300;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* Publications */
+        .publications-section {
+            background: var(--color-bg);
+        }
+
+        .publications-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+        }
+
+        .publication-card {
+            background: var(--color-surface);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.6s var(--ease-out-expo);
+            cursor: pointer;
+        }
+
+        .publication-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(212,175,55,0.2);
+            box-shadow: 0 20px 40px -20px rgba(0,0,0,0.4), 0 0 30px rgba(212,175,55,0.1);
+        }
+
+        .publication-cover {
+            aspect-ratio: 3/4;
+            background: linear-gradient(135deg, rgba(212,175,55,0.1), rgba(107,33,168,0.1));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .publication-cover i {
+            font-size: 3rem;
+            color: var(--color-gold);
+            opacity: 0.5;
+        }
+
+        .publication-cover::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, transparent, rgba(212,175,55,0.1), transparent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .publication-card:hover .publication-cover::before {
+            opacity: 1;
+        }
+
+        .publication-info {
+            padding: 1.5rem;
+        }
+
+        .publication-tag {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--color-gold);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .publication-info h4 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 600;
+        }
+
+        .publication-info p {
+            font-size: 0.85rem;
+            color: var(--color-text-muted);
+            line-height: 1.5;
+        }
+
+        /* Contact Banner */
+        .contact-banner {
+            background: linear-gradient(135deg, rgba(212,175,55,0.1) 0%, rgba(107,33,168,0.1) 100%);
+            border-top: 1px solid rgba(212,175,55,0.1);
+            border-bottom: 1px solid rgba(212,175,55,0.1);
+            padding: 3rem 4%;
+            text-align: center;
+        }
+
+        .contact-banner p {
+            font-size: 1.125rem;
+            color: var(--color-text-secondary);
+        }
+
+        .contact-banner a {
+            color: var(--color-gold);
+            text-decoration: none;
+            font-weight: 600;
+            border-bottom: 1px solid rgba(212,175,55,0.3);
+            transition: all 0.3s ease;
+        }
+
+        .contact-banner a:hover {
+            border-bottom-color: var(--color-gold);
+            text-shadow: 0 0 10px rgba(212,175,55,0.3);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .services-grid { grid-template-columns: repeat(2, 1fr); }
+            .operations-grid { grid-template-columns: repeat(2, 1fr); }
+            .publications-grid { grid-template-columns: repeat(2, 1fr); }
+            .impact-grid { grid-template-columns: repeat(2, 1fr); }
+            .impact-divider { display: none; }
+            .hero-stats-bar { gap: 2rem; }
+        }
+
+        @media (max-width: 768px) {
+            .services-grid { grid-template-columns: 1fr; }
+            .operations-grid { grid-template-columns: 1fr; }
+            .publications-grid { grid-template-columns: 1fr; }
+            .impact-grid { grid-template-columns: 1fr; gap: 1rem; }
+            .hero-stats-bar { gap: 1.5rem; }
+            .hero-stat-number { font-size: 2rem; }
+            .compassion-hero { min-height: 70vh; }
+        }
+    
+    /* LOGO IMAGE FALLBACK */
+    
+    /* HOMEPAGE HEADER LOGO MATCH */
+    nav .logo .logo-mark,
+    .study-nav .logo .logo-mark,
+    .watch-header .logo .logo-mark {
+        width: 48px;
+        height: 48px;
+        flex: 0 0 48px;
+        border: 1px solid var(--color-gold);
+        border-radius: 50%;
+        background: transparent;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        position: relative;
+        box-shadow: 0 0 20px rgba(212,175,55,0.1);
+    }
+
+    nav .logo .logo-mark img,
+    .study-nav .logo .logo-mark img,
+    .watch-header .logo .logo-mark img,
+    nav .logo .logo-mark-img,
+    .study-nav .logo .logo-mark-img,
+    .watch-header .logo .logo-mark-img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        display: block;
+        position: relative;
+        z-index: 1;
+    }
+
+    nav .logo .logo-title,
+    .study-nav .logo .logo-title,
+    .watch-header .logo .logo-title {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 1.5rem;
+        font-weight: 400;
+        line-height: 1;
+        letter-spacing: 0;
+    }
+
+    nav .logo .logo-subtitle,
+    .study-nav .logo .logo-subtitle,
+    .watch-header .logo .logo-subtitle {
+        font-size: 0.65rem;
+        text-transform: uppercase;
+        letter-spacing: 0.3em;
+        color: var(--color-text-muted);
+        margin-top: 0.25rem;
+    }
+
+    .loader-ring,
+    .loader-ring--soft,
+    .loader-dots,
+    .loader-bar,
+    .loader-progress {
+        display: none !important;
+    }
+</style>
+</head>
+<body>
+    <!-- Film Grain Overlay -->
+    <div class="grain-overlay"></div>
+    <div class="vignette"></div>
+
+    <!-- Custom Cursor -->
+    <div class="cursor" id="cursor"></div>
+    <div class="cursor-dot" id="cursorDot"></div>
+
+    <!-- Navigation -->
+    <nav id="navbar" class="scrolled" style="background: rgba(5,5,5,0.85); backdrop-filter: blur(20px);">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <div class="logo-mark"><img src="images/logowtb.png" alt="Messianic Movement logo" class="logo-mark-img"></div>
+                <div class="logo-text">
+                    <span class="logo-title">Messianic Movement</span>
+                    <span class="logo-subtitle">Regenerational Ministry</span>
+                </div>
+            </a>
+
+            <ul class="nav-links">
+                <li><a href="index.html#home" class="nav-link">Home</a></li>
+                <li><a href="index.html#ministries" class="nav-link">Ministries</a></li>
+                <li><a href="index.html#calendar" class="nav-link">Calendar</a></li>
+                <li><a href="index.html#resources" class="nav-link">Resources</a></li>
+                <li><a href="index.html#store" class="nav-link">Store</a></li>
+                <li><a href="index.html#live" class="nav-link">Live</a></li>
+                <li style="margin-left: 1rem;">
+                    <button class="nav-cta" onclick="toggleCart()">
+                        Cart (<span id="cartCount">0</span>)
+                    </button>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="compassion-hero">
+        <div class="compassion-hero-bg">
+            <img src="images/compassion-hero.jpg" alt="Humanitarian outreach">
+        </div>
+        <div class="hero-particles" id="particles"></div>
+
+        <div class="compassion-hero-content">
+            <div class="compassion-hero-eyebrow">
+                <div class="eyebrow-line"></div>
+                <span>Humanitarian Arm of WHGRM</span>
+                <div class="eyebrow-line" style="transform: rotate(180deg);"></div>
+            </div>
+
+            <h1>Compassion Works</h1>
+
+            <p class="lead">Bringing liberty, comfort, and the love of Christ to the oppressed across the nations. We extend the hands of the ministry to disaster zones, refugee camps, and forgotten communities — delivering both physical aid and the regenerating power of the Holy Ghost.</p>
+
+            <div class="hero-actions">
+                <a href="#services" class="btn btn-primary">
+                    <i class="fas fa-hand-holding-heart btn-icon"></i>
+                    Our Services
+                </a>
+                <a href="#give" class="btn btn-secondary" onclick="document.getElementById('give').scrollIntoView({behavior:'smooth'})">
+                    Partner With Us
+                    <i class="fas fa-arrow-right btn-icon"></i>
+                </a>
+            </div>
+
+            <div class="hero-stats-bar">
+                <div class="hero-stat">
+                    <div class="hero-stat-number">47</div>
+                    <div class="hero-stat-label">Nations Reached</div>
+                </div>
+                <div class="hero-stat">
+                    <div class="hero-stat-number">2.4M+</div>
+                    <div class="hero-stat-label">Lives Impacted</div>
+                </div>
+                <div class="hero-stat">
+                    <div class="hero-stat-number">156</div>
+                    <div class="hero-stat-label">Active Projects</div>
+                </div>
+                <div class="hero-stat">
+                    <div class="hero-stat-number">12K+</div>
+                    <div class="hero-stat-label">Volunteers</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mission Statement -->
+    <section class="mission-section" id="mission">
+        <div class="section-header">
+            <span class="section-eyebrow">Our Mandate</span>
+            <h2 class="section-title">Faith in Action</h2>
+        </div>
+
+        <div class="mission-container">
+            <p>As crises multiply across the earth — from armed conflicts and mass displacement to natural disasters and famine — <strong>Compassion Works</strong> remains a cornerstone of WHGRM's global mission. Over two decades of frontline engagement, we have built <strong>vast expertise in emergency relief, medical missions, and spiritual trauma care</strong> — often in the most challenging and hostile environments.</p>
+            <br>
+            <p>This experience equips us to extend our <strong>capacity to support emergency preparedness and long-term development efforts</strong>, depending on the local context. Working closely with local churches, government institutions, and international partners, we make our assets and functionalities available to fellow humanitarian operators, allowing them to <strong>save more lives, faster, and at lower cost</strong> — all while sharing the Gospel of regeneration.</p>
+        </div>
+    </section>
+
+    <!-- Services Provided -->
+    <section class="services-section" id="services">
+        <div class="section-header">
+            <span class="section-eyebrow">What We Do</span>
+            <h2 class="section-title">Services & Operations</h2>
+            <p class="section-subtitle">Comprehensive humanitarian and spiritual support delivered on behalf of churches, NGOs, and government institutions worldwide.</p>
+        </div>
+
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-kit-medical"></i>
+                </div>
+                <h3>Emergency Relief & Disaster Response</h3>
+                <p>Rapid deployment teams responding within 24–72 hours to natural disasters, conflicts, and humanitarian crises. We deliver food, clean water, temporary shelter, and emergency supplies to affected populations.</p>
+                <a href="#" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-heart-pulse"></i>
+                </div>
+                <h3>Medical Missions & Wellness</h3>
+                <p>Mobile clinics, surgical missions, and wellness programs serving underserved communities. From rural Africa to refugee camps in the Middle East, our medical teams bring healing in Jesus' name.</p>
+                <a href="#" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-book-bible"></i>
+                </div>
+                <h3>Education & Bible Distribution</h3>
+                <p>The World Bible Education Project — disseminating divine knowledge to all nations. We distribute Scriptures, establish learning centers, and train local leaders in biblical literacy and discipleship.</p>
+                <a href="#" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-wheat-awn"></i>
+                </div>
+                <h3>Food Security & Nutrition</h3>
+                <p>Procurement and distribution of nutritious food for children, families, and vulnerable groups. We operate feeding programs, agricultural training, and sustainable food systems in food-insecure regions.</p>
+                <a href="#" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-house-chimney"></i>
+                </div>
+                <h3>Shelter & Reconstruction</h3>
+                <p>Engineering support for rebuilding homes, schools, and places of worship destroyed by disaster or war. We provide temporary housing, mobile warehouses, and construction expertise.</p>
+                <a href="#" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-hands-praying"></i>
+                </div>
+                <h3>Spiritual Counseling & Trauma Care</h3>
+                <p>Trained counselors and ministers providing trauma-informed spiritual care to victims of war, abuse, and displacement. We believe true healing comes through the regenerating power of the Holy Ghost.</p>
+                <a href="#" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Impact Statistics -->
+    <section class="impact-section">
+        <div class="impact-grid">
+            <div class="impact-item">
+                <div class="impact-number" data-count="47">0</div>
+                <div class="impact-label">Nations Active</div>
+            </div>
+            <div class="impact-divider"></div>
+            <div class="impact-item">
+                <div class="impact-number" data-count="2400000">0</div>
+                <div class="impact-label">People Served</div>
+            </div>
+            <div class="impact-divider"></div>
+            <div class="impact-item">
+                <div class="impact-number" data-count="156">0</div>
+                <div class="impact-label">Active Projects</div>
+            </div>
+            <div class="impact-divider"></div>
+            <div class="impact-item">
+                <div class="impact-number" data-count="12000">0</div>
+                <div class="impact-label">Volunteers Deployed</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- In Focus / Active Operations -->
+    <section class="operations-section">
+        <div class="section-header">
+            <span class="section-eyebrow">On The Ground</span>
+            <h2 class="section-title">Active Operations</h2>
+            <p class="section-subtitle">Current frontline engagements where Compassion Works is bringing hope and regeneration.</p>
+        </div>
+
+        <div class="operations-grid">
+            <div class="operation-card">
+                <img src="images/operation-refugee.jpg" alt="Refugee camp outreach">
+                <div class="operation-overlay"></div>
+                <div class="operation-content">
+                    <div class="operation-badge"><i class="fas fa-location-dot"></i> Middle East</div>
+                    <h3>Refugee Camp Outreach</h3>
+                    <p>Providing food, medical care, and spiritual counseling to displaced families in conflict zones. Over 15,000 meals distributed monthly.</p>
+                </div>
+            </div>
+
+            <div class="operation-card">
+                <img src="images/operation-africa.jpg" alt="African medical mission">
+                <div class="operation-overlay"></div>
+                <div class="operation-content">
+                    <div class="operation-badge"><i class="fas fa-location-dot"></i> East Africa</div>
+                    <h3>Medical Mission Campaign</h3>
+                    <p>Mobile clinics serving remote villages with free healthcare, surgeries, and gospel outreach. 8,000+ patients treated this quarter.</p>
+                </div>
+            </div>
+
+            <div class="operation-card">
+                <img src="images/operation-disaster.jpg" alt="Disaster relief">
+                <div class="operation-overlay"></div>
+                <div class="operation-content">
+                    <div class="operation-badge"><i class="fas fa-location-dot"></i> Southeast Asia</div>
+                    <h3>Disaster Recovery Initiative</h3>
+                    <p>Rebuilding communities after catastrophic flooding. Shelter reconstruction, clean water systems, and trauma counseling programs.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Publications -->
+    <section class="publications-section">
+        <div class="section-header">
+            <span class="section-eyebrow">Resources</span>
+            <h2 class="section-title">Publications & Reports</h2>
+            <p class="section-subtitle">Annual reports, field manuals, and spiritual resources for partners and supporters.</p>
+        </div>
+
+        <div class="publications-grid">
+            <div class="publication-card">
+                <div class="publication-cover">
+                    <i class="fas fa-file-pdf"></i>
+                </div>
+                <div class="publication-info">
+                    <div class="publication-tag">Annual Report</div>
+                    <h4>Compassion Works Annual Impact Report 2025</h4>
+                    <p>Comprehensive overview of global operations, financial transparency, and lives transformed.</p>
+                </div>
+            </div>
+
+            <div class="publication-card">
+                <div class="publication-cover">
+                    <i class="fas fa-book-medical"></i>
+                </div>
+                <div class="publication-info">
+                    <div class="publication-tag">Field Manual</div>
+                    <h4>Emergency Response & Spiritual Care Protocol</h4>
+                    <p>Guidelines for volunteers and partners engaged in disaster zones and crisis regions.</p>
+                </div>
+            </div>
+
+            <div class="publication-card">
+                <div class="publication-cover">
+                    <i class="fas fa-globe"></i>
+                </div>
+                <div class="publication-info">
+                    <div class="publication-tag">Strategy</div>
+                    <h4>Global Bible Distribution Framework 2026</h4>
+                    <p>Strategic plan for the World Bible Education Project across 100+ nations.</p>
+                </div>
+            </div>
+
+            <div class="publication-card">
+                <div class="publication-cover">
+                    <i class="fas fa-hand-holding-heart"></i>
+                </div>
+                <div class="publication-info">
+                    <div class="publication-tag">Guide</div>
+                    <h4>Partner Handbook: Giving & Volunteering</h4>
+                    <p>Everything you need to know about partnering with Compassion Works financially or as a volunteer.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section" id="give">
+        <div class="cta-container">
+            <div class="section-eyebrow" style="justify-content: center;">
+                <div class="eyebrow-line"></div>
+                <span>Join The Mission</span>
+                <div class="eyebrow-line" style="transform: rotate(180deg);"></div>
+            </div>
+            <h2>Be Part of the Solution</h2>
+            <p>Every donation, every prayer, and every volunteer hour brings us closer to a world where no one suffers without hope. Partner with Compassion Works and extend the love of Christ to the ends of the earth.</p>
+            <div class="cta-buttons">
+                <a href="index.html#give" class="btn btn-primary">
+                    <i class="fas fa-gift btn-icon"></i>
+                    Give Now
+                </a>
+                <a href="#" class="btn btn-secondary" onclick="openModal('volunteer')">
+                    <i class="fas fa-user-plus btn-icon"></i>
+                    Become a Volunteer
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Banner -->
+    <div class="contact-banner">
+        <p><i class="fas fa-envelope" style="color: var(--color-gold); margin-right: 0.5rem;"></i> For partnership inquiries, operational support, or media requests: <a href="mailto:compassion@whgrministry.org">compassion@whgrministry.org</a></p>
+    </div>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <a href="index.html" class="logo">
+                    <div class="logo-icon"><img src="images/logowtb.png" alt="Messianic Movement logo" class="logo-mark-img"></div>
+                    <div class="logo-text">
+                        <span class="logo-title">Messianic Movement</span>
+                        <span class="logo-subtitle">Regenerational Ministry</span>
+                    </div>
+                </a>
+                <p>Raising a generation of Spirit-filled believers who will transform nations through the power of the Holy Ghost.</p>
+                <div class="social-links">
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html#home">Home</a></li>
+                    <li><a href="index.html#ministries">Ministries</a></li>
+                    <li><a href="index.html#calendar">Calendar</a></li>
+                    <li><a href="index.html#resources">Resources</a></li>
+                    <li><a href="index.html#live">Live Service</a></li>
+                    <li><a href="index.html#give">Give</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-links">
+                <h4>Compassion Works</h4>
+                <ul>
+                    <li><a href="#services">Our Services</a></li>
+                    <li><a href="#mission">Mission & Vision</a></li>
+                    <li><a href="#">Active Operations</a></li>
+                    <li><a href="#">Volunteer</a></li>
+                    <li><a href="#">Publications</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-links">
+                <h4>Contact</h4>
+                <ul>
+                    <li><i class="fas fa-map-marker-alt"></i> 123 Faith Avenue, Glory City</li>
+                    <li><i class="fas fa-phone"></i> +1 (555) 123-4567</li>
+                    <li><i class="fas fa-envelope"></i> info@whgrministry.org</li>
+                    <li><i class="fas fa-clock"></i> Sun: 9AM & 11AM EST</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2026 Messianic Movement. All rights reserved.</p>
+            <p>Designed with <i class="fas fa-heart" style="color: var(--color-gold);"></i> by the Spirit</p>
+        </div>
+    </footer>
+
+    <!-- Cart Sidebar -->
+    <div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h3>Your Cart</h3>
+            <button class="close-cart" onclick="toggleCart()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <!-- Cart items injected here -->
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Total:</span>
+                <span id="cartTotal">$0.00</span>
+            </div>
+            <button class="checkout-btn" onclick="checkout()">Proceed to Checkout</button>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModal()">
+                <i class="fas fa-times"></i>
+            </button>
+            <h2 id="modalTitle">Title</h2>
+            <p id="modalBody" style="color: var(--text-secondary); margin-top: 1rem; line-height: 1.8;">Content goes here...</p>
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div class="toast" id="toast">
+        <i class="fas fa-check-circle toast-icon"></i>
+        <span id="toastMessage">Item added to cart</span>
+    </div>
+
+    <!-- Floating Buttons -->
+    <a href="https://wa.me/1234567890" class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+    <button class="scroll-top" id="scrollTop" onclick="scrollToTop()" aria-label="Scroll to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
+    <script>
+        // Compassion Works Page Scripts
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('loader')?.classList.add('hidden');
+                initParticles();
+                initCounters();
+            }, 2000);
+        });
+
+        // Counter Animation
+        function initCounters() {
+            const counters = document.querySelectorAll('.impact-number');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const target = parseInt(entry.target.dataset.count);
+                        animateCounter(entry.target, target);
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.5 });
+
+            counters.forEach(counter => observer.observe(counter));
+        }
+
+        function animateCounter(element, target) {
+            const duration = 2000;
+            const start = 0;
+            const startTime = performance.now();
+
+            function update(currentTime) {
+                const elapsed = currentTime - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                const easeOut = 1 - Math.pow(1 - progress, 3);
+                const current = Math.floor(start + (target - start) * easeOut);
+
+                if (target >= 1000000) {
+                    element.textContent = (current / 1000000).toFixed(1) + 'M+';
+                } else if (target >= 1000) {
+                    element.textContent = (current / 1000).toFixed(0) + 'K+';
+                } else {
+                    element.textContent = current;
+                }
+
+                if (progress < 1) {
+                    requestAnimationFrame(update);
+                } else {
+                    if (target >= 1000000) {
+                        element.textContent = (target / 1000000).toFixed(1) + 'M+';
+                    } else if (target >= 1000) {
+                        element.textContent = (target / 1000).toFixed(0) + 'K+';
+                    } else {
+                        element.textContent = target;
+                    }
+                }
+            }
+            requestAnimationFrame(update);
+        }
+
+        // Volunteer Modal Content
+        const modalContent = {
+            volunteer: {
+                title: 'Become a Volunteer',
+                body: 'Thank you for your interest in serving with Compassion Works! We are looking for spirit-filled individuals who are ready to deploy to the nations. Whether you have medical expertise, construction skills, teaching experience, or simply a heart to serve, there is a place for you. Please email us at compassion@whgrministry.org with your CV and area of interest. Our volunteer coordination team will reach out within 5 business days. Shalom!'
+            }
+        };
+
+        // Override openModal for this page
+        function openModal(type) {
+            const modal = document.getElementById('modal');
+            const title = document.getElementById('modalTitle');
+            const body = document.getElementById('modalBody');
+
+            if (modalContent[type]) {
+                title.textContent = modalContent[type].title;
+                body.textContent = modalContent[type].body;
+            } else {
+                title.textContent = 'Coming Soon';
+                body.textContent = 'This feature is currently under development. Please check back soon or contact us for more information.';
+            }
+
+            modal.classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            document.getElementById('modal').classList.remove('open');
+            document.body.style.overflow = '';
+        }
+    </script>
+</body>
+</html>

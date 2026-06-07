@@ -1,0 +1,1013 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Give | Messianic Movement</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* ===== CSS VARIABLES (mirroring your site theme) ===== */
+        :root {
+            --color-bg: #050508;
+            --color-bg-elevated: #0a0a0f;
+            --color-text: #f0f0f5;
+            --color-text-secondary: #a0a0b0;
+            --color-text-muted: #606070;
+            --color-gold: #d4af37;
+            --color-gold-light: #e8c96a;
+            --color-gold-dark: #b8941f;
+            --color-purple-rich: #8b5cf6;
+            --color-soft-blue: #60a5fa;
+            --glass-bg: rgba(255,255,255,0.03);
+            --glass-border: rgba(255,255,255,0.06);
+            --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background: var(--color-bg);
+            color: var(--color-text);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Ambient background effects */
+        .grain-overlay {
+            position: fixed; inset: 0; pointer-events: none; z-index: 9999; opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+        }
+        .vignette {
+            position: fixed; inset: 0; pointer-events: none; z-index: 1;
+            background: radial-gradient(ellipse at center, transparent 0%, rgba(5,5,8,0.6) 100%);
+        }
+
+        /* ===== NAVIGATION ===== */
+        nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+            padding: 1.25rem 4%;
+            transition: all 0.4s var(--ease-out-expo);
+            background: rgba(5,5,5,0.85); backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--glass-border);
+        }
+        .nav-container {
+            max-width: 1400px; margin: 0 auto;
+            display: flex; align-items: center; justify-content: space-between;
+        }
+        .logo {
+            display: flex; align-items: center; gap: 0.875rem; text-decoration: none;
+        }
+        .logo-mark {
+    overflow: hidden;
+            width: 44px; height: 44px; border-radius: 12px;
+            background: linear-gradient(135deg, rgba(212,175,55,0.2), rgba(107,33,168,0.2));
+            border: 1px solid rgba(212,175,55,0.3);
+            display: flex; align-items: center; justify-content: center;
+            color: var(--color-gold); font-size: 1.25rem;}
+        .logo-text { display: flex; flex-direction: column; }
+        .logo-title {
+            font-family: 'Cormorant Garamond', serif; font-size: 1.35rem;
+            font-weight: 600; color: var(--color-text); line-height: 1.1;
+        }
+        .logo-subtitle {
+            font-size: 0.65rem; color: var(--color-text-muted);
+            text-transform: uppercase; letter-spacing: 0.15em;
+        }
+        .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+        .nav-links a {
+            text-decoration: none; color: var(--color-text-secondary);
+            font-size: 0.9rem; font-weight: 500; transition: color 0.3s ease;
+            position: relative;
+        }
+        .nav-links a:hover, .nav-links a.active { color: var(--color-gold); }
+        .nav-links a.active::after {
+            content: ''; position: absolute; bottom: -6px; left: 0; right: 0;
+            height: 2px; background: var(--color-gold); border-radius: 2px;
+        }
+
+        /* ===== HERO ===== */
+        .give-hero {
+            min-height: 85vh; display: flex; align-items: center; justify-content: center;
+            position: relative; padding: 140px 4% 4rem; overflow: hidden;
+        }
+        .give-hero::before {
+            content: ''; position: absolute; inset: 0; z-index: 0;
+            background:
+                radial-gradient(circle at 20% 30%, rgba(212,175,55,0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(139,92,246,0.06) 0%, transparent 50%);
+        }
+        .give-hero::after {
+            content: ''; position: absolute; top: -10%; right: -10%; width: 600px; height: 600px;
+            background: radial-gradient(circle, rgba(212,175,55,0.04), transparent 70%);
+            filter: blur(80px); pointer-events: none;
+        }
+        .give-hero-content {
+            max-width: 900px; text-align: center; position: relative; z-index: 2;
+        }
+        .hero-eyebrow {
+            display: inline-flex; align-items: center; gap: 1rem;
+            color: var(--color-gold); font-size: 0.875rem; text-transform: uppercase;
+            letter-spacing: 0.2em; margin-bottom: 1.5rem;
+        }
+        .eyebrow-line { width: 40px; height: 1px; background: var(--color-gold); opacity: 0.5; }
+        .give-hero h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(3rem, 7vw, 5.5rem); line-height: 1.05;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #fff 0%, var(--color-gold-light) 50%, var(--color-gold) 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .give-hero > div > p {
+            font-size: 1.25rem; color: var(--color-text-secondary);
+            max-width: 640px; margin: 0 auto 2.5rem; font-weight: 300; line-height: 1.7;
+        }
+        .hero-scripture {
+            font-family: 'Cormorant Garamond', serif; font-style: italic;
+            font-size: 1.1rem; color: var(--color-gold); opacity: 0.8;
+            margin-bottom: 2.5rem;
+        }
+
+        /* ===== IMPACT STRIP ===== */
+        .impact-strip {
+            display: flex; justify-content: center; gap: 4rem;
+            margin-top: 3rem; flex-wrap: wrap; position: relative; z-index: 2;
+        }
+        .impact-item { text-align: center; }
+        .impact-number {
+            font-family: 'Cormorant Garamond', serif; font-size: 3rem;
+            color: var(--color-gold); line-height: 1; text-shadow: 0 0 20px rgba(212,175,55,0.3);
+        }
+        .impact-label {
+            font-size: 0.8rem; color: var(--color-text-muted);
+            text-transform: uppercase; letter-spacing: 0.1em; margin-top: 0.5rem;
+        }
+
+        /* ===== SECTIONS COMMON ===== */
+        section { padding: 6rem 4%; position: relative; }
+        .section-header { text-align: center; max-width: 700px; margin: 0 auto 4rem; }
+        .section-eyebrow {
+            display: inline-block; color: var(--color-gold); font-size: 0.875rem;
+            text-transform: uppercase; letter-spacing: 0.2em; margin-bottom: 1rem;
+        }
+        .section-title {
+            font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 4vw, 3rem);
+            margin-bottom: 1rem; color: var(--color-text);
+        }
+        .section-subtitle {
+            font-size: 1.1rem; color: var(--color-text-secondary); font-weight: 300;
+        }
+
+        /* ===== GIVING CATEGORIES ===== */
+        .give-categories {
+            background: linear-gradient(180deg, rgba(10,10,15,0.95), rgba(5,5,5,0.98));
+            border-top: 1px solid rgba(212,175,55,0.1); border-bottom: 1px solid rgba(212,175,55,0.1);
+        }
+        .give-categories::before {
+            content: ''; position: absolute; inset: 0;
+            background: radial-gradient(circle at 50% 0%, rgba(212,175,55,0.04), transparent 60%);
+            pointer-events: none;
+        }
+        .category-grid {
+            max-width: 1400px; margin: 0 auto;
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 2rem;
+            position: relative; z-index: 1;
+        }
+        .category-card {
+            background: var(--glass-bg); border: 1px solid var(--glass-border);
+            border-radius: 24px; padding: 2.5rem; transition: all 0.5s var(--ease-out-expo);
+            cursor: pointer; position: relative; overflow: hidden; backdrop-filter: blur(10px);
+        }
+        .category-card::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+            background: linear-gradient(90deg, var(--color-gold), var(--color-purple-rich), var(--color-soft-blue));
+            transform: scaleX(0); transition: transform 0.5s var(--ease-out-expo);
+        }
+        .category-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            border-color: rgba(212,175,55,0.2);
+            box-shadow: 0 30px 60px -20px rgba(0,0,0,0.5), 0 0 40px rgba(212,175,55,0.08);
+        }
+        .category-card:hover::before { transform: scaleX(1); }
+        .category-card.selected {
+            border-color: rgba(212,175,55,0.4);
+            background: linear-gradient(135deg, rgba(212,175,55,0.08), rgba(107,33,168,0.05));
+            box-shadow: 0 0 40px rgba(212,175,55,0.12);
+        }
+        .category-card.selected::before { transform: scaleX(1); }
+        .category-icon {
+            width: 64px; height: 64px; border-radius: 16px;
+            background: linear-gradient(135deg, rgba(212,175,55,0.15), rgba(107,33,168,0.1));
+            border: 1px solid rgba(212,175,55,0.2);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.5rem; color: var(--color-gold); margin-bottom: 1.5rem;
+            transition: all 0.4s ease;
+        }
+        .category-card:hover .category-icon {
+            transform: scale(1.1) rotate(-5deg);
+            box-shadow: 0 0 30px rgba(212,175,55,0.2);
+        }
+        .category-card h3 {
+            font-family: 'Cormorant Garamond', serif; font-size: 1.6rem;
+            margin-bottom: 0.75rem; color: var(--color-text);
+        }
+        .category-card p {
+            color: var(--color-text-secondary); font-size: 0.95rem; line-height: 1.7; margin-bottom: 1.5rem;
+        }
+        .category-impact {
+            display: flex; align-items: center; gap: 0.5rem;
+            font-size: 0.85rem; color: var(--color-gold); font-weight: 500;
+        }
+
+        /* ===== AMOUNT SELECTOR ===== */
+        .amount-section { background: var(--color-bg-elevated); }
+        .amount-container {
+            max-width: 800px; margin: 0 auto; background: var(--glass-bg);
+            border: 1px solid var(--glass-border); border-radius: 32px;
+            padding: 3rem; backdrop-filter: blur(20px); position: relative; z-index: 1;
+        }
+        .amount-container::before {
+            content: ''; position: absolute; inset: 0; border-radius: 32px; padding: 1px;
+            background: linear-gradient(135deg, rgba(212,175,55,0.2), rgba(107,33,168,0.1), transparent 60%);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor; mask-composite: exclude; pointer-events: none;
+        }
+        .preset-amounts {
+            display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-bottom: 1.5rem;
+        }
+        .amount-btn {
+            padding: 1.25rem; background: rgba(255,255,255,0.03);
+            border: 1px solid var(--glass-border); border-radius: 16px;
+            color: var(--color-text); font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.1rem; font-weight: 600; cursor: pointer; transition: all 0.3s ease;
+            position: relative; overflow: hidden;
+        }
+        .amount-btn:hover {
+            border-color: rgba(212,175,55,0.3); color: var(--color-gold);
+            background: rgba(212,175,55,0.05); transform: translateY(-2px);
+        }
+        .amount-btn.active {
+            background: linear-gradient(135deg, rgba(212,175,55,0.2), rgba(107,33,168,0.1));
+            border-color: var(--color-gold); color: var(--color-gold);
+            box-shadow: 0 0 20px rgba(212,175,55,0.15);
+        }
+        .amount-btn .impact-text {
+            display: block; font-size: 0.7rem; color: var(--color-text-muted);
+            font-weight: 400; margin-top: 0.25rem;
+        }
+        .custom-amount {
+            display: flex; gap: 1rem; margin-bottom: 2rem;
+        }
+        .custom-input-wrapper {
+            flex: 1; position: relative;
+        }
+        .custom-input-wrapper span {
+            position: absolute; left: 1.25rem; top: 50%; transform: translateY(-50%);
+            color: var(--color-gold); font-size: 1.25rem; font-weight: 600;
+        }
+        .custom-input-wrapper input {
+            width: 100%; padding: 1.25rem 1.25rem 1.25rem 2.75rem;
+            background: rgba(255,255,255,0.03); border: 1px solid var(--glass-border);
+            border-radius: 16px; color: var(--color-text); font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.1rem; outline: none; transition: all 0.3s ease;
+        }
+        .custom-input-wrapper input:focus {
+            border-color: var(--color-gold); box-shadow: 0 0 20px rgba(212,175,55,0.1);
+        }
+        .custom-input-wrapper input::placeholder { color: var(--color-text-muted); }
+
+        .frequency-toggle {
+            display: flex; gap: 0.5rem; margin-bottom: 2rem;
+            background: rgba(255,255,255,0.03); border-radius: 100px; padding: 0.4rem;
+            border: 1px solid var(--glass-border);
+        }
+        .freq-btn {
+            flex: 1; padding: 0.875rem; background: transparent; border: none; border-radius: 100px;
+            color: var(--color-text-secondary); font-family: 'Space Grotesk', sans-serif;
+            font-weight: 600; cursor: pointer; transition: all 0.3s ease; font-size: 0.9rem;
+        }
+        .freq-btn.active {
+            background: linear-gradient(135deg, rgba(212,175,55,0.2), rgba(107,33,168,0.1));
+            color: var(--color-gold); box-shadow: 0 0 15px rgba(212,175,55,0.1);
+        }
+
+        .give-btn {
+            width: 100%; padding: 1.25rem; background: linear-gradient(135deg, var(--color-gold), var(--color-gold-dark));
+            border: none; border-radius: 16px; color: var(--color-bg); font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.1rem; font-weight: 700; cursor: pointer; transition: all 0.4s ease;
+            display: flex; align-items: center; justify-content: center; gap: 0.75rem;
+            box-shadow: 0 4px 20px rgba(212,175,55,0.3); position: relative; overflow: hidden;
+        }
+        .give-btn::before {
+            content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.6s ease;
+        }
+        .give-btn:hover {
+            transform: translateY(-2px); box-shadow: 0 8px 30px rgba(212,175,55,0.5);
+        }
+        .give-btn:hover::before { left: 100%; }
+
+        .secure-badge {
+            display: flex; align-items: center; justify-content: center; gap: 0.5rem;
+            margin-top: 1.25rem; font-size: 0.8rem; color: var(--color-text-muted);
+        }
+        .secure-badge i { color: #22c55e; }
+
+        /* ===== IMPACT STORIES ===== */
+        .impact-stories { background: linear-gradient(135deg, rgba(212,175,55,0.03), rgba(107,33,168,0.02)); }
+        .stories-grid {
+            max-width: 1200px; margin: 0 auto;
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem;
+        }
+        .story-card {
+            background: var(--glass-bg); border: 1px solid var(--glass-border);
+            border-radius: 24px; overflow: hidden; transition: all 0.5s var(--ease-out-expo);
+            backdrop-filter: blur(10px);
+        }
+        .story-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(212,175,55,0.2);
+            box-shadow: 0 30px 60px -20px rgba(0,0,0,0.5);
+        }
+        .story-image {
+            height: 200px; background: linear-gradient(135deg, rgba(212,175,55,0.1), rgba(107,33,168,0.1));
+            display: flex; align-items: center; justify-content: center; font-size: 3rem; color: var(--color-gold);
+            position: relative; overflow: hidden;
+        }
+        .story-image::after {
+            content: ''; position: absolute; inset: 0;
+            background: linear-gradient(to top, rgba(5,5,8,0.8), transparent);
+        }
+        .story-body { padding: 2rem; }
+        .story-body h4 {
+            font-family: 'Cormorant Garamond', serif; font-size: 1.4rem;
+            margin-bottom: 0.75rem; color: var(--color-text);
+        }
+        .story-body p {
+            color: var(--color-text-secondary); font-size: 0.95rem; line-height: 1.7;
+        }
+        .story-progress {
+            margin-top: 1.5rem;
+        }
+        .story-progress-header {
+            display: flex; justify-content: space-between; font-size: 0.85rem; margin-bottom: 0.5rem;
+        }
+        .story-progress-header span:first-child { color: var(--color-gold); font-weight: 600; }
+        .story-progress-header span:last-child { color: var(--color-text-muted); }
+        .progress-track {
+            height: 6px; background: rgba(255,255,255,0.05); border-radius: 3px; overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%; background: linear-gradient(90deg, var(--color-gold), var(--color-purple-rich));
+            border-radius: 3px; transition: width 1.5s var(--ease-out-expo);
+        }
+
+        /* ===== TESTIMONIAL ===== */
+        .testimonial-section {
+            text-align: center; max-width: 800px; margin: 0 auto;
+        }
+        .testimonial-quote {
+            font-family: 'Cormorant Garamond', serif; font-size: clamp(1.5rem, 3vw, 2.25rem);
+            font-style: italic; line-height: 1.5; color: var(--color-text);
+            margin-bottom: 2rem; position: relative;
+        }
+        .testimonial-quote::before {
+            content: '"'; font-size: 6rem; color: rgba(212,175,55,0.15);
+            position: absolute; top: -2rem; left: -1rem; line-height: 1;
+        }
+        .testimonial-author {
+            display: flex; align-items: center; justify-content: center; gap: 1rem;
+        }
+        .author-avatar {
+            width: 56px; height: 56px; border-radius: 50%;
+            background: linear-gradient(135deg, var(--color-gold), var(--color-purple-rich));
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 700; color: var(--color-bg); font-size: 1.25rem;
+        }
+        .author-info { text-align: left; }
+        .author-name { font-weight: 600; color: var(--color-text); }
+        .author-role { font-size: 0.85rem; color: var(--color-text-muted); }
+
+        /* ===== FAQ ===== */
+        .faq-section { background: var(--color-bg-elevated); }
+        .faq-item {
+            max-width: 800px; margin: 0 auto 1rem;
+            background: var(--glass-bg); border: 1px solid var(--glass-border);
+            border-radius: 16px; overflow: hidden; transition: all 0.3s ease;
+        }
+        .faq-item:hover { border-color: rgba(212,175,55,0.15); }
+        .faq-question {
+            padding: 1.5rem 2rem; display: flex; justify-content: space-between; align-items: center;
+            cursor: pointer; font-weight: 600; color: var(--color-text);
+        }
+        .faq-question i { transition: transform 0.3s ease; color: var(--color-gold); }
+        .faq-item.open .faq-question i { transform: rotate(180deg); }
+        .faq-answer {
+            padding: 0 2rem; max-height: 0; overflow: hidden; transition: all 0.4s ease;
+            color: var(--color-text-secondary); line-height: 1.7;
+        }
+        .faq-item.open .faq-answer { padding: 0 2rem 1.5rem; max-height: 300px; }
+
+        /* ===== CTA ===== */
+        .cta-section {
+            background: linear-gradient(135deg, rgba(212,175,55,0.05), rgba(107,33,168,0.05));
+            text-align: center;
+        }
+        .cta-buttons {
+            display: flex; gap: 1rem; justify-content: center; margin-top: 2rem; flex-wrap: wrap;
+        }
+        .btn {
+            display: inline-flex; align-items: center; gap: 0.75rem; padding: 1rem 2.5rem;
+            border-radius: 100px; text-decoration: none; font-weight: 600; transition: all 0.4s ease;
+            font-family: 'Space Grotesk', sans-serif; font-size: 0.95rem; cursor: pointer; border: none;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, var(--color-gold), var(--color-gold-dark));
+            color: var(--color-bg); box-shadow: 0 4px 20px rgba(212,175,55,0.3);
+        }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(212,175,55,0.5); }
+        .btn-secondary {
+            background: transparent; border: 1px solid var(--glass-border);
+            color: var(--color-text-secondary);
+        }
+        .btn-secondary:hover {
+            border-color: var(--color-gold); color: var(--color-gold);
+            background: linear-gradient(135deg, rgba(212,175,55,0.1), rgba(107,33,168,0.05));
+            box-shadow: 0 0 20px rgba(212,175,55,0.1);
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            padding: 4rem 4% 2rem; border-top: 1px solid var(--glass-border);
+            background: linear-gradient(180deg, transparent, rgba(5,5,5,0.5));
+        }
+        .footer-grid {
+            max-width: 1400px; margin: 0 auto;
+            display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; margin-bottom: 3rem;
+        }
+        .footer-brand p {
+            color: var(--color-text-secondary); font-size: 0.95rem; line-height: 1.7;
+            margin: 1rem 0; max-width: 300px;
+        }
+        .social-links { display: flex; gap: 1rem; }
+        .social-links a {
+            width: 40px; height: 40px; border-radius: 10px;
+            background: var(--glass-bg); border: 1px solid var(--glass-border);
+            display: flex; align-items: center; justify-content: center;
+            color: var(--color-text-secondary); text-decoration: none; transition: all 0.3s ease;
+        }
+        .social-links a:hover {
+            border-color: var(--color-gold); color: var(--color-gold);
+            background: rgba(212,175,55,0.1); transform: translateY(-2px);
+        }
+        .footer-links h4 {
+            font-family: 'Cormorant Garamond', serif; font-size: 1.25rem;
+            margin-bottom: 1.25rem; color: var(--color-text);
+        }
+        .footer-links ul { list-style: none; }
+        .footer-links li { margin-bottom: 0.75rem; }
+        .footer-links a {
+            color: var(--color-text-secondary); text-decoration: none; font-size: 0.9rem;
+            transition: color 0.3s ease; display: flex; align-items: center; gap: 0.5rem;
+        }
+        .footer-links a:hover { color: var(--color-gold); }
+        .footer-bottom {
+            max-width: 1400px; margin: 0 auto; padding-top: 2rem;
+            border-top: 1px solid var(--glass-border);
+            display: flex; justify-content: space-between; align-items: center;
+            color: var(--color-text-muted); font-size: 0.85rem; flex-wrap: wrap; gap: 1rem;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1024px) {
+            .stories-grid { grid-template-columns: repeat(2, 1fr); }
+            .footer-grid { grid-template-columns: repeat(2, 1fr); }
+            .preset-amounts { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .stories-grid { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr; }
+            .preset-amounts { grid-template-columns: repeat(2, 1fr); }
+            .impact-strip { gap: 2rem; }
+            .amount-container { padding: 2rem 1.5rem; border-radius: 24px; }
+            .custom-amount { flex-direction: column; }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-in {
+            animation: fadeInUp 0.8s var(--ease-out-expo) forwards;
+            opacity: 0;
+        }
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
+        .delay-4 { animation-delay: 0.4s; }
+    
+    /* LOGO IMAGE FALLBACK */
+    
+    /* HOMEPAGE HEADER LOGO MATCH */
+    nav .logo .logo-mark,
+    .study-nav .logo .logo-mark,
+    .watch-header .logo .logo-mark {
+        width: 48px;
+        height: 48px;
+        flex: 0 0 48px;
+        border: 1px solid var(--color-gold);
+        border-radius: 50%;
+        background: transparent;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        position: relative;
+        box-shadow: 0 0 20px rgba(212,175,55,0.1);
+    }
+
+    nav .logo .logo-mark img,
+    .study-nav .logo .logo-mark img,
+    .watch-header .logo .logo-mark img,
+    nav .logo .logo-mark-img,
+    .study-nav .logo .logo-mark-img,
+    .watch-header .logo .logo-mark-img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        display: block;
+        position: relative;
+        z-index: 1;
+    }
+
+    nav .logo .logo-title,
+    .study-nav .logo .logo-title,
+    .watch-header .logo .logo-title {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 1.5rem;
+        font-weight: 400;
+        line-height: 1;
+        letter-spacing: 0;
+    }
+
+    nav .logo .logo-subtitle,
+    .study-nav .logo .logo-subtitle,
+    .watch-header .logo .logo-subtitle {
+        font-size: 0.65rem;
+        text-transform: uppercase;
+        letter-spacing: 0.3em;
+        color: var(--color-text-muted);
+        margin-top: 0.25rem;
+    }
+
+    .loader-ring,
+    .loader-ring--soft,
+    .loader-dots,
+    .loader-bar,
+    .loader-progress {
+        display: none !important;
+    }
+</style>
+</head>
+<body>
+    <div class="grain-overlay"></div>
+    <div class="vignette"></div>
+
+    <!-- Navigation -->
+    <nav id="navbar" class="scrolled" style="background: rgba(5,5,5,0.85); backdrop-filter: blur(20px);">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <div class="logo-mark"><img src="images/logowtb.png" alt="Messianic Movement logo" class="logo-mark-img"></div>
+                <div class="logo-text">
+                    <span class="logo-title">Messianic Movement</span>
+                    <span class="logo-subtitle">Regenerational Ministry</span>
+                </div>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#ministries">Ministries</a></li>
+                <li><a href="divine_episodes.html">Divine Episodes</a></li>
+                <li><a href="index.html#resources">Resources</a></li>
+                <li><a href="index.html#live">Live</a></li>
+                <li><a href="giving.html" class="active">Give</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="give-hero">
+        <div class="give-hero-content">
+            <div class="hero-eyebrow">
+                <div class="eyebrow-line"></div>
+                <span>Sow into Eternity</span>
+                <div class="eyebrow-line" style="transform: rotate(180deg);"></div>
+            </div>
+            <h1 class="animate-in">Every Seed<br>Changes a Life</h1>
+            <p class="animate-in delay-1">
+                Your generosity fuels missions, builds the sanctuary, trains leaders, and sends the Gospel to the ends of the earth. Join thousands of partners advancing the Kingdom.
+            </p>
+            <p class="hero-scripture animate-in delay-2">
+                "Bring ye all the tithes into the storehouse... and prove me now herewith, saith the LORD of hosts, if I will not open you the windows of heaven." — Malachi 3:10
+            </p>
+            <div class="cta-buttons animate-in delay-3">
+                <a href="#categories" class="btn btn-primary">
+                    <i class="fas fa-heart"></i> Give Now
+                </a>
+                <a href="#impact" class="btn btn-secondary">
+                    See Your Impact <i class="fas fa-arrow-down"></i>
+                </a>
+            </div>
+            <div class="impact-strip animate-in delay-4">
+                <div class="impact-item">
+                    <div class="impact-number">$2.4M</div>
+                    <div class="impact-label">Given This Year</div>
+                </div>
+                <div class="impact-item">
+                    <div class="impact-number">47</div>
+                    <div class="impact-label">Nations Reached</div>
+                </div>
+                <div class="impact-item">
+                    <div class="impact-number">12k</div>
+                    <div class="impact-label">Lives Transformed</div>
+                </div>
+                <div class="impact-item">
+                    <div class="impact-number">89</div>
+                    <div class="impact-label">Churches Planted</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Giving Categories -->
+    <section class="give-categories" id="categories">
+        <div class="section-header">
+            <span class="section-eyebrow">Where to Sow</span>
+            <h2 class="section-title">Choose Your Field</h2>
+            <p class="section-subtitle">Every gift is a seed planted in fertile ground. Select the ministry area that resonates with your calling.</p>
+        </div>
+        <div class="category-grid">
+            <div class="category-card selected" onclick="selectCategory(this, 'tithes')">
+                <div class="category-icon"><i class="fas fa-church"></i></div>
+                <h3>Tithes & Offerings</h3>
+                <p>Honor the Lord with your substance. Tithes sustain the local church, while offerings overflow into special projects and emergency relief.</p>
+                <div class="category-impact"><i class="fas fa-seedling"></i> Sustains weekly operations & outreach</div>
+            </div>
+            <div class="category-card" onclick="selectCategory(this, 'missions')">
+                <div class="category-icon"><i class="fas fa-globe-africa"></i></div>
+                <h3>Global Missions</h3>
+                <p>Send missionaries to unreached people groups. Fund crusades, Bible distributions, and discipleship schools in 47 nations.</p>
+                <div class="category-impact"><i class="fas fa-plane"></i> Currently active in 12 countries</div>
+            </div>
+            <div class="category-card" onclick="selectCategory(this, 'building')">
+                <div class="category-icon"><i class="fas fa-hammer"></i></div>
+                <h3>Sanctuary Building</h3>
+                <p>Help construct the new WHGRM Global Headquarters—a worship center, ministry school, and mission hub for the next generation.</p>
+                <div class="category-impact"><i class="fas fa-hard-hat"></i> Phase 2: Auditorium & Dorms</div>
+            </div>
+            <div class="category-card" onclick="selectCategory(this, 'episodes')">
+                <div class="category-icon"><i class="fas fa-play-circle"></i></div>
+                <h3>Divine Episodes</h3>
+                <p>Fund the production of free biblical courses. Every $50 sponsors one episode that reaches thousands of students worldwide.</p>
+                <div class="category-impact"><i class="fas fa-graduation-cap"></i> 312 episodes produced to date</div>
+            </div>
+            <div class="category-card" onclick="selectCategory(this, 'youth')">
+                <div class="category-icon"><i class="fas fa-child"></i></div>
+                <h3>Youth & Children</h3>
+                <p>Invest in the next generation. Support youth camps, children's church resources, and scholarships for ministry school students.</p>
+                <div class="category-impact"><i class="fas fa-users"></i> 3,400 youth enrolled this year</div>
+            </div>
+            <div class="category-card" onclick="selectCategory(this, 'relief')">
+                <div class="category-icon"><i class="fas fa-hand-holding-heart"></i></div>
+                <h3>Compassion & Relief</h3>
+                <p>Provide food, medical care, and shelter to communities hit by disaster. Partner with us to be the hands of Jesus in crisis.</p>
+                <div class="category-impact"><i class="fas fa-truck"></i> 8 active relief operations</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Amount Selector -->
+    <section class="amount-section">
+        <div class="section-header">
+            <span class="section-eyebrow">Your Gift</span>
+            <h2 class="section-title">Select an Amount</h2>
+            <p class="section-subtitle">Every dollar is multiplied in the Spirit. Choose a preset or enter your own seed.</p>
+        </div>
+        <div class="amount-container">
+            <div class="preset-amounts">
+                <button class="amount-btn active" onclick="selectAmount(this, 50)">
+                    $50
+                    <span class="impact-text">Feeds a family for a week</span>
+                </button>
+                <button class="amount-btn" onclick="selectAmount(this, 100)">
+                    $100
+                    <span class="impact-text">Sponsors one Divine Episode</span>
+                </button>
+                <button class="amount-btn" onclick="selectAmount(this, 250)">
+                    $250
+                    <span class="impact-text">Trains one pastor for a month</span>
+                </button>
+                <button class="amount-btn" onclick="selectAmount(this, 500)">
+                    $500
+                    <span class="impact-text">Funds a village crusade</span>
+                </button>
+            </div>
+            <div class="custom-amount">
+                <div class="custom-input-wrapper">
+                    <span>$</span>
+                    <input type="number" id="customAmount" placeholder="Enter custom amount" oninput="clearPresets()">
+                </div>
+            </div>
+            <div class="frequency-toggle">
+                <button class="freq-btn active" onclick="selectFreq(this, 'once')">One-Time Gift</button>
+                <button class="freq-btn" onclick="selectFreq(this, 'weekly')">Weekly</button>
+                <button class="freq-btn" onclick="selectFreq(this, 'monthly')">Monthly</button>
+                <button class="freq-btn" onclick="selectFreq(this, 'yearly')">Yearly</button>
+            </div>
+            <button class="give-btn" onclick="processGive()">
+                <i class="fas fa-lock"></i> Give Securely — $<span id="totalDisplay">50</span>
+            </button>
+            <div class="secure-badge">
+                <i class="fas fa-shield-alt"></i> 256-bit SSL Encryption &nbsp;|&nbsp;
+                <i class="fas fa-check-circle"></i> Tax-Deductible &nbsp;|&nbsp;
+                <i class="fas fa-receipt"></i> Instant Receipt
+            </div>
+        </div>
+    </section>
+
+    <!-- Impact Stories -->
+    <section class="impact-stories" id="impact">
+        <div class="section-header">
+            <span class="section-eyebrow">Real Impact</span>
+            <h2 class="section-title">Where Your Seed Grows</h2>
+            <p class="section-subtitle">Track the progress of active projects funded by partners like you.</p>
+        </div>
+        <div class="stories-grid">
+            <div class="story-card">
+                <div class="story-image"><i class="fas fa-church"></i></div>
+                <div class="story-body">
+                    <h4>Uganda Mission Base</h4>
+                    <p>Building a permanent worship center and training facility in Kampala to reach East Africa.</p>
+                    <div class="story-progress">
+                        <div class="story-progress-header">
+                            <span>$142,000 raised</span>
+                            <span>Goal: $200,000</span>
+                        </div>
+                        <div class="progress-track">
+                            <div class="progress-fill" style="width: 71%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="story-card">
+                <div class="story-image"><i class="fas fa-book-open"></i></div>
+                <div class="story-body">
+                    <h4>Divine Episodes Season 4</h4>
+                    <p>Producing 48 new episodes covering the Major Prophets with 4K cinematography and Hebrew scholarship.</p>
+                    <div class="story-progress">
+                        <div class="story-progress-header">
+                            <span>$38,400 raised</span>
+                            <span>Goal: $48,000</span>
+                        </div>
+                        <div class="progress-track">
+                            <div class="progress-fill" style="width: 80%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="story-card">
+                <div class="story-image"><i class="fas fa-hands-helping"></i></div>
+                <div class="story-body">
+                    <h4>Haiti Relief & Rebuild</h4>
+                    <p>Providing clean water, medical clinics, and rebuilding homes after the recent earthquake devastation.</p>
+                    <div class="story-progress">
+                        <div class="story-progress-header">
+                            <span>$67,500 raised</span>
+                            <span>Goal: $150,000</span>
+                        </div>
+                        <div class="progress-track">
+                            <div class="progress-fill" style="width: 45%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonial -->
+    <section>
+        <div class="testimonial-section">
+            <div class="testimonial-quote">
+                We began giving $25 monthly to the Missions Fund three years ago. Today, we have seen a church planted in a village we had never heard of, and received letters from new believers thanking us by name. You cannot outgive God.
+            </div>
+            <div class="testimonial-author">
+                <div class="author-avatar">SM</div>
+                <div class="author-info">
+                    <div class="author-name">Sarah & Michael Okafor</div>
+                    <div class="author-role">Monthly Partners since 2023 · Lagos, Nigeria</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="faq-section">
+        <div class="section-header">
+            <span class="section-eyebrow">Questions</span>
+            <h2 class="section-title">Frequently Asked</h2>
+        </div>
+        <div class="faq-item open">
+            <div class="faq-question" onclick="toggleFaq(this)">
+                <span>Is my donation tax-deductible?</span>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">Yes. Messianic Movement is a registered 501(c)(3) nonprofit organization. You will receive an instant email receipt and an annual tax statement every January for your records.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">
+                <span>Can I designate my gift to a specific project?</span>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">Absolutely. Use the "Choose Your Field" cards above to direct your gift to Tithes, Missions, Building, Divine Episodes, Youth, or Relief. If you select "Tithes & Offerings," your gift will be used where most needed.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">
+                <span>How do I update or cancel a recurring gift?</span>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">You can manage your recurring gifts at any time through your Partner Portal. Simply click "Manage Giving" in your receipt email, or contact our Finance Team at finance@whgrministry.org and we will assist within 24 hours.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">
+                <span>What percentage goes to administrative costs?</span>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">We maintain a lean 12% operational overhead. That means 88 cents of every dollar goes directly to ministry—missions, media production, building projects, and compassion outreach. Our financials are audited annually and published on our Transparency page.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">
+                <span>Can I give by check, wire, or stock transfer?</span>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">Yes. We accept all forms of giving. For check, mail to: WHGRM Finance, 123 Faith Avenue, Glory City, GC 10001. For wire transfers and stock donations, email finance@whgrministry.org and we will send secure instructions within one business day.</div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section">
+        <div class="section-header">
+            <span class="section-eyebrow">Take the Step</span>
+            <h2 class="section-title">Become a Kingdom Partner</h2>
+            <p class="section-subtitle">Join 4,200 monthly partners who are rewriting the spiritual landscape of nations.</p>
+            <div class="cta-buttons">
+                <a href="#categories" class="btn btn-primary">
+                    <i class="fas fa-heart"></i> Give Your First Seed
+                </a>
+                <a href="index.html#live" class="btn btn-secondary">
+                    Join Us Live <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <a href="index.html" class="logo">
+                    <div class="logo-mark"><img src="images/logowtb.png" alt="Messianic Movement logo" class="logo-mark-img"></div>
+                    <div class="logo-text">
+                        <span class="logo-title">Messianic Movement</span>
+                        <span class="logo-subtitle">Regenerational Ministry</span>
+                    </div>
+                </a>
+                <p>Raising a generation of Spirit-filled believers who will transform nations through the power of the Holy Ghost.</p>
+                <div class="social-links">
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="index.html#ministries">Ministries</a></li>
+                    <li><a href="divine_episodes.html">Divine Episodes</a></li>
+                    <li><a href="index.html#live">Live Service</a></li>
+                    <li><a href="giving.html">Give</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Resources</h4>
+                <ul>
+                    <li><a href="watch.html">Sermon Archive</a></li>
+                    <li><a href="divine_episodes.html">Divine Episodes</a></li>
+                    <li><a href="prayer_request.html">Prayer Request</a></li>
+                    <li><a href="ministry_school.html">Ministry School</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Contact</h4>
+                <ul>
+                    <li><i class="fas fa-map-marker-alt"></i> 123 Faith Avenue, Glory City</li>
+                    <li><i class="fas fa-phone"></i> +1 (555) 123-4567</li>
+                    <li><i class="fas fa-envelope"></i> info@whgrministry.org</li>
+                    <li><i class="fas fa-clock"></i> Sun: 9AM & 11AM EST</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Messianic Movement. All rights reserved.</p>
+            <p>Designed with <i class="fas fa-heart" style="color: var(--color-gold);"></i> by the Spirit</p>
+        </div>
+    </footer>
+
+    <script>
+        let selectedCategory = 'tithes';
+        let selectedAmount = 50;
+        let selectedFreq = 'once';
+
+        function selectCategory(card, cat) {
+            document.querySelectorAll('.category-card').forEach(c => c.classList.remove('selected'));
+            card.classList.add('selected');
+            selectedCategory = cat;
+        }
+
+        function selectAmount(btn, amt) {
+            document.querySelectorAll('.amount-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            selectedAmount = amt;
+            document.getElementById('customAmount').value = '';
+            updateTotal();
+        }
+
+        function clearPresets() {
+            const val = document.getElementById('customAmount').value;
+            if (val) {
+                document.querySelectorAll('.amount-btn').forEach(b => b.classList.remove('active'));
+                selectedAmount = parseFloat(val) || 0;
+                updateTotal();
+            }
+        }
+
+        function selectFreq(btn, freq) {
+            document.querySelectorAll('.freq-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            selectedFreq = freq;
+        }
+
+        function updateTotal() {
+            document.getElementById('totalDisplay').textContent = selectedAmount.toLocaleString();
+        }
+
+        function processGive() {
+            const customVal = document.getElementById('customAmount').value;
+            const amount = customVal ? parseFloat(customVal) : selectedAmount;
+            if (!amount || amount <= 0) {
+                alert('Please enter a valid gift amount.');
+                return;
+            }
+            // Redirect to the unified donate/payment page with parameters
+            const params = new URLSearchParams();
+            params.set('category', selectedCategory);
+            params.set('amount', amount);
+            params.set('freq', selectedFreq);
+            window.location.href = 'donate.html?' + params.toString();
+        }
+
+        function toggleFaq(el) {
+            el.parentElement.classList.toggle('open');
+        }
+
+        // Intersection Observer for scroll animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-in');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.category-card, .story-card, .faq-item').forEach(el => {
+            el.style.opacity = '0';
+            observer.observe(el);
+        });
+    </script>
+<script>
+window.addEventListener('load', () => {
+    const loader = document.getElementById('loader');
+    if (loader) {
+        setTimeout(() => loader.classList.add('hidden'), 2200);
+    }
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,1757 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Give securely to Messianic Movement with multiple payment options including credit card, PayPal, Apple Pay, Google Pay, and bank transfer.">
+    <meta property="og:title" content="Donate — Messianic Movement">
+    <meta property="og:description" content="Give securely to Messianic Movement with multiple payment options.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://yourdomain.com/donate.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <title>Donate — Messianic Movement</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        /* =========================================================
+           PREMIUM DONATION PAGE — Hostinger Checkout Style
+           Integrated with Messianic Movement Theme
+           ========================================================= */
+
+        :root {
+            --donate-gold: #d4af37;
+            --donate-gold-dark: #b8941f;
+            --donate-gold-light: #e8c84a;
+            --donate-bg: #050508;
+            --donate-surface: rgba(255,255,255,0.03);
+            --donate-surface-hover: rgba(255,255,255,0.06);
+            --donate-border: rgba(255,255,255,0.08);
+            --donate-border-active: rgba(212,175,55,0.4);
+            --donate-text: #f0f0f5;
+            --donate-text-secondary: #a0a0b0;
+            --donate-text-muted: #6a6a7a;
+            --donate-success: #22c55e;
+            --donate-error: #ef4444;
+            --donate-radius-sm: 8px;
+            --donate-radius-md: 12px;
+            --donate-radius-lg: 16px;
+            --donate-shadow: 0 8px 32px rgba(0,0,0,0.4);
+            --donate-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* ── Page Layout ── */
+        .donate-page {
+            min-height: 100vh;
+            background: var(--donate-bg);
+            padding-top: 100px;
+            padding-bottom: 4rem;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .donate-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        /* ── Breadcrumb ── */
+        .donate-breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 2rem;
+            color: var(--donate-text-muted);
+            font-size: 0.875rem;
+        }
+        .donate-breadcrumb a {
+            color: var(--donate-text-secondary);
+            text-decoration: none;
+            transition: var(--donate-transition);
+        }
+        .donate-breadcrumb a:hover {
+            color: var(--donate-gold);
+        }
+        .donate-breadcrumb i {
+            font-size: 0.75rem;
+        }
+
+        /* ── Page Header ── */
+        .donate-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        .donate-header h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 300;
+            color: var(--donate-text);
+            margin-bottom: 0.75rem;
+            letter-spacing: -0.02em;
+        }
+        .donate-header p {
+            color: var(--donate-text-secondary);
+            font-size: 1.1rem;
+            max-width: 500px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* ── Main Checkout Grid ── */
+        .checkout-grid {
+            display: grid;
+            grid-template-columns: 1fr 380px;
+            gap: 2rem;
+            align-items: start;
+        }
+
+        @media (max-width: 900px) {
+            .checkout-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ── Checkout Card ── */
+        .checkout-card {
+            background: var(--donate-surface);
+            border: 1px solid var(--donate-border);
+            border-radius: var(--donate-radius-lg);
+            padding: 2rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .checkout-section {
+            margin-bottom: 2rem;
+        }
+        .checkout-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .section-label {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--donate-text);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 1.25rem;
+        }
+        .section-label .step-number {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--donate-gold), var(--donate-gold-dark));
+            color: var(--donate-bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        /* ── Express Checkout (Apple Pay, Google Pay, PayPal) ── */
+        .express-checkout {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+        @media (max-width: 600px) {
+            .express-checkout {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .express-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.875rem 1rem;
+            border-radius: var(--donate-radius-sm);
+            border: 1px solid var(--donate-border);
+            background: var(--donate-surface-hover);
+            color: var(--donate-text);
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--donate-transition);
+            position: relative;
+            overflow: hidden;
+        }
+        .express-btn:hover {
+            border-color: var(--donate-border-active);
+            background: rgba(255,255,255,0.08);
+            transform: translateY(-1px);
+        }
+        .express-btn:active {
+            transform: translateY(0);
+        }
+        .express-btn i {
+            font-size: 1.1rem;
+        }
+        .express-btn.apple-pay {
+            background: #000;
+            border-color: #333;
+            color: #fff;
+        }
+        .express-btn.apple-pay:hover {
+            background: #1a1a1a;
+            border-color: #444;
+        }
+        .express-btn.google-pay {
+            background: #fff;
+            border-color: #ddd;
+            color: #000;
+        }
+        .express-btn.google-pay:hover {
+            background: #f5f5f5;
+        }
+        .express-btn.paypal {
+            background: #0070ba;
+            border-color: #0070ba;
+            color: #fff;
+        }
+        .express-btn.paypal:hover {
+            background: #005ea6;
+        }
+
+        /* ── Divider ── */
+        .checkout-divider {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin: 1.5rem 0;
+            color: var(--donate-text-muted);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+        .checkout-divider::before,
+        .checkout-divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--donate-border);
+        }
+
+        /* ── Amount Selection ── */
+        .amount-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+        @media (max-width: 600px) {
+            .amount-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .amount-btn {
+            padding: 1rem;
+            border: 1px solid var(--donate-border);
+            border-radius: var(--donate-radius-sm);
+            background: transparent;
+            color: var(--donate-text);
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--donate-transition);
+            text-align: center;
+            position: relative;
+        }
+        .amount-btn:hover {
+            border-color: var(--donate-border-active);
+            background: var(--donate-surface-hover);
+        }
+        .amount-btn.selected {
+            border-color: var(--donate-gold);
+            background: rgba(212,175,55,0.1);
+            color: var(--donate-gold);
+        }
+        .amount-btn .currency {
+            font-size: 0.75rem;
+            color: var(--donate-text-muted);
+            font-weight: 400;
+        }
+
+        .custom-amount {
+            position: relative;
+            margin-top: 0.75rem;
+        }
+        .custom-amount .currency-symbol {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--donate-text-muted);
+            font-size: 1.1rem;
+            font-weight: 600;
+            pointer-events: none;
+        }
+        .custom-amount input {
+            width: 100%;
+            padding: 1rem 1rem 1rem 2.5rem;
+            border: 1px solid var(--donate-border);
+            border-radius: var(--donate-radius-sm);
+            background: transparent;
+            color: var(--donate-text);
+            font-size: 1.1rem;
+            font-weight: 600;
+            font-family: 'Space Grotesk', sans-serif;
+            transition: var(--donate-transition);
+        }
+        .custom-amount input:focus {
+            outline: none;
+            border-color: var(--donate-gold);
+            box-shadow: 0 0 0 3px rgba(212,175,55,0.15);
+        }
+        .custom-amount input::placeholder {
+            color: var(--donate-text-muted);
+            font-weight: 400;
+        }
+
+        /* ── Frequency Toggle ── */
+        .frequency-toggle {
+            display: flex;
+            gap: 0.5rem;
+            background: rgba(0,0,0,0.3);
+            padding: 0.375rem;
+            border-radius: var(--donate-radius-sm);
+            border: 1px solid var(--donate-border);
+        }
+        .frequency-btn {
+            flex: 1;
+            padding: 0.625rem 1rem;
+            border: none;
+            border-radius: 6px;
+            background: transparent;
+            color: var(--donate-text-secondary);
+            font-size: 0.875rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--donate-transition);
+            font-family: 'Space Grotesk', sans-serif;
+        }
+        .frequency-btn:hover {
+            color: var(--donate-text);
+        }
+        .frequency-btn.active {
+            background: linear-gradient(135deg, var(--donate-gold), var(--donate-gold-dark));
+            color: var(--donate-bg);
+            font-weight: 600;
+            box-shadow: 0 2px 8px rgba(212,175,55,0.3);
+        }
+
+        /* ── Form Fields ── */
+        .form-group {
+            margin-bottom: 1.25rem;
+        }
+        .form-group:last-child {
+            margin-bottom: 0;
+        }
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--donate-text-secondary);
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+        .form-label .required {
+            color: var(--donate-error);
+            margin-left: 0.25rem;
+        }
+        .form-input {
+            width: 100%;
+            padding: 0.875rem 1rem;
+            border: 1px solid var(--donate-border);
+            border-radius: var(--donate-radius-sm);
+            background: rgba(0,0,0,0.2);
+            color: var(--donate-text);
+            font-size: 0.95rem;
+            font-family: 'Space Grotesk', sans-serif;
+            transition: var(--donate-transition);
+        }
+        .form-input:focus {
+            outline: none;
+            border-color: var(--donate-gold);
+            box-shadow: 0 0 0 3px rgba(212,175,55,0.15);
+            background: rgba(0,0,0,0.3);
+        }
+        .form-input::placeholder {
+            color: var(--donate-text-muted);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+        @media (max-width: 500px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ── Payment Method Selection ── */
+        .payment-methods {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+        .payment-method {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem 1.25rem;
+            border: 1px solid var(--donate-border);
+            border-radius: var(--donate-radius-sm);
+            background: transparent;
+            cursor: pointer;
+            transition: var(--donate-transition);
+            position: relative;
+        }
+        .payment-method:hover {
+            border-color: var(--donate-border-active);
+            background: var(--donate-surface-hover);
+        }
+        .payment-method.selected {
+            border-color: var(--donate-gold);
+            background: rgba(212,175,55,0.05);
+        }
+        .payment-method .radio-circle {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--donate-text-muted);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            transition: var(--donate-transition);
+        }
+        .payment-method.selected .radio-circle {
+            border-color: var(--donate-gold);
+            background: var(--donate-gold);
+        }
+        .payment-method.selected .radio-circle::after {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: var(--donate-bg);
+            border-radius: 50%;
+        }
+        .payment-method .method-icon {
+            width: 40px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            flex-shrink: 0;
+        }
+        .payment-method .method-info {
+            flex: 1;
+        }
+        .payment-method .method-name {
+            font-weight: 600;
+            color: var(--donate-text);
+            font-size: 0.95rem;
+        }
+        .payment-method .method-desc {
+            font-size: 0.8rem;
+            color: var(--donate-text-muted);
+            margin-top: 0.125rem;
+        }
+        .payment-method .card-brands {
+            display: flex;
+            gap: 0.25rem;
+            font-size: 1.25rem;
+            color: var(--donate-text-muted);
+        }
+
+        /* ── Card Fields (shown when card selected) ── */
+        .card-fields {
+            display: none;
+            margin-top: 1rem;
+            padding: 1.25rem;
+            background: rgba(0,0,0,0.2);
+            border-radius: var(--donate-radius-sm);
+            border: 1px solid var(--donate-border);
+        }
+        .card-fields.active {
+            display: block;
+            animation: slideDown 0.3s ease;
+        }
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ── Bank Transfer Fields ── */
+        .bank-fields {
+            display: none;
+            margin-top: 1rem;
+            padding: 1.25rem;
+            background: rgba(0,0,0,0.2);
+            border-radius: var(--donate-radius-sm);
+            border: 1px solid var(--donate-border);
+        }
+        .bank-fields.active {
+            display: block;
+            animation: slideDown 0.3s ease;
+        }
+        .bank-detail {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--donate-border);
+        }
+        .bank-detail:last-child {
+            border-bottom: none;
+        }
+        .bank-detail .label {
+            color: var(--donate-text-muted);
+            font-size: 0.875rem;
+        }
+        .bank-detail .value {
+            color: var(--donate-text);
+            font-weight: 600;
+            font-size: 0.9rem;
+            font-family: 'Space Mono', monospace;
+        }
+        .copy-btn {
+            background: none;
+            border: 1px solid var(--donate-border);
+            color: var(--donate-text-secondary);
+            padding: 0.375rem 0.75rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: var(--donate-transition);
+            margin-left: 0.5rem;
+        }
+        .copy-btn:hover {
+            border-color: var(--donate-gold);
+            color: var(--donate-gold);
+        }
+
+        /* ── PayPal Fields ── */
+        .paypal-fields {
+            display: none;
+            margin-top: 1rem;
+            padding: 1.25rem;
+            background: rgba(0,0,0,0.2);
+            border-radius: var(--donate-radius-sm);
+            border: 1px solid var(--donate-border);
+            text-align: center;
+        }
+        .paypal-fields.active {
+            display: block;
+            animation: slideDown 0.3s ease;
+        }
+        .paypal-btn-large {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem 2rem;
+            background: #0070ba;
+            color: #fff;
+            border: none;
+            border-radius: var(--donate-radius-sm);
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--donate-transition);
+            font-family: 'Space Grotesk', sans-serif;
+        }
+        .paypal-btn-large:hover {
+            background: #005ea6;
+            transform: translateY(-1px);
+        }
+
+        /* ── Crypto Fields ── */
+        .crypto-fields {
+            display: none;
+            margin-top: 1rem;
+            padding: 1.25rem;
+            background: rgba(0,0,0,0.2);
+            border-radius: var(--donate-radius-sm);
+            border: 1px solid var(--donate-border);
+        }
+        .crypto-fields.active {
+            display: block;
+            animation: slideDown 0.3s ease;
+        }
+        .crypto-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.75rem;
+        }
+        @media (max-width: 500px) {
+            .crypto-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        .crypto-option {
+            padding: 1rem;
+            border: 1px solid var(--donate-border);
+            border-radius: var(--donate-radius-sm);
+            background: transparent;
+            color: var(--donate-text);
+            text-align: center;
+            cursor: pointer;
+            transition: var(--donate-transition);
+        }
+        .crypto-option:hover {
+            border-color: var(--donate-border-active);
+            background: var(--donate-surface-hover);
+        }
+        .crypto-option.selected {
+            border-color: var(--donate-gold);
+            background: rgba(212,175,55,0.1);
+        }
+        .crypto-option i {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+        .crypto-option .crypto-name {
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        .crypto-option .crypto-addr {
+            font-size: 0.7rem;
+            color: var(--donate-text-muted);
+            margin-top: 0.25rem;
+            word-break: break-all;
+        }
+
+        /* ── Submit Button ── */
+        .submit-btn {
+            width: 100%;
+            padding: 1.125rem;
+            background: linear-gradient(135deg, var(--donate-gold), var(--donate-gold-dark));
+            border: none;
+            border-radius: var(--donate-radius-sm);
+            color: var(--donate-bg);
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--donate-transition);
+            font-family: 'Space Grotesk', sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            margin-top: 1.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(212,175,55,0.3);
+        }
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+        .submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+        .submit-btn .spinner {
+            width: 18px;
+            height: 18px;
+            border: 2px solid rgba(5,5,8,0.3);
+            border-top-color: var(--donate-bg);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* ── Security Badge ── */
+        .security-badge {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 1rem;
+            color: var(--donate-text-muted);
+            font-size: 0.8rem;
+        }
+        .security-badge i {
+            color: var(--donate-success);
+        }
+
+        /* ── Order Summary Sidebar ── */
+        .summary-card {
+            background: var(--donate-surface);
+            border: 1px solid var(--donate-border);
+            border-radius: var(--donate-radius-lg);
+            padding: 1.5rem;
+            position: sticky;
+            top: 120px;
+            backdrop-filter: blur(10px);
+        }
+        .summary-header {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--donate-text);
+            margin-bottom: 1.25rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--donate-border);
+        }
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--donate-border);
+        }
+        .summary-item:last-child {
+            border-bottom: none;
+        }
+        .summary-item .item-label {
+            color: var(--donate-text-secondary);
+            font-size: 0.9rem;
+        }
+        .summary-item .item-value {
+            color: var(--donate-text);
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+        .summary-item .item-value.gold {
+            color: var(--donate-gold);
+        }
+        .summary-total {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.25rem 0 0;
+            margin-top: 0.5rem;
+            border-top: 2px solid var(--donate-border);
+        }
+        .summary-total .total-label {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--donate-text);
+        }
+        .summary-total .total-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--donate-gold);
+            font-family: 'Cormorant Garamond', serif;
+        }
+
+        .summary-note {
+            margin-top: 1.5rem;
+            padding: 1rem;
+            background: rgba(212,175,55,0.05);
+            border: 1px solid rgba(212,175,55,0.15);
+            border-radius: var(--donate-radius-sm);
+            font-size: 0.85rem;
+            color: var(--donate-text-secondary);
+            line-height: 1.6;
+        }
+        .summary-note i {
+            color: var(--donate-gold);
+            margin-right: 0.5rem;
+        }
+
+        /* ── Impact Card ── */
+        .impact-card {
+            margin-top: 1.5rem;
+            padding: 1.25rem;
+            background: linear-gradient(135deg, rgba(212,175,55,0.1), rgba(184,148,31,0.05));
+            border: 1px solid rgba(212,175,55,0.2);
+            border-radius: var(--donate-radius-sm);
+        }
+        .impact-card h4 {
+            color: var(--donate-gold);
+            font-size: 0.9rem;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .impact-card p {
+            color: var(--donate-text-secondary);
+            font-size: 0.85rem;
+            line-height: 1.6;
+        }
+
+        /* ── Testimonial in Sidebar ── */
+        .sidebar-testimonial {
+            margin-top: 1.5rem;
+            padding: 1.25rem;
+            background: rgba(0,0,0,0.2);
+            border-radius: var(--donate-radius-sm);
+            border: 1px solid var(--donate-border);
+        }
+        .sidebar-testimonial .quote {
+            font-style: italic;
+            color: var(--donate-text-secondary);
+            font-size: 0.85rem;
+            line-height: 1.7;
+            margin-bottom: 0.75rem;
+        }
+        .sidebar-testimonial .author {
+            color: var(--donate-gold);
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        /* ── Success State ── */
+        .success-state {
+            display: none;
+            text-align: center;
+            padding: 3rem 2rem;
+        }
+        .success-state.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--donate-success), #16a34a);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 2rem;
+            color: #fff;
+            box-shadow: 0 8px 24px rgba(34,197,94,0.3);
+        }
+        .success-state h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            color: var(--donate-text);
+            margin-bottom: 0.75rem;
+        }
+        .success-state p {
+            color: var(--donate-text-secondary);
+            max-width: 400px;
+            margin: 0 auto 1.5rem;
+            line-height: 1.6;
+        }
+        .success-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .success-actions a {
+            padding: 0.875rem 1.5rem;
+            border-radius: var(--donate-radius-sm);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: var(--donate-transition);
+        }
+        .success-actions .btn-primary {
+            background: linear-gradient(135deg, var(--donate-gold), var(--donate-gold-dark));
+            color: var(--donate-bg);
+        }
+        .success-actions .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(212,175,55,0.3);
+        }
+        .success-actions .btn-secondary {
+            border: 1px solid var(--donate-border);
+            color: var(--donate-text);
+        }
+        .success-actions .btn-secondary:hover {
+            border-color: var(--donate-gold);
+            color: var(--donate-gold);
+        }
+
+        /* ── Error Message ── */
+        .error-message {
+            display: none;
+            padding: 0.875rem 1rem;
+            background: rgba(239,68,68,0.1);
+            border: 1px solid rgba(239,68,68,0.3);
+            border-radius: var(--donate-radius-sm);
+            color: #ffb4b4;
+            font-size: 0.875rem;
+            margin-top: 1rem;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .error-message.active {
+            display: flex;
+        }
+        .error-message i {
+            flex-shrink: 0;
+        }
+
+        /* ── Responsive ── */
+        @media (max-width: 900px) {
+            .donate-page {
+                padding-top: 80px;
+            }
+            .checkout-card {
+                padding: 1.5rem;
+            }
+            .summary-card {
+                position: static;
+            }
+        }
+        @media (max-width: 600px) {
+            .donate-container {
+                padding: 0 1rem;
+            }
+            .checkout-card {
+                padding: 1.25rem;
+            }
+            .express-checkout {
+                grid-template-columns: 1fr;
+            }
+            .amount-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* ── Checkbox styling ── */
+        .checkbox-group {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            margin-top: 1rem;
+        }
+        .checkbox-group input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            accent-color: var(--donate-gold);
+            margin-top: 0.125rem;
+            flex-shrink: 0;
+        }
+        .checkbox-group label {
+            color: var(--donate-text-secondary);
+            font-size: 0.85rem;
+            line-height: 1.5;
+            cursor: pointer;
+        }
+        .checkbox-group a {
+            color: var(--donate-gold);
+            text-decoration: none;
+        }
+        .checkbox-group a:hover {
+            text-decoration: underline;
+        }
+    
+    /* LOGO IMAGE FALLBACK */
+    
+    /* HOMEPAGE HEADER LOGO MATCH */
+    nav .logo .logo-mark,
+    .study-nav .logo .logo-mark,
+    .watch-header .logo .logo-mark {
+        width: 48px;
+        height: 48px;
+        flex: 0 0 48px;
+        border: 1px solid var(--color-gold);
+        border-radius: 50%;
+        background: transparent;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        position: relative;
+        box-shadow: 0 0 20px rgba(212,175,55,0.1);
+    }
+
+    nav .logo .logo-mark img,
+    .study-nav .logo .logo-mark img,
+    .watch-header .logo .logo-mark img,
+    nav .logo .logo-mark-img,
+    .study-nav .logo .logo-mark-img,
+    .watch-header .logo .logo-mark-img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        display: block;
+        position: relative;
+        z-index: 1;
+    }
+
+    nav .logo .logo-title,
+    .study-nav .logo .logo-title,
+    .watch-header .logo .logo-title {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 1.5rem;
+        font-weight: 400;
+        line-height: 1;
+        letter-spacing: 0;
+    }
+
+    nav .logo .logo-subtitle,
+    .study-nav .logo .logo-subtitle,
+    .watch-header .logo .logo-subtitle {
+        font-size: 0.65rem;
+        text-transform: uppercase;
+        letter-spacing: 0.3em;
+        color: var(--color-text-muted);
+        margin-top: 0.25rem;
+    }
+
+    .loader-ring,
+    .loader-ring--soft,
+    .loader-dots,
+    .loader-bar,
+    .loader-progress {
+        display: none !important;
+    }
+</style>
+</head>
+<body>
+    <!-- Film Grain Overlay -->
+    <div class="grain-overlay"></div>
+    <div class="vignette"></div>
+
+    <!-- Navigation -->
+    <nav id="navbar" class="scrolled" style="background: rgba(5,5,5,0.85); backdrop-filter: blur(20px);">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <div class="logo-mark"><img src="images/logowtb.png" alt="Messianic Movement logo" class="logo-mark-img"></div>
+                <div class="logo-text">
+                    <span class="logo-title">Messianic Movement</span>
+                    <span class="logo-subtitle">Regenerational Ministry</span>
+                </div>
+            </a>
+
+            <ul class="nav-links">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="index.html#ministries" class="nav-link">Ministries</a></li>
+                <li><a href="index.html#calendar" class="nav-link">Calendar</a></li>
+                <li><a href="index.html#resources" class="nav-link">Resources</a></li>
+                <li><a href="index.html#live" class="nav-link">Live</a></li>
+                <li><a href="giving.html" class="nav-link active">Give</a></li>
+                <li style="margin-left: 1rem;">
+                    <button class="nav-cta" onclick="toggleCart()">
+                        Cart (<span id="cartCount">0</span>)
+                    </button>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="donate-page">
+        <div class="donate-container">
+            <!-- Breadcrumb -->
+            <nav class="donate-breadcrumb">
+                <a href="index.html">Home</a>
+                <i class="fas fa-chevron-right"></i>
+                <a href="giving.html">Giving</a>
+                <i class="fas fa-chevron-right"></i>
+                <span>Checkout</span>
+            </nav>
+
+            <!-- Page Header -->
+            <div class="donate-header">
+                <h1>Complete Your Gift</h1>
+                <p>Your generosity fuels global ministry. Every donation is secure, encrypted, and tax-deductible.</p>
+            </div>
+
+            <!-- Checkout Grid -->
+            <div class="checkout-grid">
+                <!-- LEFT: Checkout Form -->
+                <div class="checkout-form">
+                    <div class="checkout-card" id="checkoutCard">
+
+                        <!-- Step 1: Express Checkout -->
+                        <div class="checkout-section">
+                            <div class="section-label">
+                                <span class="step-number">1</span>
+                                Express Checkout
+                            </div>
+                            <div class="express-checkout">
+                                <button class="express-btn apple-pay" onclick="handleExpressPay('apple')">
+                                    <i class="fab fa-apple"></i>
+                                    <span>Apple Pay</span>
+                                </button>
+                                <button class="express-btn google-pay" onclick="handleExpressPay('google')">
+                                    <i class="fab fa-google"></i>
+                                    <span>Google Pay</span>
+                                </button>
+                                <button class="express-btn paypal" onclick="handleExpressPay('paypal')">
+                                    <i class="fab fa-paypal"></i>
+                                    <span>PayPal</span>
+                                </button>
+                            </div>
+                            <div class="checkout-divider">Or pay with card</div>
+                        </div>
+
+                        <!-- Step 2: Amount & Frequency -->
+                        <div class="checkout-section">
+                            <div class="section-label">
+                                <span class="step-number">2</span>
+                                Select Amount
+                            </div>
+
+                            <!-- Frequency Toggle -->
+                            <div class="frequency-toggle" style="margin-bottom: 1.25rem;">
+                                <button class="frequency-btn active" data-freq="once" onclick="setFrequency('once')">One-time</button>
+                                <button class="frequency-btn" data-freq="monthly" onclick="setFrequency('monthly')">Monthly</button>
+                                <button class="frequency-btn" data-freq="yearly" onclick="setFrequency('yearly')">Yearly</button>
+                            </div>
+
+                            <!-- Amount Grid -->
+                            <div class="amount-grid" id="amountGrid">
+                                <button class="amount-btn" data-amount="25" onclick="selectAmount(25)">
+                                    <span class="currency">$</span>25
+                                </button>
+                                <button class="amount-btn" data-amount="50" onclick="selectAmount(50)">
+                                    <span class="currency">$</span>50
+                                </button>
+                                <button class="amount-btn selected" data-amount="100" onclick="selectAmount(100)">
+                                    <span class="currency">$</span>100
+                                </button>
+                                <button class="amount-btn" data-amount="250" onclick="selectAmount(250)">
+                                    <span class="currency">$</span>250
+                                </button>
+                            </div>
+
+                            <!-- Custom Amount -->
+                            <div class="custom-amount">
+                                <span class="currency-symbol">$</span>
+                                <input type="number" id="customAmount" placeholder="Enter custom amount" min="1" oninput="handleCustomAmount(this)">
+                            </div>
+                        </div>
+
+                        <!-- Step 3: Personal Info -->
+                        <div class="checkout-section">
+                            <div class="section-label">
+                                <span class="step-number">3</span>
+                                Your Information
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label">First Name <span class="required">*</span></label>
+                                    <input type="text" class="form-input" id="firstName" placeholder="John">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Last Name <span class="required">*</span></label>
+                                    <input type="text" class="form-input" id="lastName" placeholder="Doe">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Email Address <span class="required">*</span></label>
+                                <input type="email" class="form-input" id="email" placeholder="you@example.com">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Phone Number</label>
+                                <input type="tel" class="form-input" id="phone" placeholder="+1 (555) 000-0000">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Designation (Optional)</label>
+                                <select class="form-input" id="designation" style="cursor: pointer;">
+                                    <option value="">Where should this gift go?</option>
+                                    <option value="tithe">Tithe</option>
+                                    <option value="offering">General Offering</option>
+                                    <option value="missions">Missions & Outreach</option>
+                                    <option value="compassion">Compassion Works</option>
+                                    <option value="building">Building Fund</option>
+                                    <option value="media">Media & Broadcast</option>
+                                    <option value="bible">Bible Distribution</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Prayer Request / Note (Optional)</label>
+                                <textarea class="form-input" id="note" rows="3" placeholder="Share a prayer request or note with your gift..."></textarea>
+                            </div>
+                        </div>
+
+                        <!-- Step 4: Payment Method -->
+                        <div class="checkout-section">
+                            <div class="section-label">
+                                <span class="step-number">4</span>
+                                Payment Method
+                            </div>
+
+                            <div class="payment-methods" id="paymentMethods">
+                                <!-- Credit Card -->
+                                <div class="payment-method selected" data-method="card" onclick="selectPaymentMethod('card')">
+                                    <div class="radio-circle"></div>
+                                    <div class="method-icon">
+                                        <i class="fas fa-credit-card" style="color: var(--donate-gold);"></i>
+                                    </div>
+                                    <div class="method-info">
+                                        <div class="method-name">Credit / Debit Card</div>
+                                        <div class="method-desc">Visa, Mastercard, Amex, Discover</div>
+                                    </div>
+                                    <div class="card-brands">
+                                        <i class="fab fa-cc-visa"></i>
+                                        <i class="fab fa-cc-mastercard"></i>
+                                        <i class="fab fa-cc-amex"></i>
+                                    </div>
+                                </div>
+
+                                <!-- Card Fields -->
+                                <div class="card-fields active" id="cardFields">
+                                    <div class="form-group">
+                                        <p style="color: var(--donate-text-secondary); margin: 0; line-height: 1.6;">
+                                            Your credit / debit card details will be collected securely by Stripe during the next step.
+                                            We only collect your contact and donation details here.
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <!-- PayPal -->
+                                <div class="payment-method" data-method="paypal" onclick="selectPaymentMethod('paypal')">
+                                    <div class="radio-circle"></div>
+                                    <div class="method-icon">
+                                        <i class="fab fa-paypal" style="color: #0070ba;"></i>
+                                    </div>
+                                    <div class="method-info">
+                                        <div class="method-name">PayPal</div>
+                                        <div class="method-desc">Pay with your PayPal account</div>
+                                    </div>
+                                </div>
+
+                                <div class="paypal-fields" id="paypalFields">
+                                    <p style="color: var(--donate-text-secondary); margin-bottom: 1rem; font-size: 0.9rem;">You will be redirected to PayPal to complete your secure payment.</p>
+                                    <button class="paypal-btn-large" onclick="handlePayPal()">
+                                        <i class="fab fa-paypal"></i>
+                                        Continue to PayPal
+                                    </button>
+                                </div>
+
+                                <!-- Bank Transfer -->
+                                <div class="payment-method" data-method="bank" onclick="selectPaymentMethod('bank')">
+                                    <div class="radio-circle"></div>
+                                    <div class="method-icon">
+                                        <i class="fas fa-university" style="color: var(--donate-text-secondary);"></i>
+                                    </div>
+                                    <div class="method-info">
+                                        <div class="method-name">Bank Transfer</div>
+                                        <div class="method-desc">Direct deposit to ministry account</div>
+                                    </div>
+                                </div>
+
+                                <div class="bank-fields" id="bankFields">
+                                    <p style="color: var(--donate-text-secondary); margin-bottom: 1rem; font-size: 0.85rem;">Use these details for your bank transfer. Please include your email in the reference.</p>
+                                    <div class="bank-detail">
+                                        <span class="label">Account Name</span>
+                                        <span class="value">Messianic Movement Ministry</span>
+                                    </div>
+                                    <div class="bank-detail">
+                                        <span class="label">Bank</span>
+                                        <span class="value">Chase Bank</span>
+                                    </div>
+                                    <div class="bank-detail">
+                                        <span class="label">Account Number</span>
+                                        <span class="value">
+                                            000123456789
+                                            <button class="copy-btn" onclick="copyToClipboard('000123456789')">Copy</button>
+                                        </span>
+                                    </div>
+                                    <div class="bank-detail">
+                                        <span class="label">Routing Number</span>
+                                        <span class="value">
+                                            021000021
+                                            <button class="copy-btn" onclick="copyToClipboard('021000021')">Copy</button>
+                                        </span>
+                                    </div>
+                                    <div class="bank-detail">
+                                        <span class="label">SWIFT Code</span>
+                                        <span class="value">
+                                            CHASUS33
+                                            <button class="copy-btn" onclick="copyToClipboard('CHASUS33')">Copy</button>
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <!-- Crypto -->
+                                <div class="payment-method" data-method="crypto" onclick="selectPaymentMethod('crypto')">
+                                    <div class="radio-circle"></div>
+                                    <div class="method-icon">
+                                        <i class="fab fa-bitcoin" style="color: #f7931a;"></i>
+                                    </div>
+                                    <div class="method-info">
+                                        <div class="method-name">Cryptocurrency</div>
+                                        <div class="method-desc">Bitcoin, Ethereum, USDT & more</div>
+                                    </div>
+                                </div>
+
+                                <div class="crypto-fields" id="cryptoFields">
+                                    <p style="color: var(--donate-text-secondary); margin-bottom: 1rem; font-size: 0.85rem;">Select a cryptocurrency to view the wallet address.</p>
+                                    <div class="crypto-grid">
+                                        <div class="crypto-option selected" data-crypto="btc" onclick="selectCrypto('btc')">
+                                            <i class="fab fa-bitcoin" style="color: #f7931a;"></i>
+                                            <div class="crypto-name">Bitcoin</div>
+                                            <div class="crypto-addr" id="btcAddr">bc1q...xyz9</div>
+                                        </div>
+                                        <div class="crypto-option" data-crypto="eth" onclick="selectCrypto('eth')">
+                                            <i class="fab fa-ethereum" style="color: #627eea;"></i>
+                                            <div class="crypto-name">Ethereum</div>
+                                            <div class="crypto-addr" id="ethAddr">0x71...a3f2</div>
+                                        </div>
+                                        <div class="crypto-option" data-crypto="usdt" onclick="selectCrypto('usdt')">
+                                            <i class="fas fa-coins" style="color: #26a17b;"></i>
+                                            <div class="crypto-name">USDT (TRC20)</div>
+                                            <div class="crypto-addr" id="usdtAddr">TMyz...8KpL</div>
+                                        </div>
+                                    </div>
+                                    <div style="margin-top: 1rem; text-align: center;">
+                                        <button class="copy-btn" style="padding: 0.5rem 1.5rem; font-size: 0.9rem;" onclick="copyCryptoAddress()">
+                                            <i class="fas fa-copy"></i> Copy Full Address
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Terms Checkbox -->
+                            <div class="checkbox-group">
+                                <input type="checkbox" id="termsCheck">
+                                <label for="termsCheck">I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>. I understand this is a charitable donation to Messianic Movement Ministry.</label>
+                            </div>
+
+                            <!-- Error Message -->
+                            <div class="error-message" id="errorMessage">
+                                <i class="fas fa-exclamation-circle"></i>
+                                <span id="errorText">Please fill in all required fields.</span>
+                            </div>
+
+                            <!-- Submit Button -->
+                            <button class="submit-btn" id="submitBtn" onclick="processPayment()">
+                                <span>Complete Secure Payment</span>
+                                <i class="fas fa-lock"></i>
+                            </button>
+
+                            <div class="security-badge">
+                                <i class="fas fa-shield-alt"></i>
+                                <span>256-bit SSL Encryption &middot; PCI Compliant &middot; Secure Processing</span>
+                            </div>
+                        </div>
+
+                        <!-- Success State -->
+                        <div class="success-state" id="successState">
+                            <div class="success-icon">
+                                <i class="fas fa-check"></i>
+                            </div>
+                            <h2>Thank You for Your Gift!</h2>
+                            <p>Your donation of <strong id="successAmount">$100</strong> has been received. A confirmation email has been sent to <strong id="successEmail">your email</strong>. May the Lord bless you abundantly!</p>
+                            <div class="success-actions">
+                                <a href="index.html" class="btn-primary">
+                                    <i class="fas fa-home"></i> Return Home
+                                </a>
+                                <a href="giving.html" class="btn-secondary">
+                                    <i class="fas fa-gift"></i> Give Again
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- RIGHT: Order Summary -->
+                <aside class="checkout-summary">
+                    <div class="summary-card">
+                        <div class="summary-header">
+                            <i class="fas fa-receipt"></i> Order Summary
+                        </div>
+
+                        <div class="summary-item">
+                            <span class="item-label">Donation Type</span>
+                            <span class="item-value" id="summaryType">One-time Gift</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="item-label">Category</span>
+                            <span class="item-value" id="summaryCategory">General Offering</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="item-label">Amount</span>
+                            <span class="item-value gold" id="summaryAmount">$100.00</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="item-label">Processing Fee</span>
+                            <span class="item-value" id="summaryFee">$0.00</span>
+                        </div>
+
+                        <div class="summary-total">
+                            <span class="total-label">Total</span>
+                            <span class="total-value" id="summaryTotal">$100.00</span>
+                        </div>
+
+                        <div class="summary-note">
+                            <i class="fas fa-info-circle"></i>
+                            <strong>Tax Deductible:</strong> Messianic Movement is a registered 501(c)(3) nonprofit. Your donation is fully tax-deductible. You will receive a receipt via email.
+                        </div>
+
+                        <div class="impact-card">
+                            <h4><i class="fas fa-heart"></i> Your Impact</h4>
+                            <p id="impactText">Your $100 gift can provide Bibles to 10 families, feed 20 children through Compassion Works, or broadcast the Gospel to thousands online.</p>
+                        </div>
+
+                        <div class="sidebar-testimonial">
+                            <div class="quote">"Giving is not just about making a donation. It is about making a difference. Every seed sown into this ministry produces eternal harvest."</div>
+                            <div class="author">— Apostle Paul, Ministry Founder</div>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <a href="index.html" class="logo">
+                    <div class="logo-icon"><img src="images/logowtb.png" alt="Messianic Movement logo" class="logo-mark-img"></div>
+                    <div class="logo-text">
+                        <span class="logo-title">Messianic Movement</span>
+                        <span class="logo-subtitle">Regenerational Ministry</span>
+                    </div>
+                </a>
+                <p>Raising a generation of Spirit-filled believers who will transform nations through the power of the Holy Ghost.</p>
+                <div class="social-links">
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="index.html#ministries">Ministries</a></li>
+                    <li><a href="index.html#live">Live Service</a></li>
+                    <li><a href="giving.html">Give</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-links">
+                <h4>Resources</h4>
+                <ul>
+                    <li><a href="watch.html">Sermon Archive</a></li>
+                    <li><a href="divine_episodes.html">Divine Episodes</a></li>
+                    <li><a href="prayer_request.html">Prayer Request</a></li>
+                    <li><a href="ministry_school.html">Ministry School</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-links">
+                <h4>Contact</h4>
+                <ul>
+                    <li><i class="fas fa-map-marker-alt"></i> 123 Faith Avenue, Glory City</li>
+                    <li><i class="fas fa-phone"></i> +1 (555) 123-4567</li>
+                    <li><i class="fas fa-envelope"></i> info@whgrministry.org</li>
+                    <li><i class="fas fa-clock"></i> Sun: 9AM & 11AM EST</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2026 Messianic Movement. All rights reserved.</p>
+            <p>Designed with <i class="fas fa-heart" style="color: var(--color-gold);"></i> by the Spirit</p>
+        </div>
+    </footer>
+
+    <!-- Toast -->
+    <div class="toast" id="toast">
+        <i class="fas fa-check-circle toast-icon"></i>
+        <span id="toastMessage">Copied to clipboard</span>
+    </div>
+
+    <script>
+        // ── State ──
+        let state = {
+            amount: 100,
+            frequency: 'once',
+            method: 'card',
+            crypto: 'btc',
+            category: 'offering'
+        };
+
+        // ── Amount Selection ──
+        function selectAmount(amt) {
+            state.amount = amt;
+            document.getElementById('customAmount').value = '';
+            document.querySelectorAll('.amount-btn').forEach(btn => {
+                btn.classList.toggle('selected', parseInt(btn.dataset.amount) === amt);
+            });
+            updateSummary();
+        }
+
+        function handleCustomAmount(input) {
+            const val = parseFloat(input.value);
+            if (val > 0) {
+                state.amount = val;
+                document.querySelectorAll('.amount-btn').forEach(btn => btn.classList.remove('selected'));
+                updateSummary();
+            }
+        }
+
+        // ── Frequency ──
+        function setFrequency(freq) {
+            state.frequency = freq;
+            document.querySelectorAll('.frequency-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.freq === freq);
+            });
+            updateSummary();
+        }
+
+        // ── Payment Method ──
+        function selectPaymentMethod(method) {
+            state.method = method;
+            document.querySelectorAll('.payment-method').forEach(m => m.classList.remove('selected'));
+            document.querySelector(`[data-method="${method}"]`).classList.add('selected');
+
+            // Toggle fields
+            document.getElementById('cardFields').classList.toggle('active', method === 'card');
+            document.getElementById('paypalFields').classList.toggle('active', method === 'paypal');
+            document.getElementById('bankFields').classList.toggle('active', method === 'bank');
+            document.getElementById('cryptoFields').classList.toggle('active', method === 'crypto');
+
+            // Update submit button text
+            const btn = document.getElementById('submitBtn');
+            const texts = {
+                card: 'Complete Secure Payment',
+                paypal: 'Continue to PayPal',
+                bank: 'I've Completed the Transfer',
+                crypto: 'I've Sent the Crypto'
+            };
+            btn.querySelector('span').textContent = texts[method];
+        }
+
+        // ── Crypto Selection ──
+        function selectCrypto(crypto) {
+            state.crypto = crypto;
+            document.querySelectorAll('.crypto-option').forEach(c => c.classList.remove('selected'));
+            document.querySelector(`[data-crypto="${crypto}"]`).classList.add('selected');
+        }
+
+        // ── Card Formatting ──
+        function formatCardNumber(input) {
+            let val = input.value.replace(/\s/g, '').replace(/\D/g, '');
+            val = val.substring(0, 16);
+            input.value = val.replace(/(.{4})/g, '$1 ').trim();
+        }
+
+        function formatExpiry(input) {
+            let val = input.value.replace(/\D/g, '');
+            if (val.length >= 2) {
+                val = val.substring(0, 2) + ' / ' + val.substring(2, 4);
+            }
+            input.value = val;
+        }
+
+        // ── Update Summary ──
+        function updateSummary() {
+            const freqLabels = { once: 'One-time Gift', monthly: 'Monthly Partnership', yearly: 'Yearly Partnership' };
+            const catSelect = document.getElementById('designation');
+            const catValue = catSelect.value;
+            const catLabel = catValue ? catSelect.options[catSelect.selectedIndex].text : 'General Offering';
+
+            document.getElementById('summaryType').textContent = freqLabels[state.frequency];
+            document.getElementById('summaryCategory').textContent = catLabel;
+            document.getElementById('summaryAmount').textContent = '$' + state.amount.toFixed(2);
+            document.getElementById('summaryFee').textContent = '$0.00';
+            document.getElementById('summaryTotal').textContent = '$' + state.amount.toFixed(2);
+
+            // Impact text
+            const impacts = [
+                `Your $${state.amount} gift can provide Bibles to ${Math.floor(state.amount/10)} families, feed ${Math.floor(state.amount/5)} children through Compassion Works, or broadcast the Gospel to thousands online.`,
+                `Your $${state.amount} partnership helps train ${Math.floor(state.amount/50)} ministry students, support ${Math.floor(state.amount/25)} missionaries, and reach ${state.amount * 10} souls with the Gospel.`,
+                `Your generous $${state.amount} gift plants seeds that will bear fruit for generations. Thank you for advancing the Kingdom!`
+            ];
+            document.getElementById('impactText').textContent = impacts[Math.floor(Math.random() * impacts.length)];
+        }
+
+        // ── Copy to Clipboard ──
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                showToast('Copied to clipboard: ' + text);
+            });
+        }
+
+        function copyCryptoAddress() {
+            const addresses = {
+                btc: 'bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh',
+                eth: '0x71C7656EC7ab88b098defB751B7401B5f6d8976F',
+                usdt: 'TMyz5fCB3w8r3dB2P7Z8RQKpL9vN4mJ6xY'
+            };
+            copyToClipboard(addresses[state.crypto]);
+        }
+
+        // ── Toast ──
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toastMessage').textContent = msg;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 3000);
+        }
+
+        // ── Express Pay Handlers ──
+        function handleExpressPay(type) {
+            showToast(type === 'apple' ? 'Apple Pay is not available yet.' : type === 'google' ? 'Google Pay is not available yet.' : 'PayPal is not available yet.');
+        }
+
+        function handlePayPal() {
+            showToast('PayPal is not enabled on this page yet. Please use Credit / Debit Card.');
+        }
+
+        // ── Process Payment ──
+        async function processPayment() {
+            const btn = document.getElementById('submitBtn');
+            const errorDiv = document.getElementById('errorMessage');
+            const errorText = document.getElementById('errorText');
+
+            const firstName = document.getElementById('firstName').value.trim();
+            const lastName = document.getElementById('lastName').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const terms = document.getElementById('termsCheck').checked;
+            const designation = document.getElementById('designation').value || 'general';
+
+            if (state.method !== 'card') {
+                errorText.textContent = 'Only Credit / Debit Card checkout is enabled right now. Please select that option.';
+                errorDiv.classList.add('active');
+                return;
+            }
+            if (!firstName || !lastName || !email) {
+                errorText.textContent = 'Please fill in all required fields (Name and Email).';
+                errorDiv.classList.add('active');
+                return;
+            }
+            if (!terms) {
+                errorText.textContent = 'Please agree to the Terms of Service and Privacy Policy.';
+                errorDiv.classList.add('active');
+                return;
+            }
+            if (state.amount <= 0) {
+                errorText.textContent = 'Please enter a valid donation amount.';
+                errorDiv.classList.add('active');
+                return;
+            }
+
+            errorDiv.classList.remove('active');
+
+            btn.disabled = true;
+            btn.innerHTML = '<div class="spinner"></div><span>Redirecting...</span>';
+
+            try {
+                const response = await fetch('/create-checkout-session', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        amount: state.amount,
+                        category: designation,
+                        freq: state.frequency,
+                        name: `${firstName} ${lastName}`,
+                        email: email
+                    })
+                });
+                const data = await response.json();
+
+                if (!response.ok || !data.url) {
+                    throw new Error(data.error || 'Failed to create checkout session.');
+                }
+
+                window.location.href = data.url;
+            } catch (error) {
+                errorText.textContent = error.message || 'Unable to start checkout. Please try again later.';
+                errorDiv.classList.add('active');
+                btn.disabled = false;
+                btn.innerHTML = '<span>Complete Secure Payment</span><i class="fas fa-lock"></i>';
+            }
+        }
+
+        function showSuccessState() {
+            document.querySelectorAll('.checkout-section').forEach(s => s.style.display = 'none');
+            document.getElementById('successState').classList.add('active');
+            document.getElementById('checkoutCard').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        // ── URL Params Handling ──
+        function getParam(name) {
+            return new URLSearchParams(location.search).get(name);
+        }
+
+        // Initialize from URL
+        (function init() {
+            const cat = getParam('category');
+            const amt = getParam('amount');
+            const freq = getParam('freq');
+            const sessionId = getParam('session_id');
+            const canceled = getParam('canceled');
+
+            if (cat) {
+                const select = document.getElementById('designation');
+                for (let i = 0; i < select.options.length; i++) {
+                    if (select.options[i].value === cat) {
+                        select.selectedIndex = i;
+                        break;
+                    }
+                }
+            }
+            if (amt) {
+                const amountVal = parseFloat(amt);
+                if (amountVal > 0) {
+                    const presetBtn = document.querySelector(`.amount-btn[data-amount="${amountVal}"]`);
+                    if (presetBtn) {
+                        selectAmount(amountVal);
+                    } else {
+                        document.getElementById('customAmount').value = amountVal;
+                        handleCustomAmount(document.getElementById('customAmount'));
+                    }
+                }
+            }
+            if (freq && ['once', 'monthly', 'yearly'].includes(freq)) {
+                setFrequency(freq);
+            }
+
+            updateSummary();
+
+            if (sessionId) {
+                const successEmail = getParam('email') || document.getElementById('email').value.trim() || 'your email';
+                document.getElementById('successAmount').textContent = '$' + state.amount.toFixed(2);
+                document.getElementById('successEmail').textContent = successEmail;
+                showSuccessState();
+            }
+            if (canceled) {
+                const errorDiv = document.getElementById('errorMessage');
+                const errorText = document.getElementById('errorText');
+                errorText.textContent = 'Your checkout was canceled. Please review your donation details and try again.';
+                errorDiv.classList.add('active');
+            }
+        })();
+
+        // Update summary on designation change
+        document.getElementById('designation').addEventListener('change', updateSummary);
+    </script>
+    <script src="script.js"></script>
+<script>
+window.addEventListener('load', () => {
+    const loader = document.getElementById('loader');
+    if (loader) {
+        setTimeout(() => loader.classList.add('hidden'), 2200);
+    }
+});
+</script>
+</body>
+</html>
