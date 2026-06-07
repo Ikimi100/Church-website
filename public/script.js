@@ -12,11 +12,44 @@ function initImageFallbacks() {
     });
 }
 
+function initMobileNav() {
+    document.querySelectorAll('nav').forEach(nav => {
+        const links = nav.querySelector('.nav-links');
+        if (!links) return;
+        if (nav.querySelector('.mobile-menu-toggle') || nav.querySelector('.mobile-menu-btn')) return;
+
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = 'mobile-menu-toggle';
+        button.setAttribute('aria-label', 'Open mobile menu');
+        button.innerHTML = '<i class="fas fa-bars"></i>';
+
+        button.addEventListener('click', () => {
+            const isOpen = links.classList.toggle('open');
+            button.classList.toggle('active', isOpen);
+            button.innerHTML = isOpen ? '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+            button.setAttribute('aria-label', isOpen ? 'Close mobile menu' : 'Open mobile menu');
+        });
+
+        links.querySelectorAll('a').forEach(anchor => {
+            anchor.addEventListener('click', () => {
+                links.classList.remove('open');
+                button.classList.remove('active');
+                button.innerHTML = '<i class="fas fa-bars"></i>';
+                button.setAttribute('aria-label', 'Open mobile menu');
+            });
+        });
+
+        nav.appendChild(button);
+    });
+}
+
 window.addEventListener('load', () => {
     initParticles();
     initCalendar();
     initTorahPortions();
     initImageFallbacks();
+    initMobileNav();
     updateCartUI();
 });
 

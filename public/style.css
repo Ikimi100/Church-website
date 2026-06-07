@@ -585,6 +585,41 @@ nav.scrolled {
     transform: translateY(0);
 }
 
+    .mobile-menu-toggle {
+        display: none;
+        position: absolute;
+        top: 50%;
+        right: 1.5rem;
+        transform: translateY(-50%);
+        width: 44px;
+        height: 44px;
+        border: 1px solid rgba(212,175,55,0.4);
+        border-radius: 50%;
+        background: rgba(5,5,5,0.85);
+        color: var(--color-gold);
+        font-size: 1.2rem;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        z-index: 1100;
+        transition: all 0.3s ease;
+    }
+
+    .mobile-menu-toggle:hover {
+        background: rgba(212,175,55,0.12);
+    }
+
+    .mobile-menu-toggle.active {
+        color: var(--color-bg);
+        background: var(--color-gold);
+    }
+
+    .nav-links {
+        transition: max-height 0.4s ease, opacity 0.4s ease;
+    }
+
+
 /* Hero Section */
 .hero {
     min-height: 100vh;
@@ -2979,109 +3014,183 @@ footer::before {
     .featured-grid {
         grid-template-columns: 1fr;
     }
-    
+
     .main-grid {
         grid-template-columns: repeat(2, 1fr);
     }
-    
+
     .grid-card.large,
     .grid-card.wide {
         grid-column: span 2;
     }
-    
+
     .donation-grid {
         grid-template-columns: 1fr;
     }
-    
+
     .footer-grid {
         grid-template-columns: 1fr 1fr;
-        gap: 3rem;
+        gap: 2rem;
     }
-    
+
     .cursor,
     .cursor-dot {
         display: none;
     }
-    
+
     .calendar-grid {
         grid-template-columns: repeat(2, 1fr);
     }
-    
+
     .message-bar {
         top: 70px;
     }
-    
+
     .hero {
-        padding-top: 120px;
+        padding-top: 110px;
     }
-    
+
     .torah-card {
         flex: 0 0 320px;
+    }
+
+    nav {
+        padding: 1rem 3%;
+    }
+
+    .nav-container {
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        justify-content: space-between;
+    }
+
+    .nav-links {
+        gap: 1rem;
+    }
+
+    .nav-link {
+        font-size: 0.82rem;
+    }
+
+    .nav-cta {
+        padding: 0.75rem 1.25rem;
+        font-size: 0.8rem;
     }
 }
 
 @media (max-width: 768px) {
+    nav {
+        padding: 1rem 4%;
+    }
+
+    .nav-container {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 1rem;
+    }
+
+    .mobile-menu-toggle {
+        display: inline-flex;
+    }
+
     .nav-links {
-        display: none;
+        display: none !important;
+        flex-direction: column;
+        width: 100%;
+        gap: 0.75rem;
+        max-height: 0;
+        opacity: 0;
+        overflow: hidden;
+        transition: max-height 0.4s ease, opacity 0.4s ease;
     }
-    
+
+    .nav-links.open {
+        display: flex !important;
+        max-height: 1000px !important;
+        opacity: 1 !important;
+    }
+
+    .nav-link {
+        font-size: 0.95rem;
+        padding: 0.75rem 0.75rem;
+        border-radius: 14px;
+        background: rgba(255,255,255,0.03);
+    }
+
+    .nav-cta {
+        width: 100%;
+        padding: 0.9rem 1rem;
+        text-align: center;
+        border-radius: 16px;
+    }
+
     .hero h1 {
-        font-size: 2.5rem;
+        font-size: 2.15rem;
     }
-    
+
     .main-grid {
         grid-template-columns: 1fr;
     }
-    
+
     .grid-card.large,
     .grid-card.wide {
         grid-column: span 1;
     }
-    
-    .store-grid {
+
+    .grid-card {
+        min-height: auto;
+    }
+
+    .grid-card-content {
+        padding: 1.25rem;
+    }
+
+    .grid-card-icon {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+    }
+
+    .store-grid,
+    .footer-grid,
+    .calendar-grid {
         grid-template-columns: 1fr;
     }
-    
-    .footer-grid {
-        grid-template-columns: 1fr;
-    }
-    
+
     .footer-bottom {
         flex-direction: column;
         text-align: center;
     }
-    
+
     .cart-sidebar {
         width: 100%;
     }
-    
-    .calendar-grid {
-        grid-template-columns: 1fr;
-    }
-    
+
     .calendar-filters {
         flex-direction: column;
-        align-items: center;
+        align-items: stretch;
+        gap: 0.75rem;
     }
-    
+
     .filter-btn {
-        width: 200px;
+        width: 100%;
         justify-content: center;
     }
-    
+
     .message-bar {
         display: none;
     }
-    
+
     .hero {
-        padding-top: 80px;
+        padding-top: 90px;
+        padding-bottom: 3rem;
     }
-    
+
     .torah-card {
-        flex: 0 0 300px;
+        flex: 0 0 100%;
         padding: 1.5rem;
     }
-    
+
     .torah-nav-btn {
         display: none;
     }
