@@ -8,86 +8,12 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta name="theme-color" content="#d4af37">
+    <link rel="icon" type="image/png" href="images/logowtb.png">
     <link rel="stylesheet" href="style.css">
     <style>
-        /* ===== CSS VARIABLES (mirroring your site theme) ===== */
-        :root {
-            --color-bg: #050508;
-            --color-bg-elevated: #0a0a0f;
-            --color-text: #f0f0f5;
-            --color-text-secondary: #a0a0b0;
-            --color-text-muted: #606070;
-            --color-gold: #d4af37;
-            --color-gold-light: #e8c96a;
-            --color-gold-dark: #b8941f;
-            --color-purple-rich: #8b5cf6;
-            --color-soft-blue: #60a5fa;
-            --glass-bg: rgba(255,255,255,0.03);
-            --glass-border: rgba(255,255,255,0.06);
-            --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: 'Space Grotesk', sans-serif;
-            background: var(--color-bg);
-            color: var(--color-text);
-            overflow-x: hidden;
-            line-height: 1.6;
-        }
-
-        /* Ambient background effects */
-        .grain-overlay {
-            position: fixed; inset: 0; pointer-events: none; z-index: 9999; opacity: 0.03;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-        }
-        .vignette {
-            position: fixed; inset: 0; pointer-events: none; z-index: 1;
-            background: radial-gradient(ellipse at center, transparent 0%, rgba(5,5,8,0.6) 100%);
-        }
-
-        /* ===== NAVIGATION ===== */
-        nav {
-            position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-            padding: 1.25rem 4%;
-            transition: all 0.4s var(--ease-out-expo);
-            background: rgba(5,5,5,0.85); backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--glass-border);
-        }
-        .nav-container {
-            max-width: 1400px; margin: 0 auto;
-            display: flex; align-items: center; justify-content: space-between;
-        }
-        .logo {
-            display: flex; align-items: center; gap: 0.875rem; text-decoration: none;
-        }
-        .logo-mark {
-    overflow: hidden;
-            width: 44px; height: 44px; border-radius: 12px;
-            background: linear-gradient(135deg, rgba(212,175,55,0.2), rgba(107,33,168,0.2));
-            border: 1px solid rgba(212,175,55,0.3);
-            display: flex; align-items: center; justify-content: center;
-            color: var(--color-gold); font-size: 1.25rem;}
-        .logo-text { display: flex; flex-direction: column; }
-        .logo-title {
-            font-family: 'Cormorant Garamond', serif; font-size: 1.35rem;
-            font-weight: 600; color: var(--color-text); line-height: 1.1;
-        }
-        .logo-subtitle {
-            font-size: 0.65rem; color: var(--color-text-muted);
-            text-transform: uppercase; letter-spacing: 0.15em;
-        }
-        .nav-links { display: flex; gap: 2.5rem; list-style: none; }
-        .nav-links a {
-            text-decoration: none; color: var(--color-text-secondary);
-            font-size: 0.9rem; font-weight: 500; transition: color 0.3s ease;
-            position: relative;
-        }
-        .nav-links a:hover, .nav-links a.active { color: var(--color-gold); }
-        .nav-links a.active::after {
-            content: ''; position: absolute; bottom: -6px; left: 0; right: 0;
-            height: 2px; background: var(--color-gold); border-radius: 2px;
-        }
+        /* ===== GIVING PAGE SPECIFIC STYLES ===== */
+        /* CSS variables and base styles are inherited from style.css */
 
         /* ===== HERO ===== */
         .give-hero {

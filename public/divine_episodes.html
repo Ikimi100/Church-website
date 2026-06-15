@@ -635,6 +635,40 @@
         </div>
     </section>
 
+    <!-- Live Weekly Episodes -->
+    <section style="background: var(--color-bg-elevated,#0a0a0f); padding:6rem 4%; position:relative; overflow:hidden;" id="live-episodes">
+        <div style="position:absolute;inset:0;background:radial-gradient(circle at 30% 50%,rgba(212,175,55,0.04) 0%,transparent 60%);pointer-events:none;"></div>
+        <div class="section-header">
+            <span class="section-eyebrow">Streaming Now</span>
+            <h2 class="section-title">Live Weekly Episodes</h2>
+            <p class="section-subtitle">Join us every week for live divine episodes — powerful teachings, prophetic encounters, and heaven-to-earth broadcasts.</p>
+        </div>
+        <div style="max-width:960px;margin:0 auto;">
+            <!--
+                TODO: Replace the YouTube src with your actual channel/video ID.
+                For live stream: https://www.youtube.com/embed/live_stream?channel=YOUR_CHANNEL_ID
+                For latest video: https://www.youtube.com/embed/YOUR_VIDEO_ID
+            -->
+            <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:20px;border:1px solid rgba(212,175,55,0.15);box-shadow:0 30px 60px rgba(0,0,0,0.4);">
+                <iframe
+                    src="https://www.youtube.com/embed/live_stream?channel=UCxxxxxxxxxxxxxx&autoplay=0&rel=0&modestbranding=1"
+                    title="Divine Episodes — Live Weekly Broadcast"
+                    style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen loading="lazy">
+                </iframe>
+            </div>
+            <p style="text-align:center;margin-top:1.25rem;color:var(--color-text-secondary,#a0a0b0);font-size:0.9rem;">
+                <i class="fab fa-youtube" style="color:#ff0000;margin-right:0.4rem;"></i>
+                Can't see the stream?
+                <a href="https://youtube.com/@messianicmovement" target="_blank" rel="noopener noreferrer"
+                   style="color:var(--color-gold,#d4af37);text-decoration:underline;"><!-- TODO: real YouTube URL -->
+                   Watch directly on YouTube
+                </a>
+            </p>
+        </div>
+    </section>
+
     <!-- This Sunday Feature -->
     <section class="this-sunday" id="this-sunday">
         <div class="section-header">
@@ -839,6 +873,105 @@
                 <p>Discussion questions and facilitator guides for small groups and cells.</p>
                 <a href="#" class="material-link">Get Guides <i class="fas fa-arrow-right"></i></a>
             </div>
+        </div>
+    </section>
+
+    <!-- Series of the Seasons -->
+    <section style="padding:6rem 4%; position:relative; overflow:hidden;" id="seasons">
+        <div style="position:absolute;inset:0;background:radial-gradient(circle at 70% 30%,rgba(107,33,168,0.04) 0%,transparent 60%);pointer-events:none;"></div>
+        <div class="section-header">
+            <span class="section-eyebrow">Episode Archive</span>
+            <h2 class="section-title">Series of the Seasons</h2>
+            <p class="section-subtitle">Every season is a journey through Scripture. Browse the full collection by season — each with captions and downloadable content.</p>
+        </div>
+
+        <div style="max-width:1100px; margin:0 auto; display:flex; flex-direction:column; gap:1.25rem;">
+
+            <!-- Season I -->
+            <div style="background:var(--color-surface,#111); border:1px solid rgba(212,175,55,0.15); border-radius:20px; padding:1.75rem 2rem; display:flex; align-items:center; justify-content:space-between; gap:1.5rem; flex-wrap:wrap; transition:all 0.4s ease; cursor:pointer;"
+                 onmouseover="this.style.borderColor='rgba(212,175,55,0.35)'; this.style.transform='translateX(6px)'"
+                 onmouseout="this.style.borderColor='rgba(212,175,55,0.15)'; this.style.transform=''">
+                <div style="display:flex; align-items:center; gap:1.25rem;">
+                    <div style="width:52px;height:52px;background:linear-gradient(135deg,var(--color-gold,#d4af37),#b8941f);border-radius:14px;display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:1.35rem;font-weight:600;color:#050508;flex-shrink:0;">I</div>
+                    <div>
+                        <h3 style="font-family:'Space Grotesk',sans-serif;font-size:1.05rem;font-weight:600;margin-bottom:0.2rem;">Season I</h3>
+                        <p style="color:var(--color-text-secondary,#a0a0b0);font-size:0.85rem;"><i class="fas fa-closed-captioning" style="color:var(--color-gold,#d4af37);margin-right:0.3rem;"></i> Captions Available</p>
+                    </div>
+                </div>
+                <div style="display:flex; align-items:center; gap:0.75rem;">
+                    <a href="#" style="display:inline-flex;align-items:center;gap:0.4rem;padding:0.55rem 1.1rem;background:rgba(212,175,55,0.1);border:1px solid rgba(212,175,55,0.2);border-radius:100px;color:var(--color-gold,#d4af37);text-decoration:none;font-size:0.8rem;font-weight:600;"><i class="fas fa-play"></i> Watch</a>
+                    <a href="#" style="display:inline-flex;align-items:center;gap:0.4rem;padding:0.55rem 1.1rem;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:100px;color:var(--color-text-secondary,#a0a0b0);text-decoration:none;font-size:0.8rem;font-weight:600;"><i class="fas fa-download"></i> Download</a>
+                </div>
+            </div>
+
+            <!-- Season II -->
+            <div style="background:var(--color-surface,#111); border:1px solid rgba(212,175,55,0.15); border-radius:20px; padding:1.75rem 2rem; display:flex; align-items:center; justify-content:space-between; gap:1.5rem; flex-wrap:wrap; transition:all 0.4s ease; cursor:pointer;"
+                 onmouseover="this.style.borderColor='rgba(212,175,55,0.35)'; this.style.transform='translateX(6px)'"
+                 onmouseout="this.style.borderColor='rgba(212,175,55,0.15)'; this.style.transform=''">
+                <div style="display:flex; align-items:center; gap:1.25rem;">
+                    <div style="width:52px;height:52px;background:linear-gradient(135deg,rgba(212,175,55,0.2),rgba(107,33,168,0.2));border:1px solid rgba(212,175,55,0.3);border-radius:14px;display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:1.35rem;font-weight:600;color:var(--color-gold,#d4af37);flex-shrink:0;">II</div>
+                    <div>
+                        <h3 style="font-family:'Space Grotesk',sans-serif;font-size:1.05rem;font-weight:600;margin-bottom:0.2rem;">Season II</h3>
+                        <p style="color:var(--color-text-secondary,#a0a0b0);font-size:0.85rem;"><i class="fas fa-closed-captioning" style="color:var(--color-gold,#d4af37);margin-right:0.3rem;"></i> Captions Available</p>
+                    </div>
+                </div>
+                <div style="display:flex; align-items:center; gap:0.75rem;">
+                    <a href="#" style="display:inline-flex;align-items:center;gap:0.4rem;padding:0.55rem 1.1rem;background:rgba(212,175,55,0.1);border:1px solid rgba(212,175,55,0.2);border-radius:100px;color:var(--color-gold,#d4af37);text-decoration:none;font-size:0.8rem;font-weight:600;"><i class="fas fa-play"></i> Watch</a>
+                    <a href="#" style="display:inline-flex;align-items:center;gap:0.4rem;padding:0.55rem 1.1rem;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:100px;color:var(--color-text-secondary,#a0a0b0);text-decoration:none;font-size:0.8rem;font-weight:600;"><i class="fas fa-download"></i> Download</a>
+                </div>
+            </div>
+
+            <!-- Season III -->
+            <div style="background:var(--color-surface,#111); border:1px solid rgba(212,175,55,0.15); border-radius:20px; padding:1.75rem 2rem; display:flex; align-items:center; justify-content:space-between; gap:1.5rem; flex-wrap:wrap; transition:all 0.4s ease; cursor:pointer;"
+                 onmouseover="this.style.borderColor='rgba(212,175,55,0.35)'; this.style.transform='translateX(6px)'"
+                 onmouseout="this.style.borderColor='rgba(212,175,55,0.15)'; this.style.transform=''">
+                <div style="display:flex; align-items:center; gap:1.25rem;">
+                    <div style="width:52px;height:52px;background:linear-gradient(135deg,rgba(212,175,55,0.2),rgba(107,33,168,0.2));border:1px solid rgba(212,175,55,0.3);border-radius:14px;display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:1.35rem;font-weight:600;color:var(--color-gold,#d4af37);flex-shrink:0;">III</div>
+                    <div>
+                        <h3 style="font-family:'Space Grotesk',sans-serif;font-size:1.05rem;font-weight:600;margin-bottom:0.2rem;">Season III</h3>
+                        <p style="color:var(--color-text-secondary,#a0a0b0);font-size:0.85rem;"><i class="fas fa-closed-captioning" style="color:var(--color-gold,#d4af37);margin-right:0.3rem;"></i> Captions Available</p>
+                    </div>
+                </div>
+                <div style="display:flex; align-items:center; gap:0.75rem;">
+                    <a href="#" style="display:inline-flex;align-items:center;gap:0.4rem;padding:0.55rem 1.1rem;background:rgba(212,175,55,0.1);border:1px solid rgba(212,175,55,0.2);border-radius:100px;color:var(--color-gold,#d4af37);text-decoration:none;font-size:0.8rem;font-weight:600;"><i class="fas fa-play"></i> Watch</a>
+                    <a href="#" style="display:inline-flex;align-items:center;gap:0.4rem;padding:0.55rem 1.1rem;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:100px;color:var(--color-text-secondary,#a0a0b0);text-decoration:none;font-size:0.8rem;font-weight:600;"><i class="fas fa-download"></i> Download</a>
+                </div>
+            </div>
+
+            <!-- Season IV -->
+            <div style="background:var(--color-surface,#111); border:1px solid rgba(212,175,55,0.15); border-radius:20px; padding:1.75rem 2rem; display:flex; align-items:center; justify-content:space-between; gap:1.5rem; flex-wrap:wrap; transition:all 0.4s ease; cursor:pointer;"
+                 onmouseover="this.style.borderColor='rgba(212,175,55,0.35)'; this.style.transform='translateX(6px)'"
+                 onmouseout="this.style.borderColor='rgba(212,175,55,0.15)'; this.style.transform=''">
+                <div style="display:flex; align-items:center; gap:1.25rem;">
+                    <div style="width:52px;height:52px;background:linear-gradient(135deg,rgba(212,175,55,0.2),rgba(107,33,168,0.2));border:1px solid rgba(212,175,55,0.3);border-radius:14px;display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:1.35rem;font-weight:600;color:var(--color-gold,#d4af37);flex-shrink:0;">IV</div>
+                    <div>
+                        <h3 style="font-family:'Space Grotesk',sans-serif;font-size:1.05rem;font-weight:600;margin-bottom:0.2rem;">Season IV</h3>
+                        <p style="color:var(--color-text-secondary,#a0a0b0);font-size:0.85rem;"><i class="fas fa-closed-captioning" style="color:var(--color-gold,#d4af37);margin-right:0.3rem;"></i> Captions Available</p>
+                    </div>
+                </div>
+                <div style="display:flex; align-items:center; gap:0.75rem;">
+                    <a href="#" style="display:inline-flex;align-items:center;gap:0.4rem;padding:0.55rem 1.1rem;background:rgba(212,175,55,0.1);border:1px solid rgba(212,175,55,0.2);border-radius:100px;color:var(--color-gold,#d4af37);text-decoration:none;font-size:0.8rem;font-weight:600;"><i class="fas fa-play"></i> Watch</a>
+                    <a href="#" style="display:inline-flex;align-items:center;gap:0.4rem;padding:0.55rem 1.1rem;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:100px;color:var(--color-text-secondary,#a0a0b0);text-decoration:none;font-size:0.8rem;font-weight:600;"><i class="fas fa-download"></i> Download</a>
+                </div>
+            </div>
+
+            <!-- Season V -->
+            <div style="background:var(--color-surface,#111); border:1px solid rgba(212,175,55,0.15); border-radius:20px; padding:1.75rem 2rem; display:flex; align-items:center; justify-content:space-between; gap:1.5rem; flex-wrap:wrap; transition:all 0.4s ease; cursor:pointer;"
+                 onmouseover="this.style.borderColor='rgba(212,175,55,0.35)'; this.style.transform='translateX(6px)'"
+                 onmouseout="this.style.borderColor='rgba(212,175,55,0.15)'; this.style.transform=''">
+                <div style="display:flex; align-items:center; gap:1.25rem;">
+                    <div style="width:52px;height:52px;background:linear-gradient(135deg,rgba(212,175,55,0.2),rgba(107,33,168,0.2));border:1px solid rgba(212,175,55,0.3);border-radius:14px;display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:1.35rem;font-weight:600;color:var(--color-gold,#d4af37);flex-shrink:0;">V</div>
+                    <div>
+                        <h3 style="font-family:'Space Grotesk',sans-serif;font-size:1.05rem;font-weight:600;margin-bottom:0.2rem;">Season V</h3>
+                        <p style="color:var(--color-text-secondary,#a0a0b0);font-size:0.85rem;"><i class="fas fa-closed-captioning" style="color:var(--color-gold,#d4af37);margin-right:0.3rem;"></i> Captions Available</p>
+                    </div>
+                </div>
+                <div style="display:flex; align-items:center; gap:0.75rem;">
+                    <a href="#" style="display:inline-flex;align-items:center;gap:0.4rem;padding:0.55rem 1.1rem;background:rgba(212,175,55,0.1);border:1px solid rgba(212,175,55,0.2);border-radius:100px;color:var(--color-gold,#d4af37);text-decoration:none;font-size:0.8rem;font-weight:600;"><i class="fas fa-play"></i> Watch</a>
+                    <a href="#" style="display:inline-flex;align-items:center;gap:0.4rem;padding:0.55rem 1.1rem;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:100px;color:var(--color-text-secondary,#a0a0b0);text-decoration:none;font-size:0.8rem;font-weight:600;"><i class="fas fa-download"></i> Download</a>
+                </div>
+            </div>
+
         </div>
     </section>
 

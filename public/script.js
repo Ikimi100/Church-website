@@ -24,20 +24,34 @@ function initMobileNav() {
         button.setAttribute('aria-label', 'Open mobile menu');
         button.innerHTML = '<i class="fas fa-bars"></i>';
 
+        const closeMenu = () => {
+            links.classList.remove('open');
+            button.classList.remove('active');
+            button.innerHTML = '<i class="fas fa-bars"></i>';
+            button.setAttribute('aria-label', 'Open mobile menu');
+            document.body.classList.remove('menu-open');
+        };
+
         button.addEventListener('click', () => {
             const isOpen = links.classList.toggle('open');
             button.classList.toggle('active', isOpen);
             button.innerHTML = isOpen ? '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
             button.setAttribute('aria-label', isOpen ? 'Close mobile menu' : 'Open mobile menu');
+            document.body.classList.toggle('menu-open', isOpen);
         });
 
+        // Close menu when clicking on a link
         links.querySelectorAll('a').forEach(anchor => {
-            anchor.addEventListener('click', () => {
-                links.classList.remove('open');
-                button.classList.remove('active');
-                button.innerHTML = '<i class="fas fa-bars"></i>';
-                button.setAttribute('aria-label', 'Open mobile menu');
-            });
+            anchor.addEventListener('click', closeMenu);
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            const isMenuOpen = links.classList.contains('open');
+            const isClickInsideNav = nav.contains(e.target);
+            if (isMenuOpen && !isClickInsideNav) {
+                closeMenu();
+            }
         });
 
         nav.appendChild(button);
@@ -217,10 +231,8 @@ function selectAmount(btn, amt) {
     }
 
     if (btn && btn.classList) btn.classList.add('active');
-    // update any visible total on the page
     const totalDisplay = document.getElementById('totalDisplay');
     if (totalDisplay) totalDisplay.textContent = (value || 0).toLocaleString();
-    // store temporarily so openDonateModal can pick it up
     try { localStorage.setItem('mm_donate_amount_tmp', String(value || '')); } catch (e) {}
     return value;
 }
@@ -244,7 +256,6 @@ function selectFreq(btn, freq) {
 function openDonateModal(category) {
     const stored = localStorage.getItem('mm_donate_amount_tmp');
     let amount = stored || '';
-    // try to read any active preset on the page
     try {
         const active = document.querySelector('#give .amount-btn.active, .preset-amounts .amount-btn.active');
         if (active) {
@@ -259,6 +270,76 @@ function openDonateModal(category) {
     const freq = localStorage.getItem('mm_donate_freq_tmp');
     if (freq) params.set('freq', freq);
     window.location.href = 'donate.html' + (params.toString() ? ('?' + params.toString()) : '');
+}
+
+// ==================== TESTIMONIAL CAROUSEL ====================
+let currentSlide = 0;
+const slides = document.querySelectorAll('.testimonial-slide');
+const dots = document.querySelectorAll('.carousel-dots .dot');
+
+function goToSlide(index) {
+    slides.forEach((slide, i) => {
+        slide.classList.remove('active');
+        if (dots[i]) dots[i].classList.remove('active');
+    });
+    if (slides[index]) slides[index].classList.add('active');
+    if (dots[index]) dots[index].classList.add('active');
+    currentSlide = index;
+}
+
+// Auto-advance testimonials
+setInterval(() => {
+    const next = (currentSlide + 1) % slides.length;
+    goToSlide(next);
+}, 6000);
+
+// ==================== MODAL ====================
+function quickView(title) {
+    const modal = document.getElementById('modal');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalBody = document.getElementById('modalBody');
+    if (modalTitle) modalTitle.textContent = title;
+    if (modalBody) modalBody.textContent = 'Quick view coming soon for ' + title;
+    if (modal) modal.classList.add('open');
+}
+
+function closeModal() {
+    const modal = document.getElementById('modal');
+    if (modal) modal.classList.remove('open');
+}
+
+function toggleWishlist(btn) {
+    btn.classList.toggle('active');
+    const isActive = btn.classList.contains('active');
+    showToast(isActive ? 'Added to wishlist' : 'Removed from wishlist');
+}
+
+function playVideo() {
+    showToast('Live stream starting...');
+}
+
+// ==================== SCROLL TOP ====================
+const scrollTopBtn = document.getElementById('scrollTop');
+if (scrollTopBtn) {
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 500) {
+            scrollTopBtn.classList.add('visible');
+        } else {
+            scrollTopBtn.classList.remove('visible');
+        }
+    });
+}
+
+// ==================== NAVBAR SCROLL ====================
+const navbar = document.getElementById('navbar');
+if (navbar) {
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 100) {
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.remove('scrolled');
+        }
+    });
 }
 
 // ==================== TORAH PORTIONS DATA ====================
@@ -356,12 +437,12 @@ function updateTorahProgress() {
 
 // ==================== CALENDAR ====================
 const calendarEvents = [
-    {id:1,name:"Passover",hebrewName:"Pesach",date:"2026-04-12",month:"APR",day:"12",year:"2026",description:"Commemorating the liberation...",scripture:"Exodus 12:1-28",type:"upcoming",status:"Next"},
-    {id:2,name:"Feast of Unleavened Bread",hebrewName:"Chag HaMatzot",date:"2026-04-13",month:"APR",day:"13-19",year:"2026",description:"Seven days of eating unleavened bread...",scripture:"Leviticus 23:6-8",type:"upcoming",status:"Coming"},
-    {id:3,name:"Feast of Trumpets",hebrewName:"Rosh Hashanah",date:"2026-09-25",month:"SEP",day:"25",year:"2026",description:"The blowing of the shofar...",scripture:"Leviticus 23:23-25",type:"upcoming",status:"Future"},
-    {id:4,name:"Day of Atonement",hebrewName:"Yom Kippur",date:"2026-10-04",month:"OCT",day:"04",year:"2026",description:"The holiest day...",scripture:"Leviticus 23:26-32",type:"upcoming",status:"Future"},
-    {id:5,name:"Feast of Tabernacles",hebrewName:"Sukkot",date:"2026-10-09",month:"OCT",day:"09-16",year:"2026",description:"Dwelling in temporary shelters...",scripture:"Leviticus 23:33-43",type:"upcoming",status:"Future"},
-    {id:6,name:"Pentecost",hebrewName:"Shavuot",date:"2026-05-31",month:"MAY",day:"31",year:"2026",description:"The giving of the Torah...",scripture:"Acts 2:1-4",type:"upcoming",status:"Coming"}
+    {id:1,name:"Passover",hebrewName:"Pesach",date:"2026-04-12",month:"APR",day:"12",year:"2026",description:"Commemorating the liberation of the Israelites from Egypt. A feast of redemption and new beginnings.",scripture:"Exodus 12:1-28",type:"upcoming",status:"Next"},
+    {id:2,name:"Feast of Unleavened Bread",hebrewName:"Chag HaMatzot",date:"2026-04-13",month:"APR",day:"13-19",year:"2026",description:"Seven days of eating unleavened bread, symbolizing purity and separation from sin.",scripture:"Leviticus 23:6-8",type:"upcoming",status:"Coming"},
+    {id:3,name:"Feast of Trumpets",hebrewName:"Rosh Hashanah",date:"2026-09-25",month:"SEP",day:"25",year:"2026",description:"The blowing of the shofar announces the new year and calls the people to repentance.",scripture:"Leviticus 23:23-25",type:"upcoming",status:"Future"},
+    {id:4,name:"Day of Atonement",hebrewName:"Yom Kippur",date:"2026-10-04",month:"OCT",day:"04",year:"2026",description:"The holiest day of the year. A time of fasting, prayer, and seeking forgiveness.",scripture:"Leviticus 23:26-32",type:"upcoming",status:"Future"},
+    {id:5,name:"Feast of Tabernacles",hebrewName:"Sukkot",date:"2026-10-09",month:"OCT",day:"09-16",year:"2026",description:"Dwelling in temporary shelters to remember God's provision in the wilderness.",scripture:"Leviticus 23:33-43",type:"upcoming",status:"Future"},
+    {id:6,name:"Pentecost",hebrewName:"Shavuot",date:"2026-05-31",month:"MAY",day:"31",year:"2026",description:"The giving of the Torah and the outpouring of the Holy Spirit upon the believers.",scripture:"Acts 2:1-4",type:"upcoming",status:"Coming"}
 ];
 
 let currentFilter = 'upcoming';
