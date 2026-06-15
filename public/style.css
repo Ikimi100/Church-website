@@ -1384,13 +1384,12 @@ section {
 }
 
 .calendar-hebrew {
-    position: absolute;
-    top: 2rem;
-    right: 2rem;
+    display: block;
+    margin-bottom: 0.5rem;
     font-family: 'Cormorant Garamond', serif;
     font-style: italic;
     color: var(--color-purple-rich);
-    opacity: 0.6;
+    opacity: 0.75;
     font-size: 1.1rem;
 }
 
@@ -3411,6 +3410,26 @@ footer::before {
     .calendar-date-badge {
         padding: 0.6rem 0.85rem;
         margin-bottom: 0.85rem;
+    }
+
+    /* On narrow cards, let the status pill flow at the top instead of
+       absolutely overlapping the date badge and Hebrew name. */
+    .calendar-status {
+        position: static;
+        align-self: flex-start;
+        margin-bottom: 0.75rem;
+        padding: 0.35rem 0.7rem;
+        font-size: 0.65rem;
+    }
+
+    .calendar-card {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .calendar-hebrew {
+        font-size: 0.95rem;
     }
 
     .calendar-filters {
