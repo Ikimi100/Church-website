@@ -3716,11 +3716,11 @@ footer::before {
     }
 
     .calendar-day {
-        font-size: 2rem;
+        font-size: 1.75rem;
     }
 
     .calendar-card {
-        padding: 1.75rem;
+        padding: 1rem 0.85rem;
     }
 
     /* Torah */

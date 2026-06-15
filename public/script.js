@@ -54,7 +54,10 @@ function initMobileNav() {
             }
         });
 
-        nav.appendChild(button);
+        // Place the toggle inside the flex .nav-container so it sits to the
+        // right of the logo, instead of wrapping onto its own line below it.
+        const container = nav.querySelector('.nav-container') || nav;
+        container.appendChild(button);
     });
 }
 
