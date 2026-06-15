@@ -349,6 +349,22 @@
         .scroll-top.visible { opacity: 1; visibility: visible; }
         .scroll-top:hover { background: var(--color-gold); color: var(--color-bg); border-color: var(--color-gold); }
 
+        /* Mobile Menu Toggle */
+        .mobile-menu-btn {
+            display: none;
+            background: rgba(201, 169, 98, 0.05);
+            border: 1px solid rgba(201, 169, 98, 0.3);
+            color: var(--text-primary);
+            width: 44px; height: 44px;
+            border-radius: 10px;
+            align-items: center; justify-content: center;
+            font-size: 1.2rem; cursor: pointer;
+            transition: all 0.3s;
+            flex-shrink: 0;
+        }
+        .mobile-menu-btn:hover,
+        .mobile-menu-btn.active { background: rgba(201, 169, 98, 0.15); border-color: var(--color-gold); color: var(--color-gold); }
+
         /* Responsive */
         @media (max-width: 1024px) {
             .resource-grid { grid-template-columns: repeat(2, 1fr); }
@@ -357,15 +373,75 @@
             .footer-grid { grid-template-columns: 1fr 1fr; }
         }
         @media (max-width: 768px) {
-            .nav-links { display: none; }
-            .resource-grid { grid-template-columns: 1fr; }
+            nav { padding: 1rem 1.25rem; }
+            nav.scrolled { padding: 0.75rem 1.25rem; }
+            .mobile-menu-btn { display: inline-flex; }
+            .nav-links {
+                display: none;
+                position: fixed;
+                top: 65px; left: 0; right: 0;
+                background: rgba(5,5,5,0.98);
+                backdrop-filter: blur(20px);
+                border-bottom: 1px solid var(--border-subtle);
+                flex-direction: column;
+                gap: 0;
+                padding: 0.5rem 0 1rem;
+                z-index: 999;
+                box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+            }
+            .nav-links.open { display: flex; }
+            .nav-links li { width: 100%; }
+            .nav-links a {
+                display: block;
+                padding: 0.9rem 1.75rem;
+                font-size: 1rem;
+                border-bottom: 1px solid rgba(201,169,98,0.08);
+                letter-spacing: 0.05em;
+            }
+            .nav-links li:last-child { padding: 0.75rem 1.75rem; }
+            .nav-cta { width: 100%; }
+
+            /* Resource grid — 2x2 like Spiritual Resources */
+            .resource-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+            }
+            .resource-card { padding: 1.75rem 1.25rem; }
+            .resource-icon { width: 56px; height: 56px; font-size: 1.2rem; margin-bottom: 1rem; }
+            .resource-card h3 { font-size: 1.25rem; }
+            .resource-card p { font-size: 0.82rem; }
+
+            /* Pathways — keep 1 col */
             .pathways-grid { grid-template-columns: 1fr; }
+            .pathway-card { min-height: 300px; }
+
+            /* Teachings — 1 col */
             .teachings-grid { grid-template-columns: 1fr; }
-            .footer-grid { grid-template-columns: 1fr; }
-            .hero-actions { flex-direction: column; align-items: center; }
-            .books-grid { grid-template-columns: repeat(2, 1fr); }
+
+            /* Footer */
+            .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
+            .footer-bottom { flex-direction: column; gap: 0.5rem; text-align: center; }
+
+            /* Hero */
+            .hero { padding: 6rem 1.25rem 3rem; }
+            .hero-actions { flex-direction: column; align-items: center; gap: 1rem; }
+            .btn { padding: 0.85rem 1.75rem; font-size: 0.8rem; }
+            .section-header { padding: 0 1.25rem; margin-bottom: 2.5rem; }
+            .resources-section, .explorer-section, .pathways-section,
+            .teachings-section, .cta-section { padding: 4rem 1.25rem; }
+            footer { padding: 3rem 1.25rem 2rem; }
+
+            /* Books grid */
+            .books-grid { grid-template-columns: repeat(2, 1fr); gap: 0.75rem; }
+            .testament-tabs { gap: 0.5rem; }
+            .tab-btn { padding: 0.6rem 1.25rem; font-size: 0.78rem; }
+
             body { cursor: auto; }
             .cursor, .cursor-dot { display: none; }
+        }
+
+        @media (max-width: 400px) {
+            .resource-grid { grid-template-columns: 1fr; }
         }
 
         .fade-in { opacity: 0; transform: translateY(30px); transition: opacity 0.8s var(--transition-smooth), transform 0.8s var(--transition-smooth); }
@@ -449,13 +525,15 @@
                     <span class="logo-subtitle">Regenerational Ministry</span>
                 </div>
             </a>
-            <ul class="nav-links">
-                <!-- FIX 2: Home and Ministries now link back to index.html properly -->
-                <li><a href="index.html">Home</a></li>
-                <li><a href="index.html#ministries">Ministries</a></li>
-                <li><a href="#faith">Faith Dimension</a></li>
-                <li><a href="#resources">Resources</a></li>
-                <li><a href="#live">Live</a></li>
+            <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle menu" onclick="toggleMobileMenu()">
+                <i class="fas fa-bars" id="menuIcon"></i>
+            </button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="index.html#ministries" class="nav-link">Ministries</a></li>
+                <li><a href="#faith" class="nav-link">Faith Dimension</a></li>
+                <li><a href="#resources" class="nav-link">Resources</a></li>
+                <li><a href="#live" class="nav-link">Live</a></li>
                 <li style="margin-left:1rem;"><button class="nav-cta">Give</button></li>
             </ul>
         </div>
@@ -793,6 +871,24 @@
     <button class="scroll-top" id="scrollTop" onclick="scrollToTop()" aria-label="Scroll to top"><i class="fas fa-arrow-up"></i></button>
 
     <script>
+        // Mobile Menu
+        function toggleMobileMenu() {
+            const nav = document.getElementById('navLinks');
+            const btn = document.getElementById('mobileMenuBtn');
+            const icon = document.getElementById('menuIcon');
+            const isOpen = nav.classList.toggle('open');
+            btn.classList.toggle('active', isOpen);
+            icon.className = isOpen ? 'fas fa-times' : 'fas fa-bars';
+        }
+        // Close menu on link click
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                document.getElementById('navLinks').classList.remove('open');
+                document.getElementById('mobileMenuBtn').classList.remove('active');
+                document.getElementById('menuIcon').className = 'fas fa-bars';
+            });
+        });
+
         // Loader
         setTimeout(() => { document.getElementById('loader')?.classList.add('hidden'); }, 2200);
 

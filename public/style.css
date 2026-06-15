@@ -3397,10 +3397,20 @@ footer::before {
         font-size: 1.75rem;
     }
 
-    /* Calendar */
+    /* Calendar — 2-col grid like Spiritual Resources */
     .calendar-grid {
-        grid-template-columns: 1fr;
-        gap: 1.25rem;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.85rem;
+    }
+
+    .calendar-card {
+        padding: 1.25rem 1rem;
+        border-radius: 16px;
+    }
+
+    .calendar-date-badge {
+        padding: 0.6rem 0.85rem;
+        margin-bottom: 0.85rem;
     }
 
     .calendar-filters {
@@ -3573,10 +3583,15 @@ footer::before {
     /* Cards - Premium Small Screen */
     .featured-grid,
     .store-grid,
-    .donation-grid,
-    .calendar-grid {
+    .donation-grid {
         grid-template-columns: 1fr;
         gap: 1rem;
+        padding: 0 2%;
+    }
+
+    /* Calendar stays 2-col at all mobile sizes */
+    .calendar-grid {
+        gap: 0.75rem;
         padding: 0 2%;
     }
 
