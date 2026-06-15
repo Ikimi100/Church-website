@@ -1942,6 +1942,40 @@
 
         console.log("✅ Never Again page loaded successfully");
     </script>
+    <!-- Mobile navigation menu (added for responsive nav) -->
+    <style>
+        .mm-burger{display:none;background:rgba(212,175,55,0.06);border:1px solid rgba(212,175,55,0.3);color:#f0f0f5;width:44px;height:44px;border-radius:10px;align-items:center;justify-content:center;font-size:1.2rem;cursor:pointer;flex-shrink:0;margin-left:auto}
+        .mm-burger.active{color:#d4af37;border-color:#d4af37}
+        @media(max-width:768px){
+            .mm-burger{display:inline-flex}
+            .nav-links.open{display:flex !important;position:fixed;top:64px;left:0;right:0;flex-direction:column;gap:0;align-items:stretch;background:rgba(5,5,5,0.98);backdrop-filter:blur(20px);border-bottom:1px solid rgba(212,175,55,0.15);box-shadow:0 8px 32px rgba(0,0,0,0.45);z-index:1200;padding:0.5rem 0 1rem;max-height:80vh;overflow-y:auto}
+            .nav-links.open li{width:100%;margin:0;list-style:none}
+            .nav-links.open a{display:block;padding:0.9rem 1.5rem;font-size:1rem}
+        }
+    </style>
+    <script>
+        (function(){
+            var links=document.querySelector('.nav-links');
+            if(!links) return;
+            var logo=document.querySelector('.logo');
+            var bar=logo?logo.parentElement:links.parentElement;
+            var root=links.closest('nav,header')||bar;
+            var btn=document.createElement('button');
+            btn.type='button';btn.className='mm-burger';
+            btn.setAttribute('aria-label','Open menu');
+            btn.innerHTML='<i class="fas fa-bars"></i>';
+            function set(open){
+                if(open){links.style.top=Math.max(0,Math.round(root.getBoundingClientRect().bottom))+'px';}
+                btn.classList.toggle('active',open);
+                btn.innerHTML=open?'<i class="fas fa-times"></i>':'<i class="fas fa-bars"></i>';
+                btn.setAttribute('aria-label',open?'Close menu':'Open menu');
+            }
+            btn.addEventListener('click',function(e){e.stopPropagation();set(links.classList.toggle('open'));});
+            links.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){links.classList.remove('open');set(false);});});
+            document.addEventListener('click',function(e){if(links.classList.contains('open')&&!links.contains(e.target)&&e.target!==btn&&!btn.contains(e.target)){links.classList.remove('open');set(false);}});
+            bar.appendChild(btn);
+        })();
+    </script>
 </body>
 </html>
 
