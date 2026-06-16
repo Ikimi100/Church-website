@@ -224,7 +224,9 @@ h1, h2, h3, h4, .serif {
     display: flex;
     align-items: center;
     gap: 2.5rem;
-    animation: tickerScroll 50s linear infinite;
+    /* Track is now two identical halves; -50% lands on a perfect seam.
+       Duration scaled from 50s so the on-screen speed matches the original. */
+    animation: tickerScroll 78s linear infinite;
     width: max-content;
     padding: 0 50px;
 }
@@ -3196,23 +3198,27 @@ footer::before {
    RESPONSIVE - MOBILE (768px)
    ============================================ */
 @media (max-width: 768px) {
-    /* Scrolling manifesto — clean full-width strip on phones */
+    /* Scrolling manifesto — clean, readable full-width strip on phones */
     .manifesto-ticker {
         max-width: 100%;
-        margin: 1.25rem auto 1.75rem;
-        padding: 0.65rem 0;
+        margin: 1.5rem auto 1.75rem;
+        padding: 0.9rem 0;
         background: transparent;
         border: none;
-        border-top: 1px solid rgba(212,175,55,0.12);
-        border-bottom: 1px solid rgba(212,175,55,0.12);
+        border-top: 1px solid rgba(212,175,55,0.14);
+        border-bottom: 1px solid rgba(212,175,55,0.14);
         border-radius: 0;
         box-shadow: none;
+        /* hint the browser the track moves, for smoother compositing */
+        will-change: transform;
     }
 
     .ticker-track {
-        gap: 1rem;
-        padding: 0 24px;
-        animation-duration: 32s;
+        gap: 1.5rem;
+        padding: 0 28px;
+        /* Track is two identical halves, so -50% loops seamlessly.
+           ~50s gives a calm, readable pace on a narrow screen. */
+        animation-duration: 50s;
     }
 
     .ticker-item {
@@ -3220,7 +3226,7 @@ footer::before {
         border: none;
         border-radius: 0;
         padding: 0;
-        gap: 0.5rem;
+        gap: 0.6rem;
     }
 
     .ticker-item:hover {
@@ -3231,16 +3237,36 @@ footer::before {
     }
 
     .ticker-item i {
-        font-size: 0.8rem;
+        font-size: 0.85rem;
+        opacity: 0.9;
     }
 
     .ticker-item span {
-        font-size: 0.75rem;
+        font-size: 0.85rem;
+        line-height: 1.3;
+        color: #c6c6d2;
+        letter-spacing: 0.01em;
     }
 
+    .ticker-dot {
+        width: 5px;
+        height: 5px;
+        opacity: 0.5;
+    }
+
+    /* Solid-to-transparent fades the exact page colour, so phrases dissolve
+       smoothly at both edges instead of being hard-clipped. */
     .ticker-fade-left,
     .ticker-fade-right {
-        width: 32px;
+        width: 56px;
+    }
+
+    .ticker-fade-left {
+        background: linear-gradient(to right, var(--color-bg) 0%, var(--color-bg) 12%, transparent 100%);
+    }
+
+    .ticker-fade-right {
+        background: linear-gradient(to left, var(--color-bg) 0%, var(--color-bg) 12%, transparent 100%);
     }
 
     section {
