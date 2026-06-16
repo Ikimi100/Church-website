@@ -3403,21 +3403,49 @@ footer::before {
     }
 
     /* Donation Cards */
+    /* Giving — 2-col grid like the Store */
     .donation-grid {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
-        max-width: 500px;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.85rem;
+        max-width: none;
         margin: 0 auto;
     }
 
     .donation-card {
-        padding: 2.5rem 2rem;
+        padding: 1.5rem 1.1rem;
     }
 
     .donation-icon {
-        width: 70px;
-        height: 70px;
-        font-size: 1.75rem;
+        width: 52px;
+        height: 52px;
+        font-size: 1.3rem;
+        margin-bottom: 1rem;
+    }
+
+    .donation-card h3 {
+        font-size: 1.2rem;
+    }
+
+    .donation-card p {
+        font-size: 0.8rem;
+        line-height: 1.5;
+        margin-bottom: 1rem;
+    }
+
+    .amount-buttons {
+        gap: 0.35rem;
+        margin-bottom: 1rem;
+    }
+
+    .amount-btn {
+        padding: 0.4rem 0.7rem;
+        font-size: 0.75rem;
+    }
+
+    .donate-btn {
+        padding: 0.75rem;
+        font-size: 0.8rem;
+        letter-spacing: 0.05em;
     }
 
     /* Calendar — 2-col grid like Spiritual Resources */
@@ -3453,7 +3481,42 @@ footer::before {
     }
 
     .calendar-hebrew {
-        font-size: 0.95rem;
+        font-size: 0.85rem;
+        margin-bottom: 0.35rem;
+    }
+
+    /* Compact calendar cards — each sized to its own content, like the other grids */
+    .calendar-grid {
+        align-items: start;
+    }
+
+    .calendar-month { font-size: 0.6rem; }
+
+    .calendar-day {
+        font-size: 1.55rem;
+        margin: 0.15rem 0;
+    }
+
+    .calendar-year { font-size: 0.7rem; }
+
+    .calendar-card h3 {
+        font-size: 1.05rem;
+        margin-bottom: 0.4rem;
+    }
+
+    .calendar-description {
+        font-size: 0.75rem;
+        line-height: 1.45;
+        margin-bottom: 0.85rem;
+        display: -webkit-box;
+        -webkit-line-clamp: 4;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    .calendar-scripture {
+        font-size: 0.72rem;
+        padding-top: 0.85rem;
     }
 
     .calendar-filters {
@@ -3624,18 +3687,14 @@ footer::before {
     }
 
     /* Cards - Premium Small Screen */
-    .donation-grid {
-        grid-template-columns: 1fr;
-        gap: 1rem;
-        padding: 0 2%;
-    }
-
-    /* Ministries + Store stay as 2-col grids on phones */
+    /* Ministries, Store + Giving stay as 2-col grids on phones */
     .featured-grid,
-    .store-grid {
+    .store-grid,
+    .donation-grid {
         grid-template-columns: repeat(2, 1fr);
         gap: 0.75rem;
         padding: 0 2%;
+        max-width: none;
     }
 
     /* Calendar stays 2-col at all mobile sizes */
@@ -3735,33 +3794,41 @@ footer::before {
         left: 0.6rem;
     }
 
-    /* Donation Cards */
+    /* Donation Cards — compact 2-col */
     .donation-card {
-        padding: 2rem 1.5rem;
+        padding: 1.25rem 0.9rem;
     }
 
     .donation-icon {
-        width: 60px;
-        height: 60px;
-        font-size: 1.5rem;
-        margin-bottom: 1rem;
+        width: 44px;
+        height: 44px;
+        font-size: 1.1rem;
+        margin-bottom: 0.75rem;
     }
 
     .donation-card h3 {
-        font-size: 1.2rem;
+        font-size: 1rem;
     }
 
     .donation-card p {
-        font-size: 0.9rem;
+        font-size: 0.72rem;
+        line-height: 1.4;
+        margin-bottom: 0.85rem;
     }
 
     .amount-buttons {
-        gap: 0.4rem;
+        gap: 0.3rem;
+        margin-bottom: 0.85rem;
     }
 
     .amount-btn {
-        padding: 0.4rem 0.8rem;
-        font-size: 0.8rem;
+        padding: 0.35rem 0.55rem;
+        font-size: 0.68rem;
+    }
+
+    .donate-btn {
+        padding: 0.65rem;
+        font-size: 0.72rem;
     }
 
     /* Calendar */
@@ -3775,11 +3842,11 @@ footer::before {
     }
 
     .calendar-card h3 {
-        font-size: 1.25rem;
+        font-size: 1rem;
     }
 
     .calendar-day {
-        font-size: 1.75rem;
+        font-size: 1.5rem;
     }
 
     .calendar-card {
