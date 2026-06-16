@@ -3269,6 +3269,77 @@ footer::before {
         background: linear-gradient(to left, var(--color-bg) 0%, var(--color-bg) 12%, transparent 100%);
     }
 
+    /* ----------------------------------------------------------
+       PHONE: static crossfade carousel (JS adds .ticker-mobile-fade)
+       One full phrase shown at a time, wrapped + centred, fading to
+       the next every 5s. No horizontal scroll, nothing clipped.
+       ---------------------------------------------------------- */
+    .manifesto-ticker.ticker-mobile-fade {
+        overflow: visible;
+        padding: 1rem 0;
+    }
+
+    .ticker-mobile-fade .ticker-track {
+        display: block;
+        position: relative;
+        width: 100%;
+        margin: 0;
+        padding: 0 18px;
+        /* stop the marquee */
+        animation: none;
+        transform: none;
+        /* stable height so shorter/longer phrases don't shift the layout */
+        min-height: 4.8em;
+    }
+
+    /* hide the marquee scaffolding in fade mode */
+    .ticker-mobile-fade .ticker-dot,
+    .ticker-mobile-fade .ticker-fade-left,
+    .ticker-mobile-fade .ticker-fade-right {
+        display: none;
+    }
+
+    /* every phrase stacked in the same spot, hidden until active */
+    .ticker-mobile-fade .ticker-item {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        margin: 0;
+        padding: 0 0.75rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.55rem;
+        text-align: center;
+        white-space: normal;          /* allow wrapping — full phrase visible */
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transition: opacity 0.7s ease, visibility 0.7s ease;
+    }
+
+    .ticker-mobile-fade .ticker-item.is-active {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .ticker-mobile-fade .ticker-item i {
+        flex-shrink: 0;
+        font-size: 0.95rem;
+        color: var(--color-gold);
+        opacity: 0.95;
+    }
+
+    .ticker-mobile-fade .ticker-item span {
+        font-size: 0.95rem;
+        line-height: 1.45;
+        letter-spacing: 0.01em;
+        color: #d2d2dc;
+        white-space: normal;
+    }
+
     section {
         padding: 4rem 3% 3rem;
     }
