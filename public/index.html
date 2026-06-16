@@ -351,7 +351,42 @@
 
         <style>
             @media (max-width: 768px) {
-                #new-here-grid { grid-template-columns: 1fr !important; }
+                #new-here-grid {
+                    grid-template-columns: repeat(2, 1fr) !important;
+                    gap: 0.75rem !important;
+                    padding: 0 2% 2rem !important;
+                }
+                #new-here-grid > div {
+                    padding: 1.25rem 0.9rem !important;
+                    border-radius: 16px !important;
+                }
+                /* Third step spans the full width below the first two */
+                #new-here-grid > div:nth-child(3) {
+                    grid-column: 1 / -1 !important;
+                }
+                #new-here-grid > div > div:first-child {
+                    width: 44px !important;
+                    height: 44px !important;
+                    font-size: 1.1rem !important;
+                    margin-bottom: 0.85rem !important;
+                }
+                #new-here-grid > div > div:nth-child(2) {
+                    font-size: 1.9rem !important;
+                    margin-bottom: 0.25rem !important;
+                }
+                #new-here-grid > div h3 {
+                    font-size: 0.95rem !important;
+                    margin-bottom: 0.5rem !important;
+                }
+                #new-here-grid > div p {
+                    font-size: 0.74rem !important;
+                    line-height: 1.45 !important;
+                    margin-bottom: 1rem !important;
+                }
+                #new-here-grid > div a {
+                    padding: 0.5rem 1rem !important;
+                    font-size: 0.72rem !important;
+                }
             }
         </style>
     </section>

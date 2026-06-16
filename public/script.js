@@ -435,8 +435,8 @@ function torahCardHTML(portion, index, isCurrent) {
     const slug = torahSlug(portion.week);
     const hasPage = torahPageSlugs.has(slug);
     const cta = hasPage
-        ? `<a href="weekly-${slug}.html" style="display:block;margin-top:1.5rem;padding:0.8rem;background:rgba(212,175,55,0.1);border:1px solid var(--color-gold);border-radius:12px;text-align:center;color:var(--color-gold);text-decoration:none;font-weight:600;">Read Weekly Study →</a>`
-        : `<span style="display:block;margin-top:1.5rem;padding:0.8rem;background:rgba(255,255,255,0.03);border:1px solid var(--glass-border);border-radius:12px;text-align:center;color:var(--color-text-muted);font-weight:600;">Study guide coming soon</span>`;
+        ? `<a href="weekly-${slug}.html" class="torah-study-link">Read Weekly Study →</a>`
+        : `<span class="torah-study-link soon">Study guide coming soon</span>`;
     return `
         <div class="torah-card${isCurrent ? ' current' : ''}">
             ${isCurrent ? '<div class="torah-current-badge">This Week</div>' : ''}
