@@ -397,7 +397,7 @@ const torahPortions = [
 ];
 
 // ==================== TORAH PORTIONS — SEARCHABLE GRID ====================
-const TORAH_VISIBLE_COUNT = 6;
+const TORAH_VISIBLE_COUNT = 2;
 
 function parseTorahDate(str) {
     const d = new Date(str);
