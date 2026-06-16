@@ -61,14 +61,22 @@ function initMobileNav() {
     });
 }
 
-window.addEventListener('load', () => {
+function initSite() {
     initParticles();
     initCalendar();
     initTorahPortions();
     initImageFallbacks();
     initMobileNav();
     updateCartUI();
-});
+}
+
+// Render as soon as the DOM is ready, rather than waiting for the full
+// window 'load' event (which is delayed by the YouTube embed and images).
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initSite);
+} else {
+    initSite();
+}
 
 const cartStorageKey = 'whgrm_cart';
 
