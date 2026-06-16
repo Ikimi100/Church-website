@@ -1216,6 +1216,126 @@ section {
     box-shadow: 0 0 10px rgba(212,175,55,0.5);
 }
 
+/* Torah — search + 6-card grid */
+.torah-search {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+    flex-wrap: wrap;
+    max-width: 720px;
+    margin: 0 auto 2.5rem;
+}
+
+.torah-search-box {
+    flex: 1;
+    min-width: 220px;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.85rem 1.25rem;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(212,175,55,0.2);
+    border-radius: 14px;
+    transition: border-color 0.3s ease;
+}
+
+.torah-search-box:focus-within {
+    border-color: rgba(212,175,55,0.5);
+}
+
+.torah-search-box i {
+    color: var(--color-gold);
+    font-size: 0.9rem;
+}
+
+.torah-search-box input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: var(--color-text);
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.95rem;
+}
+
+.torah-search-box input::placeholder {
+    color: var(--color-text-muted);
+}
+
+.torah-search-btn,
+.torah-reset-btn {
+    padding: 0.85rem 1.5rem;
+    border-radius: 14px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.torah-search-btn {
+    background: linear-gradient(135deg, var(--color-gold), #b8941f);
+    border: none;
+    color: #050508;
+}
+
+.torah-search-btn:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+}
+
+.torah-reset-btn {
+    background: transparent;
+    border: 1px solid rgba(212,175,55,0.3);
+    color: var(--color-gold);
+}
+
+.torah-reset-btn:hover {
+    background: rgba(212,175,55,0.1);
+}
+
+.torah-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 1.5rem;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.torah-grid .torah-card {
+    flex: none;
+    width: auto;
+}
+
+.torah-card.current {
+    border-color: rgba(212,175,55,0.45);
+    box-shadow: 0 0 30px rgba(212,175,55,0.12);
+}
+
+.torah-current-badge {
+    position: absolute;
+    top: 1.25rem;
+    right: 1.25rem;
+    padding: 0.35rem 0.85rem;
+    background: rgba(34,197,94,0.12);
+    border: 1px solid rgba(34,197,94,0.35);
+    border-radius: 100px;
+    font-size: 0.65rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #22c55e;
+    z-index: 5;
+}
+
+.torah-empty {
+    text-align: center;
+    color: var(--color-text-muted);
+    font-size: 1rem;
+    padding: 2rem 0;
+}
+
 /* ============================================
    CALENDAR - PREMIUM CARDS
    ============================================ */

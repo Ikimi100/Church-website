@@ -396,18 +396,51 @@ const torahPortions = [
     { week: "Vezot Ha'Bracha", hebrew: "וזאת הברכה", torah: "Deuteronomy 33:1–34:12", prophets: "Joshua 1:1-18", gospel: "Revelation 22:1-5", date: "October 4, 2026" }
 ];
 
-// ==================== TORAH SLIDER ====================
-function initTorahPortions() {
-    const slider = document.getElementById('torahSlider');
-    if (!slider) return;
-    slider.innerHTML = '';
+// ==================== TORAH PORTIONS — SEARCHABLE GRID ====================
+const TORAH_VISIBLE_COUNT = 6;
 
-    torahPortions.forEach((portion, index) => {
-        const slug = portion.week.toLowerCase().replace(/'/g, '').replace(/\s+/g, '-');
-        const card = document.createElement('div');
-        card.className = 'torah-card';
-        card.innerHTML = `
-            <div class="torah-week-badge"><i class="fas fa-scroll"></i> Week ${index + 1} of 54</div>
+function parseTorahDate(str) {
+    const d = new Date(str);
+    return isNaN(d) ? null : d;
+}
+
+// Index of the current/most-recent portion (latest date that is today or earlier).
+function getCurrentTorahIndex() {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    let idx = 0;
+    for (let i = 0; i < torahPortions.length; i++) {
+        const d = parseTorahDate(torahPortions[i].date);
+        if (d && d <= today) idx = i;
+    }
+    return idx;
+}
+
+// Weekly study pages that actually exist in the project.
+const torahPageSlugs = new Set([
+    "bereisheet", "noach", "lech-lecha", "vayera", "chayei-sarah", "toldot",
+    "vayetzei", "vayishlach", "vayeshev", "miketz", "vayigash", "vayechi",
+    "shemot", "va-era", "bo", "beshalach", "yitro", "mishpatim",
+    "terumah", "tetzaveh", "ki-tisa", "vayakhel"
+]);
+// Names whose generated slug differs from the page filename.
+const torahSlugAlias = { "vaera": "va-era", "vayakhel-pekudei": "vayakhel" };
+
+function torahSlug(week) {
+    let s = week.toLowerCase().replace(/'/g, '').replace(/\s+/g, '-');
+    return torahSlugAlias[s] || s;
+}
+
+function torahCardHTML(portion, index, isCurrent) {
+    const slug = torahSlug(portion.week);
+    const hasPage = torahPageSlugs.has(slug);
+    const cta = hasPage
+        ? `<a href="weekly-${slug}.html" style="display:block;margin-top:1.5rem;padding:0.8rem;background:rgba(212,175,55,0.1);border:1px solid var(--color-gold);border-radius:12px;text-align:center;color:var(--color-gold);text-decoration:none;font-weight:600;">Read Weekly Study →</a>`
+        : `<span style="display:block;margin-top:1.5rem;padding:0.8rem;background:rgba(255,255,255,0.03);border:1px solid var(--glass-border);border-radius:12px;text-align:center;color:var(--color-text-muted);font-weight:600;">Study guide coming soon</span>`;
+    return `
+        <div class="torah-card${isCurrent ? ' current' : ''}">
+            ${isCurrent ? '<div class="torah-current-badge">This Week</div>' : ''}
+            <div class="torah-week-badge"><i class="fas fa-scroll"></i> Week ${index + 1} of ${torahPortions.length}</div>
             <div class="torah-hebrew-name">${portion.hebrew}</div>
             <h3>${portion.week}</h3>
             <div class="torah-readings">
@@ -416,26 +449,57 @@ function initTorahPortions() {
                 <div class="torah-reading gospel"><div class="torah-reading-icon"><i class="fas fa-cross"></i></div><div class="torah-reading-content"><div class="torah-reading-label">Gospel</div><div class="torah-reading-text">${portion.gospel}</div></div></div>
             </div>
             <div class="torah-date"><i class="fas fa-calendar-alt"></i><span>${portion.date}</span></div>
-            <a href="weekly-${slug}.html" style="display:block;margin-top:1.5rem;padding:0.8rem;background:rgba(212,175,55,0.1);border:1px solid var(--color-gold);border-radius:12px;text-align:center;color:var(--color-gold);text-decoration:none;font-weight:600;">Read Weekly Study →</a>
-        `;
-        slider.appendChild(card);
-    });
-
-    slider.addEventListener('scroll', updateTorahProgress);
+            ${cta}
+        </div>
+    `;
 }
 
-function scrollTorah(direction) {
-    const slider = document.getElementById('torahSlider');
-    const amount = 400;
-    slider.scrollBy({ left: direction === 'left' ? -amount : amount, behavior: 'smooth' });
+function renderTorah() {
+    const grid = document.getElementById('torahGrid');
+    if (!grid) return;
+    const input = document.getElementById('torahSearch');
+    const resetBtn = document.getElementById('torahReset');
+    const empty = document.getElementById('torahEmpty');
+    const term = (input ? input.value : '').trim().toLowerCase();
+
+    const currentIdx = getCurrentTorahIndex();
+    let items;
+
+    if (term) {
+        // Search by week name, Hebrew name, or date (month/year)
+        items = torahPortions
+            .map((p, i) => ({ p, i }))
+            .filter(({ p }) =>
+                p.week.toLowerCase().includes(term) ||
+                p.hebrew.includes(term) ||
+                p.date.toLowerCase().includes(term)
+            );
+        if (resetBtn) resetBtn.style.display = 'inline-flex';
+    } else {
+        // Default: current/most-recent reading plus the upcoming ones (6 total)
+        let start = currentIdx;
+        if (start + TORAH_VISIBLE_COUNT > torahPortions.length) {
+            start = Math.max(0, torahPortions.length - TORAH_VISIBLE_COUNT);
+        }
+        items = torahPortions
+            .map((p, i) => ({ p, i }))
+            .slice(start, start + TORAH_VISIBLE_COUNT);
+        if (resetBtn) resetBtn.style.display = 'none';
+    }
+
+    grid.innerHTML = items.map(({ p, i }) => torahCardHTML(p, i, i === currentIdx && !term)).join('');
+    if (empty) empty.style.display = items.length ? 'none' : 'block';
 }
 
-function updateTorahProgress() {
-    const slider = document.getElementById('torahSlider');
-    const bar = document.getElementById('torahProgress');
-    if (!slider || !bar) return;
-    const percent = (slider.scrollLeft / (slider.scrollWidth - slider.clientWidth)) * 100;
-    bar.style.width = percent + '%';
+function resetTorah() {
+    const input = document.getElementById('torahSearch');
+    if (input) input.value = '';
+    renderTorah();
+}
+
+// Kept name for the load handler; now renders the searchable grid.
+function initTorahPortions() {
+    renderTorah();
 }
 
 // ==================== CALENDAR ====================

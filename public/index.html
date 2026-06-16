@@ -365,23 +365,20 @@
         </div>
 
         <div class="torah-container">
-            <div class="torah-slider-wrapper">
-                <button class="torah-nav-btn prev" onclick="scrollTorah('left')">
-                    <i class="fas fa-chevron-left"></i>
-                </button>
-
-                <div class="torah-slider" id="torahSlider">
-                    <!-- Torah portions will be injected here via JS -->
+            <div class="torah-search">
+                <div class="torah-search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="torahSearch" placeholder="Search by week or month — e.g. Bo, January..." oninput="renderTorah()" onkeydown="if(event.key==='Enter')renderTorah()">
                 </div>
-
-                <button class="torah-nav-btn next" onclick="scrollTorah('right')">
-                    <i class="fas fa-chevron-right"></i>
-                </button>
+                <button class="torah-search-btn" onclick="renderTorah()">Search</button>
+                <button class="torah-reset-btn" id="torahReset" onclick="resetTorah()" style="display:none;">Show upcoming</button>
             </div>
 
-            <div class="torah-progress">
-                <div class="torah-progress-bar" id="torahProgress"></div>
+            <div class="torah-grid" id="torahGrid">
+                <!-- Torah portions injected via JS -->
             </div>
+
+            <p class="torah-empty" id="torahEmpty" style="display:none;">No readings match your search.</p>
         </div>
     </section>
 
