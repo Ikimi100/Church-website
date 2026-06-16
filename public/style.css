@@ -3268,19 +3268,19 @@ footer::before {
         font-size: 0.9rem;
     }
 
-    /* Featured Cards - Premium Mobile */
+    /* Featured Cards — 2-col grid like Quick Access */
     .featured-grid {
-        grid-template-columns: 1fr;
-        gap: 1.25rem;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.85rem;
     }
 
     .featured-card {
-        height: 340px;
-        border-radius: 20px;
+        height: 240px;
+        border-radius: 16px;
     }
 
     .featured-card::before {
-        border-radius: 20px;
+        border-radius: 16px;
     }
 
     .featured-card-arrow {
@@ -3288,23 +3288,47 @@ footer::before {
     }
 
     .featured-card-content {
-        padding: 2rem;
-        transform: translateY(20px);
+        padding: 1.15rem;
+        transform: none;
     }
 
     .featured-card p {
-        opacity: 0.9;
-        transform: translateY(0);
+        opacity: 0.85;
+        transform: none;
+        font-size: 0.72rem;
+        line-height: 1.35;
+        max-width: none;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
     }
 
     .featured-icon {
-        width: 52px;
-        height: 52px;
-        font-size: 1.25rem;
+        width: 42px;
+        height: 42px;
+        font-size: 1rem;
+        margin-bottom: 0.6rem;
+        border-radius: 12px;
     }
 
     .featured-card h3 {
-        font-size: 1.75rem;
+        font-size: 1.1rem;
+        margin-bottom: 0.25rem;
+    }
+
+    /* Premium touches on mobile: soft gradient border always on + tap feedback */
+    .featured-card::before,
+    .product-card::before {
+        opacity: 0.55;
+    }
+
+    .featured-card:active,
+    .product-card:active,
+    .grid-card:active,
+    .calendar-card:active {
+        transform: scale(0.97);
+        transition: transform 0.15s ease;
     }
 
     /* Grids */
@@ -3600,11 +3624,17 @@ footer::before {
     }
 
     /* Cards - Premium Small Screen */
-    .featured-grid,
-    .store-grid,
     .donation-grid {
         grid-template-columns: 1fr;
         gap: 1rem;
+        padding: 0 2%;
+    }
+
+    /* Ministries + Store stay as 2-col grids on phones */
+    .featured-grid,
+    .store-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.75rem;
         padding: 0 2%;
     }
 
@@ -3628,48 +3658,81 @@ footer::before {
     }
 
     .featured-card {
-        height: 280px;
+        height: 205px;
     }
 
     .featured-icon {
-        width: 44px;
-        height: 44px;
-        font-size: 1.1rem;
+        width: 36px;
+        height: 36px;
+        font-size: 0.9rem;
         margin-bottom: 0.5rem;
     }
 
     .featured-card h3 {
-        font-size: 1.35rem;
+        font-size: 0.98rem;
     }
 
     .featured-card p {
-        font-size: 0.85rem;
-        line-height: 1.5;
+        font-size: 0.68rem;
+        line-height: 1.3;
     }
 
     .featured-card-content {
-        padding: 1.5rem;
+        padding: 0.9rem;
     }
 
-    /* Product Cards */
+    /* Product Cards — 2-col grid */
     .store-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, 1fr);
     }
 
     .product-image {
-        aspect-ratio: 3/4;
-    }
-
-    .product-title {
-        font-size: 1rem;
-    }
-
-    .product-price {
-        font-size: 1.25rem;
+        aspect-ratio: 1 / 1;
     }
 
     .product-info {
-        padding: 1.25rem;
+        padding: 0.85rem;
+    }
+
+    .product-category {
+        font-size: 0.6rem;
+        margin-bottom: 0.3rem;
+    }
+
+    .product-title {
+        font-size: 0.85rem;
+        margin-bottom: 0.45rem;
+        line-height: 1.25;
+    }
+
+    .product-price {
+        font-size: 1.15rem;
+        margin-bottom: 0.6rem;
+    }
+
+    .add-to-cart {
+        padding: 0.6rem;
+        font-size: 0.72rem;
+        border-radius: 10px;
+    }
+
+    .action-btn {
+        width: 34px;
+        height: 34px;
+        font-size: 0.75rem;
+    }
+
+    .product-actions {
+        top: 0.6rem;
+        right: 0.6rem;
+        gap: 0.5rem;
+    }
+
+    .product-badge {
+        font-size: 0.58rem;
+        padding: 0.3rem 0.6rem;
+        top: 0.6rem;
+        left: 0.6rem;
     }
 
     /* Donation Cards */
