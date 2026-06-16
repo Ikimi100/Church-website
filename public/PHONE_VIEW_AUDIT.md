@@ -37,7 +37,12 @@ Date: 2026-06-16.
 - DONE (P3): hero headings checked site-wide. Homepage already shrinks correctly; `never_again` already has a mobile size; only `faith_dimension` had an oversized title (48px floor at 360px) — added a mobile reduction so "Faith Dimension" fits cleanly. Other ministry pages don't define oversized hero titles.
 - Cache version now `?v=20260622` site-wide.
 
-## Status: P1–P3 complete
-Remaining is just a real-device pass after deploy — glance at `donate`, `giving`, the `items` book modal, and the `faith_dimension` hero.
+## Site-wide grid + ticker pass (latest)
+- Every card-bearing page now collapses its card grids to a neat single column on phones (35 pages total). Stat / donation-amount / payment grids drop to a tidy 2-up instead of one tall column. Home page left as-is (already good).
+- All scrolling "ticker" messages are now static on phones with a 10-second crossfade. The home page uses the shared script; `faith_dimension` (a self-contained page that doesn't load the shared CSS/JS) got its own inline fade styling + script so it behaves identically.
+- Pages with no card grids (`checkout`, `watch`, `weekly-bereisheet`) and `items`/`zion_music` (already responsive) needed no grid changes.
+
+## Status: P1–P3 + site-wide grids/tickers complete
+Remaining is just a real-device pass after deploy — glance at `donate`, `giving`, the `items` book modal, the `faith_dimension` hero + ticker, and a couple of ministry/weekly pages.
 
 > Reminder: changes only reach the live Vercel site after `git commit` + `git push`.

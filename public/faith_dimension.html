@@ -967,6 +967,38 @@
         .pathways-grid,.teachings-grid,.resource-grid{grid-template-columns:1fr}
         .hero h1{font-size:clamp(2rem, 8vw, 2.6rem);line-height:1.15}
       }
+      @media (max-width: 768px) {
+        .manifesto-ticker.ticker-mobile-fade { overflow: visible; padding: 1rem 0; }
+        .ticker-mobile-fade .ticker-track { display: block; position: relative; width: 100%; margin: 0; padding: 0 18px; animation: none; transform: none; min-height: 4.8em; }
+        .ticker-mobile-fade .ticker-dot,
+        .ticker-mobile-fade .ticker-fade-left,
+        .ticker-mobile-fade .ticker-fade-right { display: none; }
+        .ticker-mobile-fade .ticker-item { position: absolute; top: 0; left: 0; right: 0; bottom: 0; margin: 0; padding: 0 0.75rem; display: flex; align-items: center; justify-content: center; gap: 0.55rem; text-align: center; white-space: normal; opacity: 0; visibility: hidden; pointer-events: none; transition: opacity 0.7s ease, visibility 0.7s ease; }
+        .ticker-mobile-fade .ticker-item.is-active { opacity: 1; visibility: visible; }
+        .ticker-mobile-fade .ticker-item i { flex-shrink: 0; font-size: 0.95rem; color: var(--color-gold); opacity: 0.95; }
+        .ticker-mobile-fade .ticker-item span { font-size: 0.95rem; line-height: 1.45; letter-spacing: 0.01em; color: #d2d2dc; white-space: normal; }
+      }
     </style>
+    <!-- Static 10s fade for the scrolling ticker on phones (self-contained) -->
+    <script>
+    (function(){
+      function initFadeTicker(){
+        var t=document.querySelector('.manifesto-ticker'); if(!t) return;
+        var tr=t.querySelector('.ticker-track'); if(!tr) return;
+        var seen={}, items=[].slice.call(tr.querySelectorAll('.ticker-item')).filter(function(el){
+          var k=(el.textContent||'').replace(/\s+/g,' ').trim(); if(!k||seen[k]) return false; seen[k]=1; return true;});
+        if(items.length<2) return;
+        var mql=window.matchMedia('(max-width: 768px)'), timer=null, idx=0;
+        function show(i){for(var n=0;n<items.length;n++){items[n].classList.toggle('is-active',n===i);}}
+        function enable(){ if(timer) return; t.classList.add('ticker-mobile-fade'); idx=0; show(0);
+          timer=setInterval(function(){idx=(idx+1)%items.length; show(idx);},10000); }
+        function disable(){ t.classList.remove('ticker-mobile-fade'); if(timer){clearInterval(timer);timer=null;}
+          for(var n=0;n<items.length;n++){items[n].classList.remove('is-active');} }
+        function sync(){ mql.matches?enable():disable(); }
+        sync(); if(mql.addEventListener){mql.addEventListener('change',sync);} else if(mql.addListener){mql.addListener(sync);}
+      }
+      document.readyState==='loading'?document.addEventListener('DOMContentLoaded',initFadeTicker):initFadeTicker();
+    })();
+    </script>
 </body>
 </html>

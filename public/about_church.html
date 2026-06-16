@@ -16,7 +16,7 @@
     <meta name="theme-color" content="#d4af37">
     <link rel="icon" type="image/png" href="images/logowtb.png">
     <!-- Styles -->
-    <link rel="stylesheet" href="style.css?v=20260622">
+    <link rel="stylesheet" href="style.css?v=20260623">
     <style>
         /* ===== ABOUT CHURCH SPECIFIC STYLES ===== */
 
@@ -1309,7 +1309,7 @@
     </button>
 
     <!-- Scripts -->
-    <script src="script.js?v=20260622"></script>
+    <script src="script.js?v=20260623"></script>
     <script>
         function openModal(title, body) {
             document.getElementById('modalTitle').textContent = title;
@@ -1341,5 +1341,12 @@
             scrollTopBtn.classList.toggle('visible', window.scrollY > 500);
         });
     </script>
+
+    <!-- Phone-view grid fix (phone-grid-fix2-20260622) -->
+    <style>
+      @media (max-width: 600px) {
+        .faith-grid,.team-grid,.values-grid,.vision-grid{grid-template-columns:1fr}
+      }
+    </style>
 </body>
 </html>

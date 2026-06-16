@@ -1976,6 +1976,14 @@
             bar.appendChild(btn);
         })();
     </script>
+
+    <!-- Phone-view grid fix (phone-grid-fix2-20260622) -->
+    <style>
+      @media (max-width: 600px) {
+        .feed-grid,.prayer-grid{grid-template-columns:1fr}
+        .stats-container{grid-template-columns:repeat(2,1fr)}
+      }
+    </style>
 </body>
 </html>
 
