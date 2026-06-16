@@ -664,6 +664,78 @@ function placeOrder(event) {
    MOBILE MANIFESTO — static crossfade carousel
    On phones (<=768px) the horizontal ticker reads poorly because
    each phrase is wider than the screen. Here we stop the scroll and
+   show ONE full, wrapped phrase at a time, fading to the next every 10s.
+   Desktop is untouched (this only runs when the media query matches).
+   ============================================================ */
+(function () {
+    function initManifestoFade() {
+        var ticker = document.querySelector('.manifesto-ticker');
+        if (!ticker) return;
+        var track = ticker.querySelector('.ticker-track');
+        if (!track) return;
+
+        // The track holds two identical halves (for the desktop loop) — keep
+        // only the first occurrence of each phrase for the fade carousel.
+        var seen = {};
+        var items = Array.prototype.slice
+            .call(track.querySelectorAll('.ticker-item'))
+            .filter(function (el) {
+                var key = (el.textContent || '').replace(/\s+/g, ' ').trim();
+                if (!key || seen[key]) return false;
+                seen[key] = true;
+                return true;
+            });
+        if (items.length < 2) return;
+
+        var mql = window.matchMedia('(max-width: 768px)');
+        var timer = null;
+        var idx = 0;
+
+        function show(i) {
+            for (var n = 0; n < items.length; n++) {
+                items[n].classList.toggle('is-active', n === i);
+            }
+        }
+
+        function enable() {
+            if (timer) return;
+            ticker.classList.add('ticker-mobile-fade');
+            idx = 0;
+            show(idx);
+            timer = window.setInterval(function () {
+                idx = (idx + 1) % items.length;
+                show(idx);
+            }, 10000);
+        }
+
+        function disable() {
+            ticker.classList.remove('ticker-mobile-fade');
+            if (timer) { window.clearInterval(timer); timer = null; }
+            for (var n = 0; n < items.length; n++) {
+                items[n].classList.remove('is-active');
+            }
+        }
+
+        function sync() {
+            if (mql.matches) { enable(); } else { disable(); }
+        }
+
+        sync();
+        if (mql.addEventListener) { mql.addEventListener('change', sync); }
+        else if (mql.addListener) { mql.addListener(sync); }
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initManifestoFade);
+    } else {
+        initManifestoFade();
+    }
+})();
+
+/* ============================================================
+   MOBILE MANIFESTO — static crossfade carousel
+   On phones (<=768px) the horizontal ticker reads poorly because
+   each phrase is wider than the screen. Here we stop the scroll and
    show ONE full, wrapped phrase at a time, fading to the next every 5s.
    Desktop is untouched (this only runs when the media query matches).
    ============================================================ */
@@ -705,7 +777,7 @@ function placeOrder(event) {
             timer = window.setInterval(function () {
                 idx = (idx + 1) % items.length;
                 show(idx);
-            }, 5000);
+            }, 10000);
         }
 
         function disable() {

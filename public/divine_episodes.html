@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css?v=20260618">
+    <link rel="stylesheet" href="style.css?v=20260622">
     <style>
         /* Page-Specific Styles */
         .classroom-hero {
@@ -1149,5 +1149,12 @@ window.addEventListener('load', () => {
             bar.appendChild(btn);
         })();
     </script>
+
+    <!-- Phone-view grid fix (phone-grid-fix-20260620) -->
+    <style>
+      @media (max-width: 600px) {
+        .materials-grid{grid-template-columns:1fr}
+      }
+    </style>
 </body>
 </html>

@@ -1104,5 +1104,13 @@
             bar.appendChild(btn);
         })();
     </script>
+
+    <!-- Phone-view grid fix (phone-grid-fix-20260620) -->
+    <style>
+      @media (max-width: 600px) {
+        .crises-grid,.respond-grid{grid-template-columns:1fr}
+        .impact-grid{grid-template-columns:repeat(2,1fr)}
+      }
+    </style>
 </body>
 </html>

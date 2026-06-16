@@ -960,5 +960,13 @@
             alert('Playing: ' + teaching + '... (Connect to your video player)');
         }
     </script>
+
+    <!-- Phone-view grid fix (phone-grid-fix-20260620) -->
+    <style>
+      @media (max-width: 600px) {
+        .pathways-grid,.teachings-grid,.resource-grid{grid-template-columns:1fr}
+        .hero h1{font-size:clamp(2rem, 8vw, 2.6rem);line-height:1.15}
+      }
+    </style>
 </body>
 </html>

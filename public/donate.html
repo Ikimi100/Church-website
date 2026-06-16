@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <!-- Styles -->
-    <link rel="stylesheet" href="style.css?v=20260618">
+    <link rel="stylesheet" href="style.css?v=20260622">
 
     <style>
         /* =========================================================
@@ -1744,7 +1744,7 @@
         // Update summary on designation change
         document.getElementById('designation').addEventListener('change', updateSummary);
     </script>
-    <script src="script.js?v=20260618"></script>
+    <script src="script.js?v=20260622"></script>
 <script>
 window.addEventListener('load', () => {
     const loader = document.getElementById('loader');
@@ -1753,5 +1753,12 @@ window.addEventListener('load', () => {
     }
 });
 </script>
+
+    <!-- Phone-view grid fix (phone-grid-fix-20260620) -->
+    <style>
+      @media (max-width: 600px) {
+        .express-checkout,.amount-grid,.crypto-grid{grid-template-columns:repeat(2,1fr)}
+      }
+    </style>
 </body>
 </html>
