@@ -429,7 +429,13 @@ const torahPageSlugs = new Set([
     "bereisheet", "noach", "lech-lecha", "vayera", "chayei-sarah", "toldot",
     "vayetzei", "vayishlach", "vayeshev", "miketz", "vayigash", "vayechi",
     "shemot", "va-era", "bo", "beshalach", "yitro", "mishpatim",
-    "terumah", "tetzaveh", "ki-tisa", "vayakhel"
+    "terumah", "tetzaveh", "ki-tisa", "vayakhel",
+    "vayikra", "tzav", "shemini", "tazria-metzora", "acharei-mot-kedoshim",
+    "emor", "behar-bechukotai",
+    "bamidbar", "nasso", "behaalotcha", "shelach", "korach", "chukat-balak",
+    "pinchas", "mattot-massei",
+    "devarim", "vaetchanan", "ekev", "reeh", "shoftim", "ki-tetze", "ki-tavo",
+    "nitzavim-vayelech", "haazinu", "vezot-habracha"
 ]);
 // Names whose generated slug differs from the page filename.
 const torahSlugAlias = { "vaera": "va-era", "vayakhel-pekudei": "vayakhel" };
