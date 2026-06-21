@@ -1255,7 +1255,14 @@
         /* Two compact cards per row, like the homepage Ministries section */
         .events-grid,.ministry-cards{grid-template-columns:repeat(2,1fr);gap:0.85rem;}
         .about-preview-stats{grid-template-columns:repeat(2,1fr)}
-        .service-strip-grid{grid-template-columns:1fr}
+        /* Service strip (Sunday / Midweek / Location) — 2-up compact; Location spans full width */
+        .service-strip{padding:2.25rem 4%;}
+        .service-strip-grid{grid-template-columns:repeat(2,1fr);gap:0.85rem;padding:1.5rem 4% 0.5rem;}
+        .service-strip-item{padding:1.1rem 0.85rem;border:1px solid var(--glass-border);border-radius:16px;background:rgba(255,255,255,0.02);}
+        .service-strip-item:last-child{grid-column:1 / -1;}
+        .service-strip-icon{width:44px;height:44px;font-size:1.1rem;margin:0 auto 0.7rem;}
+        .service-strip-item h3{font-size:0.95rem;margin-bottom:0.3rem;}
+        .service-strip-item p{font-size:0.72rem;line-height:1.45;}
 
         /* Ministry cards — compact */
         .ministry-card{padding:1.25rem 0.85rem;border-radius:16px;}
