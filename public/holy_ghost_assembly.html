@@ -623,8 +623,8 @@
         }
 
         @media (max-width: 768px) {
-            .events-grid { grid-template-columns: 1fr; }
-            .ministry-cards { grid-template-columns: 1fr; }
+            .events-grid { grid-template-columns: repeat(2, 1fr); gap: 0.85rem; }
+            .ministry-cards { grid-template-columns: repeat(2, 1fr); gap: 0.85rem; }
             .about-preview-stats { grid-template-columns: 1fr; }
             .page-hero { padding-top: 140px; }
             .announcement-bar { display: none; }
@@ -1249,11 +1249,32 @@
         });
     </script>
 
-    <!-- Phone-view grid fix (phone-grid-fix2-20260622) -->
+    <!-- Phone: 2-up compact cards to match index 'Our Ministries' grid (20260621) -->
     <style>
       @media (max-width: 600px) {
-        .events-grid,.ministry-cards,.service-strip-grid{grid-template-columns:1fr}
+        /* Two compact cards per row, like the homepage Ministries section */
+        .events-grid,.ministry-cards{grid-template-columns:repeat(2,1fr);gap:0.85rem;}
         .about-preview-stats{grid-template-columns:repeat(2,1fr)}
+        .service-strip-grid{grid-template-columns:1fr}
+
+        /* Ministry cards — compact */
+        .ministry-card{padding:1.25rem 0.85rem;border-radius:16px;}
+        .ministry-card-icon{width:46px;height:46px;font-size:1.15rem;border-radius:14px;margin:0 auto 0.85rem;}
+        .ministry-card h3{font-size:1rem;margin-bottom:0.35rem;}
+        .ministry-card p{font-size:0.74rem;line-height:1.35;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;}
+
+        /* Event cards — compact */
+        .event-card{border-radius:16px;}
+        .event-card-content{padding:0.9rem;}
+        .event-card-content h3{font-size:0.98rem;line-height:1.2;margin-bottom:0.35rem;}
+        .event-card-content p{font-size:0.74rem;line-height:1.35;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+        .event-meta{flex-wrap:wrap;gap:0.35rem 0.6rem;margin-bottom:0.5rem;}
+        .event-meta-item{font-size:0.66rem;}
+        .event-date-badge{top:0.6rem;left:0.6rem;padding:0.4rem 0.55rem;border-radius:12px;}
+        .event-date-badge .day{font-size:1.1rem;}
+        .event-date-badge .month,.event-date-badge .year{font-size:0.55rem;}
+        .event-status{font-size:0.6rem;padding:0.25rem 0.6rem;}
+        .event-btn{font-size:0.72rem;}
       }
     </style>
 </body>
