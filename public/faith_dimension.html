@@ -411,12 +411,12 @@
             .resource-card h3 { font-size: 1.25rem; }
             .resource-card p { font-size: 0.82rem; }
 
-            /* Pathways — keep 1 col */
-            .pathways-grid { grid-template-columns: 1fr; }
-            .pathway-card { min-height: 300px; }
+            /* Pathways — 2-up */
+            .pathways-grid { grid-template-columns: repeat(2, 1fr); }
+            .pathway-card { min-height: 240px; }
 
-            /* Teachings — 1 col */
-            .teachings-grid { grid-template-columns: 1fr; }
+            /* Teachings — 2-up */
+            .teachings-grid { grid-template-columns: repeat(2, 1fr); }
 
             /* Footer */
             .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
@@ -441,7 +441,7 @@
         }
 
         @media (max-width: 400px) {
-            .resource-grid { grid-template-columns: 1fr; }
+            .resource-grid { grid-template-columns: repeat(2, 1fr); }
         }
 
         .fade-in { opacity: 0; transform: translateY(30px); transition: opacity 0.8s var(--transition-smooth), transform 0.8s var(--transition-smooth); }
@@ -964,7 +964,27 @@
     <!-- Phone-view grid fix (phone-grid-fix-20260620) -->
     <style>
       @media (max-width: 600px) {
-        .pathways-grid,.teachings-grid,.resource-grid{grid-template-columns:1fr}
+        /* All Faith Dimension cards — 2-up compact, like index 'Our Ministries' */
+        .resource-grid,.pathways-grid,.teachings-grid{grid-template-columns:repeat(2,1fr);gap:0.85rem;}
+        /* Resource cards */
+        .resource-card{padding:1.1rem 0.8rem;}
+        .resource-icon{width:44px;height:44px;font-size:1.1rem;margin:0 auto 0.7rem;}
+        .resource-card h3{font-size:1.02rem;margin-bottom:0.4rem;}
+        .resource-card p{font-size:0.72rem;line-height:1.4;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;}
+        /* Pathway cards (image) */
+        .pathway-card{min-height:200px;border-radius:14px;}
+        .pathway-content{padding:0.9rem;}
+        .pathway-tag{font-size:0.58rem;padding:0.3rem 0.6rem;margin-bottom:0.55rem;letter-spacing:0.1em;}
+        .pathway-card h3{font-size:1.15rem;margin-bottom:0.4rem;}
+        .pathway-card p{font-size:0.72rem;line-height:1.4;margin-bottom:0.7rem;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+        .pathway-meta{gap:0.6rem;font-size:0.66rem;flex-wrap:wrap;}
+        /* Teaching cards (video) */
+        .teaching-info{padding:0.85rem;}
+        .teaching-card h4{font-size:1rem;margin-bottom:0.4rem;}
+        .teaching-card p{font-size:0.72rem;line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+        .teaching-category{font-size:0.6rem;margin-bottom:0.35rem;}
+        .play-icon{width:44px;height:44px;font-size:0.95rem;}
+        .teaching-duration{font-size:0.62rem;padding:0.2rem 0.45rem;bottom:0.6rem;right:0.6rem;}
         .hero h1{font-size:clamp(2rem, 8vw, 2.6rem);line-height:1.15}
       }
       @media (max-width: 768px) {
