@@ -1112,12 +1112,5 @@
         .impact-grid{grid-template-columns:repeat(2,1fr)}
       }
     </style>
-    <!-- phone hero-button full-width (consistency-with-index 20260621) -->
-    <style>
-      @media (max-width: 480px){
-        .gr-hero-actions{flex-direction:column;align-items:stretch;width:100%}
-        .gr-hero-actions .btn{width:100%;justify-content:center}
-      }
-    </style>
-  </body>
+</body>
 </html>

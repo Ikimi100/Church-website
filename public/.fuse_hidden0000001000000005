@@ -1224,12 +1224,5 @@
             bar.appendChild(btn);
         })();
     </script>
-    <!-- phone hero-button full-width (consistency-with-index 20260621) -->
-    <style>
-      @media (max-width: 480px){
-        .hero-actions{flex-direction:column;align-items:stretch;width:100%}
-        .hero-actions .btn-primary,.hero-actions .btn-secondary{width:100%;justify-content:center}
-      }
-    </style>
-  </body>
+</body>
 </html>

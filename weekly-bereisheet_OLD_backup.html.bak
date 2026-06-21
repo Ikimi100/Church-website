@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weekly Study for Disciples | B'reisheet</title>
+    
+    <!-- Fonts (same as your website) -->
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Your existing style.css file -->
+    <link rel="stylesheet" href="style.css?v=20260623">
+    
+    <style>
+        body { background: var(--color-bg); color: var(--color-text); }
+        .study-container {
+            max-width: 1000px;
+            margin: 120px auto 80px;
+            padding: 2rem;
+            background: rgba(10,10,15,0.95);
+            border: 1px solid rgba(212,175,55,0.2);
+            border-radius: 24px;
+        }
+        .study-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid rgba(212,175,55,0.2);
+        }
+        .portion-badge {
+            display: inline-block;
+            background: rgba(212,175,55,0.1);
+            color: var(--color-gold);
+            padding: 0.6rem 1.8rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            letter-spacing: 0.1em;
+            margin-bottom: 1rem;
+        }
+        .study-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3.2rem;
+            line-height: 1.1;
+            color: var(--color-gold);
+        }
+        .readings-bar {
+            background: rgba(17,17,17,0.8);
+            border: 1px solid rgba(212,175,55,0.2);
+            border-radius: 16px;
+            padding: 1.8rem;
+            margin: 2.5rem 0;
+        }
+        .reading-item {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.2rem;
+        }
+        .reading-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            flex-shrink: 0;
+        }
+        .section h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.4rem;
+            color: var(--color-gold);
+            margin: 2.5rem 0 1.5rem;
+            padding-left: 1rem;
+            border-left: 5px solid var(--color-gold);
+        }
+        .thematic-box {
+            background: linear-gradient(135deg, rgba(212,175,55,0.08), rgba(124,58,237,0.08));
+            border: 1px solid rgba(212,175,55,0.3);
+            border-radius: 20px;
+            padding: 2.5rem;
+            margin: 3rem 0;
+        }
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--color-gold), var(--color-purple-rich));
+            color: #050505;
+            padding: 1.2rem 3rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-top: 2rem;
+        }
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(212,175,55,0.4);
+        }
+    
+    /* LOGO IMAGE FALLBACK */
+    
+    /* HOMEPAGE HEADER LOGO MATCH */
+    nav .logo .logo-mark,
+    .study-nav .logo .logo-mark,
+    .watch-header .logo .logo-mark {
+        width: 48px;
+        height: 48px;
+        flex: 0 0 48px;
+        border: 1px solid var(--color-gold);
+        border-radius: 50%;
+        background: transparent;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        position: relative;
+        box-shadow: 0 0 20px rgba(212,175,55,0.1);
+    }
+
+    nav .logo .logo-mark img,
+    .study-nav .logo .logo-mark img,
+    .watch-header .logo .logo-mark img,
+    nav .logo .logo-mark-img,
+    .study-nav .logo .logo-mark-img,
+    .watch-header .logo .logo-mark-img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        display: block;
+        position: relative;
+        z-index: 1;
+    }
+
+    nav .logo .logo-title,
+    .study-nav .logo .logo-title,
+    .watch-header .logo .logo-title {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 1.5rem;
+        font-weight: 400;
+        line-height: 1;
+        letter-spacing: 0;
+    }
+
+    nav .logo .logo-subtitle,
+    .study-nav .logo .logo-subtitle,
+    .watch-header .logo .logo-subtitle {
+        font-size: 0.65rem;
+        text-transform: uppercase;
+        letter-spacing: 0.3em;
+        color: var(--color-text-muted);
+        margin-top: 0.25rem;
+    }
+
+    .loader-ring,
+    .loader-ring--soft,
+    .loader-dots,
+    .loader-bar,
+    .loader-progress {
+        display: none !important;
+    }
+</style>
+</head>
+<body>
+    <nav id="navbar" class="study-nav scrolled" style="background: rgba(5,5,5,0.85); backdrop-filter: blur(20px);">
+        <div class="nav-inner">
+            <a href="index.html" class="logo">
+                <div class="logo-mark"><img src="images/logowtb.png" alt="Messianic Movement logo" class="logo-mark-img"></div>
+                <div class="logo-text">
+                    <span class="logo-title">Messianic Movement</span>
+                    <span class="logo-subtitle">Regenerational Ministry</span>
+                </div>
+            </a>
+            <a href="index.html#torah" class="nav-back">
+                <i class="fas fa-arrow-left"></i>
+                <span>Back to Torah Portions</span>
+            </a>
+            <div class="nav-title">Weekly Study</div>
+        </div>
+    </nav>
+
+    <div class="study-container">
+            <div class="portion-badge">
+                <i class="fas fa-scroll"></i> Week 1 • October 18, 2025
+            </div>
+            <h1 class="study-title">בראשית • B'reisheet (In the Beginning)</h1>
+            
+            <div class="readings-bar">
+                <div class="reading-item">
+                    <div class="reading-icon" style="background: rgba(212,175,55,0.15); color: var(--color-gold);">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <div><strong>Torah:</strong> Genesis 1:1 – 6:8</div>
+                </div>
+                <div class="reading-item">
+                    <div class="reading-icon" style="background: rgba(124,58,237,0.15); color: var(--color-purple-rich);">
+                        <i class="fas fa-fire"></i>
+                    </div>
+                    <div><strong>Haftarah:</strong> Isaiah 42:5 – 43:10</div>
+                </div>
+                <div class="reading-item">
+                    <div class="reading-icon" style="background: rgba(59,130,246,0.15); color: var(--color-soft-blue);">
+                        <i class="fas fa-cross"></i>
+                    </div>
+                    <div><strong>Gospel:</strong> John 1:1-18</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Messianic Insights Section -->
+        <div class="section">
+            <h2>Messianic Insights</h2>
+            <p>The Torah begins with the powerful words: “In the beginning God created the heavens and the earth.” This portion shows us God as the Creator who brings light out of darkness and order out of chaos.</p>
+            <p>In the Gospel of John we read: “In the beginning was the Word, and the Word was with God, and the Word was God… All things were made through Him.” Yeshua is the living Word! He is the fulfillment of the Torah. The same Spirit that hovered over the waters at creation now lives in every believer, making us new creations in Messiah.</p>
+            <p>The Torah is not against the Gospel — it is the foundation that reveals the Messiah to us.</p>
+        </div>
+
+        <!-- Gospel Insights Section -->
+        <div class="section">
+            <h2>Gospel Insights: Applicable Lessons for a Life of Discipleship</h2>
+            <p><strong>Unclean Hands, Pure Heart?</strong> The story of the Fall in the Garden teaches us that sin always begins in the heart. Yeshua later taught that what truly defiles a person is not what they eat, but what comes out of their heart.</p>
+            <p>As disciples of Yeshua, we must guard our hearts daily. This week, take time to examine your thoughts and attitudes. Ask the Holy Spirit to renew your mind with God’s Word. True discipleship is not just knowing the Torah — it is allowing the Torah and the Gospel to change how we live every day.</p>
+        </div>
+
+        <!-- Thematic Focus -->
+        <div class="thematic-box">
+            <h2>Thematic Focus</h2>
+            <h3>“In the Beginning” — The Power of New Creation</h3>
+            <p>Just as God spoke light into darkness at creation, Yeshua offers every person a brand new beginning. As His disciples, we are called to be agents of new creation — bringing light, hope, and order into the dark and broken places around us.</p>
+            <p><strong>Action Step for this week:</strong> Identify one area of chaos or darkness in your life or in your community. Speak God’s Word over it in prayer and take one practical step to bring light into that situation.</p>
+        </div>
+
+        <a href="#" class="cta-button">Join the Discussion • Share Your Insights</a>
+    </div>
+
+    <!-- You can add your footer here if you want -->
+
+<script>
+window.addEventListener('load', () => {
+    const loader = document.getElementById('loader');
+    if (loader) {
+        setTimeout(() => loader.classList.add('hidden'), 2200);
+    }
+});
+</script>
+    <!-- Compact mobile nav (added for responsive study header) -->
+    <style>
+        @media(max-width:768px){
+            .study-nav{padding:0.85rem 4%}
+            .study-nav .nav-inner{gap:0.5rem;flex-wrap:nowrap}
+            .study-nav .logo-text{display:none}
+            .study-nav .nav-title{display:none}
+            .study-nav .nav-back{font-size:0.8rem;gap:0.4rem}
+            .study-nav .nav-back span{white-space:nowrap}
+        }
+    </style>
+</body>
+</html>
+
+
