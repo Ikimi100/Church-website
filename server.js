@@ -6,6 +6,7 @@ const path = require('path');
 const nodemailer = require('nodemailer');
 const helmet = require('helmet');
 const compression = require('compression');
+const { mountApi } = require('./src/api');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -186,4 +187,13 @@ app.post('/webhook', bodyParser.raw({ type: 'application/json' }), (req, res) =>
   res.json({ received: true });
 });
 
-app.listen(PORT, () => console.log(`Donation backend listening on http://localhost:${PORT}`));
+// Mount the registration + admin API, then start the server.
+mountApi(app)
+  .then(() => {
+    app.listen(PORT, () => console.log(`Server listening on http://localhost:${PORT}`));
+  })
+  .catch((err) => {
+    console.error('Failed to mount API:', err);
+    // Start anyway so the static site and donations still work.
+    app.listen(PORT, () => console.log(`Server (API failed to mount) listening on http://localhost:${PORT}`));
+  });

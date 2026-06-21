@@ -1,7 +1,7 @@
 {
-  "name": "messianic-movement-donations",
-  "version": "1.0.0",
-  "description": "Backend for donations (Stripe Checkout + email receipts) for Messianic Movement",
+  "name": "messianic-movement-backend",
+  "version": "1.1.0",
+  "description": "Backend for Messianic Movement: donations (Stripe), registrations/volunteering, and an admin dashboard (sales, income/expense, advanced filters)",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
@@ -12,6 +12,7 @@
     "dotenv": "^16.6.1",
     "express": "^4.18.2",
     "helmet": "^7.2.0",
+    "mongodb": "^6.8.0",
     "nodemailer": "^8.0.9",
     "stripe": "^12.18.0"
   },

@@ -1067,7 +1067,7 @@
                     </div>
                 </div>
 
-                <a href="register.html?type=event&amp;event=sunday_service" class="btn btn-primary" style="margin-top: 1rem;">
+                <a href="#" class="btn btn-primary" style="margin-top: 1rem;" onclick="openModal('visit')">
                     <i class="fas fa-calendar-check btn-icon"></i>
                     Plan Your First Visit
                 </a>

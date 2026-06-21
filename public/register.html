@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Register / Volunteer | Messianic Movement</title>
+<meta name="description" content="Register to attend an event, join a ministry program, or volunteer to serve with Messianic Movement.">
+<link rel="icon" type="image/png" href="images/logowtb.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+  :root{
+    --bg:#050505;--surface:#0f0f12;--card:#141418;--gold:#d4af37;--gold-light:#f4d03f;
+    --purple:#7c3aed;--text:#fff;--text-2:#b0b0c0;--muted:#71717a;--border:rgba(255,255,255,0.09);
+    --border-gold:rgba(212,175,55,0.3);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--text);font-family:'Space Grotesk',sans-serif;line-height:1.6;overflow-x:hidden;min-height:100vh}
+  body::before{content:'';position:fixed;inset:0;z-index:-1;background:
+    radial-gradient(circle at 20% 10%,rgba(212,175,55,0.08),transparent 45%),
+    radial-gradient(circle at 85% 90%,rgba(124,58,237,0.07),transparent 45%);pointer-events:none}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:760px;margin:0 auto;padding:1.5rem 1.25rem 4rem}
+  .topbar{display:flex;align-items:center;justify-content:space-between;padding:0.5rem 0 2rem}
+  .brand{display:flex;align-items:center;gap:0.7rem}
+  .brand img{width:42px;height:42px;border-radius:50%;border:1px solid var(--border-gold)}
+  .brand .t{font-family:'Cormorant Garamond',serif;font-size:1.25rem;line-height:1}
+  .brand .s{font-size:0.6rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--muted)}
+  .back{font-size:0.8rem;color:var(--text-2);display:flex;align-items:center;gap:0.4rem;border:1px solid var(--border);padding:0.5rem 0.9rem;border-radius:999px;transition:.3s}
+  .back:hover{border-color:var(--border-gold);color:var(--gold)}
+  .hero{text-align:center;margin-bottom:2rem}
+  .eyebrow{font-size:0.72rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--gold);margin-bottom:0.75rem}
+  h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2.2rem,7vw,3.4rem);font-weight:500;line-height:1.05}
+  .sub{color:var(--text-2);max-width:520px;margin:0.75rem auto 0;font-weight:300;font-size:0.98rem}
+  .card{background:linear-gradient(180deg,var(--card),var(--surface));border:1px solid var(--border);border-radius:20px;padding:1.75rem 1.5rem;box-shadow:0 30px 80px -40px rgba(0,0,0,0.8)}
+  .seg{display:grid;grid-template-columns:repeat(3,1fr);gap:0.6rem;margin-bottom:1.75rem}
+  .seg button{font-family:inherit;cursor:pointer;background:var(--surface);border:1px solid var(--border);color:var(--text-2);padding:0.9rem 0.5rem;border-radius:14px;font-size:0.82rem;font-weight:500;transition:.25s;display:flex;flex-direction:column;align-items:center;gap:0.45rem}
+  .seg button i{font-size:1.1rem;color:var(--muted);transition:.25s}
+  .seg button.active{border-color:var(--border-gold);background:rgba(212,175,55,0.08);color:var(--text)}
+  .seg button.active i{color:var(--gold)}
+  .field{margin-bottom:1.15rem}
+  label.lab{display:block;font-size:0.78rem;letter-spacing:0.04em;color:var(--text-2);margin-bottom:0.5rem}
+  label.lab .req{color:var(--gold)}
+  input,select,textarea{width:100%;font-family:inherit;background:var(--surface);border:1px solid var(--border);color:var(--text);padding:0.85rem 1rem;border-radius:12px;font-size:0.92rem;transition:.2s}
+  input:focus,select:focus,textarea:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(212,175,55,0.12)}
+  textarea{resize:vertical;min-height:90px}
+  select{appearance:none;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23d4af37' stroke-width='2'><path d='M6 9l6 6 6-6'/></svg>");background-repeat:no-repeat;background-position:right 1rem center}
+  .row2{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+  .chips{display:flex;flex-wrap:wrap;gap:0.5rem}
+  .chip{position:relative;cursor:pointer}
+  .chip input{position:absolute;opacity:0;inset:0;cursor:pointer}
+  .chip span{display:inline-block;padding:0.5rem 0.9rem;border:1px solid var(--border);border-radius:999px;font-size:0.78rem;color:var(--text-2);transition:.2s}
+  .chip input:checked+span{border-color:var(--border-gold);background:rgba(212,175,55,0.1);color:var(--gold)}
+  .submit{width:100%;font-family:inherit;cursor:pointer;margin-top:0.5rem;background:linear-gradient(135deg,var(--gold),var(--gold-light));color:#1a1303;border:none;padding:1rem;border-radius:12px;font-size:0.95rem;font-weight:600;letter-spacing:0.03em;transition:.25s;display:flex;align-items:center;justify-content:center;gap:0.5rem}
+  .submit:hover{transform:translateY(-2px);box-shadow:0 14px 30px -10px rgba(212,175,55,0.5)}
+  .submit:disabled{opacity:0.6;cursor:not-allowed;transform:none;box-shadow:none}
+  .hidden{display:none!important}
+  .note{font-size:0.74rem;color:var(--muted);margin-top:0.4rem}
+  .msg{padding:0.85rem 1rem;border-radius:12px;font-size:0.86rem;margin-bottom:1.25rem}
+  .msg.err{background:rgba(220,80,80,0.12);border:1px solid rgba(220,80,80,0.35);color:#ffb4b4}
+  .success{text-align:center;padding:1.5rem 0.5rem}
+  .success .ic{width:70px;height:70px;border-radius:50%;margin:0 auto 1.25rem;display:flex;align-items:center;justify-content:center;background:rgba(212,175,55,0.12);border:1px solid var(--border-gold);color:var(--gold);font-size:1.8rem}
+  .success h2{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:500;margin-bottom:0.5rem}
+  .success p{color:var(--text-2);max-width:420px;margin:0 auto 1.5rem}
+  .ghost{display:inline-flex;gap:0.5rem;align-items:center;border:1px solid var(--border);padding:0.7rem 1.4rem;border-radius:999px;font-size:0.85rem;transition:.25s}
+  .ghost:hover{border-color:var(--border-gold);color:var(--gold)}
+  @media(max-width:560px){.seg{grid-template-columns:1fr}.row2{grid-template-columns:1fr}.card{padding:1.4rem 1.1rem}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topbar">
+    <a href="index.html" class="brand">
+      <img src="images/logowtb.png" alt="Messianic Movement logo">
+      <span><span class="t">Messianic Movement</span><br><span class="s">Regenerational Ministry</span></span>
+    </a>
+    <a href="index.html" class="back"><i class="fas fa-arrow-left"></i> Home</a>
+  </div>
+
+  <div class="hero">
+    <div class="eyebrow">Get Involved</div>
+    <h1 id="heroTitle">Register &amp; Serve</h1>
+    <p class="sub" id="heroSub">Attend an event, join a ministry, or step in to serve. Tell us where God is leading you.</p>
+  </div>
+
+  <div class="card" id="card">
+    <div id="formMsg"></div>
+
+    <div class="seg" id="typeSeg" role="tablist" aria-label="Registration type">
+      <button type="button" data-type="event"><i class="fas fa-calendar-day"></i> Attend an Event</button>
+      <button type="button" data-type="program"><i class="fas fa-people-group"></i> Join a Program</button>
+      <button type="button" data-type="volunteer"><i class="fas fa-hands-helping"></i> Volunteer</button>
+    </div>
+
+    <form id="regForm" novalidate>
+      <!-- type-specific blocks -->
+      <div class="field hidden" id="block-event">
+        <label class="lab" for="eventSel">Which event/service? <span class="req">*</span></label>
+        <select id="eventSel" name="event"></select>
+      </div>
+      <div class="field hidden" id="block-attendees">
+        <label class="lab" for="attendees">Number attending</label>
+        <input type="number" id="attendees" name="attendees" min="1" max="50" value="1">
+      </div>
+      <div class="field hidden" id="block-program">
+        <label class="lab" for="programSel">Which program/ministry? <span class="req">*</span></label>
+        <select id="programSel" name="program"></select>
+      </div>
+      <div class="field hidden" id="block-role">
+        <label class="lab" for="roleSel">Where would you like to serve? <span class="req">*</span></label>
+        <select id="roleSel" name="role"></select>
+      </div>
+      <div class="field hidden" id="block-availability">
+        <label class="lab">Your availability</label>
+        <div class="chips" id="availChips"></div>
+      </div>
+      <div class="field hidden" id="block-skills">
+        <label class="lab" for="skills">Skills / experience (optional)</label>
+        <input type="text" id="skills" name="skills" placeholder="e.g. guitar, video editing, first aid, teaching">
+      </div>
+
+      <!-- personal details -->
+      <div class="row2">
+        <div class="field">
+          <label class="lab" for="fullName">Full name <span class="req">*</span></label>
+          <input type="text" id="fullName" name="fullName" autocomplete="name" placeholder="Your full name" required>
+        </div>
+        <div class="field">
+          <label class="lab" for="phone">Phone (WhatsApp)</label>
+          <input type="tel" id="phone" name="phone" autocomplete="tel" placeholder="+234...">
+        </div>
+      </div>
+      <div class="field">
+        <label class="lab" for="email">Email <span class="req">*</span></label>
+        <input type="email" id="email" name="email" autocomplete="email" placeholder="you@example.com" required>
+      </div>
+      <div class="field">
+        <label class="lab" for="message">Anything you'd like us to know? (optional)</label>
+        <textarea id="message" name="message" placeholder="Questions, prayer requests, or details..."></textarea>
+      </div>
+
+      <button type="submit" class="submit" id="submitBtn"><i class="fas fa-paper-plane"></i> Submit Registration</button>
+      <p class="note">By submitting you agree to be contacted by the ministry about your registration.</p>
+    </form>
+  </div>
+
+  <div class="card hidden" id="successCard">
+    <div class="success">
+      <div class="ic"><i class="fas fa-check"></i></div>
+      <h2>You're registered!</h2>
+      <p id="successMsg">Thank you. Our team will reach out to you shortly with the next steps.</p>
+      <a href="index.html" class="ghost"><i class="fas fa-arrow-left"></i> Back to Home</a>
+    </div>
+  </div>
+</div>
+
+<script>
+const API = '';
+let OPTIONS = null;
+let currentType = 'event';
+
+const $ = (s) => document.querySelector(s);
+function qp(name){ return new URLSearchParams(location.search).get(name); }
+
+function fillSelect(sel, items, placeholder){
+  sel.innerHTML = '<option value="">'+placeholder+'</option>' +
+    items.map(o => '<option value="'+o.id+'">'+o.label+'</option>').join('');
+}
+function fillRoles(sel, roles){
+  const groups = {};
+  roles.forEach(r => { (groups[r.group] = groups[r.group] || []).push(r); });
+  sel.innerHTML = '<option value="">Choose a role...</option>' +
+    Object.entries(groups).map(([g, list]) =>
+      '<optgroup label="'+g+'">' + list.map(r => '<option value="'+r.id+'">'+r.label+'</option>').join('') + '</optgroup>'
+    ).join('');
+}
+function fillChips(box, items){
+  box.innerHTML = items.map(o =>
+    '<label class="chip"><input type="checkbox" value="'+o.id+'"><span>'+o.label+'</span></label>'
+  ).join('');
+}
+
+function setType(type){
+  currentType = type;
+  document.querySelectorAll('#typeSeg button').forEach(b => b.classList.toggle('active', b.dataset.type === type));
+  const show = (id, on) => $(id).classList.toggle('hidden', !on);
+  show('#block-event', type === 'event');
+  show('#block-attendees', type === 'event');
+  show('#block-program', type === 'program');
+  show('#block-role', type === 'volunteer');
+  show('#block-availability', type === 'volunteer');
+  show('#block-skills', type === 'volunteer');
+  const titles = {
+    event: ['Register to Attend', 'Reserve your place at an upcoming event or service.'],
+    program: ['Join a Program', 'Become part of a ministry and grow in your walk.'],
+    volunteer: ['Volunteer to Serve', 'Use your gifts to serve the body and the community.']
+  };
+  $('#heroTitle').textContent = titles[type][0];
+  $('#heroSub').textContent = titles[type][1];
+}
+
+async function init(){
+  try{
+    OPTIONS = await (await fetch(API + '/api/options')).json();
+  }catch(e){
+    $('#formMsg').innerHTML = '<div class="msg err">Could not reach the server. Make sure the backend is running.</div>';
+    return;
+  }
+  fillSelect($('#eventSel'), OPTIONS.EVENTS, 'Choose an event...');
+  fillSelect($('#programSel'), OPTIONS.PROGRAMS, 'Choose a program...');
+  fillRoles($('#roleSel'), OPTIONS.VOLUNTEER_ROLES);
+  fillChips($('#availChips'), OPTIONS.AVAILABILITY);
+
+  document.querySelectorAll('#typeSeg button').forEach(b =>
+    b.addEventListener('click', () => setType(b.dataset.type)));
+
+  // prefill from URL (?type=&event=&program=&role=&area=)
+  const t = qp('type'); if(['event','program','volunteer'].includes(t)) setType(t); else setType('event');
+  if(qp('event')) $('#eventSel').value = qp('event');
+  if(qp('program')) $('#programSel').value = qp('program');
+  if(qp('role')){ $('#roleSel').value = qp('role'); }
+
+  $('#regForm').addEventListener('submit', submitForm);
+}
+
+async function submitForm(e){
+  e.preventDefault();
+  $('#formMsg').innerHTML = '';
+  const role = $('#roleSel');
+  const area = role.value ? (OPTIONS.VOLUNTEER_ROLES.find(r => r.id === role.value)||{}).group : undefined;
+  const payload = {
+    type: currentType,
+    fullName: $('#fullName').value.trim(),
+    email: $('#email').value.trim(),
+    phone: $('#phone').value.trim(),
+    message: $('#message').value.trim(),
+    event: currentType === 'event' ? $('#eventSel').value : undefined,
+    attendees: currentType === 'event' ? $('#attendees').value : undefined,
+    program: currentType === 'program' ? $('#programSel').value : undefined,
+    role: currentType === 'volunteer' ? role.value : undefined,
+    area: currentType === 'volunteer' ? area : undefined,
+    availability: currentType === 'volunteer'
+      ? Array.from(document.querySelectorAll('#availChips input:checked')).map(c => c.value) : [],
+    skills: currentType === 'volunteer' ? $('#skills').value.trim() : ''
+  };
+  const btn = $('#submitBtn');
+  btn.disabled = true; btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting...';
+  try{
+    const res = await fetch(API + '/api/register', {
+      method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(payload)
+    });
+    const data = await res.json();
+    if(!res.ok){ throw new Error(data.error || 'Submission failed'); }
+    $('#card').classList.add('hidden');
+    document.querySelector('.hero').classList.add('hidden');
+    $('#successCard').classList.remove('hidden');
+    window.scrollTo({top:0,behavior:'smooth'});
+  }catch(err){
+    $('#formMsg').innerHTML = '<div class="msg err"><i class="fas fa-circle-exclamation"></i> '+err.message+'</div>';
+    btn.disabled = false; btn.innerHTML = '<i class="fas fa-paper-plane"></i> Submit Registration';
+  }
+}
+
+init();
+</script>
+</body>
+</html>

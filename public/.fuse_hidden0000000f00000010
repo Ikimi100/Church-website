@@ -895,7 +895,6 @@
             <div class="footer-links">
                 <h4>Quick Links</h4>
                 <ul>
-                    <li><a href="register.html">Register / Volunteer</a></li>
                     <li><a href="#home">Home</a></li>
                     <li><a href="#ministries">Ministries</a></li>
                     <li><a href="#calendar">Calendar</a></li>
@@ -1024,5 +1023,3 @@ window.addEventListener('load', () => {
     }
 });
 </script>
-</body>
-</html>

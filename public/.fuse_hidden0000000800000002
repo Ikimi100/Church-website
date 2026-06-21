@@ -812,7 +812,7 @@
                     </div>
                     <h3>Global Holy Ghost Crusade 2026</h3>
                     <p>A three-day apostolic invasion of the Spirit. Featuring international ministers, mass healings, and a mighty outpouring of the Holy Ghost.</p>
-                    <a href="register.html?type=event&amp;event=crusade_2026" class="event-btn">Register Now <i class="fas fa-arrow-right"></i></a>
+                    <a href="#" class="event-btn" onclick="openModal('crusade')">Register Now <i class="fas fa-arrow-right"></i></a>
                 </div>
             </div>
 
@@ -856,7 +856,7 @@
                     </div>
                     <h3>Apostolic Leadership Summit</h3>
                     <p>Equipping ministers and leaders with cutting-edge revelation, strategic insight, and the anointing for kingdom expansion.</p>
-                    <a href="register.html?type=event&amp;event=other_event" class="event-btn">Register Now <i class="fas fa-arrow-right"></i></a>
+                    <a href="#" class="event-btn" onclick="openModal('summit')">Register Now <i class="fas fa-arrow-right"></i></a>
                 </div>
             </div>
 
@@ -900,7 +900,7 @@
                     </div>
                     <h3>Mission Trip to Kenya</h3>
                     <p>Join our Global Response team for a life-changing mission to Kenya. Evangelism, medical outreach, and school building projects.</p>
-                    <a href="register.html?type=event&amp;event=other_event" class="event-btn">Apply Now <i class="fas fa-arrow-right"></i></a>
+                    <a href="#" class="event-btn" onclick="openModal('mission')">Apply Now <i class="fas fa-arrow-right"></i></a>
                 </div>
             </div>
 
@@ -922,7 +922,7 @@
                     </div>
                     <h3>School of the Spirit — Term 3</h3>
                     <p>A 12-week intensive on the gifts, fruit, and operations of the Holy Spirit. Graduate equipped for supernatural ministry.</p>
-                    <a href="register.html?type=program&amp;program=ministry_school" class="event-btn">Enroll Now <i class="fas fa-arrow-right"></i></a>
+                    <a href="#" class="event-btn" onclick="openModal('school')">Enroll Now <i class="fas fa-arrow-right"></i></a>
                 </div>
             </div>
         </div>
@@ -1067,7 +1067,7 @@
                     </div>
                 </div>
 
-                <a href="register.html?type=event&amp;event=sunday_service" class="btn btn-primary" style="margin-top: 1rem;">
+                <a href="#" class="btn btn-primary" style="margin-top: 1rem;" onclick="openModal('visit')">
                     <i class="fas fa-calendar-check btn-icon"></i>
                     Plan Your First Visit
                 </a>

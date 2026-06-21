@@ -53,7 +53,6 @@
                 <li><a href="#resources" class="nav-link">Resources</a></li>
                 <li><a href="#store" class="nav-link">Store</a></li>
                 <li><a href="#live" class="nav-link">Live</a></li>
-                <li><a href="register.html" class="nav-link">Register</a></li>
                 <li style="margin-left: 1rem;">
                     <button class="nav-cta" onclick="toggleCart()">
                         Cart (<span id="cartCount">0</span>)
@@ -895,7 +894,6 @@
             <div class="footer-links">
                 <h4>Quick Links</h4>
                 <ul>
-                    <li><a href="register.html">Register / Volunteer</a></li>
                     <li><a href="#home">Home</a></li>
                     <li><a href="#ministries">Ministries</a></li>
                     <li><a href="#calendar">Calendar</a></li>
@@ -1024,5 +1022,3 @@ window.addEventListener('load', () => {
     }
 });
 </script>
-</body>
-</html>

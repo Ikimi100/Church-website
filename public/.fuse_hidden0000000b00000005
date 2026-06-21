@@ -922,7 +922,7 @@
                     </div>
                     <h3>School of the Spirit — Term 3</h3>
                     <p>A 12-week intensive on the gifts, fruit, and operations of the Holy Spirit. Graduate equipped for supernatural ministry.</p>
-                    <a href="register.html?type=program&amp;program=ministry_school" class="event-btn">Enroll Now <i class="fas fa-arrow-right"></i></a>
+                    <a href="#" class="event-btn" onclick="openModal('school')">Enroll Now <i class="fas fa-arrow-right"></i></a>
                 </div>
             </div>
         </div>
@@ -1067,7 +1067,7 @@
                     </div>
                 </div>
 
-                <a href="register.html?type=event&amp;event=sunday_service" class="btn btn-primary" style="margin-top: 1rem;">
+                <a href="#" class="btn btn-primary" style="margin-top: 1rem;" onclick="openModal('visit')">
                     <i class="fas fa-calendar-check btn-icon"></i>
                     Plan Your First Visit
                 </a>

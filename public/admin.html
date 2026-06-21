@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Dashboard | Messianic Movement</title>
+<meta name="robots" content="noindex,nofollow">
+<link rel="icon" type="image/png" href="images/logowtb.png">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+  :root{--bg:#08080a;--surface:#101014;--card:#16161c;--gold:#d4af37;--gold-light:#f4d03f;
+    --green:#4ade80;--red:#f87171;--blue:#60a5fa;--purple:#a78bfa;
+    --text:#fff;--text-2:#aab;--muted:#6b6b78;--border:rgba(255,255,255,0.08);--border-gold:rgba(212,175,55,0.3)}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--bg);color:var(--text);font-family:'Space Grotesk',sans-serif;font-size:14px;overflow-x:hidden}
+  a{color:inherit}
+  /* Login */
+  .login-screen{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:1.5rem}
+  .login-box{width:100%;max-width:380px;background:linear-gradient(180deg,var(--card),var(--surface));border:1px solid var(--border);border-radius:18px;padding:2rem 1.75rem;text-align:center}
+  .login-box img{width:54px;height:54px;border-radius:50%;border:1px solid var(--border-gold);margin-bottom:1rem}
+  .login-box h1{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:1.6rem;margin-bottom:0.25rem}
+  .login-box p{color:var(--muted);font-size:0.82rem;margin-bottom:1.5rem}
+  input,select{width:100%;font-family:inherit;background:var(--surface);border:1px solid var(--border);color:var(--text);padding:0.7rem 0.85rem;border-radius:10px;font-size:0.88rem}
+  input:focus,select:focus{outline:none;border-color:var(--gold)}
+  select{appearance:none;cursor:pointer;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23d4af37' stroke-width='2'><path d='M6 9l6 6 6-6'/></svg>");background-repeat:no-repeat;background-position:right 0.7rem center;padding-right:2rem}
+  .btn{font-family:inherit;cursor:pointer;background:linear-gradient(135deg,var(--gold),var(--gold-light));color:#1a1303;border:none;padding:0.75rem 1rem;border-radius:10px;font-weight:600;font-size:0.88rem;transition:.2s;display:inline-flex;align-items:center;justify-content:center;gap:0.5rem}
+  .btn:hover{transform:translateY(-1px)}
+  .btn.ghost{background:transparent;border:1px solid var(--border);color:var(--text-2)}
+  .btn.ghost:hover{border-color:var(--border-gold);color:var(--gold)}
+  .login-err{color:var(--red);font-size:0.8rem;margin-top:0.75rem;min-height:1rem}
+  .hidden{display:none!important}
+  /* Shell */
+  .topnav{position:sticky;top:0;z-index:20;display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:0.85rem 1.25rem;background:rgba(8,8,10,0.9);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+  .topnav .brand{display:flex;align-items:center;gap:0.6rem;font-family:'Cormorant Garamond',serif;font-size:1.15rem}
+  .topnav .brand img{width:34px;height:34px;border-radius:50%;border:1px solid var(--border-gold)}
+  .topnav .right{display:flex;align-items:center;gap:0.6rem}
+  .tag{font-size:0.62rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);border:1px solid var(--border-gold);padding:0.2rem 0.55rem;border-radius:999px}
+  .container{max-width:1200px;margin:0 auto;padding:1.25rem}
+  /* Cards */
+  .cards{display:grid;grid-template-columns:repeat(4,1fr);gap:0.85rem;margin-bottom:1.25rem}
+  .stat{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.1rem 1.15rem}
+  .stat .lab{font-size:0.7rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-bottom:0.4rem;display:flex;align-items:center;gap:0.4rem}
+  .stat .val{font-size:1.5rem;font-weight:600;font-family:'Space Grotesk'}
+  .stat .sub{font-size:0.72rem;color:var(--text-2);margin-top:0.25rem}
+  .stat.income .val{color:var(--green)} .stat.expense .val{color:var(--red)} .stat.net .val{color:var(--gold)}
+  .panel{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.1rem;margin-bottom:1.25rem}
+  .panel h3{font-size:0.78rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-bottom:0.9rem;font-weight:500}
+  /* Chart */
+  .chart{display:flex;align-items:flex-end;gap:0.5rem;height:130px;padding-top:0.5rem}
+  .chart .col{flex:1;display:flex;flex-direction:column;align-items:center;gap:0.35rem;height:100%;justify-content:flex-end}
+  .chart .bars{width:100%;display:flex;gap:3px;align-items:flex-end;justify-content:center;height:100%}
+  .chart .bar{width:42%;border-radius:4px 4px 0 0;min-height:2px;transition:height .4s}
+  .chart .bar.in{background:linear-gradient(180deg,var(--green),rgba(74,222,128,0.4))}
+  .chart .bar.out{background:linear-gradient(180deg,var(--red),rgba(248,113,113,0.4))}
+  .chart .mlab{font-size:0.65rem;color:var(--muted)}
+  .legend{display:flex;gap:1rem;font-size:0.72rem;color:var(--text-2);margin-top:0.6rem}
+  .legend i{font-style:normal;display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:4px;vertical-align:middle}
+  /* Tabs */
+  .tabs{display:flex;gap:0.4rem;margin-bottom:1rem;flex-wrap:wrap}
+  .tabs button{font-family:inherit;cursor:pointer;background:var(--surface);border:1px solid var(--border);color:var(--text-2);padding:0.55rem 1rem;border-radius:999px;font-size:0.82rem;transition:.2s}
+  .tabs button.active{border-color:var(--border-gold);background:rgba(212,175,55,0.1);color:var(--gold)}
+  /* Filters */
+  .filters{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:0.6rem;margin-bottom:1rem;align-items:end}
+  .filters .f label{display:block;font-size:0.68rem;letter-spacing:0.05em;text-transform:uppercase;color:var(--muted);margin-bottom:0.3rem}
+  .filters input,.filters select{padding:0.55rem 0.7rem;font-size:0.82rem}
+  .filter-actions{display:flex;gap:0.5rem;flex-wrap:wrap;margin-bottom:1rem}
+  /* Table */
+  .table-wrap{overflow-x:auto;border:1px solid var(--border);border-radius:12px}
+  table{width:100%;border-collapse:collapse;font-size:0.82rem;min-width:640px}
+  thead th{text-align:left;padding:0.7rem 0.85rem;background:var(--surface);color:var(--text-2);font-weight:500;font-size:0.72rem;letter-spacing:0.05em;text-transform:uppercase;cursor:pointer;white-space:nowrap;border-bottom:1px solid var(--border)}
+  thead th:hover{color:var(--gold)}
+  tbody td{padding:0.7rem 0.85rem;border-bottom:1px solid rgba(255,255,255,0.04);white-space:nowrap}
+  tbody tr:hover{background:rgba(255,255,255,0.02)}
+  .pill{font-size:0.68rem;padding:0.18rem 0.55rem;border-radius:999px;text-transform:capitalize}
+  .pill.paid{background:rgba(74,222,128,0.15);color:var(--green)}
+  .pill.pending{background:rgba(212,175,55,0.15);color:var(--gold)}
+  .pill.refunded{background:rgba(248,113,113,0.15);color:var(--red)}
+  .pill.new{background:rgba(96,165,250,0.15);color:var(--blue)}
+  .pill.sale{background:rgba(167,139,250,0.15);color:var(--purple)}
+  .pill.donation{background:rgba(74,222,128,0.13);color:var(--green)}
+  .pill.event,.pill.program,.pill.volunteer{background:rgba(96,165,250,0.13);color:var(--blue)}
+  .amt{font-weight:600;font-variant-numeric:tabular-nums}
+  .pager{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-top:0.9rem;font-size:0.8rem;color:var(--text-2)}
+  .pager .pg{display:flex;gap:0.4rem}
+  .empty{text-align:center;color:var(--muted);padding:2.5rem 1rem;font-size:0.85rem}
+  @media(max-width:820px){.cards{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:520px){.cards{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div class="login-screen" id="loginScreen">
+  <div class="login-box">
+    <img src="images/logowtb.png" alt="logo">
+    <h1>Admin Dashboard</h1>
+    <p>Messianic Movement &middot; restricted access</p>
+    <form id="loginForm">
+      <input type="password" id="pw" placeholder="Admin password" autocomplete="current-password" required>
+      <div class="login-err" id="loginErr"></div>
+      <button class="btn" style="width:100%;margin-top:0.5rem" type="submit"><i class="fas fa-lock-open"></i> Sign In</button>
+    </form>
+  </div>
+</div>
+
+<!-- DASHBOARD -->
+<div id="dash" class="hidden">
+  <div class="topnav">
+    <div class="brand"><img src="images/logowtb.png" alt=""> Admin</div>
+    <div class="right">
+      <span class="tag" id="modeTag">Sample data</span>
+      <button class="btn ghost" id="refreshBtn"><i class="fas fa-rotate"></i> Refresh</button>
+      <button class="btn ghost" id="logoutBtn"><i class="fas fa-arrow-right-from-bracket"></i> Logout</button>
+    </div>
+  </div>
+
+  <div class="container">
+    <!-- Summary cards -->
+    <div class="cards" id="cards"></div>
+
+    <!-- Chart -->
+    <div class="panel">
+      <h3>Income vs Expense by month</h3>
+      <div class="chart" id="chart"></div>
+      <div class="legend"><span><i style="background:var(--green)"></i>Income</span><span><i style="background:var(--red)"></i>Expense</span></div>
+    </div>
+
+    <!-- Tabs -->
+    <div class="tabs" id="tabs">
+      <button data-tab="orders" class="active"><i class="fas fa-sack-dollar"></i> Sales &amp; Donations</button>
+      <button data-tab="registrations"><i class="fas fa-user-plus"></i> Registrations</button>
+      <button data-tab="expenses"><i class="fas fa-money-bill-transfer"></i> Expenses (out)</button>
+    </div>
+
+    <!-- Filters -->
+    <div class="filters" id="filters"></div>
+    <div class="filter-actions">
+      <button class="btn" id="applyBtn"><i class="fas fa-filter"></i> Apply filters</button>
+      <button class="btn ghost" id="clearBtn"><i class="fas fa-eraser"></i> Clear</button>
+      <button class="btn ghost" id="exportBtn"><i class="fas fa-file-csv"></i> Export CSV</button>
+    </div>
+
+    <!-- Table -->
+    <div class="table-wrap">
+      <table>
+        <thead id="thead"></thead>
+        <tbody id="tbody"></tbody>
+      </table>
+    </div>
+    <div class="pager">
+      <span id="pageInfo"></span>
+      <div class="pg">
+        <button class="btn ghost" id="prevBtn"><i class="fas fa-chevron-left"></i></button>
+        <button class="btn ghost" id="nextBtn"><i class="fas fa-chevron-right"></i></button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const API = '';
+const TOKEN_KEY = 'mm_admin_token';
+let token = localStorage.getItem(TOKEN_KEY) || '';
+let tab = 'orders';
+let sortBy = 'createdAt', sortOrder = 'desc', page = 1;
+const $ = (s) => document.querySelector(s);
+const money = (n) => '$' + Number(n||0).toLocaleString(undefined,{maximumFractionDigits:0});
+
+const COLUMNS = {
+  orders: [
+    {k:'createdAt',label:'Date',fmt:fmtDate},
+    {k:'reference',label:'Ref'},
+    {k:'type',label:'Type',fmt:v=>pill(v,v)},
+    {k:'item',label:'Item / Fund'},
+    {k:'customerName',label:'Name'},
+    {k:'channel',label:'Channel'},
+    {k:'amount',label:'Amount',fmt:v=>'<span class="amt">'+money(v)+'</span>',cls:'amt'},
+    {k:'status',label:'Status',fmt:v=>pill(v,v)}
+  ],
+  registrations: [
+    {k:'createdAt',label:'Date',fmt:fmtDate},
+    {k:'type',label:'Type',fmt:v=>pill(v,v)},
+    {k:'fullName',label:'Name'},
+    {k:'email',label:'Email'},
+    {k:'phone',label:'Phone'},
+    {k:'detail',label:'Choice',fmt:(v,r)=>regDetail(r)},
+    {k:'status',label:'Status',fmt:v=>pill(v,v)}
+  ],
+  expenses: [
+    {k:'createdAt',label:'Date',fmt:fmtDate},
+    {k:'reference',label:'Ref'},
+    {k:'category',label:'Category'},
+    {k:'payee',label:'Payee'},
+    {k:'method',label:'Method'},
+    {k:'amount',label:'Amount',fmt:v=>'<span class="amt">'+money(v)+'</span>'},
+    {k:'status',label:'Status',fmt:v=>pill(v,v)}
+  ]
+};
+
+// filter config per tab
+const FILTERS = {
+  orders: [
+    {k:'q',label:'Search',type:'text'},
+    {k:'type',label:'Type',type:'select',opts:[['','All'],['sale','Sales'],['donation','Donations']]},
+    {k:'status',label:'Status',type:'select',opts:[['','All'],['paid','Paid'],['pending','Pending'],['refunded','Refunded']]},
+    {k:'from',label:'From',type:'date'},{k:'to',label:'To',type:'date'},
+    {k:'min',label:'Min $',type:'number'},{k:'max',label:'Max $',type:'number'}
+  ],
+  registrations: [
+    {k:'q',label:'Search',type:'text'},
+    {k:'type',label:'Type',type:'select',opts:[['','All'],['event','Event'],['program','Program'],['volunteer','Volunteer']]},
+    {k:'status',label:'Status',type:'select',opts:[['','All'],['new','New']]},
+    {k:'from',label:'From',type:'date'},{k:'to',label:'To',type:'date'}
+  ],
+  expenses: [
+    {k:'q',label:'Search',type:'text'},
+    {k:'status',label:'Status',type:'select',opts:[['','All'],['paid','Paid'],['pending','Pending']]},
+    {k:'from',label:'From',type:'date'},{k:'to',label:'To',type:'date'},
+    {k:'min',label:'Min $',type:'number'},{k:'max',label:'Max $',type:'number'}
+  ]
+};
+let OPT = null;
+
+function fmtDate(v){ const d=new Date(v); return d.toLocaleDateString(undefined,{year:'2-digit',month:'short',day:'numeric'}); }
+function pill(cls,txt){ return '<span class="pill '+cls+'">'+txt+'</span>'; }
+function labelOf(list,id){ const o=(list||[]).find(x=>x.id===id); return o?o.label:id; }
+function regDetail(r){
+  if(r.type==='event') return labelOf(OPT&&OPT.EVENTS,r.event)+(r.attendees?(' &middot; '+r.attendees+' pax'):'');
+  if(r.type==='program') return labelOf(OPT&&OPT.PROGRAMS,r.program);
+  if(r.type==='volunteer') return labelOf(OPT&&OPT.VOLUNTEER_ROLES,r.role);
+  return '';
+}
+
+async function authedFetch(url){
+  const res = await fetch(API+url,{headers:{'Authorization':'Bearer '+token}});
+  if(res.status===401){ logout(); throw new Error('Session expired'); }
+  return res;
+}
+function buildQuery(extra){
+  const p = new URLSearchParams();
+  document.querySelectorAll('#filters [data-fk]').forEach(el=>{ if(el.value) p.set(el.dataset.fk, el.value); });
+  p.set('sort',sortBy); p.set('order',sortOrder); p.set('page',page); p.set('limit','25');
+  if(extra) Object.entries(extra).forEach(([k,v])=>p.set(k,v));
+  return p.toString();
+}
+
+async function loadSummary(){
+  // summary respects date filters only
+  const p = new URLSearchParams();
+  ['from','to'].forEach(k=>{ const el=document.querySelector('#filters [data-fk="'+k+'"]'); if(el&&el.value) p.set(k,el.value); });
+  const d = await (await authedFetch('/api/admin/summary?'+p.toString())).json();
+  $('#cards').innerHTML = [
+    card('income','Income (in)','fa-arrow-down',money(d.incomeTotal),'Sales '+money(d.salesTotal)+' &middot; Donations '+money(d.donationsTotal)),
+    card('expense','Expenses (out)','fa-arrow-up',money(d.expenseTotal),d.counts.expenses+' records'),
+    card('net','Net balance','fa-scale-balanced',money(d.net),'Income minus expenses'),
+    card('','Activity','fa-list-check',d.counts.orders+' orders',d.counts.registrations+' registrations &middot; '+d.counts.pendingOrders+' pending')
+  ].join('');
+  renderChart(d.months||[]);
+}
+function card(cls,lab,icon,val,sub){
+  return '<div class="stat '+cls+'"><div class="lab"><i class="fas '+icon+'"></i>'+lab+'</div><div class="val">'+val+'</div><div class="sub">'+sub+'</div></div>';
+}
+function renderChart(months){
+  if(!months.length){ $('#chart').innerHTML='<div class="empty" style="width:100%">No data in range</div>'; return; }
+  const max = Math.max(1, ...months.map(m=>Math.max(m.income,m.expense)));
+  $('#chart').innerHTML = months.map(m=>{
+    const ih=Math.round((m.income/max)*100), eh=Math.round((m.expense/max)*100);
+    const lbl = new Date(m.month+'-01').toLocaleDateString(undefined,{month:'short'});
+    return '<div class="col"><div class="bars">'+
+      '<div class="bar in" style="height:'+ih+'%" title="Income '+money(m.income)+'"></div>'+
+      '<div class="bar out" style="height:'+eh+'%" title="Expense '+money(m.expense)+'"></div>'+
+      '</div><div class="mlab">'+lbl+'</div></div>';
+  }).join('');
+}
+
+function renderFilters(){
+  $('#filters').innerHTML = FILTERS[tab].map(f=>{
+    let ctrl;
+    if(f.type==='select') ctrl='<select data-fk="'+f.k+'">'+f.opts.map(o=>'<option value="'+o[0]+'">'+o[1]+'</option>').join('')+'</select>';
+    else ctrl='<input data-fk="'+f.k+'" type="'+f.type+'" placeholder="'+(f.type==='text'?'name, email, ref...':'')+'">';
+    return '<div class="f"><label>'+f.label+'</label>'+ctrl+'</div>';
+  }).join('');
+}
+
+async function loadTable(){
+  const cols = COLUMNS[tab];
+  $('#thead').innerHTML = '<tr>'+cols.map(c=>'<th data-sort="'+c.k+'">'+c.label+(c.k===sortBy?(' '+(sortOrder==='asc'?'&#9650;':'&#9660;')):'')+'</th>').join('')+'</tr>';
+  $('#thead').querySelectorAll('th[data-sort]').forEach(th=>th.onclick=()=>{
+    const k=th.dataset.sort; if(k==='detail')return;
+    if(sortBy===k) sortOrder=sortOrder==='asc'?'desc':'asc'; else {sortBy=k;sortOrder='desc';}
+    page=1; loadTable();
+  });
+  const d = await (await authedFetch('/api/admin/'+tab+'?'+buildQuery())).json();
+  if(!d.rows.length){ $('#tbody').innerHTML='<tr><td colspan="'+cols.length+'"><div class="empty">No records match your filters.</div></td></tr>'; }
+  else $('#tbody').innerHTML = d.rows.map(r=>'<tr>'+cols.map(c=>{
+    const raw = r[c.k];
+    return '<td>'+(c.fmt?c.fmt(raw,r):(raw==null?'':raw))+'</td>';
+  }).join('')+'</tr>').join('');
+  $('#pageInfo').textContent = 'Showing '+d.rows.length+' of '+d.total+' &middot; page '+d.page+'/'+d.pages;
+  $('#pageInfo').innerHTML = 'Showing '+d.rows.length+' of '+d.total+' &middot; page '+d.page+' / '+d.pages;
+  $('#prevBtn').disabled = d.page<=1; $('#nextBtn').disabled = d.page>=d.pages;
+  window._pages = d.pages;
+}
+
+async function refresh(){ await loadSummary(); await loadTable(); }
+
+function setTab(t){
+  tab=t; page=1; sortBy='createdAt'; sortOrder='desc';
+  document.querySelectorAll('#tabs button').forEach(b=>b.classList.toggle('active',b.dataset.tab===t));
+  renderFilters(); loadTable();
+}
+
+async function exportCSV(){
+  const res = await authedFetch('/api/admin/export?'+buildQuery({collection:tab,limit:100000}));
+  const blob = await res.blob();
+  const a=document.createElement('a'); a.href=URL.createObjectURL(blob);
+  a.download = tab+'.csv'; a.click(); URL.revokeObjectURL(a.href);
+}
+
+function showDash(){ $('#loginScreen').classList.add('hidden'); $('#dash').classList.remove('hidden'); }
+function logout(){ token=''; localStorage.removeItem(TOKEN_KEY); $('#dash').classList.add('hidden'); $('#loginScreen').classList.remove('hidden'); }
+
+async function boot(){
+  try{ OPT = await (await fetch(API+'/api/options')).json(); }catch(e){}
+  renderFilters();
+  // wire controls
+  document.querySelectorAll('#tabs button').forEach(b=>b.onclick=()=>setTab(b.dataset.tab));
+  $('#applyBtn').onclick=()=>{ page=1; refresh(); };
+  $('#clearBtn').onclick=()=>{ renderFilters(); page=1; refresh(); };
+  $('#exportBtn').onclick=exportCSV;
+  $('#refreshBtn').onclick=refresh;
+  $('#logoutBtn').onclick=logout;
+  $('#prevBtn').onclick=()=>{ if(page>1){page--;loadTable();} };
+  $('#nextBtn').onclick=()=>{ if(page<window._pages){page++;loadTable();} };
+  await refresh();
+}
+
+$('#loginForm').addEventListener('submit', async (e)=>{
+  e.preventDefault(); $('#loginErr').textContent='';
+  try{
+    const res = await fetch(API+'/api/admin/login',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({password:$('#pw').value})});
+    const d = await res.json();
+    if(!res.ok) throw new Error(d.error||'Login failed');
+    token=d.token; localStorage.setItem(TOKEN_KEY,token); showDash(); boot();
+  }catch(err){ $('#loginErr').textContent=err.message; }
+});
+
+// auto-enter if token present
+if(token){ showDash(); boot().catch(()=>logout()); }
+</script>
+</body>
+</html>
