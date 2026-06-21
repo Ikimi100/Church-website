@@ -383,12 +383,14 @@ nav.scrolled {
     font-size: 1.5rem;
     font-weight: 400;
     line-height: 1;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
 }
 
 .logo-subtitle {
     font-size: 0.65rem;
-    text-transform: uppercase;
-    letter-spacing: 0.3em;
+    text-transform: none;
+    letter-spacing: 0.12em;
     color: var(--color-text-muted);
     margin-top: 0.25rem;
 }
@@ -1299,9 +1301,9 @@ section {
 
 .torah-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(3, 1fr);
     gap: 1.5rem;
-    max-width: 760px;
+    max-width: 1180px;
     margin: 0 auto;
 }
 
@@ -3814,84 +3816,112 @@ footer::before {
         padding: 0.85rem 1.5rem;
     }
 
-    /* Weekly Readings — compact 2-col grid like Our Ministries */
+    /* Weekly Readings — single-column, full-width cards (2 shown on phone) */
+    .torah-search {
+        max-width: 440px;
+        gap: 0.6rem;
+        margin-bottom: 1.75rem;
+    }
+
+    .torah-search-box {
+        flex: 1 1 100%;
+        padding: 0.8rem 1.1rem;
+    }
+
+    .torah-search-btn,
+    .torah-reset-btn {
+        flex: 1;
+        justify-content: center;
+    }
+
     .torah-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 0.75rem;
+        grid-template-columns: 1fr;
+        gap: 1.1rem;
+        max-width: 440px;
     }
 
     .torah-grid .torah-card {
-        padding: 0.95rem 0.85rem;
-        border-radius: 14px;
+        padding: 1.5rem 1.35rem;
+        border-radius: 20px;
+        border: 1px solid rgba(212,175,55,0.18);
+        background: rgba(17,17,17,0.72);
+    }
+
+    .torah-card.current {
+        border-color: rgba(212,175,55,0.5);
     }
 
     .torah-current-badge {
         position: static;
-        display: block;
+        display: inline-block;
         width: fit-content;
-        margin-bottom: 0.6rem;
-        font-size: 0.5rem;
-        padding: 0.22rem 0.5rem;
+        margin-bottom: 0.9rem;
+        font-size: 0.62rem;
+        padding: 0.3rem 0.7rem;
     }
 
     .torah-week-badge {
-        font-size: 0.55rem;
-        padding: 0.3rem 0.6rem;
-        margin-bottom: 0.7rem;
-        gap: 0.3rem;
+        font-size: 0.68rem;
+        padding: 0.4rem 0.85rem;
+        margin-bottom: 1rem;
+        gap: 0.45rem;
     }
 
     .torah-hebrew-name {
-        position: static;
+        position: absolute;
+        top: 1.5rem;
+        right: 1.35rem;
         display: block;
-        font-size: 1.05rem;
-        margin-bottom: 0.25rem;
-        opacity: 0.8;
+        font-size: 1.5rem;
+        margin-bottom: 0;
+        opacity: 0.6;
     }
 
     .torah-card h3 {
-        font-size: 1.05rem;
-        margin-bottom: 0.7rem;
+        font-size: 1.4rem;
+        margin-bottom: 1.1rem;
+        padding-right: 3.5rem;
     }
 
     .torah-readings {
-        gap: 0.5rem;
+        gap: 0.7rem;
     }
 
     .torah-reading {
-        padding: 0.5rem;
-        gap: 0.5rem;
-        border-radius: 9px;
+        padding: 0.8rem 0.85rem;
+        gap: 0.8rem;
+        border-radius: 12px;
+        align-items: center;
     }
 
     .torah-reading-icon {
-        width: 28px;
-        height: 28px;
-        font-size: 0.7rem;
-        border-radius: 8px;
+        width: 38px;
+        height: 38px;
+        font-size: 0.9rem;
+        border-radius: 10px;
     }
 
     .torah-reading-label {
-        font-size: 0.55rem;
-        margin-bottom: 0.1rem;
+        font-size: 0.62rem;
+        margin-bottom: 0.15rem;
     }
 
     .torah-reading-text {
-        font-size: 0.7rem;
-        line-height: 1.25;
+        font-size: 0.9rem;
+        line-height: 1.35;
     }
 
     .torah-date {
-        font-size: 0.65rem;
-        margin-top: 0.85rem;
-        padding-top: 0.85rem;
+        font-size: 0.82rem;
+        margin-top: 1.2rem;
+        padding-top: 1.2rem;
     }
 
     .torah-study-link {
-        margin-top: 0.85rem;
-        padding: 0.55rem;
-        font-size: 0.68rem;
-        border-radius: 9px;
+        margin-top: 1.1rem;
+        padding: 0.8rem;
+        font-size: 0.85rem;
+        border-radius: 12px;
     }
 
     .torah-nav-btn {

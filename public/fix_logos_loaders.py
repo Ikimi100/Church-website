@@ -4,7 +4,7 @@ import re
 new_loader = '''    <div class="loader" id="loader">
         <div class="loader-content">
             <div class="loader-logo">
-                <img src="images/logowtb.png" alt="Messianic Movement logo" class="loader-logo-img">
+                <img src="images/logowtb.png" alt="Messianic Mandate logo" class="loader-logo-img">
                 <div class="loader-ring"></div>
                 <div class="loader-ring loader-ring--soft"></div>
             </div>

@@ -51,7 +51,7 @@ function buildPage(slug) {
   let out = template;
 
   // title
-  out = out.replace(/<title>[\s\S]*?<\/title>/, `<title>Weekly Study | ${p.week} — Messianic Movement</title>`);
+  out = out.replace(/<title>[\s\S]*?<\/title>/, `<title>Weekly Study | ${p.week} — Messianic Mandate</title>`);
 
   // hero
   const hero =

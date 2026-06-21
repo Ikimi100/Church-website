@@ -405,7 +405,11 @@ const torahPortions = [
 ];
 
 // ==================== TORAH PORTIONS — SEARCHABLE GRID ====================
-const TORAH_VISIBLE_COUNT = 2;
+// Cards shown in the default (non-search) view: 3 on desktop, 2 on phone.
+const torahPhoneQuery = window.matchMedia('(max-width: 768px)');
+function getTorahVisibleCount() {
+    return torahPhoneQuery.matches ? 2 : 3;
+}
 
 function parseTorahDate(str) {
     const d = new Date(str);
@@ -490,14 +494,15 @@ function renderTorah() {
             );
         if (resetBtn) resetBtn.style.display = 'inline-flex';
     } else {
-        // Default: current/most-recent reading plus the upcoming ones (6 total)
+        // Default: current/most-recent reading plus the upcoming ones.
+        const visible = getTorahVisibleCount();
         let start = currentIdx;
-        if (start + TORAH_VISIBLE_COUNT > torahPortions.length) {
-            start = Math.max(0, torahPortions.length - TORAH_VISIBLE_COUNT);
+        if (start + visible > torahPortions.length) {
+            start = Math.max(0, torahPortions.length - visible);
         }
         items = torahPortions
             .map((p, i) => ({ p, i }))
-            .slice(start, start + TORAH_VISIBLE_COUNT);
+            .slice(start, start + visible);
         if (resetBtn) resetBtn.style.display = 'none';
     }
 
@@ -514,6 +519,13 @@ function resetTorah() {
 // Kept name for the load handler; now renders the searchable grid.
 function initTorahPortions() {
     renderTorah();
+}
+
+// Re-render when crossing the phone/desktop breakpoint so the card count adjusts.
+if (torahPhoneQuery.addEventListener) {
+    torahPhoneQuery.addEventListener('change', renderTorah);
+} else if (torahPhoneQuery.addListener) {
+    torahPhoneQuery.addListener(renderTorah);
 }
 
 // ==================== CALENDAR ====================

@@ -1,4 +1,4 @@
-# Phone-View Audit — Messianic Movement site
+# Phone-View Audit — Messianic Mandate site
 
 Scope: every page in `public/`, reviewed for small-screen (~360–390px) behaviour.
 Date: 2026-06-16.
