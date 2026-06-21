@@ -3988,7 +3988,10 @@ footer::before {
     }
 
     .logo-subtitle {
-        display: none;
+        display: block;
+        font-size: 0.55rem;
+        letter-spacing: 0.1em;
+        margin-top: 0.1rem;
     }
 
     .mobile-menu-toggle {
