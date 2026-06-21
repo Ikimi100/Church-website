@@ -19,3 +19,9 @@ donations.json
 
 # Local JSON data store (registrations, orders, expenses) — keep private
 data/
+
+# Backups
+*.bak
+
+# FUSE / mount temp artifacts
+.fuse_hidden*

@@ -7,6 +7,7 @@ const nodemailer = require('nodemailer');
 const helmet = require('helmet');
 const compression = require('compression');
 const { mountApi } = require('./src/api');
+const { getDb } = require('./src/db');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -165,6 +166,30 @@ app.post('/webhook', bodyParser.raw({ type: 'application/json' }), (req, res) =>
           created: new Date().toISOString()
         };
         appendDonation(donation);
+
+        // Also record into the admin "orders" collection so REAL Stripe donations
+        // show up in the dashboard alongside everything else. (Store purchases can
+        // be recorded the same way once you wire store checkout to Stripe.)
+        try {
+          const db = await getDb();
+          await db.insert('orders', {
+            type: 'donation',
+            reference: donation.id,
+            item: donation.category,
+            category: 'Donation',
+            quantity: 1,
+            amount: (donation.amount_total || 0) / 100,
+            currency: (donation.currency || 'usd').toUpperCase(),
+            customerName: donation.customer_name || '',
+            customerEmail: donation.customer_email || '',
+            channel: 'Online (Card)',
+            freq: donation.freq || 'one-time',
+            status: 'paid',
+            source: 'stripe',
+            stripeSessionId: donation.id,
+            createdAt: donation.created || new Date().toISOString(),
+          });
+        } catch (e) { console.error('Failed to record donation order:', e.message); }
 
         // send receipt email
         if (transporter && donation.customer_email) {
