@@ -1,131 +1,102 @@
 /* =====================================================================
-   Messianic Mandate — Shared mobile drawer navigation
-   Builds an OK-style slide-in drawer (icon/title/subtitle cards, CTA,
-   social row) and injects a hamburger trigger. Self-contained: works on
-   every page regardless of that page's own nav markup.
+   Messianic Mandate — Shared mobile navigation (simple + reliable)
+   A hamburger fixed in the header corner opens a clean opaque dropdown
+   anchored just under the header. Self-contained; works on every page.
    ===================================================================== */
 (function () {
-    if (window.__mmDrawerInit) return;
-    window.__mmDrawerInit = true;
+    if (window.__smNavInit) return;
+    window.__smNavInit = true;
 
-    var NAV = [
-        { t: 'Home',            s: 'Welcome & latest',         i: 'fa-house',              h: 'index.html#home' },
-        { t: 'About',           s: 'Our story & beliefs',      i: 'fa-circle-info',        h: 'about_church.html' },
-        { t: 'Ministries',      s: 'Dimensions of faith',      i: 'fa-hands-praying',      h: 'index.html#ministries' },
-        { t: 'Calendar',        s: 'Feasts & appointed times', i: 'fa-calendar-day',       h: 'index.html#calendar' },
-        { t: 'Weekly Torah',    s: 'Parashah readings',        i: 'fa-book-open',          h: 'index.html#torah' },
-        { t: 'Watch Live',      s: 'Sermons & live stream',    i: 'fa-play',               h: 'watch.html' },
-        { t: 'Prayer Request',  s: 'Submit to the Upper Room', i: 'fa-hand-holding-heart', h: 'prayer_request.html' },
-        { t: 'Giving',          s: 'Partner & support',        i: 'fa-gift',               h: 'giving.html' },
-        { t: 'Store',           s: 'Books & materials',        i: 'fa-bag-shopping',       h: 'items.html' },
-        { t: 'Register',        s: 'Join / volunteer',         i: 'fa-user-plus',          h: 'register.html' }
+    var LINKS = [
+        { t: 'Home',           i: 'fa-house',              h: 'index.html#home' },
+        { t: 'About',          i: 'fa-circle-info',        h: 'about_church.html' },
+        { t: 'Ministries',     i: 'fa-hands-praying',      h: 'index.html#ministries' },
+        { t: 'Calendar',       i: 'fa-calendar-day',       h: 'index.html#calendar' },
+        { t: 'Weekly Torah',   i: 'fa-book-open',          h: 'index.html#torah' },
+        { t: 'Watch Live',     i: 'fa-play',               h: 'watch.html' },
+        { t: 'Prayer Request', i: 'fa-hand-holding-heart', h: 'prayer_request.html' },
+        { t: 'Giving',         i: 'fa-gift',               h: 'giving.html' },
+        { t: 'Store',          i: 'fa-bag-shopping',       h: 'items.html' },
+        { t: 'Register',       i: 'fa-user-plus',          h: 'register.html' }
     ];
-
-    var SOCIAL = [
-        { i: 'fa-facebook-f', h: 'https://facebook.com/messianicmovement', a: 'Facebook' },
-        { i: 'fa-instagram',  h: 'https://instagram.com/messianicmovement', a: 'Instagram' },
-        { i: 'fa-twitter',    h: 'https://twitter.com/messianicmvmt', a: 'Twitter / X' },
-        { i: 'fa-youtube',    h: 'https://youtube.com/@messianicmovement', a: 'YouTube' }
-    ];
-
-    var LOGO = 'images/logowtb.png';
-
-    function el(tag, cls, html) {
-        var e = document.createElement(tag);
-        if (cls) e.className = cls;
-        if (html != null) e.innerHTML = html;
-        return e;
-    }
 
     function build() {
-        var burger = el('button', null, '<span></span><span></span><span></span>');
-        burger.id = 'mmBurger';
+        var burger = document.createElement('button');
+        burger.id = 'smBurger';
         burger.type = 'button';
         burger.setAttribute('aria-label', 'Open menu');
+        burger.setAttribute('aria-expanded', 'false');
+        burger.innerHTML = '<span></span><span></span><span></span>';
 
-        var backdrop = el('div');
-        backdrop.id = 'mmBackdrop';
-
-        var drawer = el('div');
-        drawer.id = 'mmDrawer';
-        drawer.setAttribute('role', 'dialog');
-        drawer.setAttribute('aria-label', 'Site navigation');
-
-        var head = el('div', 'mm-head');
-        head.innerHTML =
-            '<div class="mm-head-logo"><img src="' + LOGO + '" alt="Messianic Mandate"></div>' +
-            '<div class="mm-head-text">' +
-                '<div class="mm-head-title">Messianic Mandate</div>' +
-                '<div class="mm-head-sub">Powered by WHARM</div>' +
-            '</div>';
-        var closeBtn = el('button', 'mm-close', '<i class="fas fa-xmark"></i>');
-        closeBtn.type = 'button';
-        closeBtn.setAttribute('aria-label', 'Close menu');
-        head.appendChild(closeBtn);
-        drawer.appendChild(head);
-
-        drawer.appendChild(el('div', 'mm-label', 'Navigate'));
-        var nav = el('nav', 'mm-nav');
-        NAV.forEach(function (n) {
-            var a = el('a', 'mm-item');
-            a.href = n.h;
-            a.innerHTML =
-                '<span class="mm-ic"><i class="fas ' + n.i + '"></i></span>' +
-                '<span class="mm-tx"><span class="mm-tx-t">' + n.t + '</span>' +
-                '<span class="mm-tx-s">' + n.s + '</span></span>' +
-                '<i class="fas fa-chevron-right mm-chev"></i>';
-            nav.appendChild(a);
+        var menu = document.createElement('div');
+        menu.id = 'smMenu';
+        menu.setAttribute('role', 'navigation');
+        LINKS.forEach(function (l) {
+            var a = document.createElement('a');
+            a.className = 'smItem';
+            a.href = l.h;
+            a.innerHTML = '<i class="fas ' + l.i + '"></i>' + l.t;
+            menu.appendChild(a);
         });
-        drawer.appendChild(nav);
+        var cta = document.createElement('a');
+        cta.className = 'smItem smCta';
+        cta.href = 'register.html';
+        cta.innerHTML = '<i class="fas fa-fire"></i> Join the Movement';
+        menu.appendChild(cta);
 
-        var cta = el('div', 'mm-cta');
-        cta.innerHTML =
-            '<span class="mm-cta-tag"><i class="fas fa-fire"></i> Join the Movement</span>' +
-            '<div class="mm-cta-h">Walk in the Power of the Spirit.</div>' +
-            '<p class="mm-cta-p">Add your voice to a global community of Spirit-filled believers.</p>' +
-            '<a class="mm-cta-btn" href="register.html">Join Us <i class="fas fa-arrow-right"></i></a>';
-        drawer.appendChild(cta);
-
-        drawer.appendChild(el('div', 'mm-label', 'Follow the Movement'));
-        var soc = el('div', 'mm-social');
-        SOCIAL.forEach(function (s) {
-            var a = el('a', null, '<i class="fab ' + s.i + '"></i>');
-            a.href = s.h; a.target = '_blank'; a.rel = 'noopener noreferrer';
-            a.setAttribute('aria-label', s.a);
-            soc.appendChild(a);
-        });
-        drawer.appendChild(soc);
-
-        drawer.appendChild(el('div', 'mm-copy',
-            '&copy; ' + new Date().getFullYear() + ' Messianic Mandate &middot; Powered by WHARM'));
-
+        document.body.appendChild(menu);
         document.body.appendChild(burger);
-        document.body.appendChild(backdrop);
-        document.body.appendChild(drawer);
+
+        // Anchor the menu just below the page header (fall back to the
+        // burger's own position when no visible header is found).
+        function position() {
+            var header = document.querySelector(
+                '#navbar, nav, header, .study-nav, .watch-header');
+            var top = 60;
+            if (header) {
+                var r = header.getBoundingClientRect();
+                if (r.height > 0 && r.bottom > 0) top = Math.round(r.bottom);
+            }
+            if (top < 52) top = 52;
+            menu.style.top = top + 'px';
+            menu.style.maxHeight = 'calc(100vh - ' + top + 'px)';
+        }
 
         function open() {
-            drawer.classList.add('mm-open');
-            backdrop.classList.add('mm-open');
-            document.body.classList.add('mm-locked');
+            position();
+            menu.classList.add('open');
+            burger.classList.add('active');
+            document.body.classList.add('sm-locked');
+            burger.setAttribute('aria-label', 'Close menu');
             burger.setAttribute('aria-expanded', 'true');
         }
         function close() {
-            drawer.classList.remove('mm-open');
-            backdrop.classList.remove('mm-open');
-            document.body.classList.remove('mm-locked');
+            menu.classList.remove('open');
+            burger.classList.remove('active');
+            document.body.classList.remove('sm-locked');
+            burger.setAttribute('aria-label', 'Open menu');
             burger.setAttribute('aria-expanded', 'false');
         }
+        function toggle() { menu.classList.contains('open') ? close() : open(); }
 
-        burger.addEventListener('click', open);
-        closeBtn.addEventListener('click', close);
-        backdrop.addEventListener('click', close);
+        burger.addEventListener('click', function (e) { e.stopPropagation(); toggle(); });
+        menu.querySelectorAll('a').forEach(function (a) {
+            a.addEventListener('click', close);
+        });
+        document.addEventListener('click', function (e) {
+            if (menu.classList.contains('open') &&
+                !menu.contains(e.target) && e.target !== burger && !burger.contains(e.target)) {
+                close();
+            }
+        });
         document.addEventListener('keydown', function (e) {
-            if (e.key === 'Escape' && drawer.classList.contains('mm-open')) close();
+            if (e.key === 'Escape' && menu.classList.contains('open')) close();
         });
-        nav.querySelectorAll('a').forEach(function (a) {
-            a.addEventListener('click', function () { setTimeout(close, 60); });
+        window.addEventListener('resize', function () {
+            if (menu.classList.contains('open')) position();
         });
 
+        // Remove any legacy hamburgers injected by per-page scripts
         document.querySelectorAll('.mobile-menu-toggle, .mobile-menu-btn, .mm-burger').forEach(function (b) {
             b.style.display = 'none';
         });

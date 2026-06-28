@@ -1,34 +1,26 @@
 /* =====================================================================
-   Messianic Mandate — Shared mobile enhancements
-   - OK-style slide-in drawer navigation (phone view)
-   - Centered footer on phone view (all footer variants)
-   Loaded on every page. Drawer markup is built by site-mobile.js.
-   Fonts are intentionally left to each page (Cormorant Garamond +
-   Space Grotesk) — no global font override here.
+   Messianic Mandate — Shared mobile navigation + footer
+   Simple, robust phone-view navigation: a hamburger fixed in the header
+   corner that opens a clean opaque dropdown anchored just under the
+   header. No full-height drawer, no sticky header, no backdrop-filter
+   (those caused overlap + scroll ghosting on Android).
+   Plus centered footers on phones. No global font override.
    ===================================================================== */
 
 :root {
     --mm-gold: #d4af37;
-    --mm-gold-soft: rgba(212, 175, 55, 0.12);
-    --mm-gold-line: rgba(212, 175, 55, 0.22);
-    --mm-ink: #050507;
-    --mm-panel: #0c0c10;
+    --mm-gold-soft: rgba(212, 175, 55, 0.14);
+    --mm-gold-line: rgba(212, 175, 55, 0.30);
     --mm-text: #f4f4f6;
     --mm-text-dim: #9a9aa4;
     --mm-font: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
-/* =====================================================================
-   1. MOBILE DRAWER NAVIGATION  (phone view only)
-   Deliberately avoids position:sticky and backdrop-filter inside the
-   scrolling panel — both trigger paint/ghosting bugs on Android Chrome.
-   ===================================================================== */
-
-/* Hamburger trigger — fixed top-right so it shows over any nav layout */
-#mmBurger {
+/* ---- Hamburger (sits in the top-right of the header) ---- */
+#smBurger {
     display: none;
     position: fixed;
-    top: 14px;
+    top: 13px;
     right: 14px;
     width: 46px;
     height: 46px;
@@ -40,213 +32,92 @@
     padding: 0;
     margin: 0;
     border: 1px solid var(--mm-gold-line);
-    border-radius: 13px;
-    background: #0d0d11;
+    border-radius: 12px;
+    background: rgba(8, 8, 10, 0.92);
     cursor: pointer;
-    transition: border-color .25s ease, transform .15s ease;
+    transition: border-color .2s ease, transform .12s ease;
 }
-#mmBurger:active { transform: scale(0.94); }
-#mmBurger span {
+#smBurger span {
     display: block;
     width: 20px;
     height: 2px;
     border-radius: 2px;
     background: var(--mm-gold);
+    transition: transform .25s ease, opacity .2s ease;
 }
+#smBurger:active { transform: scale(0.94); }
+#smBurger.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+#smBurger.active span:nth-child(2) { opacity: 0; }
+#smBurger.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
-/* Backdrop (solid, no blur) */
-#mmBackdrop {
+/* ---- Dropdown menu (anchored under the header) ---- */
+#smMenu {
     position: fixed;
-    inset: 0;
-    z-index: 10060;
-    background: rgba(0, 0, 0, 0.62);
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity .3s ease, visibility .3s ease;
-}
-#mmBackdrop.mm-open { opacity: 1; visibility: visible; }
-
-/* The sliding panel — opaque background, normal-flow children */
-#mmDrawer {
-    position: fixed;
-    top: 0;
+    top: 64px;
+    left: 0;
     right: 0;
-    bottom: 0;
-    height: 100%;
-    width: min(420px, 90vw);
-    z-index: 10070;
-    background: #0a0a0d;
-    border-left: 1px solid var(--mm-gold-line);
-    box-shadow: -24px 0 60px rgba(0, 0, 0, 0.5);
-    transform: translateX(105%);
-    transition: transform .38s cubic-bezier(0.22, 1, 0.36, 1);
+    z-index: 10040;
+    background: #0b0b0e;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    border-bottom: 1px solid var(--mm-gold-line);
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.55);
+    max-height: calc(100vh - 64px);
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
     overscroll-behavior: contain;
     font-family: var(--mm-font);
-    padding: 0 18px calc(28px + env(safe-area-inset-bottom));
+    transform: translateY(-14px);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity .25s ease, transform .28s ease, visibility .25s ease;
 }
-#mmDrawer.mm-open { transform: translateX(0); }
-#mmDrawer * { font-family: var(--mm-font); box-sizing: border-box; }
+#smMenu.open { transform: translateY(0); opacity: 1; visibility: visible; }
 
-/* Drawer header — STATIC + solid (no sticky, no transparency) */
-.mm-head {
+.smItem {
     display: flex;
     align-items: center;
     gap: 12px;
-    padding: 20px 4px 18px;
-    margin-bottom: 4px;
-    background: #0a0a0d;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-}
-.mm-head-logo {
-    width: 46px; height: 46px; flex: 0 0 46px;
-    border-radius: 50%;
-    border: 1px solid var(--mm-gold-line);
-    background: rgba(255,255,255,0.06);
-    display: flex; align-items: center; justify-content: center;
-    overflow: hidden;
-}
-.mm-head-logo img { width: 100%; height: 100%; object-fit: contain; }
-.mm-head-text { flex: 1; min-width: 0; }
-.mm-head-title {
-    font-size: 1.05rem; font-weight: 700; color: var(--mm-text);
-    line-height: 1.15; letter-spacing: -0.01em;
-}
-.mm-head-sub {
-    font-size: 0.62rem; font-weight: 600; letter-spacing: 0.18em;
-    text-transform: uppercase; color: var(--mm-gold); margin-top: 4px;
-}
-.mm-close {
-    width: 40px; height: 40px; flex: 0 0 40px;
-    border-radius: 50%;
-    border: 1px solid var(--mm-gold-line);
-    background: rgba(255,255,255,0.04);
+    padding: 15px 22px;
     color: var(--mm-text);
-    font-size: 1rem; cursor: pointer;
-    display: flex; align-items: center; justify-content: center;
-    transition: background .2s ease, color .2s ease;
-}
-.mm-close:active { background: var(--mm-gold-soft); color: var(--mm-gold); }
-
-/* Section label ("NAVIGATE", "FOLLOW THE MOVEMENT") */
-.mm-label {
-    display: flex; align-items: center; gap: 12px;
-    font-size: 0.64rem; font-weight: 700; letter-spacing: 0.22em;
-    text-transform: uppercase; color: var(--mm-text-dim);
-    margin: 20px 4px 12px;
-}
-.mm-label::before {
-    content: ''; width: 26px; height: 2px; border-radius: 2px;
-    background: var(--mm-gold); flex: 0 0 26px;
-}
-
-/* Navigation card list */
-.mm-nav {
-    background: rgba(255, 255, 255, 0.025);
-    border: 1px solid rgba(255, 255, 255, 0.06);
-    border-radius: 20px;
-    overflow: hidden;
-}
-.mm-item {
-    display: flex; align-items: center; gap: 14px;
-    padding: 15px 16px;
     text-decoration: none;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-    transition: background .2s ease;
+    font-size: 1.02rem;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.055);
 }
-.mm-item:last-child { border-bottom: none; }
-.mm-item:active { background: var(--mm-gold-soft); }
-.mm-ic {
-    width: 44px; height: 44px; flex: 0 0 44px;
-    border-radius: 13px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 1.05rem; color: var(--mm-gold);
-    background: rgba(212,175,55,0.08);
-    border: 1px solid var(--mm-gold-line);
-}
-.mm-tx { flex: 1; min-width: 0; }
-.mm-tx-t {
-    display: block;
-    font-size: 1rem; font-weight: 700; color: var(--mm-text);
-    line-height: 1.2; letter-spacing: -0.01em;
-}
-.mm-tx-s {
-    display: block;
-    font-size: 0.78rem; color: var(--mm-text-dim);
-    margin-top: 3px; line-height: 1.25;
-}
-.mm-chev { color: var(--mm-text-dim); font-size: 0.85rem; flex: 0 0 auto; }
+.smItem:last-child { border-bottom: none; }
+.smItem i { color: var(--mm-gold); width: 22px; text-align: center; font-size: 0.95rem; flex: 0 0 22px; }
+.smItem:active { background: var(--mm-gold-soft); color: var(--mm-gold); }
+.smItem:active i { color: var(--mm-gold); }
 
-/* CTA card */
-.mm-cta {
-    margin-top: 22px;
-    border-radius: 22px;
-    padding: 24px 22px;
-    background: #d4af37;
-}
-.mm-cta-tag {
-    display: inline-flex; align-items: center; gap: 7px;
-    font-size: 0.62rem; font-weight: 800; letter-spacing: 0.16em;
+/* CTA row at the bottom of the menu */
+.smItem.smCta {
+    margin: 12px;
+    border: none;
+    border-radius: 12px;
+    background: var(--mm-gold);
+    color: #14100a;
+    font-weight: 800;
+    justify-content: center;
     text-transform: uppercase;
-    background: rgba(0,0,0,0.16); color: #1a1407;
-    padding: 6px 12px; border-radius: 100px; margin-bottom: 14px;
+    letter-spacing: 0.04em;
+    font-size: 0.95rem;
 }
-.mm-cta-h {
-    font-size: 1.4rem; font-weight: 800; line-height: 1.18;
-    letter-spacing: -0.02em; margin-bottom: 8px; color: #14100a;
-}
-.mm-cta-p {
-    font-size: 0.85rem; line-height: 1.5; color: #3a2f12;
-    margin-bottom: 18px;
-}
-.mm-cta-btn {
-    display: flex; align-items: center; justify-content: center; gap: 10px;
-    width: 100%; padding: 15px;
-    background: #fff; color: #1a1407;
-    border-radius: 100px; text-decoration: none;
-    font-weight: 800; font-size: 0.9rem; letter-spacing: 0.04em;
-    text-transform: uppercase;
-}
+.smItem.smCta i { color: #14100a; }
 
-/* Social row */
-.mm-social {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 12px;
-}
-.mm-social a {
-    aspect-ratio: 1 / 1;
-    border-radius: 16px;
-    background: rgba(255,255,255,0.04);
-    border: 1px solid rgba(255,255,255,0.08);
-    color: var(--mm-text);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 1.15rem; text-decoration: none;
-    transition: background .2s ease, color .2s ease;
-}
-.mm-social a:active { background: var(--mm-gold-soft); color: var(--mm-gold); }
+body.sm-locked { overflow: hidden !important; }
 
-/* Drawer copyright */
-.mm-copy {
-    text-align: center; color: var(--mm-text-dim);
-    font-size: 0.72rem; margin-top: 24px; line-height: 1.5;
-}
-
-/* Lock body scroll while drawer is open */
-body.mm-locked { overflow: hidden !important; }
-
-/* Show drawer controls only on phone view; hide ALL legacy mobile toggles */
+/* Show on phones; hide all legacy mobile toggles to avoid duplicates */
 @media (max-width: 768px) {
-    #mmBurger { display: flex; }
+    #smBurger { display: flex; }
     .mobile-menu-toggle, .mobile-menu-btn, .mm-burger { display: none !important; }
 }
 @media (min-width: 769px) {
-    #mmBurger, #mmBackdrop, #mmDrawer { display: none !important; }
+    #smBurger, #smMenu { display: none !important; }
 }
 
 /* =====================================================================
-   2. CENTERED FOOTER  (phone view only) — covers every footer variant
+   CENTERED FOOTER  (phone view only) — covers every footer variant
    ===================================================================== */
 @media (max-width: 768px) {
 
