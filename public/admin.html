@@ -87,6 +87,8 @@
   @media(max-width:820px){.cards{grid-template-columns:repeat(2,1fr)}}
   @media(max-width:520px){.cards{grid-template-columns:1fr}}
 </style>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="site-mobile.css?v=1">
 </head>
 <body>
 
@@ -349,5 +351,6 @@ $('#loginForm').addEventListener('submit', async (e)=>{
 // auto-enter if token present
 if(token){ showDash(); boot().catch(()=>logout()); }
 </script>
+    <script src="site-mobile.js?v=1"></script>
 </body>
 </html>
