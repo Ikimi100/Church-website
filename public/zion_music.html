@@ -734,7 +734,6 @@
         display: none !important;
     }
 </style>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="site-mobile.css?v=1">
 </head>
 <body>
@@ -742,6 +741,213 @@
     <div class="vignette"></div>
     <div class="cursor" id="cursor"></div>
     <div class="cursor-dot" id="cursorDot"></div>
+
+    <!-- ====================================================================
+         SPOTIFY-STYLE MOBILE VIEW (phone only). Desktop layout untouched.
+         ==================================================================== -->
+    <style>
+      .spfy{ display:none; }
+      @media (max-width: 768px){
+        #navbar, .music-hero, .tracklist-section, .categories-section,
+        .hymn-section, footer, #nowPlayingBar, .grain-overlay, .vignette,
+        .cursor, .cursor-dot { display:none !important; }
+        body{ background:#121212 !important; color:#fff; cursor:auto;
+              padding:0 0 132px !important; }
+
+        .spfy{ display:block; font-family:'Space Grotesk',sans-serif;
+               padding:16px 16px 0; }
+
+        .spfy-top{ display:flex; align-items:center; gap:10px;
+                   padding:6px 52px 14px 0; flex-wrap:wrap; }
+        .spfy-ava{ width:34px;height:34px;border-radius:50%;
+                   background:linear-gradient(135deg,#1ed760,#0a8f3c);
+                   color:#06250f;font-weight:700;font-size:0.95rem;
+                   display:flex;align-items:center;justify-content:center;flex:0 0 34px; }
+        .spfy-chip{ background:#232323;color:#fff;border:none;
+                    padding:8px 16px;border-radius:100px;font-size:0.82rem;
+                    font-weight:600;cursor:pointer;font-family:inherit; }
+        .spfy-chip.active{ background:#1ed760;color:#06250f; }
+
+        .spfy-grid{ display:grid;grid-template-columns:repeat(2,1fr);
+                    gap:8px;margin-bottom:26px; }
+        .spfy-tile{ display:flex;align-items:center;gap:10px;
+                    background:#2a2a2a;border-radius:6px;overflow:hidden;
+                    text-decoration:none;color:#fff;min-height:56px; }
+        .spfy-tile:active{ background:#3a3a3a; }
+        .spfy-tile-art{ width:56px;height:56px;flex:0 0 56px;
+                        display:flex;align-items:center;justify-content:center;
+                        font-size:1.1rem;color:#fff;overflow:hidden; }
+        .spfy-tile-art img{ width:100%;height:100%;object-fit:cover; }
+        .spfy-tile span{ font-size:0.82rem;font-weight:700;line-height:1.15;
+                         padding-right:8px; }
+
+        .spfy-h{ font-size:1.3rem;font-weight:700;letter-spacing:-0.01em;
+                 margin:0 0 14px;color:#fff; }
+        .spfy-row{ display:flex;gap:14px;overflow-x:auto;
+                   margin:0 -16px 26px;padding:0 16px 4px;
+                   -webkit-overflow-scrolling:touch;scrollbar-width:none; }
+        .spfy-row::-webkit-scrollbar{ display:none; }
+        .spfy-card{ flex:0 0 150px;text-decoration:none;color:#fff; }
+        .spfy-card-art{ width:150px;height:150px;border-radius:6px;
+                        overflow:hidden;margin-bottom:8px;background:#2a2a2a; }
+        .spfy-card-art img{ width:100%;height:100%;object-fit:cover; }
+        .spfy-card-t{ font-size:0.9rem;font-weight:700;line-height:1.2;
+                      margin-bottom:2px; }
+        .spfy-card-s{ font-size:0.78rem;color:#a7a7a7;line-height:1.3; }
+
+        .spfy-now{ position:fixed;left:8px;right:8px;bottom:60px;z-index:1400;
+                   display:flex;align-items:center;gap:10px;
+                   background:#3e4a3a;border-radius:8px;padding:8px 10px; }
+        .spfy-now-art{ width:42px;height:42px;border-radius:5px;
+                       object-fit:cover;flex:0 0 42px; }
+        .spfy-now-tx{ flex:1;min-width:0; }
+        .spfy-now-t{ font-size:0.84rem;font-weight:700;white-space:nowrap;
+                     overflow:hidden;text-overflow:ellipsis; }
+        .spfy-now-s{ font-size:0.74rem;color:#cfcfcf;white-space:nowrap;
+                     overflow:hidden;text-overflow:ellipsis; }
+        .spfy-now-dev{ color:#1ed760;font-size:1rem;padding:0 4px; }
+        .spfy-now-play{ width:30px;height:30px;border:none;background:none;
+                        color:#fff;font-size:1.05rem;cursor:pointer;
+                        display:flex;align-items:center;justify-content:center; }
+
+        .spfy-tabs{ position:fixed;left:0;right:0;bottom:0;z-index:1400;
+                    height:60px;background:#0b0b0b;display:flex;
+                    border-top:1px solid rgba(255,255,255,0.06); }
+        .spfy-tab{ flex:1;display:flex;flex-direction:column;align-items:center;
+                   justify-content:center;gap:3px;text-decoration:none;
+                   color:#a7a7a7;font-size:0.66rem;font-weight:600; }
+        .spfy-tab i{ font-size:1.15rem; }
+        .spfy-tab.active{ color:#fff; }
+      }
+    </style>
+
+    <div class="spfy">
+      <div class="spfy-top">
+        <div class="spfy-ava">Z</div>
+        <button class="spfy-chip active">All</button>
+        <button class="spfy-chip">Music</button>
+        <button class="spfy-chip">Hymns</button>
+      </div>
+
+      <div class="spfy-grid">
+        <a class="spfy-tile" href="#" onclick="spfyPlay('Liked Songs','Zion Worship','https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=200&q=80');return false;">
+          <span class="spfy-tile-art" style="background:linear-gradient(135deg,#6a3df0,#c1a7ff);"><i class="fas fa-heart"></i></span>
+          <span>Liked Songs</span>
+        </a>
+        <a class="spfy-tile" href="#" onclick="spfyPlay('Holy Ghost Fire','Zion Worship Choir','https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?w=200&q=80');return false;">
+          <span class="spfy-tile-art"><img src="https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?w=200&q=80" alt=""></span>
+          <span>Zion Worship Live</span>
+        </a>
+        <a class="spfy-tile" href="#" onclick="spfyPlay('Sacred Songs &amp; Solos','Hymns of Faith','https://images.unsplash.com/photo-1507838153414-b4b713384a76?w=200&q=80');return false;">
+          <span class="spfy-tile-art"><img src="https://images.unsplash.com/photo-1507838153414-b4b713384a76?w=200&q=80" alt=""></span>
+          <span>Sacred Songs &amp; Solos</span>
+        </a>
+        <a class="spfy-tile" href="#" onclick="spfyPlay('Amazing Grace','Hymns of the Faith','https://images.unsplash.com/photo-1510915361894-db8b60106cb1?w=200&q=80');return false;">
+          <span class="spfy-tile-art"><img src="https://images.unsplash.com/photo-1510915361894-db8b60106cb1?w=200&q=80" alt=""></span>
+          <span>Hymns of Faith</span>
+        </a>
+        <a class="spfy-tile" href="#" onclick="spfyPlay('Way Maker (Live)','Zion Worship Choir','https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=200&q=80');return false;">
+          <span class="spfy-tile-art"><img src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=200&q=80" alt=""></span>
+          <span>Miracle Night</span>
+        </a>
+        <a class="spfy-tile" href="#" onclick="spfyPlay('Graves into Gardens','Zion Worship Choir','https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=200&q=80');return false;">
+          <span class="spfy-tile-art"><img src="https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=200&q=80" alt=""></span>
+          <span>Resurrection Power</span>
+        </a>
+        <a class="spfy-tile" href="#" onclick="spfyPlay('Raise a Hallelujah','Zion Worship Choir','https://images.unsplash.com/photo-1493225255756-d9584f8606e9?w=200&q=80');return false;">
+          <span class="spfy-tile-art"><img src="https://images.unsplash.com/photo-1493225255756-d9584f8606e9?w=200&q=80" alt=""></span>
+          <span>Victory Sessions</span>
+        </a>
+        <a class="spfy-tile" href="#" onclick="spfyPlay('Build My Life','Zion Worship Choir','https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=200&q=80');return false;">
+          <span class="spfy-tile-art"><img src="https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=200&q=80" alt=""></span>
+          <span>Instrumental</span>
+        </a>
+      </div>
+
+      <h2 class="spfy-h">New from Zion</h2>
+      <div class="spfy-row">
+        <a class="spfy-card" href="#" onclick="spfyPlay('Holy Ghost Fire','Zion Worship Choir','https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?w=300&q=80');return false;">
+          <div class="spfy-card-art"><img src="https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?w=300&q=80" alt=""></div>
+          <div class="spfy-card-t">Zion Worship Live</div>
+          <div class="spfy-card-s">Zion Worship Choir</div>
+        </a>
+        <a class="spfy-card" href="#" onclick="spfyPlay('Spirit Break Out','Zion Worship Choir','https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=300&q=80');return false;">
+          <div class="spfy-card-art"><img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=300&q=80" alt=""></div>
+          <div class="spfy-card-t">Outpouring</div>
+          <div class="spfy-card-s">Zion Worship Choir</div>
+        </a>
+        <a class="spfy-card" href="#" onclick="spfyPlay('Way Maker (Live)','Zion Worship Choir','https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=300&q=80');return false;">
+          <div class="spfy-card-art"><img src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=300&q=80" alt=""></div>
+          <div class="spfy-card-t">Miracle Night</div>
+          <div class="spfy-card-s">Zion Worship Choir</div>
+        </a>
+        <a class="spfy-card" href="#" onclick="spfyPlay('Goodness of God','Zion Worship Choir','https://images.unsplash.com/photo-1510915361894-db8b60106cb1?w=300&q=80');return false;">
+          <div class="spfy-card-art"><img src="https://images.unsplash.com/photo-1510915361894-db8b60106cb1?w=300&q=80" alt=""></div>
+          <div class="spfy-card-t">Glory Sessions</div>
+          <div class="spfy-card-s">Zion Worship Choir</div>
+        </a>
+      </div>
+
+      <h2 class="spfy-h">Jump back in</h2>
+      <div class="spfy-row">
+        <a class="spfy-card" href="#" onclick="spfyPlay('Raise a Hallelujah','Zion Worship Choir','https://images.unsplash.com/photo-1493225255756-d9584f8606e9?w=300&q=80');return false;">
+          <div class="spfy-card-art"><img src="https://images.unsplash.com/photo-1493225255756-d9584f8606e9?w=300&q=80" alt=""></div>
+          <div class="spfy-card-t">Victory Sessions</div>
+          <div class="spfy-card-s">Zion Worship Choir</div>
+        </a>
+        <a class="spfy-card" href="#" onclick="spfyPlay('Graves into Gardens','Zion Worship Choir','https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=300&q=80');return false;">
+          <div class="spfy-card-art"><img src="https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=300&q=80" alt=""></div>
+          <div class="spfy-card-t">Resurrection Power</div>
+          <div class="spfy-card-s">Zion Worship Choir</div>
+        </a>
+        <a class="spfy-card" href="#" onclick="spfyPlay('Amazing Grace','Hymns of the Faith','https://images.unsplash.com/photo-1507838153414-b4b713384a76?w=300&q=80');return false;">
+          <div class="spfy-card-art"><img src="https://images.unsplash.com/photo-1507838153414-b4b713384a76?w=300&q=80" alt=""></div>
+          <div class="spfy-card-t">Hymns of Faith</div>
+          <div class="spfy-card-s">Sacred Songs &amp; Solos</div>
+        </a>
+        <a class="spfy-card" href="#" onclick="spfyPlay('Build My Life','Zion Worship Choir','https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=300&q=80');return false;">
+          <div class="spfy-card-art"><img src="https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=300&q=80" alt=""></div>
+          <div class="spfy-card-t">Foundation</div>
+          <div class="spfy-card-s">Zion Worship Choir</div>
+        </a>
+      </div>
+
+      <div class="spfy-now" id="spfyNow">
+        <img class="spfy-now-art" id="spfyNowArt" src="https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?w=200&q=80" alt="">
+        <div class="spfy-now-tx">
+          <div class="spfy-now-t" id="spfyNowT">Holy Ghost Fire</div>
+          <div class="spfy-now-s" id="spfyNowS">Zion Worship Choir</div>
+        </div>
+        <i class="fas fa-headphones spfy-now-dev"></i>
+        <i class="fas fa-circle-check spfy-now-dev"></i>
+        <button class="spfy-now-play" id="spfyNowPlay" onclick="spfyToggle()" aria-label="Play"><i class="fas fa-play"></i></button>
+      </div>
+
+      <nav class="spfy-tabs">
+        <a class="spfy-tab active" href="#"><i class="fas fa-house"></i><span>Home</span></a>
+        <a class="spfy-tab" href="index.html#torah"><i class="fas fa-magnifying-glass"></i><span>Search</span></a>
+        <a class="spfy-tab" href="#"><i class="fas fa-book-bookmark"></i><span>Your Library</span></a>
+        <a class="spfy-tab" href="index.html#live"><i class="fas fa-tower-broadcast"></i><span>Live</span></a>
+      </nav>
+    </div>
+
+    <script>
+      window.__spfyPlaying = false;
+      function spfyPlay(title, artist, img){
+        var t=document.getElementById('spfyNowT'), s=document.getElementById('spfyNowS'),
+            a=document.getElementById('spfyNowArt'), p=document.getElementById('spfyNowPlay');
+        if(t) t.textContent=title;
+        if(s) s.textContent=artist;
+        if(a && img) a.src=img;
+        window.__spfyPlaying=true;
+        if(p) p.innerHTML='<i class="fas fa-pause"></i>';
+      }
+      function spfyToggle(){
+        window.__spfyPlaying=!window.__spfyPlaying;
+        var p=document.getElementById('spfyNowPlay');
+        if(p) p.innerHTML=window.__spfyPlaying?'<i class="fas fa-pause"></i>':'<i class="fas fa-play"></i>';
+      }
+    </script>
 
     <nav id="navbar" class="scrolled" style="background: rgba(5,5,5,0.85); backdrop-filter: blur(20px);">
         <div class="nav-container">

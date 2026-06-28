@@ -1,9 +1,10 @@
 /* =====================================================================
    Messianic Mandate — Shared mobile enhancements
-   - Plus Jakarta Sans typography (all viewports)
    - OK-style slide-in drawer navigation (phone view)
    - Centered footer on phone view (all footer variants)
    Loaded on every page. Drawer markup is built by site-mobile.js.
+   Fonts are intentionally left to each page (Cormorant Garamond +
+   Space Grotesk) — no global font override here.
    ===================================================================== */
 
 :root {
@@ -14,42 +15,13 @@
     --mm-panel: #0c0c10;
     --mm-text: #f4f4f6;
     --mm-text-dim: #9a9aa4;
-}
-
-/* ---------------------------------------------------------------------
-   1. TYPOGRAPHY — Plus Jakarta Sans everywhere
-   An !important rule in this stylesheet beats inline font-family on
-   elements, so it remaps the old Cormorant / Space Grotesk usage too.
-   Font Awesome glyphs are restored immediately afterwards.
-   --------------------------------------------------------------------- */
-body,
-h1, h2, h3, h4, h5, h6,
-p, a, span, div, li, ul, ol, td, th, tr, table,
-button, input, textarea, select, option, label,
-blockquote, figcaption, strong, em, small, b, i.text,
-.logo-title, .logo-subtitle, .nav-title, .section-title,
-.hero-title-line, .product-title, .testimonial-text {
-    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont,
-                 'Segoe UI', Roboto, sans-serif !important;
-}
-
-/* Headings get a touch more weight / tighter tracking for hierarchy */
-h1, h2, h3,
-.section-title, .hero-title-line, .logo-title {
-    font-weight: 700 !important;
-    letter-spacing: -0.01em !important;
-}
-
-/* Restore icon fonts (Font Awesome) — must come AFTER the override */
-.fa, .fas, .far, .fal, .fab, .fad,
-.fa-solid, .fa-regular, .fa-light, .fa-thin, .fa-brands, .fa-duotone,
-[class^="fa-"], [class*=" fa-"] {
-    font-family: "Font Awesome 6 Free", "Font Awesome 6 Brands",
-                 "Font Awesome 5 Free", "Font Awesome 5 Brands" !important;
+    --mm-font: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
 /* =====================================================================
-   2. MOBILE DRAWER NAVIGATION  (phone view only)
+   1. MOBILE DRAWER NAVIGATION  (phone view only)
+   Deliberately avoids position:sticky and backdrop-filter inside the
+   scrolling panel — both trigger paint/ghosting bugs on Android Chrome.
    ===================================================================== */
 
 /* Hamburger trigger — fixed top-right so it shows over any nav layout */
@@ -66,13 +38,12 @@ h1, h2, h3,
     flex-direction: column;
     gap: 5px;
     padding: 0;
+    margin: 0;
     border: 1px solid var(--mm-gold-line);
     border-radius: 13px;
-    background: rgba(10, 10, 12, 0.72);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
+    background: #0d0d11;
     cursor: pointer;
-    transition: background .25s ease, border-color .25s ease, transform .25s ease;
+    transition: border-color .25s ease, transform .15s ease;
 }
 #mmBurger:active { transform: scale(0.94); }
 #mmBurger span {
@@ -81,61 +52,58 @@ h1, h2, h3,
     height: 2px;
     border-radius: 2px;
     background: var(--mm-gold);
-    transition: transform .3s ease, opacity .25s ease;
 }
 
-/* Backdrop */
+/* Backdrop (solid, no blur) */
 #mmBackdrop {
     position: fixed;
     inset: 0;
     z-index: 10060;
-    background: rgba(0, 0, 0, 0.55);
-    backdrop-filter: blur(2px);
-    -webkit-backdrop-filter: blur(2px);
+    background: rgba(0, 0, 0, 0.62);
     opacity: 0;
     visibility: hidden;
-    transition: opacity .35s ease, visibility .35s ease;
+    transition: opacity .3s ease, visibility .3s ease;
 }
 #mmBackdrop.mm-open { opacity: 1; visibility: visible; }
 
-/* The sliding panel */
+/* The sliding panel — opaque background, normal-flow children */
 #mmDrawer {
     position: fixed;
     top: 0;
     right: 0;
+    bottom: 0;
     height: 100%;
-    height: 100dvh;
     width: min(420px, 90vw);
     z-index: 10070;
-    background: linear-gradient(180deg, #0d0d11 0%, #060608 100%);
+    background: #0a0a0d;
     border-left: 1px solid var(--mm-gold-line);
     box-shadow: -24px 0 60px rgba(0, 0, 0, 0.5);
     transform: translateX(105%);
-    transition: transform .42s cubic-bezier(0.22, 1, 0.36, 1);
+    transition: transform .38s cubic-bezier(0.22, 1, 0.36, 1);
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
     overscroll-behavior: contain;
+    font-family: var(--mm-font);
     padding: 0 18px calc(28px + env(safe-area-inset-bottom));
 }
 #mmDrawer.mm-open { transform: translateX(0); }
+#mmDrawer * { font-family: var(--mm-font); box-sizing: border-box; }
 
-/* Drawer header */
+/* Drawer header — STATIC + solid (no sticky, no transparency) */
 .mm-head {
-    position: sticky;
-    top: 0;
-    z-index: 2;
     display: flex;
     align-items: center;
     gap: 12px;
-    padding: 18px 4px 16px;
-    margin-bottom: 6px;
-    background: linear-gradient(180deg, #0d0d11 70%, rgba(13,13,17,0));
+    padding: 20px 4px 18px;
+    margin-bottom: 4px;
+    background: #0a0a0d;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 }
 .mm-head-logo {
     width: 46px; height: 46px; flex: 0 0 46px;
     border-radius: 50%;
     border: 1px solid var(--mm-gold-line);
-    background: #fff1;
+    background: rgba(255,255,255,0.06);
     display: flex; align-items: center; justify-content: center;
     overflow: hidden;
 }
@@ -143,11 +111,11 @@ h1, h2, h3,
 .mm-head-text { flex: 1; min-width: 0; }
 .mm-head-title {
     font-size: 1.05rem; font-weight: 700; color: var(--mm-text);
-    line-height: 1.1; letter-spacing: -0.01em;
+    line-height: 1.15; letter-spacing: -0.01em;
 }
 .mm-head-sub {
-    font-size: 0.66rem; font-weight: 600; letter-spacing: 0.18em;
-    text-transform: uppercase; color: var(--mm-gold); margin-top: 3px;
+    font-size: 0.62rem; font-weight: 600; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--mm-gold); margin-top: 4px;
 }
 .mm-close {
     width: 40px; height: 40px; flex: 0 0 40px;
@@ -164,9 +132,9 @@ h1, h2, h3,
 /* Section label ("NAVIGATE", "FOLLOW THE MOVEMENT") */
 .mm-label {
     display: flex; align-items: center; gap: 12px;
-    font-size: 0.66rem; font-weight: 700; letter-spacing: 0.22em;
+    font-size: 0.64rem; font-weight: 700; letter-spacing: 0.22em;
     text-transform: uppercase; color: var(--mm-text-dim);
-    margin: 18px 4px 12px;
+    margin: 20px 4px 12px;
 }
 .mm-label::before {
     content: ''; width: 26px; height: 2px; border-radius: 2px;
@@ -194,17 +162,19 @@ h1, h2, h3,
     border-radius: 13px;
     display: flex; align-items: center; justify-content: center;
     font-size: 1.05rem; color: var(--mm-gold);
-    background: linear-gradient(135deg, rgba(212,175,55,0.16), rgba(212,175,55,0.05));
+    background: rgba(212,175,55,0.08);
     border: 1px solid var(--mm-gold-line);
 }
 .mm-tx { flex: 1; min-width: 0; }
 .mm-tx-t {
+    display: block;
     font-size: 1rem; font-weight: 700; color: var(--mm-text);
-    line-height: 1.15; letter-spacing: -0.01em;
+    line-height: 1.2; letter-spacing: -0.01em;
 }
 .mm-tx-s {
+    display: block;
     font-size: 0.78rem; color: var(--mm-text-dim);
-    margin-top: 2px; line-height: 1.25;
+    margin-top: 3px; line-height: 1.25;
 }
 .mm-chev { color: var(--mm-text-dim); font-size: 0.85rem; flex: 0 0 auto; }
 
@@ -213,24 +183,21 @@ h1, h2, h3,
     margin-top: 22px;
     border-radius: 22px;
     padding: 24px 22px;
-    background: linear-gradient(135deg, #d4af37 0%, #b8941f 100%);
-    color: #1a1407;
-    position: relative;
-    overflow: hidden;
+    background: #d4af37;
 }
 .mm-cta-tag {
     display: inline-flex; align-items: center; gap: 7px;
-    font-size: 0.64rem; font-weight: 800; letter-spacing: 0.16em;
+    font-size: 0.62rem; font-weight: 800; letter-spacing: 0.16em;
     text-transform: uppercase;
     background: rgba(0,0,0,0.16); color: #1a1407;
     padding: 6px 12px; border-radius: 100px; margin-bottom: 14px;
 }
 .mm-cta-h {
-    font-size: 1.45rem; font-weight: 800; line-height: 1.15;
+    font-size: 1.4rem; font-weight: 800; line-height: 1.18;
     letter-spacing: -0.02em; margin-bottom: 8px; color: #14100a;
 }
 .mm-cta-p {
-    font-size: 0.86rem; line-height: 1.5; color: #3a2f12;
+    font-size: 0.85rem; line-height: 1.5; color: #3a2f12;
     margin-bottom: 18px;
 }
 .mm-cta-btn {
@@ -238,11 +205,9 @@ h1, h2, h3,
     width: 100%; padding: 15px;
     background: #fff; color: #1a1407;
     border-radius: 100px; text-decoration: none;
-    font-weight: 800; font-size: 0.92rem; letter-spacing: 0.04em;
+    font-weight: 800; font-size: 0.9rem; letter-spacing: 0.04em;
     text-transform: uppercase;
 }
-.mm-cta-btn i { transition: transform .25s ease; }
-.mm-cta-btn:active i { transform: translateX(4px); }
 
 /* Social row */
 .mm-social {
@@ -271,17 +236,17 @@ h1, h2, h3,
 /* Lock body scroll while drawer is open */
 body.mm-locked { overflow: hidden !important; }
 
-/* Show drawer controls only on phone view; hide legacy mobile toggles */
+/* Show drawer controls only on phone view; hide ALL legacy mobile toggles */
 @media (max-width: 768px) {
     #mmBurger { display: flex; }
-    .mobile-menu-toggle, .mobile-menu-btn { display: none !important; }
+    .mobile-menu-toggle, .mobile-menu-btn, .mm-burger { display: none !important; }
 }
 @media (min-width: 769px) {
     #mmBurger, #mmBackdrop, #mmDrawer { display: none !important; }
 }
 
 /* =====================================================================
-   3. CENTERED FOOTER  (phone view only) — covers every footer variant
+   2. CENTERED FOOTER  (phone view only) — covers every footer variant
    ===================================================================== */
 @media (max-width: 768px) {
 

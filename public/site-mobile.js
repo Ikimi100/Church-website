@@ -8,19 +8,17 @@
     if (window.__mmDrawerInit) return;
     window.__mmDrawerInit = true;
 
-    // Navigation model — absolute (in-folder) links so the drawer behaves
-    // identically from any page in /public.
     var NAV = [
-        { t: 'Home',            s: 'Welcome & latest',        i: 'fa-house',           h: 'index.html#home' },
-        { t: 'About',           s: 'Our story & beliefs',     i: 'fa-circle-info',     h: 'about_church.html' },
-        { t: 'Ministries',      s: 'Dimensions of faith',     i: 'fa-hands-praying',   h: 'index.html#ministries' },
-        { t: 'Calendar',        s: 'Feasts & appointed times',i: 'fa-calendar-day',    h: 'index.html#calendar' },
-        { t: 'Weekly Torah',    s: 'Parashah readings',       i: 'fa-book-open',       h: 'index.html#torah' },
-        { t: 'Watch Live',      s: 'Sermons & live stream',   i: 'fa-play',            h: 'watch.html' },
-        { t: 'Prayer Request',  s: 'Submit to the Upper Room',i: 'fa-hand-holding-heart', h: 'prayer_request.html' },
-        { t: 'Giving',          s: 'Partner & support',       i: 'fa-gift',            h: 'giving.html' },
-        { t: 'Store',           s: 'Books & materials',       i: 'fa-bag-shopping',    h: 'items.html' },
-        { t: 'Register',        s: 'Join / volunteer',        i: 'fa-user-plus',       h: 'register.html' }
+        { t: 'Home',            s: 'Welcome & latest',         i: 'fa-house',              h: 'index.html#home' },
+        { t: 'About',           s: 'Our story & beliefs',      i: 'fa-circle-info',        h: 'about_church.html' },
+        { t: 'Ministries',      s: 'Dimensions of faith',      i: 'fa-hands-praying',      h: 'index.html#ministries' },
+        { t: 'Calendar',        s: 'Feasts & appointed times', i: 'fa-calendar-day',       h: 'index.html#calendar' },
+        { t: 'Weekly Torah',    s: 'Parashah readings',        i: 'fa-book-open',          h: 'index.html#torah' },
+        { t: 'Watch Live',      s: 'Sermons & live stream',    i: 'fa-play',               h: 'watch.html' },
+        { t: 'Prayer Request',  s: 'Submit to the Upper Room', i: 'fa-hand-holding-heart', h: 'prayer_request.html' },
+        { t: 'Giving',          s: 'Partner & support',        i: 'fa-gift',               h: 'giving.html' },
+        { t: 'Store',           s: 'Books & materials',        i: 'fa-bag-shopping',       h: 'items.html' },
+        { t: 'Register',        s: 'Join / volunteer',         i: 'fa-user-plus',          h: 'register.html' }
     ];
 
     var SOCIAL = [
@@ -40,23 +38,19 @@
     }
 
     function build() {
-        // Burger
         var burger = el('button', null, '<span></span><span></span><span></span>');
         burger.id = 'mmBurger';
         burger.type = 'button';
         burger.setAttribute('aria-label', 'Open menu');
 
-        // Backdrop
         var backdrop = el('div');
         backdrop.id = 'mmBackdrop';
 
-        // Drawer
         var drawer = el('div');
         drawer.id = 'mmDrawer';
         drawer.setAttribute('role', 'dialog');
         drawer.setAttribute('aria-label', 'Site navigation');
 
-        // Header
         var head = el('div', 'mm-head');
         head.innerHTML =
             '<div class="mm-head-logo"><img src="' + LOGO + '" alt="Messianic Mandate"></div>' +
@@ -70,7 +64,6 @@
         head.appendChild(closeBtn);
         drawer.appendChild(head);
 
-        // NAVIGATE label + card list
         drawer.appendChild(el('div', 'mm-label', 'Navigate'));
         var nav = el('nav', 'mm-nav');
         NAV.forEach(function (n) {
@@ -85,7 +78,6 @@
         });
         drawer.appendChild(nav);
 
-        // CTA card
         var cta = el('div', 'mm-cta');
         cta.innerHTML =
             '<span class="mm-cta-tag"><i class="fas fa-fire"></i> Join the Movement</span>' +
@@ -94,7 +86,6 @@
             '<a class="mm-cta-btn" href="register.html">Join Us <i class="fas fa-arrow-right"></i></a>';
         drawer.appendChild(cta);
 
-        // FOLLOW label + social
         drawer.appendChild(el('div', 'mm-label', 'Follow the Movement'));
         var soc = el('div', 'mm-social');
         SOCIAL.forEach(function (s) {
@@ -105,7 +96,6 @@
         });
         drawer.appendChild(soc);
 
-        // Copyright
         drawer.appendChild(el('div', 'mm-copy',
             '&copy; ' + new Date().getFullYear() + ' Messianic Mandate &middot; Powered by WHARM'));
 
@@ -113,7 +103,6 @@
         document.body.appendChild(backdrop);
         document.body.appendChild(drawer);
 
-        // ---- behaviour ----
         function open() {
             drawer.classList.add('mm-open');
             backdrop.classList.add('mm-open');
@@ -133,13 +122,11 @@
         document.addEventListener('keydown', function (e) {
             if (e.key === 'Escape' && drawer.classList.contains('mm-open')) close();
         });
-        // Close after navigating to an in-page anchor on the current page
         nav.querySelectorAll('a').forEach(function (a) {
             a.addEventListener('click', function () { setTimeout(close, 60); });
         });
 
-        // Neutralise any legacy hamburger the page's own script injected
-        document.querySelectorAll('.mobile-menu-toggle, .mobile-menu-btn').forEach(function (b) {
+        document.querySelectorAll('.mobile-menu-toggle, .mobile-menu-btn, .mm-burger').forEach(function (b) {
             b.style.display = 'none';
         });
     }
